@@ -1,0 +1,101 @@
+@import '../../../public/styles/functions';
+
+
+.FieldRow {
+  display: flex;
+
+  &--align {
+
+    &_top {
+      align-items: flex-start;
+    }
+
+    &_bottom {
+      align-items: flex-end;
+    }
+
+    &_center {
+      align-items: center;
+    }
+  }
+
+  &--wrap {
+
+    &_wrap {
+      flex-wrap: wrap;
+    }
+
+    &_nowrap {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &--width {
+
+    &_100 {
+      width: 100%;
+    }
+
+    &_50 {
+      width: 50%;
+    }
+
+    &_25 {
+      width: 25%;
+    }
+  }
+
+  &--direction {
+
+    &_row {
+      flex-direction: row;
+    }
+
+    &_column {
+      flex-direction: column;
+    }
+
+    &_columnreverse {
+      flex-direction: column-reverse;
+    }
+
+    &_rowreverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &--justify {
+
+    &_start {
+      justify-content: flex-start;
+    }
+
+    &_center {
+      justify-content: center;
+    }
+
+    &_between {
+      justify-content: space-between;
+    }
+
+    &_around {
+      justify-content: space-around;
+    }
+
+    &_end {
+      justify-content: flex-end;
+    }
+  }
+
+  //& + & {
+  //  margin-top: rem(20);
+  //}
+
+  //& > * {
+  //  flex-shrink: 1;
+  //
+  //  &:not(:last-child) {
+  //    margin-right: rem(24);
+  //  }
+  //}
+}

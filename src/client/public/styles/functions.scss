@@ -1,0 +1,9 @@
+@function rem($size) {
+  @if unitless($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+  } @else {
+    @error 'Size must be a unitless number.';
+  }
+}
+

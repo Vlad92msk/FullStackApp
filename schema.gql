@@ -1,0 +1,121 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Users {
+  id: Float!
+
+  """Чей токен"""
+  name: String!
+
+  """Пароль"""
+  password: String!
+
+  """Почта"""
+  email: String!
+
+  """Статус"""
+  status: String!
+  roles: [Roles!]!
+}
+
+type Roles {
+  """id"""
+  id: Float!
+
+  """Название роли"""
+  value: String!
+
+  """Описание роли"""
+  description: String!
+  users: [Users!]!
+}
+
+type Skills {
+  id: Float!
+
+  """Название"""
+  name: String!
+
+  """Позиция на сетке"""
+  position: Float!
+
+  """Специальность (Frontend/Backend/Other)"""
+  specialty: String!
+}
+
+type Query {
+  """Найти всех юзеров"""
+  usersFindAll: [Users!]!
+
+  """Найти всех юзеров по условию"""
+  usersFindAllByParam(params: FindUserInput!): [Users!]!
+
+  """Найти 1 юзера по условию"""
+  usersFindOneByParam(params: FindUserInput!): Users!
+
+  """Найти все роли"""
+  rolesFindAll: [Roles!]!
+
+  """Найти роль"""
+  rolesFindOne(params: FindRoleInput!): Roles!
+  authSignIn(user: SignInInput!): Users!
+
+  """Найти умения"""
+  findAllSkills: [Skills!]!
+}
+
+input FindUserInput {
+  id: Float
+  name: String
+  password: String
+  email: String
+  status: String
+}
+
+input FindRoleInput {
+  id: Float!
+  value: String!
+  description: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  """Обновить данные юзера"""
+  usersUpdate(param: UpdateUserInput!, target: FindUserInput!): Users!
+
+  """Создать юзера"""
+  usersCreate(user: CreateUsersInput!): Users!
+
+  """Удалить юзера"""
+  usersDelete(userParam: FindUserInput!): Users!
+
+  """Создать роль"""
+  rolesCreate(params: CreateRoleInput!): Boolean!
+
+  """Удалить роль"""
+  rolesDelete(params: FindRoleInput!): Boolean!
+  authSignUp(user: CreateUsersInput!): Users!
+}
+
+input UpdateUserInput {
+  name: String
+  password: String
+  email: String
+  status: String
+}
+
+input CreateUsersInput {
+  name: String!
+  password: String!
+  email: String!
+}
+
+input CreateRoleInput {
+  value: String!
+  description: String!
+}

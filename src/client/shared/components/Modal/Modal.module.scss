@@ -1,0 +1,238 @@
+@import '../../../public/styles/functions';
+
+.Modal {
+  $this: &;
+  $paddingSize: 32;
+  $smallSizeReducedOffsetSize: 8;
+
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+
+  &::before {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: '';
+    opacity: 0.7;
+    background-color: var(--Color-OldAsphalt--80);
+  }
+
+  &-Inner {
+    position: relative;
+    z-index: 1010;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: calc(100% - #{rem(48)});
+    max-height: calc(100% - #{rem(32)});
+    border-radius: rem(8);
+    background-color: var(--Color-Light--100);
+
+    &--autoHeight {
+      height: calc(100% - #{rem(32)});
+    }
+
+
+    &--size {
+
+      &_small {
+        width: rem(640);
+      }
+
+      &_medium {
+        width: rem(880);
+      }
+
+      &_large {
+        width: rem(1140);
+      }
+
+      &_fullScreen {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &-BlockIconClose {
+    position: absolute;
+    z-index: 9;
+    top: rem(32);
+    right: rem(32);
+    cursor: pointer;
+  }
+
+  &-IconClose {
+    width: rem(28);
+    height: rem(28);
+    fill: var(--Color-OldAsphalt--50);
+  }
+
+  &-Header {
+    position: relative;
+    padding: rem($paddingSize);
+
+
+    #{$this}--withDivider {
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        height: rem(1);
+        content: '';
+        background-color: var(--Color-OldAsphalt--20);
+      }
+    }
+
+
+    #{$this}--withReducedBottomPadding {
+      padding-bottom: rem($paddingSize - $smallSizeReducedOffsetSize);
+    }
+  }
+
+
+  &-Title {
+
+    &--withTopMargin {
+      margin-top: rem($smallSizeReducedOffsetSize);
+    }
+
+    &--titlePosition {
+      &_left {
+        text-align: left;
+      }
+
+      &_right {
+        text-align: right;
+      }
+
+      &_center {
+        text-align: center;
+      }
+    }
+  }
+
+
+  &-Description {
+    margin-top: rem(8);
+  }
+
+
+  &-Footer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: rem($paddingSize);
+
+
+    #{$this}--withDivider {
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: block;
+        height: rem(1);
+        content: '';
+        background-color: var(--Color-OldAsphalt--20);
+      }
+    }
+
+
+    #{$this}--withReducedTopPadding {
+      padding-top: rem($paddingSize - $smallSizeReducedOffsetSize);
+    }
+  }
+
+
+  &-Action {
+
+    &:not(:first-child) {
+      margin-left: rem(20);
+    }
+
+
+    &--alignedLeft {
+      margin-right: auto;
+    }
+  }
+
+
+  &-Body {
+    overflow-y: auto;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    // min-height: 100%;
+    // max-height: 100%;
+    padding: rem(20) rem(24) rem(32) rem(32);
+    background-color: var(--Color-Background--dark);
+
+    #{$this}--withLightBackgroundColor {
+      background-color: var(--Color-Background);
+    }
+
+    #{$this}--withNoPadding {
+      padding: rem(0);
+    }
+  }
+
+  &-SubHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(20) rem(32);
+
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: rem(1);
+      content: '';
+      background-color: var(--Color-OldAsphalt--20);
+    }
+  }
+
+  &-Switcher {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-Option {
+    margin-right: rem(32);
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    #{$this}--active {
+      padding: rem(10) rem(16);
+      border-radius: rem(100);
+      background: var(--Color-OldAsphalt--10);
+    }
+  }
+}

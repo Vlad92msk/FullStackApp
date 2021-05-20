@@ -1,0 +1,68 @@
+@import '../../../public/styles/functions';
+
+.Checkbox {
+  $this: &;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: rem(20);
+  height: rem(20);
+  cursor: pointer;
+  border-color: var(--Color-OldAsphalt--30);
+
+  &:hover {
+    border-color: var(--Color-BluePrimrose--50);
+  }
+
+  &-Input {
+    box-sizing: border-box;
+    width: rem(20);
+    height: rem(20);
+    transition: border-color 0.15s, background 0.15s;
+    border-width: rem(1);
+    border-style: solid;
+    border-color: inherit;
+    border-radius: rem(4);
+    outline: 0;
+    appearance: none;
+
+    &:checked {
+      border-color: var(--Color-BluePrimrose--50);
+      background: var(--Color-BluePrimrose--50);
+
+      & ~ #{$this}-Check {
+        opacity: 1;
+        fill: var(--Color-Light--100);
+      }
+
+      &--error {
+        background: var(--Color-RedRose--50);
+      }
+    }
+
+    &:disabled {
+      border-color: var(--Color-OldAsphalt--30);
+      background: var(--Color-OldAsphalt--30);
+
+      & ~ #{$this}--Check {
+        fill: var(--Color-OldAsphalt--40);
+      }
+    }
+
+    &--error {
+      border-color: var(--Color-RedRose--50);
+    }
+  }
+
+  &-Check {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: rem(16);
+    height: rem(16);
+    opacity: 0;
+    fill: var(--Color-Light--100);
+  }
+}

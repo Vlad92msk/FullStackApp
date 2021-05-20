@@ -1,0 +1,87 @@
+@import 'functions';
+
+/* Миксин для работы с полифиллом селектора :focus-visible */
+@mixin focusVisible() {
+
+  &[data-focus-visible-added] {
+    @content;
+  }
+}
+
+
+@mixin clearListStyle() {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  list-style: none;
+}
+
+
+@mixin placeholderColor($color) {
+
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin mozScrollBar($light-theme: true) {
+  scrollbar-width: thin;
+
+  @if $light-theme {
+    scrollbar-color: var(--Color-Scrollbar) transparent;
+
+    &:hover {
+      scrollbar-color: var(--Color-Scrollbar-hover) transparent;
+    }
+  }
+
+  @else {
+    scrollbar-color: var(--Color-Scrollbar-dark);
+
+    &:hover {
+      scrollbar-color: var(--Color-Scrollbar-darkHover);
+    }
+  }
+}
+
+@mixin scrollbar($light-theme: true) {
+
+  ::-webkit-scrollbar {
+    width: rem(16);
+    height: rem(16);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: rem(8);
+    height: rem(8);
+
+    border: rem(4) solid transparent;
+    border-radius: rem(8);
+    background-clip: padding-box;
+
+    @if $light-theme {
+      background-color: var(--Color-Scrollbar);
+
+      &:hover {
+        background-color: var(--Color-Scrollbar-hover);
+      }
+    }
+
+    @else {
+      background-color: var(--Color-Scrollbar-dark);
+
+      &:hover {
+        background-color: var(--Color-Scrollbar-darkHover);
+      }
+    }
+  }
+}

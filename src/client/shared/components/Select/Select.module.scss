@@ -1,0 +1,413 @@
+@import '../../../public/styles/functions';
+
+.Select {
+  $this: &;
+
+  &-SelectInput {
+    position: relative;
+
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: rem(8) rem(12) rem(8) rem(16);
+
+    cursor: pointer;
+
+    border: rem(1) solid var(--Color-OldAsphalt--30);
+    border-radius: rem(8);
+    background: var(--Color-Light--100);
+
+    &:hover {
+      border-color: var(--Color-OldAsphalt--50);
+    }
+
+    &--error {
+      border-color: var(--Color-RedRose--50);
+    }
+
+    &--disabled {
+      border-color: var(--Color-OldAsphalt--30);
+      background: var(--Color-OldAsphalt--10);
+
+      &:hover {
+        border-color: var(--Color-OldAsphalt--30);
+      }
+    }
+
+    &--focus {
+      border-color: var(--Color-BluePrimrose--50);
+    }
+
+    &--size {
+
+      &_small {
+        height: rem(36);
+      }
+
+      &_medium {
+        height: rem(40);
+
+        #{$this}-Token {
+          height: rem(32);
+        }
+        #{$this}-Combobox {
+          height: rem(32);
+        }
+      }
+
+      &_large {
+        height: rem(48);
+
+        #{$this}-Token {
+          height: rem(40);
+        }
+        #{$this}-Combobox {
+          height: rem(40);
+        }
+      }
+    }
+
+    &--tokenfield {
+
+      &_fixed {
+        padding: rem(4);
+
+        #{$this}-ControlBlock {
+          width: calc(100% - #{rem(54)});
+        }
+      }
+
+      &_rubber {
+        height: auto;
+        padding: rem(2) rem(2) rem(4) rem(2);
+
+        #{$this}-ControlBlock {
+          flex-wrap: wrap;
+        }
+
+        #{$this}-Token {
+          max-width: 100%;
+          margin-bottom: rem(4);
+        }
+
+        #{$this}-Combobox {
+          display: flex;
+          flex-grow: 1;
+          width: auto;
+        }
+      }
+    }
+  }
+
+  &-ControlBlock {
+    position: relative;
+
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+
+    width: calc(100% - #{rem(18)});
+    height: 100%;
+
+    &--combobox {
+      width: calc(100% - #{rem(40)});
+    }
+  }
+
+
+  &-SelectedValue {
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &--combobox {
+      position: absolute;
+      top: 50%;
+      left: rem(2);
+
+      transform: translateY(-50%);
+    }
+
+    &Icon {
+      max-width: rem(20);
+      height: rem(20);
+      margin-right: rem(10);
+
+      fill: var(--Color-BluePrimrose--50);
+    }
+  }
+
+  &-SelectIconBlock {
+    position: absolute;
+    z-index: 7;
+    top: 50%;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    height: 100%;
+    padding-right: rem(12);
+
+    transform: translateY(-50%);
+  }
+
+  &-SelectIconClear {
+    display: flex;
+    margin-right: rem(8);
+
+    #{$this}-SelectIcon {
+      fill: var(--Color-OldAsphalt--50);
+    }
+
+    &--tokenfield {
+      #{$this}-SelectIcon {
+        width: rem(20);
+        height: rem(20);
+        fill: var(--Color-OldAsphalt--40);
+      }
+    }
+  }
+
+  &-SelectIcon {
+    width: rem(16);
+    height: rem(16);
+    fill: var(--Color-OldAsphalt--80);
+  }
+
+
+  &-Combobox {
+    z-index: 3;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    &::placeholder {
+      color: var(--Color-OldAsphalt--40);
+    }
+  }
+
+  &-Token {
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: auto;
+    max-width: 42.5%;
+    height: rem(32);
+    padding: rem(4) rem(12);
+    margin-right: rem(4);
+
+    border: rem(1) solid var(--Color-LightGray--50);
+    border-radius: rem(6);
+    background: var(--Color-OldAsphalt--10);
+
+    &Text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &IconCloseBlock {
+      display: flex;
+    }
+
+    &IconClose {
+      width: rem(16);
+      height: rem(16);
+      margin-left: rem(4);
+
+      fill: var(--Color-OldAsphalt--50);
+    }
+  }
+
+  &-CountSumTokenBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-left: auto;
+  }
+
+  &-CountSumToken {
+    height: 100%;
+    padding: rem(2) rem(10);
+    margin-right: rem(4);
+
+    color: var(--Color-Light--100);
+    border-radius: rem(6);
+    background: var(--Color-OldAsphalt--50);
+  }
+
+
+  &-SelectListContainer {
+    z-index: 99;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+    max-height: 100%;
+    padding: rem(12) rem(10) rem(12) rem(8);
+
+    border: rem(1) solid var(--Color-LightGray--50);
+    border-radius: rem(8);
+    background-color: var(--Color-Light--100);
+    box-shadow: var(--Shadow-Pale);
+  }
+
+  &-SelectListWrapper {
+    overflow-y: auto;
+    max-height: rem(44*6);
+
+    &:hover {
+
+      &::-webkit-scrollbar-thumb {
+        display: initial;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: rem(10);
+      height: rem(10);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: rem(8);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      display: none;
+
+      width: rem(6);
+      height: rem(6);
+
+      border-right: rem(2) solid transparent;
+
+      border-left: rem(2) solid transparent;
+      border-radius: rem(8);
+
+      background-color: var(--Color-OldAsphalt--40);
+      background-clip: padding-box;
+    }
+
+    &--loading {
+      height: rem(220);
+    }
+  }
+
+  &-SelectList {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+  }
+
+  &-SearchInput {
+    margin-bottom: rem(8);
+  }
+
+
+  &-Option {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: rem(40);
+    padding: rem(8) rem(16);
+
+    cursor: pointer;
+
+    border-radius: rem(4);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &:not(:last-child) {
+      margin-bottom: rem(4);
+    }
+
+    &:hover {
+      background: var(--Color-OldAsphalt--10);
+    }
+
+    &--active {
+      color: var(--Color-Light--100);
+      background: var(--Color-BluePrimrose--50);
+
+      #{$this}-OptionIcon {
+        fill: var(--Color-Light--100);
+      }
+
+      #{$this}-OptionBadge {
+        border: rem(1) solid var(--Color-Light--100);
+        background: var(--Color-BluePrimrose--50);
+      }
+
+      &:hover {
+        color: var(--Color-Light--100);
+        background: var(--Color-BluePrimrose--50);
+      }
+    }
+
+    &--disabled {
+      #{$this}-OptionIcon {
+        fill: var(--Color-OldAsphalt--40);
+      }
+
+      #{$this}-OptionBadge {
+        background: var(--Color-OldAsphalt--40);
+      }
+    }
+
+    &--hide {
+      display: none;
+    }
+  }
+
+  &-OptionIcon {
+    max-width: rem(20);
+    height: rem(20);
+    margin-right: rem(10);
+
+    fill: var(--Color-OldAsphalt--50);
+  }
+
+  &-OptionBadge {
+    box-sizing: border-box;
+    padding: rem(2) rem(8);
+    margin-left: auto;
+
+    color: var(--Color-Light--100);
+    border-radius: rem(20);
+    background: var(--Color-OldAsphalt--40);
+
+    font-size: rem(12);
+    line-height: rem(16);
+
+    &--select {
+      margin-right: rem(12);
+    }
+  }
+
+  &-OptionCheckbox {
+    margin-right: rem(12);
+  }
+}

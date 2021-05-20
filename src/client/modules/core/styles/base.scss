@@ -1,0 +1,51 @@
+@import '../../../public/styles/mixins';
+@import '../../../public/styles/functions';
+@import 'variables/colors';
+@import 'variables/typography';
+@include scrollbar();
+
+html {
+  box-sizing: border-box;
+
+  color: var(--colorText);
+  fill: var(--Color-OldAsphalt--80);
+
+  font-family: var(--FontFamily);
+  font-size: var(--BaseFontSize);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+
+  @include mozScrollBar();
+}
+
+
+body {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: var(--Color-Bckground--root);
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+
+button {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,116 @@
+:root {
+  --Color-Bckground--root: #151010;
+
+  --Color-Light--100: #ffffff;
+  --Color-Light--90: #{rgba(#ffffff, 0.9)};
+  --Color-Light--80: #{rgba(#ffffff, 0.8)};
+  --Color-Light--70: #{rgba(#ffffff, 0.7)};
+  --Color-Light--60: #{rgba(#ffffff, 0.6)};
+  --Color-Light--50: #{rgba(#ffffff, 0.5)};
+  --Color-Light--40: #{rgba(#ffffff, 0.4)};
+  --Color-Light--30: #{rgba(#ffffff, 0.3)};
+  --Color-Light--20: #{rgba(#ffffff, 0.2)};
+  --Color-Light--10: #{rgba(#ffffff, 0.1)};
+  --Color-Light--5: #{rgba(#ffffff, 0.05)};
+
+  --Color-BluePrimrose--10: #f6f8ff;
+  --Color-BluePrimrose--20: #e0edff;
+  --Color-BluePrimrose--30: #69acff;
+  --Color-BluePrimrose--40: #4794ff;
+  --Color-BluePrimrose--50: #0055cb;
+  --Color-BluePrimrose--60: #0044a2;
+  --Color-BluePrimrose--80: #2b3858;
+  --Color-BluePrimrose--90: #232d45;
+
+  --Color-OrangeSunset--20: #fef6ee;
+  --Color-OrangeSunset--40: #f7ca9a;
+  --Color-OrangeSunset--50: #f2a657;
+  --Color-OrangeSunset--60: #ed861a;
+  --Color-OrangeSunset--80: #99540c;
+
+  --Color-AmethystStarling--20: #f4e5f9;
+  --Color-AmethystStarling--25: #7d8ecd;
+  --Color-AmethystStarling--30: #e4b7f4;
+  --Color-AmethystStarling--40: #E28AFF;
+  --Color-AmethystStarling--45: #bb61dc;
+  --Color-AmethystStarling--50: #7a229b;
+  --Color-AmethystStarling--60: #621b7c;
+  --Color-AmethystStarling--80: #3d114e;
+
+  --Color-RedRose--10: #fff8f9;
+  --Color-RedRose--20: #fbe9ea;
+  --Color-RedRose--30: #cd7d9a;
+  --Color-RedRose--40: #e47b83;
+  --Color-RedRose--50: #cc2a35;
+  --Color-RedRose--60: #a3212a;
+  --Color-RedRose--80: #66151a;
+
+  --Color-FirGreen--10: #f4fafb;
+  --Color-FirGreen--20: #ebf8ea;
+  --Color-FirGreen--25: #a3c382;
+  --Color-FirGreen--30: #6fc86d;
+  --Color-FirGreen--40: #84d682;
+  --Color-FirGreen--50: #3daf3a;
+  --Color-FirGreen--60: #318c2e;
+  --Color-FirGreen--80: #1f581d;
+
+  --Color-Sunglow--20: #fffae9;
+  --Color-Sunglow--40: #ffebad;
+  --Color-Sunglow--50: #ffcc2e;
+  --Color-Sunglow--60: #f1b600;
+  --Color-Sunglow--80: #d39f00;
+
+  --Color-MunsellBlue--20: #e6fbfd;
+  --Color-MunsellBlue--30: #b5f2f5;
+  --Color-MunsellBlue--40: #65baba;
+  --Color-MunsellBlue--50: #00b9c6;
+  --Color-MunsellBlue--60: #00949e;
+  --Color-MunsellBlue--80: #006f77;
+
+  --Color-OldAsphalt--10: #f4f3f8;
+  --Color-OldAsphalt--15: #f7f7fa;
+  --Color-OldAsphalt--20: #e5e6eb;
+  --Color-OldAsphalt--30: #d7d9e1;
+  --Color-OldAsphalt--35: #cacdd9;
+  --Color-OldAsphalt--40: #b0b3c3;
+  --Color-OldAsphalt--50: #7b819b;
+  --Color-OldAsphalt--70: #50597e;
+  --Color-OldAsphalt--80: #181920;
+  --Color-OldAsphalt--90: #0c0d10;
+
+  --Color-LightGray--30: #f9f9fb;
+  --Color-LightGray--50: #e8e8ef;
+  --Color-LightGray--70: #dadada;
+
+  --Color-Text--title: var(--Color-Sunglow--50);
+  --Color-Text--body: linear-gradient(180deg, var(--Color-BluePrimrose--40) -3%, var(--Color-AmethystStarling--40) 95%);
+  --Color-Text--note: var(--Color-OldAsphalt--50);
+  --Color-Text--disabled: var(--Color-OldAsphalt--40);
+
+
+  --Color-Background: var(--Color-Light--100);
+  --Color-Background--root: var(--Color-BluePrimrose--80);
+  --Color-Background--dark: var(--Color-OldAsphalt--10);
+  --Color-Background--darkest: #25314f;
+  --Color-Background--translucentGrey: rgba(244, 243, 248, 0.5);
+  --Color-Background--transparentGrey: rgba(232, 232, 239, 0.5);
+  --Color-Background--translucentGreen: rgba(244, 250, 251, 0.5);
+
+  --Color-Overlay--hover: rgba(36, 38, 47, 0.6);
+  --Color-Overlay--lite: rgba(12, 13, 16, 0.4);
+
+  --Color-Shadow--pale: rgba(146, 146, 146, 0.2);
+
+  --Color-Scrollbar: rgba(176, 179, 195, 0.6);
+  --Color-Scrollbar-hover: var(--Color-OldAsphalt--40);
+  --Color-Scrollbar-dark: rgba(139, 153, 187, 0.6);
+  --Color-Scrollbar-darkHover: #8b99bb;
+
+  --Color-ControlBorder: var(--Color-OldAsphalt--30);
+  --Color-TooltipBackground: rgba(43, 56, 88, 0.8);
+
+  --Color-ProgressBackground: #99bbea;
+  --Color-LoadingProgressBackground: #6394d8;
+
+  --Color-Portfolio-Line: linear-gradient(to right, var(--Color-Sunglow--60), var(--Color-BluePrimrose--80));
+}

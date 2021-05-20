@@ -1,0 +1,12 @@
+@import '../../../../public/styles/functions';
+@import 'colors';
+
+:root {
+  --Shadow-Empire: 0 #{rem(1)} #{rem(2)} rgba(0, 0, 0, 0.1);
+  --Shadow-Taipei: 0 #{rem(2)} #{rem(4)} rgba(0, 0, 0, 0.1);
+  --Shadow-Tokyo: 0 #{rem(4)} #{rem(8)} rgba(0, 0, 0, 0.1);
+  --Shadow-TokyoReverse: 0 #{rem(-4)} #{rem(8)} rgba(0, 0, 0, 0.1);
+  --Shadow-Khalifa: 0 #{rem(8)} #{rem(12)} rgba(0, 0, 0, 0.1);
+  --Shadow-Pale: 0 #{rem(4)} #{rem(22)} var(--Color-Shadow--pale);
+  --Shadow-Allocating: 0 #{rem(4)} #{rem(12)} var(--Color-Shadow--pale);
+}

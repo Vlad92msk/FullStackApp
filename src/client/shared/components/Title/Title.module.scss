@@ -1,0 +1,47 @@
+@import '../../../public/styles/functions';
+
+
+.Title {
+  margin-top: 0;
+  color: var(--Color-Text--title);
+  font-weight: var(--FontWeight-Bold);
+
+
+  &--noMargin {
+    margin-bottom: 0;
+  }
+
+
+  &--size {
+
+    &_1 {
+      font-size: rem(32);
+      line-height: rem(36);
+    }
+
+    &_2 {
+      font-size: rem(24);
+      line-height: rem(28);
+    }
+
+    &_3 {
+      font-size: rem(20);
+      line-height: rem(24);
+    }
+
+    &_4 {
+      font-size: rem(18);
+      line-height: rem(24);
+    }
+
+    &_5 {
+      font-size: rem(16);
+      line-height: rem(20);
+    }
+
+    &_6 {
+      font-size: rem(14);
+      line-height: rem(20);
+    }
+  }
+}

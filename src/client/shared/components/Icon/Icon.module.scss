@@ -1,0 +1,31 @@
+@import '../../../public/styles/functions';
+
+
+.Icon {
+  flex-shrink: 0;
+  //width: rem(24);
+  //height: rem(24);
+
+  &--fill {
+
+    &_oldAsphalt50 {
+      fill: var(--Color-OldAsphalt--50);
+    }
+
+    &_oldAsphalt40 {
+      fill: var(--Color-OldAsphalt--40);
+    }
+
+    &_bluePrimrose50 {
+      fill: var(--Color-BluePrimrose--50);
+    }
+
+    &_light100 {
+      fill: var(--Color-Light--100);
+    }
+
+    &_redRose40 {
+      fill: var(--Color-RedRose--40);
+    }
+  }
+}

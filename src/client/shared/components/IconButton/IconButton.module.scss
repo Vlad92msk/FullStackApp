@@ -1,0 +1,41 @@
+@import '../../../public/styles/functions';
+@import '../../../public/styles/mixins';
+
+
+.IconButton {
+  display: flex;
+  justify-content: center;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+  background: none;
+
+
+  &--size {
+
+    &_small {
+      width: rem(14);
+      height: rem(14);
+    }
+
+    &_ordinary {
+      width: rem(20);
+      height: rem(20);
+    }
+
+    &_medium {
+      width: rem(24);
+      height: rem(24);
+    }
+  }
+
+
+  &-Icon {
+    width: 100%;
+    height: 100%;
+  }
+}

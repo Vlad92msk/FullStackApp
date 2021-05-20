@@ -1,0 +1,32 @@
+import React from 'react'
+import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
+import { classnames } from '@bem-react/classnames'
+import { makeCn } from '@shared/utils'
+import styles from './Text.module.scss'
+
+const cn = makeCn('Text', styles)
+
+export interface TextOwnProps {
+  size?: 'regular' | 'small' | 'extraSmall' | 'large' | 'extraLarge'
+  weight?: 'regular' | 'medium' | 'bold'
+  color?: 'inherit' | 'body' | 'title' | 'note' | 'disabled'
+  textTransform?: 'uppercase'
+  className?: string
+}
+
+export type TextProps<E extends React.ElementType> = PolymorphicComponentProps<E, TextOwnProps>
+
+const DEFAULT_ELEMENT = 'span'
+
+export const Text = <E extends React.ElementType = typeof DEFAULT_ELEMENT>(props: TextProps<E>): JSX.Element => {
+  const { className, size, weight, color, textTransform, ...rest } = props
+
+  return <Box as={DEFAULT_ELEMENT} className={classnames(cn({ size, weight, color, textTransform }), className)} {...rest} />
+}
+
+Text.defaultProps = {
+  className: null,
+  size: 'regular',
+  weight: 'regular',
+  color: 'inherit',
+} as Partial<TextOwnProps>

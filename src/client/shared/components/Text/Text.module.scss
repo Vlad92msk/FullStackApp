@@ -1,0 +1,83 @@
+@import '../../../public/styles/functions';
+
+
+.Text {
+
+  &--size {
+
+    &_regular {
+      font-size: rem(16);
+      line-height: rem(24);
+    }
+
+    &_small {
+      font-size: rem(14);
+      line-height: rem(20);
+    }
+
+    &_extraSmall {
+      font-size: rem(12);
+      line-height: rem(16);
+    }
+
+    &_large {
+      font-size: rem(30);
+      //line-height: rem(16);
+    }
+
+    &_extraLarge {
+      font-size: rem(40);
+      //line-height: rem(16);
+    }
+  }
+
+  &--textTransform {
+
+    &_uppercase {
+      text-transform: uppercase;
+    }
+  }
+
+  &--weight {
+
+    &_regular {
+      font-weight: var(--FontWeight-Regular);
+    }
+
+    &_medium {
+      font-weight: var(--FontWeight-Medium);
+    }
+
+    &_bold {
+      font-weight: var(--FontWeight-Bold);
+    }
+  }
+
+
+  &--color {
+
+    &_inherit {
+      color: inherit;
+    }
+
+    &_title {
+      color: var(--Color-Text--title);
+    }
+
+    &_body {
+      background: var(--Color-Text--body);
+      //background: linear-gradient(
+      //    180deg, #5190FE -3%, #E28AFF 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    &_note {
+      color: var(--Color-Text--note);
+    }
+
+    &_disabled {
+      color: var(--Color-Text--disabled);
+    }
+  }
+}

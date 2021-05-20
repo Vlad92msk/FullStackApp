@@ -1,0 +1,179 @@
+@import '../../../public/styles/functions';
+
+.BlockContentLoader {
+  $this: &;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &-DotsContainer {
+    display: inline-block;
+    position: relative;
+
+    &--size {
+      &_regular {
+        width: rem(74);
+        height: rem(74);
+
+        #{$this}-Dot {
+          transform-origin: rem(37) rem(37);
+
+          &:after {
+            width: rem(7);
+            height: rem(7);
+          }
+
+          &:nth-child(1):after {
+            top: rem(63);
+            left: rem(63);
+          }
+
+          &:nth-child(2):after {
+            top: rem(68);
+            left: rem(56);
+          }
+
+          &:nth-child(3):after {
+            top: rem(71);
+            left: rem(48);
+          }
+
+          &:nth-child(4):after {
+            top: rem(72);
+            left: rem(40);
+          }
+
+          &:nth-child(5):after {
+            top: rem(71);
+            left: rem(32);
+          }
+
+          &:nth-child(6):after {
+            top: rem(68);
+            left: rem(24);
+          }
+
+          &:nth-child(7):after {
+            top: rem(63);
+            left: rem(17);
+          }
+
+          &:nth-child(8):after {
+            top: rem(56);
+            left: rem(12);
+          }
+        }
+      }
+
+      &_small {
+        width: rem(48);
+        height: rem(48);
+
+        #{$this}-Dot {
+          transform-origin: rem(24) rem(24);
+
+          &:after {
+            width: rem(5);
+            height: rem(5);
+          }
+
+          &:nth-child(1):after {
+            top: rem(39);
+            left: rem(45);
+          }
+
+          &:nth-child(2):after {
+            top: rem(44);
+            left: rem(40);
+          }
+
+          &:nth-child(3):after {
+            top: rem(47);
+            left: rem(34);
+          }
+
+          &:nth-child(4):after {
+            top: rem(48);
+            left: rem(28);
+          }
+
+          &:nth-child(5):after {
+            top: rem(47);
+            left: rem(21);
+          }
+
+          &:nth-child(6):after {
+            top: rem(45);
+            left: rem(15);
+          }
+
+          &:nth-child(7):after {
+            top: rem(40);
+            left: rem(10);
+          }
+
+          &:nth-child(8):after {
+            top: rem(35);
+            left: rem(6);
+          }
+        }
+      }
+    }
+  }
+
+  &-Dot {
+    animation: roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      background: var(--Color-BluePrimrose--50);
+      margin: rem(-4) 0 0 rem(-4);
+    }
+
+    &:nth-child(1) {
+      animation-delay: -0.04s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: -0.07s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: -0.11s;
+    }
+
+    &:nth-child(4) {
+      animation-delay: -0.14s;
+    }
+
+    &:nth-child(5) {
+      animation-delay: -0.18s;
+    }
+
+    &:nth-child(6) {
+      animation-delay: -0.22s;
+    }
+
+    &:nth-child(7) {
+      animation-delay: -0.25s;
+    }
+
+    &:nth-child(8) {
+      animation-delay: -0.29s;
+    }
+  }
+
+  @keyframes roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

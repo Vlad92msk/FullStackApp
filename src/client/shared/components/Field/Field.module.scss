@@ -1,0 +1,73 @@
+@import '../../../public/styles/functions';
+
+
+.Field {
+  display: flex;
+  flex-direction: column;
+
+  &--autoWidth {
+    width: 100%;
+  }
+
+
+  &-InputContainer {
+    display: flex;
+
+    &--labelPosition {
+
+      &_top {
+        flex-direction: column;
+      }
+
+      &_right {
+        flex-direction: row-reverse;
+        align-items: center;
+      }
+
+      &_left {
+        flex-direction: row-reverse;
+        align-items: center;
+      }
+    }
+  }
+
+
+  &-Label {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+
+
+    &--labelPosition {
+
+      &_top {
+        margin-bottom: rem(8);
+      }
+
+      &_right {
+        margin-left: rem(12);
+      }
+
+      &_left {
+        order: 1;
+        margin-right: rem(16);
+      }
+    }
+  }
+
+
+  &-RequiredIcon {
+    width: rem(12);
+    height: rem(12);
+    fill: var(--Color-RedRose--50);
+  }
+
+
+  &-Message {
+    width: 100%;
+    padding: rem(10) rem(16);
+    margin-top: rem(8);
+    color: var(--Color-RedRose--50);
+    background-color: var(--Color-RedRose--20);
+  }
+}
