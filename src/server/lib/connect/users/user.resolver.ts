@@ -9,6 +9,7 @@ import { UpdateUserInput } from './inputs/update-user.input'
 import { FindUserInput } from './inputs/find-user.input'
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 import { Users } from '~server/lib/connect/users/entitys/user.entity'
+import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
 
 @UsePipes(new ValidationPipe())
 @Resolver(() => Users)
@@ -31,9 +32,17 @@ export class UserResolver {
     return from(this.userService.findOneUserByParam(params))
   }
 
-  @Mutation(() => Users, { description: 'Обновить данные юзера' })
-  usersUpdate(@Args('target') target: FindUserInput, @Args('param') param: UpdateUserInput): Observable<Users> {
+  @Mutation(() => Boolean, { description: 'Обновить данные юзера' })
+  usersUpdate(@Args('target') target: FindUserInput, @Args('param') param: UpdateUserInput): Observable<boolean> {
     return from(this.userService.updateUser(target, param))
+  }
+
+  @Mutation(() => Boolean, { description: 'Дать юзеру новую роль' })
+  usersUpdateGiveNewRole(
+    @Args('target') target: FindUserInput,
+    @Args('param') newRole: UpdateUserRolesInput
+  ): Observable<boolean> {
+    return from(this.userService.updateUserRoles(target, newRole))
   }
 
   @Mutation(() => Users, { description: 'Создать юзера' })

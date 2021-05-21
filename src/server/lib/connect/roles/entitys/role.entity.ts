@@ -18,6 +18,6 @@ export class Roles {
   description: string
 
   @Field(() => [Users])
-  @ManyToMany(() => Users, (user) => user.roles)
+  @ManyToMany(() => Users, ({ roles }) => roles)
   users: Users[]
 }

@@ -24,19 +24,20 @@ export class RoleService {
   /**
    * Найти 1 роль по условию
    */
-  async getRoleByValue(where: FindRoleInput) {
-    const role = await this.roleRepository.findOne({ where })
-    if (role) {
-      return role
-    }
-    throw new UserLoginAlreadyUsedException('Такой роли нет')
+  async getRoleByValue(where: FindRoleInput, relations?: string[]) {
+    return await this.roleRepository.findOne({ where, relations })
   }
 
   /**
    * Создать роль
    */
   async createRole(input: CreateRoleInput) {
-    return this.roleRepository.create(input)
+    const found = await this.getRoleByValue(input)
+    if (found) {
+      throw new UserLoginAlreadyUsedException('Такая роль уже существует')
+    }
+    const newRole = this.roleRepository.create(input)
+    return this.roleRepository.save(newRole)
   }
 
   /**

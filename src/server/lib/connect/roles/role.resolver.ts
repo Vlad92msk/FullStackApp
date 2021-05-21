@@ -5,7 +5,9 @@ import { RoleService } from './role.service'
 import { CreateRoleInput } from './inputs/create-role.input'
 import { Roles } from '~server/lib/connect/roles/entitys/role.entity'
 import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
+import { UsePipes, ValidationPipe } from '@nestjs/common'
 
+@UsePipes(new ValidationPipe())
 @Resolver(() => Roles)
 export class RoleResolver {
   constructor(private roleService: RoleService) {}
@@ -20,7 +22,7 @@ export class RoleResolver {
     return from(this.roleService.getRoleByValue(params))
   }
 
-  @Mutation(() => Boolean, { description: 'Создать роль' })
+  @Mutation(() => Roles, { description: 'Создать роль' })
   rolesCreate(@Args('params') params: CreateRoleInput): Observable<Roles> {
     return from(this.roleService.createRole(params))
   }

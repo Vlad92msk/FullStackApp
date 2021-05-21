@@ -10,6 +10,7 @@ import { FindUserInput } from './inputs/find-user.input'
 import { Users } from '~server/lib/connect/users/entitys/user.entity'
 import { RoleService } from '~server/lib/connect/roles/role.service'
 import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
+import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
 
 @Injectable()
 export class UserService {
@@ -36,26 +37,44 @@ export class UserService {
   /**
    * Найти всех юзеров по условию
    */
-  public findAllUsersByParam = async (params: FindUserInput): Promise<Users[]> => {
-    return await this.userRepository.find({ where: params, relations: ['roles'] })
+  public findAllUsersByParam = async (where: FindUserInput, relations?: string[]): Promise<Users[]> => {
+    return await this.userRepository.find({ where, relations })
   }
 
   /**
    * Найти 1 юзера по условию
    */
-  public findOneUserByParam = async (params: FindUserInput) => {
-    return await this.userRepository.findOne({ where: params })
+  public findOneUserByParam = async (where: FindUserInput) => {
+    return await this.userRepository.findOne({ where, relations: ['roles'] })
   }
 
   /**
    * Обновить данные юзера
    */
-  public updateUser = async (target: FindUserInput, param: UpdateUserInput): Promise<Users> => {
+  public updateUser = async (target: FindUserInput, param: UpdateUserInput) => {
     const find = await this.findOneUserByParam(target)
     if (find) {
       await this.userRepository.update(find, param)
+      return true
     }
-    return find
+    throw new UserLoginAlreadyUsedException('Пользователь не найден')
+  }
+
+  /**
+   * Добавить юзеру роль
+   */
+  public updateUserRoles = async (target: FindUserInput, { role }: UpdateUserRolesInput): Promise<boolean> => {
+    const findUser = await this.findOneUserByParam(target)
+    if (findUser) {
+      const findRole = await this.roleService.getRoleByValue({ value: role })
+      const updateUser = await this.userRepository.create({
+        ...findUser,
+        roles: [...findUser.roles, findRole],
+      })
+      await this.userRepository.save(updateUser)
+      return true
+    }
+    throw new UserLoginAlreadyUsedException('Пользователь не найден')
   }
 
   /**

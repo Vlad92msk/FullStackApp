@@ -26,7 +26,7 @@ export class Users {
   status: string
 
   @Field(() => [Roles])
-  @ManyToMany(() => Roles, (role) => role.users, { cascade: true })
+  @ManyToMany(() => Roles, ({ users }) => users, { cascade: true })
   @JoinTable()
   roles: Roles[]
 }

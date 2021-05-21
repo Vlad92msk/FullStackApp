@@ -74,9 +74,9 @@ input FindUserInput {
 }
 
 input FindRoleInput {
-  id: Float!
-  value: String!
-  description: String!
+  id: Float
+  value: String
+  description: String
 }
 
 input SignInInput {
@@ -86,7 +86,10 @@ input SignInInput {
 
 type Mutation {
   """Обновить данные юзера"""
-  usersUpdate(param: UpdateUserInput!, target: FindUserInput!): Users!
+  usersUpdate(param: UpdateUserInput!, target: FindUserInput!): Boolean!
+
+  """Дать юзеру новую роль"""
+  usersUpdateGiveNewRole(param: UpdateUserRolesInput!, target: FindUserInput!): Boolean!
 
   """Создать юзера"""
   usersCreate(user: CreateUsersInput!): Users!
@@ -95,7 +98,7 @@ type Mutation {
   usersDelete(userParam: FindUserInput!): Users!
 
   """Создать роль"""
-  rolesCreate(params: CreateRoleInput!): Boolean!
+  rolesCreate(params: CreateRoleInput!): Roles!
 
   """Удалить роль"""
   rolesDelete(params: FindRoleInput!): Boolean!
@@ -107,6 +110,10 @@ input UpdateUserInput {
   password: String
   email: String
   status: String
+}
+
+input UpdateUserRolesInput {
+  role: String!
 }
 
 input CreateUsersInput {
