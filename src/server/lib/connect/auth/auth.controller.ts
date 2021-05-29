@@ -17,6 +17,6 @@ export class AuthController {
 
   @Get('/confirm')
   confirm(@Query(ValidationPipe) query: ConfirmAccountInput): void {
-    from([this.authService.confirm(query.token), true]).pipe(switchMap((a) => of(a)))
+    from([this.authService.confirmRegistrationToLink(query.token), true]).pipe(switchMap((a) => of(a)))
   }
 }

@@ -1,10 +1,9 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ConnectModule } from '~server/lib/connect/connection.module'
 import { PortfolioModule } from '~server/lib/portfolio/portfolio.module'
 import { NextStartModule } from '~server/lib/nextJStart/nextStart.module'
-
-
+import { AuthMiddleware } from '~server/lib/connect/auth/middleware/auth.middleware'
 
 
 @Module({
@@ -18,4 +17,11 @@ import { NextStartModule } from '~server/lib/nextJStart/nextStart.module'
     NextStartModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes({
+      path: '*',
+      method: RequestMethod.ALL,
+    });
+  }
+}

@@ -45,7 +45,7 @@ export class UserService {
    * Найти 1 юзера по условию
    */
   public findOneUserByParam = async (where: FindUserInput) => {
-    return await this.userRepository.findOne({ where, relations: ['roles'] })
+    return await this.userRepository.findOne({ where })
   }
 
   /**

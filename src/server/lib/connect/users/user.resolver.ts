@@ -1,23 +1,22 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql'
 import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
 import { from, Observable } from 'rxjs'
 
 import { UserService } from './user.service'
 import { CreateUsersInput } from './inputs/create-user.input'
 import { UpdateUserInput } from './inputs/update-user.input'
 import { FindUserInput } from './inputs/find-user.input'
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import { AuthGuard } from '../auth/guards/auth-guard'
 import { Users } from '~server/lib/connect/users/entitys/user.entity'
 import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
 
 @UsePipes(new ValidationPipe())
 @Resolver(() => Users)
 export class UserResolver {
-  constructor(private userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-  // @UseGuards(JwtAuthGuard)
   @Query(() => [Users], { description: 'Найти всех юзеров' })
+  @UseGuards(AuthGuard)
   usersFindAll(): Observable<Users[]> {
     return from(this.userService.findAllUsers())
   }

@@ -24,7 +24,7 @@ export class AuthResolver {
 
   // @Query(() => Boolean)
   // authConfirm(@Args('query') query: ConfirmAccountInput) {
-  // 	this.authService.confirm(query.tokens);
+  // 	this.authService.confirmRegistrationToLink(query.tokens);
   // 	return true
   // }
 }
