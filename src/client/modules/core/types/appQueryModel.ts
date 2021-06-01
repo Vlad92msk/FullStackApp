@@ -1,13 +1,13 @@
-import { Skills } from '~server/lib/portfolio/skills/entitys/skills.entity'
-import { Users } from '~server/lib/connect/users/entitys/user.entity'
+import { Skill } from '~server/lib/portfolio/skills/entitys/skills.entity'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
 
 export type SkillsQueryModel = {
-  findAllSkills: [Skills]
+  findAllSkills: [Skill]
 }
 
 export interface UserQueryModel {
-  findAllUsers: [Users]
-  findAllUsersByParam: [Users]
-  findOneUserByParam: Users
-  signIn: Users
+  findAllUsers: [User]
+  findAllUsersByParam: [User]
+  findOneUserByParam: User
+  signIn: User
 }

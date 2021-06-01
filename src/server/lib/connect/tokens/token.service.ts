@@ -1,13 +1,14 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
 import { Repository } from 'typeorm'
-import { PostgreConstants } from '~server/db/db.constants'
-import { Tokens } from './entitys/token.entity'
-import { TokenInput } from './inputs/create-token.input'
 import { sign, verify } from 'jsonwebtoken'
-import { Users } from '~server/lib/connect/users/entitys/user.entity'
-import { config } from 'dotenv'
-import { Roles } from '~server/lib/connect/roles/entitys/role.entity'
+
+import { PostgreConstants } from '~server/db/db.constants'
+import { Token } from './entitys/token.entity'
+import { TokenInput } from './inputs/create-token.input'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
+import { Role } from '~server/lib/connect/roles/entitys/role.entity'
 import { StatusEnum } from '~server/lib/connect/users/interfaces/status'
+import { config } from 'dotenv'
 
 config()
 
@@ -16,13 +17,13 @@ config()
 export class TokenService {
   constructor(
     @Inject(PostgreConstants.connect_db.repository)
-    private readonly tokenRepository: Repository<Tokens>
+    private readonly tokenRepository: Repository<Token>
   ) {}
 
   /**
    * Генерация токена
    */
-  generateToken(user: Users):string {
+  generateToken(user: User):string {
     return sign(
       { id: user.id, status: user.status, roles: user.roles },
       process.env.JWT_SECRET_KEY,
@@ -54,7 +55,7 @@ export class TokenService {
    */
   verifyToken(token: string) {
     try {
-      return verify(token, process.env.JWT_SECRET_KEY) as {id: number, status: StatusEnum, roles: Roles[]};
+      return verify(token, process.env.JWT_SECRET_KEY) as {id: number, status: StatusEnum, roles: Role[]};
     } catch (error) {
       throw new UnauthorizedException('Ошибка подтверждения токена')
     }

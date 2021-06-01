@@ -10,7 +10,7 @@ import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { StatusEnum } from '../users/interfaces/status'
 import { SignInInput } from './inputs/signIn.input'
 import { userSensitiveFieldsEnum } from '../users/interfaces/protected-fields'
-import { Users } from '~server/lib/connect/users/entitys/user.entity'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
 
 @Injectable()
 export class AuthService {
@@ -36,7 +36,7 @@ export class AuthService {
   /**
    * Отправить подтверждение
    */
-  async sendConfirmation(user: Users) {
+  async sendConfirmation(user: User) {
     const expireAt = await moment().add(1, 'day').toISOString()
     const token = await this.tokenService.generateToken(user)
     const confirmLink = `${this.clientAppUrl}/auth/confirm?token=${token}`
@@ -93,7 +93,11 @@ export class AuthService {
     await this.tokenService.delete(data.id, token)
 
     if (user && user.status === StatusEnum.pending) {
-      return await this.userService.updateUser({ id: user.id }, { status: StatusEnum.active })
+      try {
+        return await this.userService.updateUser({ id: user.id }, { status: StatusEnum.active })
+      } catch (e) {
+        console.log('e', e)
+      }
     }
     throw new BadRequestException('Неверные данные')
   }
@@ -102,8 +106,8 @@ export class AuthService {
    * Подтверждает наличие токена у пользователя
    */
   async confirmUserToken(token: string) {
-      const decodeTokenObject = await this.tokenService.verifyToken(token)
-      await this.tokenService.exists({ uid: decodeTokenObject.id, token })
-      return decodeTokenObject
+    const decodeTokenObject = await this.tokenService.verifyToken(token)
+    await this.tokenService.exists({ uid: decodeTokenObject.id, token })
+    return decodeTokenObject
   }
 }

@@ -1,11 +1,11 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-@Entity()
-export class Tokens {
+@Entity({ name: 'Tokens' })
+export class Token {
   @Field()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number
 
   @Field({ description: 'Токен' })

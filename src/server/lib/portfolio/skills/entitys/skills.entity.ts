@@ -3,8 +3,8 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import { IconName } from '~public/models/icon.model'
 
 @ObjectType()
-@Entity()
-export class Skills {
+@Entity('Skills')
+export class Skill {
   @Field()
   @PrimaryColumn({ name: 'id' })
   id: number

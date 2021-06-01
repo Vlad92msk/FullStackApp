@@ -1,12 +1,12 @@
 import { Resolver, Query } from '@nestjs/graphql'
 import { SkillsService } from './skills.service'
-import { Skills } from '~server/lib/portfolio/skills/entitys/skills.entity'
+import { Skill } from '~server/lib/portfolio/skills/entitys/skills.entity'
 
-@Resolver(() => Skills)
+@Resolver(() => Skill)
 export class SkillsResolver {
   constructor(private skillService: SkillsService) {}
 
-  @Query(() => [Skills], { description: 'Найти умения' })
+  @Query(() => [Skill], { description: 'Найти умения' })
   async findAllSkills() {
     return await this.skillService.findAllSkills()
   }

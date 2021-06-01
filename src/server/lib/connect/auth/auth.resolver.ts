@@ -4,20 +4,20 @@ import { AuthService } from './auth.service'
 import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { ConfirmAccountInput } from './inputs/confirm-account.input'
 import { SignInInput } from './inputs/signIn.input'
-import { Users } from '~server/lib/connect/users/entitys/user.entity'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { from } from 'rxjs'
 
-@Resolver(() => Users)
+@Resolver(() => User)
 @UsePipes(new ValidationPipe())
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => Users)
+  @Mutation(() => User)
   authSignUp(@Args('user') createUserDto: CreateUsersInput) {
     return from(this.authService.signUp(createUserDto))
   }
 
-  @Query(() => Users)
+  @Query(() => User)
   authSignIn(@Args('user') signInInput: SignInInput) {
     return from(this.authService.signIn(signInInput))
   }

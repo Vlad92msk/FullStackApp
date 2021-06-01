@@ -3,7 +3,7 @@ import { Repository } from 'typeorm'
 
 import { PostgreConstants } from '~server/db/db.constants'
 import { CreateRoleInput } from './inputs/create-role.input'
-import { Roles } from '~server/lib/connect/roles/entitys/role.entity'
+import { Role } from '~server/lib/connect/roles/entitys/role.entity'
 import { UserLoginAlreadyUsedException } from '~server/lib/connect/users/exceptions/userLoginAlreadyUsedException'
 import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
 
@@ -11,7 +11,7 @@ import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
 export class RoleService {
   constructor(
     @Inject(PostgreConstants.connect_db.repository)
-    private readonly roleRepository: Repository<Roles>
+    private readonly roleRepository: Repository<Role>
   ) {}
 
   /**
