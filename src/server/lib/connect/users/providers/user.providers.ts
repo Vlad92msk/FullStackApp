@@ -1,6 +1,6 @@
 import { PostgreConstants } from '~server/db/db.constants'
 import { createProvider } from '~server/utils'
-import { Users } from '~server/lib/connect/users/entitys/user.entity'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
 
 export const UsersProviders = createProvider([
   {

@@ -3,8 +3,10 @@
  * @param key
  */
 export function storageGet<T>(key: string): T | null {
-  const item = localStorage.getItem(key);
-  return item ? JSON.parse(item) as T : null;
+  if (typeof window !== 'undefined') {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) as T : null;
+  }
 }
 
 /**

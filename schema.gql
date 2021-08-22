@@ -2,7 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Users {
+type Role {
+  """id"""
+  id: Float!
+
+  """Название роли"""
+  value: String!
+
+  """Описание роли"""
+  description: String!
+  users: [User!]!
+}
+
+type User {
   id: Float!
 
   """Чей токен"""
@@ -16,22 +28,11 @@ type Users {
 
   """Статус"""
   status: String!
-  roles: [Roles!]!
+  roles: [Role!]!
+  uRoles: [String!]!
 }
 
-type Roles {
-  """id"""
-  id: Float!
-
-  """Название роли"""
-  value: String!
-
-  """Описание роли"""
-  description: String!
-  users: [Users!]!
-}
-
-type Skills {
+type Skill {
   id: Float!
 
   """Название"""
@@ -46,23 +47,25 @@ type Skills {
 
 type Query {
   """Найти всех юзеров"""
-  usersFindAll: [Users!]!
+  usersFindAll: [User!]!
 
   """Найти всех юзеров по условию"""
-  usersFindAllByParam(params: FindUserInput!): [Users!]!
+  usersFindAllByParam(params: FindUserInput!): [User!]!
 
   """Найти 1 юзера по условию"""
-  usersFindOneByParam(params: FindUserInput!): Users!
+  usersFindOneByParam(params: FindUserInput!): User!
 
   """Найти все роли"""
-  rolesFindAll: [Roles!]!
+  rolesFindAll: [Role!]!
 
   """Найти роль"""
-  rolesFindOne(params: FindRoleInput!): Roles!
-  authSignIn(user: SignInInput!): Users!
+  rolesFindOne(params: FindRoleInput!): Role!
+
+  """Войти"""
+  authSignIn(signInInput: SignInInput!): User!
 
   """Найти умения"""
-  findAllSkills: [Skills!]!
+  findAllSkills: [Skill!]!
 }
 
 input FindUserInput {
@@ -74,9 +77,9 @@ input FindUserInput {
 }
 
 input FindRoleInput {
-  id: Float!
-  value: String!
-  description: String!
+  id: Float
+  value: String
+  description: String
 }
 
 input SignInInput {
@@ -86,20 +89,28 @@ input SignInInput {
 
 type Mutation {
   """Обновить данные юзера"""
-  usersUpdate(param: UpdateUserInput!, target: FindUserInput!): Users!
+  usersUpdate(param: UpdateUserInput!, target: FindUserInput!): User!
+
+  """Дать юзеру новую роль"""
+  usersUpdateGiveNewRole(param: UpdateUserRolesInput!, target: FindUserInput!): Boolean!
 
   """Создать юзера"""
-  usersCreate(user: CreateUsersInput!): Users!
+  usersCreate(user: CreateUsersInput!): User!
 
   """Удалить юзера"""
-  usersDelete(userParam: FindUserInput!): Users!
+  usersDelete(userParam: FindUserInput!): User!
 
   """Создать роль"""
-  rolesCreate(params: CreateRoleInput!): Boolean!
+  rolesCreate(params: CreateRoleInput!): Role!
 
   """Удалить роль"""
   rolesDelete(params: FindRoleInput!): Boolean!
-  authSignUp(user: CreateUsersInput!): Users!
+
+  """Зарегистрироваться"""
+  authSignUp(user: CreateUsersInput!): User!
+
+  """Выйти"""
+  authSignOut: Boolean!
 }
 
 input UpdateUserInput {
@@ -107,6 +118,11 @@ input UpdateUserInput {
   password: String
   email: String
   status: String
+  uRoles: [String!]
+}
+
+input UpdateUserRolesInput {
+  role: String!
 }
 
 input CreateUsersInput {

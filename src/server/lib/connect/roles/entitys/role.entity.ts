@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Users } from '../../users/entitys/user.entity'
+import { User } from '../../users/entitys/user.entity'
 
 @ObjectType()
-@Entity()
-export class Roles {
+@Entity('Roles')
+export class Role {
   @Field({ description: 'id' })
   @PrimaryGeneratedColumn({ name: 'id' })
   id: number
@@ -17,7 +17,7 @@ export class Roles {
   @Column({ name: 'description' })
   description: string
 
-  @Field(() => [Users])
-  @ManyToMany(() => Users, (user) => user.roles)
-  users: Users[]
+  @Field(() => [User])
+  @ManyToMany(() => User, ({ roles }) => roles)
+  users: User[]
 }

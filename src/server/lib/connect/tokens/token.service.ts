@@ -1,38 +1,85 @@
 import { Inject, Injectable } from '@nestjs/common'
+import { GraphQLError } from 'graphql'
 import { Repository } from 'typeorm'
-import { PostgreConstants } from '../../../db/db.constants'
-import { Tokens } from './entitys/token.entity'
+import { sign, verify } from 'jsonwebtoken'
+
+import { PostgreConstants } from '~server/db/db.constants'
+import { Token } from './entitys/token.entity'
 import { TokenInput } from './inputs/create-token.input'
+import { User } from '~server/lib/connect/users/entitys/user.entity'
+import { Role } from '~server/lib/connect/roles/entitys/role.entity'
+import { StatusEnum } from '~server/lib/connect/users/interfaces/status'
+import { config } from 'dotenv'
+import { tokenErrors } from '~server/lib/connect/tokens/errors'
+
+config()
+
 
 @Injectable()
 export class TokenService {
   constructor(
     @Inject(PostgreConstants.connect_db.repository)
-    readonly tokenRepository: Repository<Tokens>
+    private readonly tokenRepository: Repository<Token>
   ) {}
 
-  async create(createUserToken: TokenInput) {
-    const newToken = await this.tokenRepository.create(createUserToken)
-    await this.tokenRepository.save(newToken)
-    return newToken
+  /**
+   * Генерация токена
+   */
+  generateToken(user: User): string {
+    return sign(
+      { id: user.id, status: user.status, roles: user.roles },
+      process.env.JWT_SECRET_KEY
+    )
   }
 
-  async delete(uid: number, token: string) {
-    const find = await this.tokenRepository.findOne({ uid })
-    if (find) {
-      return await this.tokenRepository.delete(find)
+  /**
+   * Сохранение токена в БД
+   */
+  async saveToken(createUserToken: TokenInput) {
+    try {
+      const newToken = await this.tokenRepository.create(createUserToken)
+      await this.tokenRepository.save(newToken)
+      return newToken
+    } catch {
+      throw new GraphQLError(tokenErrors.SAVE)
     }
   }
 
-  async deleteAll(uid: number) {
-    return await this.tokenRepository.delete({ uid })
+  /**
+   * Проверяет есть ли у пользователя токен
+   */
+  async exists(param: { uid: number; token: string }) {
+    try {
+      const findToken = await this.tokenRepository.findOne(param)
+      return findToken ?? findToken
+    } catch {
+      throw new GraphQLError(tokenErrors.EXISTS)
+    }
   }
 
-  async exists(param: { uid: number; token?: string }) {
-    console.log(param)
-    const findToken = await this.tokenRepository.findOne(param)
-    if (findToken) {
-      return true
+  /**
+   * Подтверждение токена
+   */
+  verifyToken(token: string) {
+    try {
+      return verify(token, process.env.JWT_SECRET_KEY) as { id: number, status: StatusEnum, roles: Role[] }
+    } catch (error) {
+      throw new GraphQLError(tokenErrors.VERIFY)
+    }
+  }
+
+  /**
+   * Удаляет токен у пользователя
+   */
+  async delete(uid: number, token?: string) {
+    try {
+      const where = token ? { uid, token } : { uid }
+      const find = await this.tokenRepository.findOne({ where })
+      if (!find) return
+
+      return await this.tokenRepository.delete(find)
+    } catch {
+      throw new GraphQLError(tokenErrors.DELETE)
     }
   }
 }

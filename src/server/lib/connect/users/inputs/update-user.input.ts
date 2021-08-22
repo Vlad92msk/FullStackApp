@@ -15,6 +15,6 @@ export class UpdateUserInput {
   @Field({ nullable: true })
   status?: StatusEnum
 
-  // @Field({ nullable: true })
-  // role?: RoleEnum
+  @Field(() => [String], { nullable: true })
+  uRoles?: string[]
 }
