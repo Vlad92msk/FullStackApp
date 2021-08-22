@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { makeCn } from '@shared/utils'
 import styles from './App.module.scss'
 import { Page } from '@shared/components/page'
@@ -9,30 +9,28 @@ import { Line } from '@shared/components/Line'
 import { Icon } from '@shared/components/Icon'
 import { HoneycombMesh } from '~client/modules/core/components/HoneycombMesh'
 import { IconName } from '~public/models/icon.model'
-import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
-import { IconButton } from '@shared/components/IconButton'
-import { createActions } from '@shared/utils/createApolloActions'
+
 import { useQuery } from '@apollo/client'
 import { appQueries } from '~client/modules/core/graphql/queries'
 import { SkillsQueryModel } from '~client/modules/core/types/appQueryModel'
-import { Modal, ModalBody, ModalHeader } from '@shared/components/Modal'
-import ReactTooltip from 'react-tooltip'
-import { SignInForm } from '~client/modules/core/containers/SignInForm'
+import { MenuApp } from '~client/modules/core/containers/AppMenu'
 
 const cn = makeCn('App', styles)
 
 export type SpecialtyType = 'backend' | 'frontend' | 'other'
 
-export const App: React.FC = () => {
-  const { data: { findAllSkills = [] } = {}, loading: findAllLoading, error: findAllError } = useQuery<SkillsQueryModel>(appQueries.FIND_SKILLS)
 
+export const App = () => {
+  const {
+    data: { findAllSkills = [] } = {},
+    loading: findAllLoading,
+    error: findAllError
+  } = useQuery<SkillsQueryModel>(appQueries.FIND_SKILLS)
   const [specialty, setSpecialty] = useState<SpecialtyType>('other')
-  const [signIn, setSignIn] = useState(true)
 
   const handleChangeSkillFrontend = useCallback(() => setSpecialty('frontend'), [])
   const handleChangeSkillBackend = useCallback(() => setSpecialty('backend'), [])
   const handleChangeSkillOther = useCallback(() => setSpecialty('other'), [])
-  const handleChangeSignIn = useCallback(() => setSignIn((prev) => !prev), [])
 
   const el = useCallback(
     (icon: IconName, spec?: SpecialtyType) => (
@@ -57,12 +55,12 @@ export const App: React.FC = () => {
         userElements={[
           {
             position: 1,
-            element: el('projects-button'),
+            element: el('projects-button')
           },
           {
             position: 2,
-            element: el('cosmo-button'),
-          },
+            element: el('cosmo-button')
+          }
         ]}
       />
     ),
@@ -77,7 +75,7 @@ export const App: React.FC = () => {
         userElements={[
           ...findAllSkills.map(({ position, specialty, name }) => ({
             position,
-            element: el(name, specialty),
+            element: el(name, specialty)
           })),
           {
             position: 11,
@@ -98,8 +96,8 @@ export const App: React.FC = () => {
                   onMouseLeave={handleChangeSkillOther}
                 />
               </svg>
-            ),
-          },
+            )
+          }
         ]}
       />
     ),
@@ -116,40 +114,7 @@ export const App: React.FC = () => {
   return (
     <Page>
       <div className={cn()}>
-        <div className={cn('Menu')}>
-          <SpeedDial
-            buttonClassname={cn('MenuButton')}
-            icon={'share'}
-            direction={'left'}
-            size={'medium'}
-            elements={[
-              <>
-                <IconButton className={cn('MenuItem')} icon={'sign-in'} onClick={handleChangeSignIn} data-for="sign-in" data-tip />
-                <ReactTooltip id={'sign-in'} type={'dark'} place={'bottom'}>
-                  Войти
-                </ReactTooltip>
-              </>,
-              <>
-                <IconButton className={cn('MenuItem')} icon={'settings-2'} data-for="settings" data-tip />
-                <ReactTooltip id={'settings'} type={'dark'} place={'bottom'}>
-                  Настройки
-                </ReactTooltip>
-              </>,
-              <>
-                <IconButton key={3} className={cn('MenuItem')} icon={'info-2'} data-for="info" data-tip />
-                <ReactTooltip id={'info'} type={'dark'} place={'bottom'}>
-                  Информация
-                </ReactTooltip>
-              </>,
-              <>
-                <IconButton className={cn('MenuItem')} icon={'message-square'} data-for="message" data-tip />
-                <ReactTooltip id={'message'} type={'dark'} place={'bottom'}>
-                  Сообщение
-                </ReactTooltip>
-              </>,
-            ]}
-          />
-        </div>
+        <MenuApp />
         <FieldRow className={cn('LeftBlock')} direction={'column'}>
           <FieldRow className={cn('Info')} width={'100'} direction={'column'}>
             <Title className={cn('Title')} size={'1'}>
@@ -205,22 +170,6 @@ export const App: React.FC = () => {
           <div className={cn('Person')} />
         </div>
       </div>
-
-      <Modal open={signIn} size={'medium'} onClose={handleChangeSignIn}>
-        {() => (
-          <>
-            <ModalHeader title={'Войти'} titlePosition={'center'} />
-            <ModalBody>
-              <SignInForm />
-            </ModalBody>
-          </>
-        )}
-      </Modal>
     </Page>
   )
 }
-
-export const getServerSideProps = (): Promise<unknown> =>
-  createActions({
-    queries: [{ query: appQueries.FIND_SKILLS }],
-  })

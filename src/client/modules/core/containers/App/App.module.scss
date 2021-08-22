@@ -13,24 +13,6 @@
   justify-content: space-between;
   align-content: flex-start;
 
-  #{$this}-Menu {
-    width: 100%;
-    display: flex;
-    padding: 16px 2.5rem;
-    justify-content: flex-end;
-    background: #293f6863;
-
-    #{$this}-MenuButton {
-      fill: var(--Color-MunsellBlue--30);
-    }
-
-    #{$this}-MenuItem {
-      fill: var(--Color-MunsellBlue--30);
-      margin: rem(15);
-      //filter: drop-shadow(0 0 5px #00bff3);
-    }
-  }
-
   #{$this}-LeftBlock {
     width: 50%;
     padding: rem(40);

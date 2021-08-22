@@ -11,6 +11,11 @@ import { AuthMiddleware } from '~server/lib/connect/auth/middleware/auth.middlew
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       installSubscriptionHandlers: true,
+      // cors: {
+      //   origin: 'https://studio.apollographql.com',
+      //   credentials: true,
+      // },
+      context: ({ req, res }) => ({ req, res })
     }),
     ConnectModule,
     PortfolioModule,

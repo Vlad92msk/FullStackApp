@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable, MethodNotAllowedException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { GraphQLError } from 'graphql'
 import * as bcrypt from 'bcrypt'
-import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import { UserService } from '../users/user.service'
@@ -9,7 +9,6 @@ import { TokenService } from '../tokens/token.service'
 import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { StatusEnum } from '../users/interfaces/status'
 import { SignInInput } from './inputs/signIn.input'
-import { userSensitiveFieldsEnum } from '../users/interfaces/protected-fields'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 
 @Injectable()
@@ -60,28 +59,25 @@ export class AuthService {
   /**
    * Войти
    */
-  async signIn({ email, password }: SignInInput) {
+  async signIn({ email, password }: SignInInput): Promise<[User, string]> {
     const user = await this.userService.findOneUserByParam({ email })
 
     if (user && (await bcrypt.compare(password, user.password))) {
       if (user.status !== StatusEnum.active) {
-        throw new MethodNotAllowedException('Учетная запись не подтверждена')
+        throw new GraphQLError('Учетная запись не подтверждена')
       }
+      /**
+       * Удаляет из базы старый токен
+       */
+      await this.tokenService.delete(user.id)
 
       const token = await this.tokenService.generateToken(user)
       const expireAt = moment().add(1, 'day').toISOString()
 
       await this.tokenService.saveToken({ token, expireAt, uid: user.id })
-
-      // const readableUser = user.toObject();
-      // const readableUser: any = {...user};
-      const readableUser = await Object.create(user)
-      readableUser.accessToken = token
-
-      await _.omit<any>(readableUser, Object.values(userSensitiveFieldsEnum))
-      return user
+      return [user, token]
     }
-    throw new BadRequestException('Указаны неверные реквизиты учетной записи')
+    throw new GraphQLError('Указаны неверные реквизиты учетной записи')
   }
 
   /**
@@ -99,7 +95,7 @@ export class AuthService {
         console.log('e', e)
       }
     }
-    throw new BadRequestException('Неверные данные')
+    throw new GraphQLError('Неверные данные')
   }
 
   /**
@@ -109,5 +105,14 @@ export class AuthService {
     const decodeTokenObject = await this.tokenService.verifyToken(token)
     await this.tokenService.exists({ uid: decodeTokenObject.id, token })
     return decodeTokenObject
+  }
+
+  /**
+   * Выйти
+   */
+  async signOut(token: string): Promise<boolean> {
+    const decode = await this.tokenService.verifyToken(token)
+    await this.tokenService.delete(decode.id, token)
+    return true
   }
 }

@@ -60,7 +60,9 @@ type Query {
 
   """Найти роль"""
   rolesFindOne(params: FindRoleInput!): Role!
-  authSignIn(user: SignInInput!): User!
+
+  """Войти"""
+  authSignIn(signInInput: SignInInput!): User!
 
   """Найти умения"""
   findAllSkills: [Skill!]!
@@ -103,7 +105,12 @@ type Mutation {
 
   """Удалить роль"""
   rolesDelete(params: FindRoleInput!): Boolean!
+
+  """Зарегистрироваться"""
   authSignUp(user: CreateUsersInput!): User!
+
+  """Выйти"""
+  authSignOut: Boolean!
 }
 
 input UpdateUserInput {

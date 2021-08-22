@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
 
-@ObjectType()
+@ObjectType({ description: 'Хранит актуальный токен для каждого пользователя' })
 @Entity({ name: 'Tokens' })
 export class Token {
   @Field()

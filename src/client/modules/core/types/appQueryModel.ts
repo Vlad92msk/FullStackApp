@@ -10,4 +10,5 @@ export interface UserQueryModel {
   findAllUsersByParam: [User]
   findOneUserByParam: User
   signIn: User
+  authSignIn: User
 }

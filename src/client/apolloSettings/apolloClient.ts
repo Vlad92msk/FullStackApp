@@ -3,29 +3,30 @@ import { ApolloClient, DataProxy, HttpLink, InMemoryCache, NormalizedCacheObject
 import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
+import { getCookie, storageRemove } from '@shared/utils'
+
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
-const createApolloClient = () =>
-  new ApolloClient({
+const createApolloClient = () => new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    // ssrMode: true,
     link: new HttpLink({
       uri: `http://localhost:3000/graphql`,
-      credentials: 'same-origin',
+      // credentials: 'same-origin',
     }),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
           fields: {
-            allPosts: concatPagination(),
-          },
-        },
-      },
-    }),
+            allPosts: concatPagination()
+          }
+        }
+      }
+    })
   })
+
 
 export const initializeApollo = (initialState = null) => {
   const _apolloClient = apolloClient ?? createApolloClient()
@@ -46,18 +47,24 @@ export const initializeApollo = (initialState = null) => {
   }
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === 'undefined') return _apolloClient
+
+   // Чистит localStorage если пользователь вышел/не авторизирован
+  if (!getCookie('token')) storageRemove('user');
+
+
   // Для SSG и SSR всегда создавайте нового клиента Apollo.
   if (!apolloClient) apolloClient = _apolloClient
 
   return _apolloClient
 }
 
-export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, pageProps?: any) => {
-  if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
+type Pops ={
+  props:{
+    [key: string]: any
   }
-
-  return pageProps
+}
+export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, pageProps: Pops) => {
+  pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
 }
 
 export const useApollo = (pageProps: unknown): ApolloClient<NormalizedCacheObject> => {

@@ -1,4 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common'
+import { Response } from 'express'
 import { UserService } from '~server/lib/connect/users/user.service'
 import { NextFunction, Request } from 'express'
 import { TokenService } from '~server/lib/connect/tokens/token.service'
@@ -26,45 +27,44 @@ export class AuthMiddleware implements NestMiddleware {
   ) {
   }
 
-  async use(req: ExpressRequest, _: Response, next: NextFunction) {
-    if (!req.headers.authorization) {
+  async use(req: ExpressRequest, res: Response, next: NextFunction) {
+    const requestCookieToken = req.headers.cookie?.split('=')[1]
+
+    if (!requestCookieToken) {
       req.status = AuthStatus.userUnAuthorisation
       next()
       return
     }
-    const token = req.headers.authorization.split(' ')[1]
 
-    try {
-      const decode = await this.tokenService.verifyToken(token)
-      const { expireAt } = await this.tokenService.exists({ uid: decode.id, token })
+    const decode = await this.tokenService.verifyToken(requestCookieToken)
 
-      const tokenExpireAt = moment(expireAt)
-      const now = moment()
-      const difference = tokenExpireAt.diff(now, 'minutes')
-      /**
-       * Время токена истекло
-       */
-      if (difference < 0) {
-        await this.tokenService.delete(decode.id, token)
-        next()
-        return req.status = AuthStatus.tokenDead
-      }
+    const { expireAt } = await this.tokenService.exists({ uid: decode.id, token: requestCookieToken })
+    const tokenExpireAt = moment(expireAt)
+    const now = moment()
+    const difference = tokenExpireAt.diff(now, 'minutes')
 
-      const user = await this.userService.findOneUserByParam({ id: decode.id })
-
-      /**
-       * Пользователь с данным токеном не найден
-       */
-      if (!user) {
-        next()
-        return req.status = AuthStatus.noUser
-      }
-
-      req.status = AuthStatus.ok
+    /**
+     * Время токена истекло
+     */
+    if (difference < 0) {
+      await this.tokenService.delete(decode.id, requestCookieToken)
+      req.status = AuthStatus.tokenDead
       next()
-    } catch (err) {
-      req.status = AuthStatus.userUnAuthorisation
-      next()
+      return
     }
+
+    const user = await this.userService.findOneUserByParam({ id: decode.id })
+
+    /**
+     * Пользователь с данным токеном не найден
+     */
+    if (!user) {
+      req.status = AuthStatus.noUser
+      next()
+      return
+    }
+
+    req.status = AuthStatus.ok
+    next()
   }
 }

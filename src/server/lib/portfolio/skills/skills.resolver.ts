@@ -4,7 +4,8 @@ import { Skill } from '~server/lib/portfolio/skills/entitys/skills.entity'
 
 @Resolver(() => Skill)
 export class SkillsResolver {
-  constructor(private skillService: SkillsService) {}
+  constructor(private skillService: SkillsService) {
+  }
 
   @Query(() => [Skill], { description: 'Найти умения' })
   async findAllSkills() {

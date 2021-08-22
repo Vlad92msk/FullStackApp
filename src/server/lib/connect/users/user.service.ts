@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
+import { GraphQLError } from 'graphql'
 import * as bcrypt from 'bcrypt'
 
 import { PostgreConstants } from '~server/db/db.constants'
-import { UserLoginAlreadyUsedException } from './exceptions/userLoginAlreadyUsedException'
 import { StatusEnum } from './interfaces/status'
 import { CreateUsersInput } from './inputs/create-user.input'
 import { UpdateUserInput } from './inputs/update-user.input'
@@ -12,6 +12,7 @@ import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { RoleService } from '~server/lib/connect/roles/role.service'
 import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
 import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
+import { userErrors } from '~server/lib/connect/users/errors'
 
 @Injectable()
 export class UserService {
@@ -32,21 +33,33 @@ export class UserService {
    * Найти всех юзеров
    */
   public findAllUsers = async () => {
-    return await this.userRepository.find({ relations: ['roles'] })
+    try {
+      return await this.userRepository.find({ relations: ['roles'] })
+    } catch {
+      throw new GraphQLError(userErrors.FIND_ALL_USERS)
+    }
   }
 
   /**
    * Найти всех юзеров по условию
    */
   public findAllUsersByParam = async (where: FindUserInput, relations?: string[]): Promise<User[]> => {
-    return await this.userRepository.find({ where, relations })
+    try {
+      return await this.userRepository.find({ where, relations })
+    } catch {
+      throw new GraphQLError(userErrors.FIND_ALL_USERS_BY_PARAM)
+    }
   }
 
   /**
    * Найти 1 юзера по условию
    */
   public findOneUserByParam = async (where: FindUserInput) => {
-    return await this.userRepository.findOne({ where })
+    try {
+      return await this.userRepository.findOne({ where })
+    } catch {
+      throw new GraphQLError(userErrors.FIND_ONE_USERS_BY_PARAM)
+    }
   }
 
   /**
@@ -54,10 +67,13 @@ export class UserService {
    */
   public updateUser = async (target: FindUserInput, param: UpdateUserInput) => {
     const find = await this.findOneUserByParam(target)
-    if (find) {
+    if (!find) throw new GraphQLError(userErrors.USER_NOT_FOUND)
+
+    try {
       return await this.userRepository.update({ id: target.id }, param)
+    } catch {
+      throw new GraphQLError(userErrors.UPDATE_USER)
     }
-    throw new UserLoginAlreadyUsedException('Пользователь не найден')
   }
 
   /**
@@ -65,7 +81,9 @@ export class UserService {
    */
   public updateUserRoles = async (target: FindUserInput, { role }: UpdateUserRolesInput): Promise<boolean> => {
     const findUser = await this.findOneUserByParam(target)
-    if (findUser) {
+    if (!findUser) throw new GraphQLError(userErrors.USER_NOT_FOUND)
+
+    try {
       const findRole = await this.roleService.getRoleByValue({ value: role })
       const updateUser = await this.userRepository.create({
         ...findUser,
@@ -74,8 +92,9 @@ export class UserService {
       })
       await this.userRepository.save(updateUser)
       return true
+    } catch {
+      throw new GraphQLError(userErrors.UPDATE_USER_ROLES)
     }
-    throw new UserLoginAlreadyUsedException('Пользователь не найден')
   }
 
   /**
@@ -84,7 +103,9 @@ export class UserService {
    */
   public deleteUserRoles = async (target: FindUserInput, { role }: UpdateUserRolesInput): Promise<boolean> => {
     const findUser = await this.findOneUserByParam(target)
-    if (findUser) {
+    if (!findUser) throw new GraphQLError(userErrors.USER_NOT_FOUND)
+
+    try {
       const findRole = await this.roleService.getRoleByValue({ value: role })
       const updateUser = await this.userRepository.create({
         ...findUser,
@@ -93,8 +114,9 @@ export class UserService {
       })
       await this.userRepository.save(updateUser)
       return true
+    } catch {
+      throw new GraphQLError(userErrors.DELETE_USER_ROLES)
     }
-    throw new UserLoginAlreadyUsedException('Пользователь не найден')
   }
 
   /**
@@ -102,14 +124,13 @@ export class UserService {
    */
   public createUser = async (user: CreateUsersInput): Promise<User> => {
     const found = await this.findOneUserByParam(user)
+    if (found) throw new GraphQLError(userErrors.USER_NOT_FOUND)
 
-    if (found) {
-      throw new UserLoginAlreadyUsedException('Такой пользователь существует')
-    } else {
+    try {
       const hash = await this.hashPassword(user.password)
       const role = await this.roleService.getRoleByValue({ value: RoleEnum.visitor })
 
-      const newUser = this.userRepository.create({
+      const newUser = await this.userRepository.create({
         name: user.name,
         email: user.email,
         password: hash,
@@ -119,6 +140,8 @@ export class UserService {
       })
 
       return await this.userRepository.manager.save(newUser)
+    } catch {
+      throw new GraphQLError(userErrors.CREATE_USER)
     }
   }
 
@@ -127,10 +150,12 @@ export class UserService {
    */
   public deleteUser = async (userParam: FindUserInput) => {
     const found = await this.findOneUserByParam(userParam)
-    if (!found) {
-      throw new UserLoginAlreadyUsedException('Такого пользователя не существует')
-    } else {
-      return await this.userRepository.delete({id: found.id})
+    if (!found) throw new GraphQLError(userErrors.USER_NOT_FOUND)
+
+    try {
+      return await this.userRepository.delete({ id: found.id })
+    } catch {
+      throw new GraphQLError(userErrors.DELETE_USER)
     }
   }
 }
