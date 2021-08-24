@@ -6,7 +6,7 @@ import { UserService } from '~server/lib/connect/users/user.service'
 import { NextFunction, Request } from 'express'
 import { TokenService } from '~server/lib/connect/tokens/token.service'
 import { getNestCookie } from '~server/utils/getNestCookie'
-import { CookieEnum } from '~server/lib/connect/auth/constants'
+import { CookieEnum } from '~server/lib/connect/auth/types/cookie'
 
 config()
 

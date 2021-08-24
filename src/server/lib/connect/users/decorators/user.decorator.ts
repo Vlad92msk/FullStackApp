@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql'
 import { getNestCookie } from '~server/utils/getNestCookie'
-import { CookieEnum } from '~server/lib/connect/auth/constants'
+import { CookieEnum } from '~server/lib/connect/auth/types/cookie'
 
 export const User = createParamDecorator(
   (data: any, context: ExecutionContext) => {
