@@ -10,6 +10,7 @@ import { Modal, ModalBody, ModalHeader } from '@shared/components/Modal'
 import ReactTooltip from 'react-tooltip'
 import { SignInForm } from '~client/modules/core/containers/SignInForm'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
+import { LocalStorageEnum } from '@shared/types/localStorage'
 
 const cn = makeCn('AppMenu', styles)
 
@@ -17,12 +18,12 @@ export const MenuApp = () => {
 
   const [signIn, setSignIn] = useState(false)
 
-  const user = storageGet<User>('user')
+  const user = storageGet<User>(LocalStorageEnum.USER)
 
   const handleChangeSignIn = useCallback(() => setSignIn((prev) => !prev), [])
   const [onHandleLogOut] = useMutation(appQueries.LOG_OUT)
   const handleLogOut = useCallback(() => {
-    storageRemove('user')
+    storageRemove(LocalStorageEnum.USER)
     return onHandleLogOut()
   }, [onHandleLogOut])
 

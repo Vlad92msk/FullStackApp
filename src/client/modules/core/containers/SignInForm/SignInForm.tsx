@@ -9,6 +9,7 @@ import { appQueries } from '~client/modules/core/graphql/queries'
 import { SignInInput } from '~server/lib/connect/auth/inputs/signIn.input'
 import { IconButton } from '@shared/components/IconButton'
 import { storageSet } from '@shared/utils'
+import { LocalStorageEnum } from '@shared/types/localStorage'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -50,7 +51,7 @@ export const SignInForm: React.FC<SignInFormType> = ({setSignIn}) => {
 
   useEffect(() => {
      if (data) {
-       storageSet('user', data.authSignIn)
+       storageSet(LocalStorageEnum.USER, data.authSignIn)
        setSignIn(false)
      }
   }, [setSignIn, data]);

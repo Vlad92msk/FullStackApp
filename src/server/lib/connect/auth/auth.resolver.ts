@@ -9,7 +9,7 @@ import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { SignInInput } from './inputs/signIn.input'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { Token } from '~server/lib/connect/users/decorators/user.decorator'
-import { CookieEnum } from '~server/lib/connect/auth/constants'
+import { CookieEnum } from '~server/lib/connect/auth/types/cookie'
 
 
 @Resolver(() => User)
