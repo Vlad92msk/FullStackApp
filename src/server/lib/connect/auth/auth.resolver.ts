@@ -9,6 +9,7 @@ import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { SignInInput } from './inputs/signIn.input'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { Token } from '~server/lib/connect/users/decorators/user.decorator'
+import { CookieEnum } from '~server/lib/connect/auth/constants'
 
 
 @Resolver(() => User)
@@ -35,7 +36,7 @@ export class AuthResolver {
       expires: new Date(Date.now() + 86400e3)
     }
 
-    context.res.cookie('token', token, options)
+    context.res.cookie(CookieEnum.TOKEN, token, options)
     return user
   }
 
@@ -49,7 +50,7 @@ export class AuthResolver {
 
     await this.authService.signOut(token)
 
-    context.res.cookie('token', token, {
+    context.res.cookie(CookieEnum.TOKEN, token, {
       expires: new Date(Date.now() - 1)
     })
 

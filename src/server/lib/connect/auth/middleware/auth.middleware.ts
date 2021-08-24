@@ -1,10 +1,12 @@
 import { Injectable, NestMiddleware } from '@nestjs/common'
 import { Response } from 'express'
+import * as moment from 'moment'
+import { config } from 'dotenv'
 import { UserService } from '~server/lib/connect/users/user.service'
 import { NextFunction, Request } from 'express'
 import { TokenService } from '~server/lib/connect/tokens/token.service'
-import * as moment from 'moment'
-import { config } from 'dotenv'
+import { getNestCookie } from '~server/utils/getNestCookie'
+import { CookieEnum } from '~server/lib/connect/auth/constants'
 
 config()
 
@@ -28,14 +30,14 @@ export class AuthMiddleware implements NestMiddleware {
   }
 
   async use(req: ExpressRequest, res: Response, next: NextFunction) {
-    const requestCookieToken = req.headers.cookie?.split('=')[1]
+    const getCookie = req.headers.cookie
+    const requestCookieToken = !!getCookie ? getNestCookie(CookieEnum.TOKEN, getCookie) : null
 
     if (!requestCookieToken) {
       req.status = AuthStatus.userUnAuthorisation
       next()
       return
     }
-
     const decode = await this.tokenService.verifyToken(requestCookieToken)
 
     const { expireAt } = await this.tokenService.exists({ uid: decode.id, token: requestCookieToken })
