@@ -1,0 +1,15 @@
+@import '../../../../public/styles/functions';
+
+.MySkills {
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+
+  &-Mesh {
+    width: 427px;
+    height: 343px;
+    display: flex;
+    justify-content: center;
+  }
+}

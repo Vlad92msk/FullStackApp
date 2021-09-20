@@ -64,7 +64,7 @@ export const HoneycombMesh: FC<HoneycombMeshType> = React.memo((props) => {
    * FIXME: Переименовать isFirstInside
    */
   return (
-    <FieldRow className={classnames(cn(), className)}>
+    <div className={classnames(cn(), className)}>
       {mesh.map((row, index) => (
         <div
           style={{ top: top[index], zIndex: rowIndex === index ? 3 : 2 }}
@@ -82,7 +82,7 @@ export const HoneycombMesh: FC<HoneycombMeshType> = React.memo((props) => {
           })}
         </div>
       ))}
-    </FieldRow>
+    </div>
   )
 })
 

@@ -2,9 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import { App } from '~client/modules/core/containers/App'
 import { addApolloState, getCache, initializeApollo } from '~client/apolloSettings/apolloClient'
-import { appQueries, AppQueriesType } from '~client/modules/core/graphql/queries'
-import { useQuery } from '@apollo/client'
-import { GetServerSideProps, InferGetServerSidePropsType, GetStaticProps } from 'next'
+import { appQueries } from '~client/modules/core/graphql/queries'
 
 type DD = {
   skills
@@ -13,7 +11,7 @@ type DD = {
 const Home: NextPage<DD> = (props) => {
   const { skills } = props
   const a = getCache({ query: appQueries.LOG_IN })
-  // console.log('a', a)
+  if (typeof window === 'undefined') return <div>Loading</div>
   return <App />
 }
 

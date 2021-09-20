@@ -3,9 +3,9 @@ import { ApolloClient, DataProxy, HttpLink, InMemoryCache, NormalizedCacheObject
 import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
-import { CookieEnum } from '@shared/types/cookie'
+import { CookieEnum } from '~public/models/cookie'
 import { getCookie, storageRemove } from '@shared/utils'
-import { LocalStorageEnum } from '@shared/types/localStorage'
+import { LocalStorageEnum } from '~public/models/localStorage'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 

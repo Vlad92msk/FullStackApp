@@ -1,37 +1,66 @@
-import React from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { TextInput } from '@shared/components/TextInput'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { TextField } from '@material-ui/core'
-import { Option, Select } from '@shared/components/Select'
-import { SelectField } from '@shared/components/SelectField'
+import { IconButton } from '@shared/components/IconButton'
+import * as yup from 'yup'
+import { makeStyles } from "@material-ui/core/styles";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { makeCn } from '@shared/utils'
+import { CreateUsersInput } from '~server/lib/connect/users/inputs/create-user.input'
+import { formStyles } from '~client/modules/core/styles/materialUI'
+import styles from './SignUpForm.module.scss'
+
+const cn = makeCn('Form', styles)
+const useStyles = makeStyles(() => (formStyles));
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required().min(5),
+  name: yup.string().required().min(5)
+})
 
 export const SignUpForm: React.FC = (props) => {
-  const { register, handleSubmit, control } = useForm()
+  const classes = useStyles();
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<CreateUsersInput>({ resolver: yupResolver(schema) })
+  const emailWatch = watch('email')
+  const passwordWatch = watch('password')
+  const nameWatch = watch('name')
+  const [{ email, password, name }, setFormDate] = useState<CreateUsersInput>({ email: emailWatch, password: passwordWatch, name: nameWatch })
   const onSubmit = (data) => console.log(data)
 
+  useEffect(() => setFormDate({
+    email: emailWatch,
+    password: passwordWatch,
+    name: nameWatch
+  }), [passwordWatch, emailWatch, nameWatch])
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} >
-      <TextField {...register('firstName')} />
-      <Controller
-        name="iceCreamType"
-        control={control}
-        render={({ field }) => (
-          <SelectField
-            {...field}
-            style={{ width: '100%', margin: 0 }}
-            placeholder="Выберите ученика..."
-            size="large"
-            combobox
-            tokenfield="check"
-          >
-            <Option value={1}>{1}</Option>
-            <Option value={2}>{2}</Option>
-            <Option value={3}>{3}</Option>
-            <Option value={4}>{4}</Option>
-          </SelectField>
-        )}
+    <form onSubmit={handleSubmit(onSubmit)} className={cn()} >
+      <TextField
+        fullWidth {...register('name')} label={'Введите login...'} error={!!errors.name}
+        helperText={errors.name?.message}
+        inputProps={{ className: classes.input }}
+        InputLabelProps={{ className: classes.label }}
       />
-      <input type="submit" />
+      <TextField
+        fullWidth {...register('email')} label={'Введите email...'} error={!!errors.email}
+        helperText={errors.email?.message}
+        inputProps={{ className: classes.input }}
+        InputLabelProps={{ className: classes.label }}
+      />
+      <TextField
+        type={'text'} fullWidth {...register('password')} label={'Введите пароль...'} error={!!errors.password}
+        helperText={errors.password?.message}
+        inputProps={{className: classes.input}}
+        InputLabelProps={{className: classes.label}}
+      />
+      <IconButton
+        classNameIcon={cn('SubmitButton')}
+        type='submit'
+        icon={'exit'}
+        fill={'bluePrimrose50'}
+        disabled={!!!email?.length || !!!password?.length || !!errors.email || !!errors.password}
+      />
     </form>
   )
 }
