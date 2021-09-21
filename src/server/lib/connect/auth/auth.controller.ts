@@ -11,7 +11,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/signUp')
-  signUp(@Body(ValidationPipe) createUserDto: CreateUsersInput): Observable<User> {
+  signUp(@Body(ValidationPipe) createUserDto: CreateUsersInput): Observable<((string | User)[])> {
     return from(this.authService.signUp(createUserDto))
   }
 

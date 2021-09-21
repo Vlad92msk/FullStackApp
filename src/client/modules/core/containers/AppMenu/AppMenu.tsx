@@ -4,7 +4,7 @@ import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
 import { useMutation } from '@apollo/client'
-import { appQueries } from '~client/modules/core/graphql/queries'
+import { appQueries } from '~client/modules/core/graphql/appQueries'
 import { Modal, ModalBody } from '@shared/components/Modal'
 import ReactTooltip from 'react-tooltip'
 import { SignInForm } from '~client/modules/core/containers/SignInForm'
@@ -105,7 +105,7 @@ export const MenuApp = () => {
                   onActiveIndexChange={({realIndex})=>setActiveSlide(realIndex)}
                 >
                   <SwiperSlide><SignInForm setSignIn={setSignIn} /></SwiperSlide>
-                  <SwiperSlide><SignUpForm /></SwiperSlide>
+                  <SwiperSlide><SignUpForm setSignIn={setSignIn} /></SwiperSlide>
                 </Swiper>
               </div>
             </ModalBody>

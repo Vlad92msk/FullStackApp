@@ -3,9 +3,8 @@ import { makeCn } from '@shared/utils'
 import styles from './MySkills.module.scss'
 import { HoneycombMesh } from '~client/modules/core/components/HoneycombMesh'
 import { IconName } from '~public/models/icon.model'
-import { ApolloError, useQuery } from '@apollo/client'
-import { SkillsQueryModel } from '~client/modules/core/types/appQueryModel'
-import { appQueries } from '~client/modules/core/graphql/queries'
+import { useQuery } from '@apollo/client'
+import { appQueries } from '~client/modules/core/graphql/appQueries'
 import { SpecialtyType } from '../App'
 import { ResponseApi } from '@shared/components/ResponseApi'
 
@@ -22,7 +21,7 @@ export const MySkills: FC<MySkillsType> = ({ el }) => {
     data: { findAllSkills = [] } = {},
     loading,
     error
-  } = useQuery<SkillsQueryModel>(appQueries.FIND_SKILLS)
+  } = useQuery(appQueries.FIND_SKILLS)
 
   return (
     <div className={cn()}>

@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import { App } from '~client/modules/core/containers/App'
 import { addApolloState, getCache, initializeApollo } from '~client/apolloSettings/apolloClient'
-import { appQueries } from '~client/modules/core/graphql/queries'
+import { appQueries } from '~client/modules/core/graphql/appQueries'
 
 type DD = {
   skills
