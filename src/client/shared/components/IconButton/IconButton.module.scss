@@ -3,17 +3,14 @@
 
 
 .IconButton {
+  $this: &;
   display: flex;
   justify-content: center;
-
   padding: 0;
-
   cursor: pointer;
-
   border: none;
   outline: none;
   background: none;
-
 
   &--size {
 
@@ -28,14 +25,34 @@
     }
 
     &_medium {
-      width: rem(24);
+      min-width: rem(24);
+      max-width: rem(70);
       height: rem(24);
     }
   }
 
-
   &-Icon {
     width: 100%;
     height: 100%;
+  }
+
+  &-IconInContainer {
+    width: 100%;
+    height: 100%;
+    transform: translateX(rem(-50));
+    transition: .5s;
+  }
+
+  &-IconContainer{
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:hover #{$this}-IconInContainer{
+    transform: translateX(0);
+    transition: .5s;
   }
 }

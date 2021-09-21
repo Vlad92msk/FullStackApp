@@ -7,22 +7,20 @@ export interface PageType {
   subTitle?: string
 }
 
-export const Page: NextPage<PageType> = (props) => {
-  const { title, subTitle, children } = props
-  return (
-    <>
-      <Head>
-        <link type="image/png" rel="shortcut icon" href="/resources/images/htmlTag.png" />
-        <title>
-          {title} | {subTitle}
-        </title>
-        <meta property="og:title" content="My page title" key="title" />
-      </Head>
-      {children}
-    </>
-  )
-}
+export const Page: NextPage<PageType> = ({ title, subTitle, children }) => (
+  <>
+    <Head>
+      <link type='image/png' rel='shortcut icon' href='/resources/images/htmlTag.png' />
+      <title>
+        {title} | {subTitle}
+      </title>
+      <meta property='og:title' content='My page title' key='title' />
+    </Head>
+    <div>{children}</div>
+  </>
+)
+
 Page.defaultProps = {
   title: 'Влад',
-  subTitle: 'Портфолио',
+  subTitle: 'Портфолио'
 }

@@ -1,10 +1,11 @@
 @import '../../../../public/styles/functions';
+@import '../../../../public/styles/mixins';
 
 .AppMenu {
+  @include flex($justify: space-between);
   width: 100%;
-  display: flex;
-  padding: 16px 2.5rem;
-  justify-content: space-between;
+  height: rem(56);
+  padding: rem(16) rem(35);
   background: #293f6863;
 
   &-MenuButton {
@@ -14,6 +15,51 @@
   &-MenuItem {
     fill: var(--Color-MunsellBlue--30);
     margin: rem(15);
-    //filter: drop-shadow(0 0 5px #00bff3);
+
+    &:hover {
+      filter: drop-shadow(0 0 rem(5) var(--Color-MunsellBlue--30));
+    }
+  }
+
+  &-UserName {
+    color: var(--Color-MunsellBlue--30);
+  }
+
+  &-ModalBody {
+    @include flex($justify: center, $align-items: center, $direction: column);
+    height: 50vh;
+    background: #292d36;
+    border: rem(1) solid var(--Color-BluePrimrose--40-opacity-035);
+    border-radius: rem(5);
+  }
+
+  &-ThumbRow {
+    @include flex($justify: center);
+    width: 100%;
+    margin: rem(40) 0;
+  }
+
+  &-SwiperContainer {
+    @include flex($justify: center, $align-items: center);
+    padding: rem(30) rem(30) rem(10) rem(30);
+    width: rem(500);
+    background: #1c202a29;
+  }
+
+  &-Thumb {
+    padding: rem(5) rem(50);
+    color: var(--Color-Text--note);
+    border-radius: rem(5);
+    transition: .5s;
+
+    &--activeSlide {
+      text-shadow: 0 0 rem(5) var(--Color-BluePrimrose--40);
+      color: var(--Color-BluePrimrose--40);
+      transition: .5s;
+    }
+  }
+
+  &-Item {
+    width: 100%;
   }
 }

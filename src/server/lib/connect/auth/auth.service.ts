@@ -28,8 +28,8 @@ export class AuthService {
    */
   async signUp(createUser: CreateUsersInput) {
     const user = await this.userService.createUser(createUser)
-    await this.sendConfirmation(user)
-    return user
+    const confirmLink = await this.sendConfirmation(user)
+    return [user, confirmLink]
   }
 
   /**
@@ -53,7 +53,8 @@ export class AuthService {
     //             <p>Please use this <a href="${confirmLink}">link</a> to confirm your account.</p>
     //         `,
     // });
-    return await this.tokenService.saveToken({ token, uid: user.id, expireAt })
+    await this.tokenService.saveToken({ token, uid: user.id, expireAt })
+    return confirmLink
   }
 
   /**

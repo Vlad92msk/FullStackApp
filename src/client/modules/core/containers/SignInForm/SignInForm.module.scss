@@ -1,0 +1,12 @@
+@import '../../../../public/styles/functions';
+@import '../../../../public/styles/mixins';
+
+.SignInForm {
+  @include flex($wrap: wrap, $justify:center);
+  height: rem(150);
+  overflow-y: auto;
+
+  &-SubmitButton {
+    margin: rem(20) 0 rem(5) 0;
+  }
+}

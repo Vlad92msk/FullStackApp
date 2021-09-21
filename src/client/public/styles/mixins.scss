@@ -85,3 +85,12 @@
     }
   }
 }
+
+@mixin flex($wrap: false, $direction: false, $justify: false, $align-items: false, $align-content: false){
+  display: flex;
+  @if $wrap{ flex-wrap: $wrap; };
+  @if $justify{ justify-content: $justify; };
+  @if $align-items{ align-items: $align-items; };
+  @if $align-content{ align-content: $align-content; };
+  @if $direction{ flex-direction: $direction; };
+}

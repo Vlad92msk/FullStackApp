@@ -1,76 +1,23 @@
 @import '../../../../public/styles/functions';
 
-.App {
-  $this: &;
-
+.Application {
   width: 100vw;
   height: 80vh;
+  position: relative;
+  overflow: hidden;
   background-image: url("/resources/images/bcg.png");
   display: flex;
   flex-wrap: wrap;
-  position: relative;
-  overflow: hidden;
-  justify-content: space-between;
   align-content: flex-start;
 
-  #{$this}-LeftBlock {
-    width: 50%;
-    padding: rem(40);
-    z-index: 2;
-
-    #{$this}-Info {
-      //height: 50%;
-
-      #{$this}-InfoBlock {
-        padding-top: rem(20);
-
-        #{$this}-InfoRow {
-          padding: rem(10) 0;
-        }
-      }
-    }
-
-    #{$this}-ProjectsContainer {
-      height: 50%;
-    }
-  }
-
-  #{$this}-RightBlock {
-    width: 35%;
-    padding: rem(40);
-
-
-    #{$this}-Skills {
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      z-index: 3;
-
-      #{$this}-IconSkillButton {
-        height: rem(80);
-        width: rem(70);
-        flex-shrink: 0;
-        position: absolute;
-        z-index: 3;
-      }
-    }
-
-    #{$this}-SpecialtyText {
-      position: absolute;
-      bottom: rem(20);
-      left: rem(-40);
-    }
-  }
-
-  &-PaddingBox {
-    width: 100%;
-    height: 100%;
-    padding: 10%;
-  }
-
-  &-Mesh {
-    width: 100%;
-    //height: rem(532);
+  &-Container {
+    flex: 1 1 50%;
+    height: calc(100% - 56px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+    padding: rem(20) rem(35);
   }
 
   &-IconSkill {
@@ -85,28 +32,26 @@
       filter: drop-shadow(0px 0px 5px #00bff3);
       transition: 0.3s;
     }
-
-    :hover {
-      z-index: 4;
-      filter: drop-shadow(0px 0px 5px #0075f3);
-      transition: 0.3s;
-      cursor: pointer;
-    }
   }
 
-  #{$this}-PersonContainer {
+  &-SpecialtyText {
+    width: 100%;
+    height: rem(45);
+    text-align: end;
+  }
+
+  &-PersonContainer {
     width: 100%;
     position: absolute;
     bottom: 0;
     display: flex;
     justify-content: center;
-
-    #{$this}-Person {
-      width: rem(400);
-      height: rem(600);
-      background: url("/resources/images/person2.png") no-repeat center;
-      background-size: cover;
-    }
   }
 
+  &-Person {
+    width: rem(400);
+    height: rem(600);
+    background: url("/resources/images/person2.png") no-repeat center;
+    background-size: cover;
+  }
 }

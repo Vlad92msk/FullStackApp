@@ -2,6 +2,8 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../apolloSettings/apolloClient'
 import { NextPage } from 'next'
 import '../modules/core/styles/base.scss'
+import 'swiper/swiper.min.css'
+
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
   const apolloClient = useApollo(pageProps)

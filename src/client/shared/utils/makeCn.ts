@@ -14,14 +14,14 @@ const makeClassNameMaker = withNaming({ e: '-', m: '--', v: '_' })
 
 export const makeCn = (scopeName: string, styles: IStyles) => {
   const makeClassName = makeClassNameMaker(scopeName);
-
+  if (typeof window === 'undefined') return null
   return (
     elemNameOrBlockMods?: ElemNameOrBlockModsType,
     elemModsOrBlockMix?: ElemModsOrBlockMixType,
     elemMix?: ElemMixType,
   ) => {
     const classNames = makeClassName(elemNameOrBlockMods, elemModsOrBlockMix, elemMix).split(' ');
-    
+
     return classNames.reduce(
       (acc, className) => {
         const scopedClassName = styles[className];

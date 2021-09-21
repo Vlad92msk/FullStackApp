@@ -1,0 +1,14 @@
+@import '../../../../public/styles/functions';
+@import '../../../../public/styles/mixins';
+
+.Form {
+  @include flex($wrap: wrap, $justify:center);
+  height: rem(150);
+  overflow-y: auto;
+
+  &-SubmitButton {
+    display: flex;
+    position: relative;
+    margin: rem(20) 0 rem(5) 0;
+  }
+}

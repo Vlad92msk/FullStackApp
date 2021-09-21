@@ -28,13 +28,16 @@ html {
 
 
 body {
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--Color-Bckground--root);
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 
