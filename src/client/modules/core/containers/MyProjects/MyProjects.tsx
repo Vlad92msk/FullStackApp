@@ -4,13 +4,13 @@ import { makeCn } from '@shared/utils'
 import { HoneycombMesh } from '~client/modules/core/components/HoneycombMesh'
 import { Icon } from '@shared/components/Icon'
 import styles from './MyProjects.module.scss'
-import { ROUTES } from '~client/modules/core/router'
+import { ROUTES_PORTFOLIO } from '~client/modules/core/router'
 
 const cn = makeCn('MyProjects', styles)
 
 export const MyProjects: FC = () => {
   const router = useRouter()
-  const handleProjectCheck = useCallback((page: keyof typeof ROUTES) => router.push(ROUTES[page].page), [router])
+  const handleProjectCheck = useCallback((page: keyof typeof ROUTES_PORTFOLIO) => router.push(ROUTES_PORTFOLIO[page].page), [router])
 
   return <div className={cn()}>
     <HoneycombMesh

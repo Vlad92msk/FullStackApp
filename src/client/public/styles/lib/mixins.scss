@@ -1,4 +1,4 @@
-@import 'functions';
+@use './functions' as *;
 
 /* Миксин для работы с полифиллом селектора :focus-visible */
 @mixin focusVisible() {

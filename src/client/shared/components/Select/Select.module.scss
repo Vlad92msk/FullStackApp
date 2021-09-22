@@ -1,15 +1,13 @@
-@import '../../../public/styles/functions';
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins';
 
 .Select {
   $this: &;
 
   &-SelectInput {
+    @include mixins.flex($direction: row, $align-items: center);
     position: relative;
-
-    display: flex;
     overflow: hidden;
-    flex-direction: row;
-    align-items: center;
 
     box-sizing: border-box;
     width: 100%;
@@ -54,6 +52,7 @@
         #{$this}-Token {
           height: rem(32);
         }
+
         #{$this}-Combobox {
           height: rem(32);
         }
@@ -65,6 +64,7 @@
         #{$this}-Token {
           height: rem(40);
         }
+
         #{$this}-Combobox {
           height: rem(40);
         }
@@ -104,12 +104,9 @@
   }
 
   &-ControlBlock {
+    @include mixins.flex($align-items: center);
     position: relative;
-
-    display: flex;
     overflow: hidden;
-    align-items: center;
-
     width: calc(100% - #{rem(18)});
     height: 100%;
 
@@ -120,13 +117,9 @@
 
 
   &-SelectedValue {
-    display: flex;
+    @include mixins.flex($direction: row, $align-items: center);
     overflow: hidden;
-    flex-direction: row;
-    align-items: center;
-
     width: 100%;
-
     white-space: nowrap;
     text-overflow: ellipsis;
 
@@ -148,23 +141,19 @@
   }
 
   &-SelectIconBlock {
+    @include mixins.flex($align-items: center);
     position: absolute;
     z-index: 7;
     top: 50%;
     right: 0;
-
-    display: flex;
-    align-items: center;
-
     width: auto;
     height: 100%;
     padding-right: rem(12);
-
     transform: translateY(-50%);
   }
 
   &-SelectIconClear {
-    display: flex;
+    @include mixins.flex();
     margin-right: rem(8);
 
     #{$this}-SelectIcon {
@@ -203,16 +192,13 @@
   }
 
   &-Token {
-    display: flex;
-    align-items: center;
-
+    @include mixins.flex($align-items: center);
     box-sizing: border-box;
     width: auto;
     max-width: 42.5%;
     height: rem(32);
     padding: rem(4) rem(12);
     margin-right: rem(4);
-
     border: rem(1) solid var(--Color-LightGray--50);
     border-radius: rem(6);
     background: var(--Color-OldAsphalt--10);
@@ -224,7 +210,7 @@
     }
 
     &IconCloseBlock {
-      display: flex;
+      @include mixins.flex();
     }
 
     &IconClose {
@@ -237,10 +223,7 @@
   }
 
   &-CountSumTokenBlock {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+    @include mixins.flex($justify: space-between, $align-items: center);
     margin-left: auto;
   }
 
@@ -257,13 +240,10 @@
 
   &-SelectListContainer {
     z-index: 99;
-
     overflow: hidden;
-
     box-sizing: border-box;
     max-height: 100%;
     padding: rem(12) rem(10) rem(12) rem(8);
-
     border: rem(1) solid var(--Color-LightGray--50);
     border-radius: rem(8);
     background-color: var(--Color-Light--100);

@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../apolloSettings/apolloClient'
 import { NextPage } from 'next'
-import '../modules/core/styles/base.scss'
+import '~public/styles/base.scss'
 import 'swiper/swiper.min.css'
 
 

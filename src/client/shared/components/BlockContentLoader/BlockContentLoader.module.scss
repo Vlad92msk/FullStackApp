@@ -1,11 +1,9 @@
-@import '../../../public/styles/functions';
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins';
 
 .BlockContentLoader {
   $this: &;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include mixins.flex($justify: center, $align-items: center);
   height: 100%;
 
   &-DotsContainer {

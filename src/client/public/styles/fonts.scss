@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Regular'),
+    local('Lato-Regular'),
+    url('../resources/fonts/latoregular.woff2') format('woff2'),
+    url('../resources/fonts/latoregular.woff') format('woff'),
+    url('../resources/fonts/latoregular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Italic'),
+    local('Lato-Italic'),
+    url('../resources/fonts/latoitalic.woff2') format('woff2'),
+    url('../resources/fonts/latoitalic.woff') format('woff'),
+    url('../resources/fonts/latoitalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Medium'),
+    local('Lato-Medium'),
+    url('../resources/fonts/latomedium.woff2') format('woff2'),
+    url('../resources/fonts/latomedium.woff') format('woff'),
+    url('../resources/fonts/latomedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Medium Italic'),
+    local('Lato-MediumItalic'),
+    url('../resources/fonts/latomediumitalic.woff2') format('woff2'),
+    url('../resources/fonts/latomediumitalic.woff') format('woff'),
+    url('../resources/fonts/latomediumitalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Bold'),
+    local('Lato-Bold'),
+    url('../resources/fonts/latobold.woff2') format('woff2'),
+    url('../resources/fonts/latobold.woff') format('woff'),
+    url('../resources/fonts/latobold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    local('Lato Bold Italic'),
+    local('Lato-BoldItalic'),
+    url('../resources/fonts/latobolditalic.woff2') format('woff2'),
+    url('../resources/fonts/latobolditalic.woff') format('woff'),
+    url('../resources/fonts/latobolditalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}

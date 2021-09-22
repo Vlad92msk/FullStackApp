@@ -11,7 +11,7 @@ import { makeCn, storageSet } from '@shared/utils'
 import { LocalStorageEnum } from '~public/models/localStorage'
 import { makeStyles } from '@material-ui/core/styles'
 import { FormEnums } from '~public/models/formEnums'
-import { formStyles } from '~client/modules/core/styles/materialUI'
+import { formStyles } from '~public/styles/materialUI'
 import styles from './SignInForm.module.scss'
 
 /**
