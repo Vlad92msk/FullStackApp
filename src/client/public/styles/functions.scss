@@ -1,6 +1,8 @@
+@use "sass:math";
+
 @function rem($size) {
   @if unitless($size) {
-    $remSize: $size / 16;
+    $remSize: math.div($size, 16);
     @return #{$remSize}rem;
   } @else {
     @error 'Size must be a unitless number.';

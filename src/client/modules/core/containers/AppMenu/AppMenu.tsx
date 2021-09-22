@@ -1,19 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import ReactTooltip from 'react-tooltip'
+import { useMutation } from '@apollo/client'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { EffectCoverflow, Thumbs } from 'swiper/core'
 
 import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
-import { useMutation } from '@apollo/client'
 import { appQueries } from '~client/modules/core/graphql/appQueries'
 import { Modal, ModalBody } from '@shared/components/Modal'
-import ReactTooltip from 'react-tooltip'
 import { SignInForm } from '~client/modules/core/containers/SignInForm'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
-import styles from './AppMenu.module.scss'
 import { SignUpForm } from '~client/modules/core/containers/SignUpForm'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { EffectCoverflow, Thumbs } from 'swiper/core'
+
+import styles from './AppMenu.module.scss'
 import 'swiper/components/effect-coverflow/effect-coverflow.min.css'
 import 'swiper/components/thumbs/thumbs.min.css'
 
@@ -72,12 +73,12 @@ export const MenuApp = () => {
                 </ReactTooltip>
               </>)}
             </>,
-            // <>
+            // <AuthGuard roles={[RoleEnum.participant]}>
             //   <IconButton key={3} className={cn('MenuItem')} icon={'info-2'} data-for='info' data-tip />
             //   <ReactTooltip id={'info'} type={'dark'} place={'bottom'}>
             //     Информация
             //   </ReactTooltip>
-            // </>,
+            // </AuthGuard>,
             <>
               <IconButton className={cn('MenuItem')} icon={'message-square'} data-for='message' data-tip />
               <ReactTooltip id={'message'} type={'dark'} place={'bottom'}>
@@ -102,7 +103,7 @@ export const MenuApp = () => {
                   effect={'coverflow'}
                   loop={true}
                   grabCursor={true}
-                  onActiveIndexChange={({realIndex})=>setActiveSlide(realIndex)}
+                  onActiveIndexChange={({ realIndex }) => setActiveSlide(realIndex)}
                 >
                   <SwiperSlide><SignInForm setSignIn={setSignIn} /></SwiperSlide>
                   <SwiperSlide><SignUpForm setSignIn={setSignIn} /></SwiperSlide>

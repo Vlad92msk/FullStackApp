@@ -94,3 +94,9 @@
   @if $align-content{ align-content: $align-content; };
   @if $direction{ flex-direction: $direction; };
 }
+
+@mixin breakpoint ($bp: 0){
+  @media (min-width: $bp) {
+    @content
+  }
+}
