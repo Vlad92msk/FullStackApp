@@ -10,7 +10,7 @@ import { CreateUsersInput } from '~server/lib/connect/users/inputs/create-user.i
 import { appQueries } from '~client/modules/core/graphql/appQueries'
 import { FormEnums } from '~public/models/formEnums'
 import { makeCn } from '@shared/utils'
-import { formStyles } from '~client/modules/core/styles/materialUI'
+import { formStyles } from '~public/styles/materialUI'
 import styles from './SignUpForm.module.scss'
 
 

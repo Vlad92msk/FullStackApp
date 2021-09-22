@@ -1,5 +1,5 @@
-@use "src/client/public/styles/functions" as *;
-@use "src/client/public/styles/mixins";
+@use "src/client/public/styles/lib/functions" as *;
+@use "src/client/public/styles/lib/mixins";
 
 .AppMenu {
   @include mixins.flex($justify: space-between);

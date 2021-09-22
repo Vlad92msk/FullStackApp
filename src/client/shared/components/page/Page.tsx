@@ -21,6 +21,6 @@ export const Page: NextPage<PageType> = ({ title, subTitle, children }) => (
 )
 
 Page.defaultProps = {
-  title: 'Влад',
-  subTitle: 'Портфолио'
+  title: 'Vlad',
+  subTitle: 'Portfolio'
 }

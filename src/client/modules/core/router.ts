@@ -19,7 +19,7 @@ type RouteType = {
 }
 
 
-export const ROUTES = {
+export const ROUTES_PORTFOLIO = {
   core: {
     page: '',
     title: 'Портфолио',
@@ -29,40 +29,6 @@ export const ROUTES = {
     page: 'cosmo',
     title: 'Космо',
     allowRoles: [RoleEnum.visitor],
-    subRoutes: {
-      pageName1: {
-        page: 'pageName1',
-        title: 'Космо',
-        allowRoles: [RoleEnum.visitor]
-      },
-      pageName2: {
-        page: 'pageName2',
-        title: 'Космо',
-        allowRoles: [RoleEnum.visitor]
-      },
-      pageName3: {
-        page: 'pageName3',
-        title: 'Космо',
-        allowRoles: [RoleEnum.visitor],
-        subRoutes: {
-          pageName1: {
-            page: 'pageName1',
-            title: 'Космо',
-            allowRoles: [RoleEnum.visitor]
-          },
-          pageName2: {
-            page: 'pageName2',
-            title: 'Космо',
-            allowRoles: [RoleEnum.visitor]
-          },
-          pageName3: {
-            page: 'pageName3',
-            title: 'Космо',
-            allowRoles: [RoleEnum.visitor]
-          }
-        }
-      }
-    }
   }
 }
 

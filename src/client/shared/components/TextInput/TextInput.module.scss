@@ -1,5 +1,5 @@
-@import '../../../public/styles/functions';
-@import '../../../public/styles/mixins';
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins';
 
 
 .TextInput {
@@ -25,7 +25,7 @@
   }
 
   &-Input {
-    @include placeholderColor(var(--Color-Text--disabled));
+    @include mixins.placeholderColor(var(--Color-Text--disabled));
     width: 100%;
     padding: 0 rem(16) rem(2) rem(16);
     border-width: rem(1);

@@ -2,11 +2,11 @@ import React from 'react'
 import { storageGet } from '@shared/utils'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
-import { RoleEnum, ROUTES } from '~client/modules/core/router'
+import { RoleEnum, ROUTES_PORTFOLIO } from '~client/modules/core/router'
 
 type AuthGuardType = {
   roles?: RoleEnum[]
-  page?: keyof typeof ROUTES
+  page?: keyof typeof ROUTES_PORTFOLIO
   defaultErrorComponent?: boolean
 }
 export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, defaultErrorComponent, children }) => {
@@ -19,8 +19,8 @@ export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, defaultErrorCo
    * Если Роли указаны и есть в профиле - пропустить
    */
   if ((!roles && !page) ||
-    (page && !ROUTES[page].allowRoles.length) ||
-    (page && user && user.uRoles.some((role: RoleEnum) => ROUTES[page].allowRoles.includes(role))) ||
+    (page && !ROUTES_PORTFOLIO[page].allowRoles.length) ||
+    (page && user && user.uRoles.some((role: RoleEnum) => ROUTES_PORTFOLIO[page].allowRoles.includes(role))) ||
     (roles && user && user.uRoles.some((role: RoleEnum) => roles.includes(role)))
   ) return <>{children}</>
 
