@@ -39,7 +39,7 @@ export const App = () => {
         <MenuApp />
         <div className={cn('Container')}>
           <AboutMe />
-          <MyProjects el={el} />
+          <MyProjects />
         </div>
         <div className={cn('Container')}>
           <Title className={cn('Title')} size={'1'}>

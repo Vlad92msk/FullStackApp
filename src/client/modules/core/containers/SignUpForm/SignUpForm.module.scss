@@ -1,8 +1,8 @@
-@import '../../../../public/styles/functions';
-@import '../../../../public/styles/mixins';
+@use "src/client/public/styles/functions" as *;
+@use "src/client/public/styles/mixins";
 
 .Form {
-  @include flex($wrap: wrap, $justify:center);
+  @include mixins.flex($wrap: wrap, $justify:center);
   height: rem(150);
   overflow-y: auto;
 

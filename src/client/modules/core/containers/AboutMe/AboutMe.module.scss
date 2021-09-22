@@ -1,4 +1,4 @@
-@import '../../../../public/styles/functions';
+@use "src/client/public/styles/functions" as *;
 
 .AboutMe {
   &-InfoBlock {

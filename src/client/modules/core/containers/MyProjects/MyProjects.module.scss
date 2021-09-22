@@ -1,4 +1,4 @@
-@import '../../../../public/styles/functions';
+@use 'src/client/public/styles/functions' as *;
 
 .MyProjects {
   height: 50%;
@@ -8,4 +8,18 @@
     width: 100%;
   }
 
+  &-Icon {
+    height: rem(80);
+    width: rem(70);
+    flex-shrink: 0;
+    z-index: 3;
+    filter: brightness(0.7);
+    transition: 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      filter: drop-shadow(0px 0px 5px #00bff3);
+      transition: 0.3s;
+    }
+  }
 }

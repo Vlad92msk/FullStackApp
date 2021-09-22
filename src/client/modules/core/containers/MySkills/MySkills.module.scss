@@ -1,15 +1,14 @@
-@import '../../../../public/styles/functions';
+@use "src/client/public/styles/functions" as *;
+@use "src/client/public/styles/mixins";
 
 .MySkills {
+  @include mixins.flex($justify: flex-end);
   width: 100%;
   z-index: 3;
-  display: flex;
-  justify-content: flex-end;
 
   &-Mesh {
-    width: 427px;
-    height: 343px;
-    display: flex;
-    justify-content: center;
+    @include mixins.flex($justify: center);
+    width: rem(427);
+    height: rem(343);
   }
 }

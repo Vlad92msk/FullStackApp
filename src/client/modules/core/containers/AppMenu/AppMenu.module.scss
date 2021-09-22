@@ -1,8 +1,8 @@
-@import '../../../../public/styles/functions';
-@import '../../../../public/styles/mixins';
+@use "src/client/public/styles/functions" as *;
+@use "src/client/public/styles/mixins";
 
 .AppMenu {
-  @include flex($justify: space-between);
+  @include mixins.flex($justify: space-between);
   width: 100%;
   height: rem(56);
   padding: rem(16) rem(35);
@@ -26,7 +26,7 @@
   }
 
   &-ModalBody {
-    @include flex($justify: center, $align-items: center, $direction: column);
+    @include mixins.flex($justify: center, $align-items: center, $direction: column);
     height: 50vh;
     background: #292d36;
     border: rem(1) solid var(--Color-BluePrimrose--40-opacity-035);
@@ -34,13 +34,13 @@
   }
 
   &-ThumbRow {
-    @include flex($justify: center);
+    @include mixins.flex($justify: center);
     width: 100%;
     margin: rem(40) 0;
   }
 
   &-SwiperContainer {
-    @include flex($justify: center, $align-items: center);
+    @include mixins.flex($justify: center, $align-items: center);
     padding: rem(30) rem(30) rem(10) rem(30);
     width: rem(500);
     background: #1c202a29;
