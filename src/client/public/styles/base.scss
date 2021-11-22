@@ -2,6 +2,7 @@
 @import 'lib/functions';
 @import 'variables/colors';
 @import 'variables/typography';
+
 @include scrollbar();
 
 html {
@@ -51,4 +52,8 @@ button {
   &:focus {
     outline: none;
   }
+}
+
+svg {
+  width: 100%;
 }

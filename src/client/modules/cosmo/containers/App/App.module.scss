@@ -1,14 +1,10 @@
 @use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins';
 
 .Application {
+  @include mixins.flex($direction: column);
   width: 100vw;
-  height: 80vh;
-  position: relative;
+  height: 100vh;
   overflow: hidden;
-  background-image: url("/resources/images/bcg.png");
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-
-
+  overflow-y: auto;
 }

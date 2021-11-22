@@ -1,15 +1,13 @@
-import React, { useMemo, useState } from 'react'
-import { makeCn } from '@shared/utils'
-
-import styles from './App.module.scss'
-
-const cn = makeCn('Application', styles)
+import React from 'react'
+import { Header } from '../Header'
+import { Body } from '../Body'
 
 
 export const App = () => {
   return (
-    <div className={cn()}>
-      <div>Cosmo</div>
-    </div>
+    <>
+      <Header />
+      <Body />
+    </>
   )
 }

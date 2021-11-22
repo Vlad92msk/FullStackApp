@@ -42,9 +42,7 @@
     &:hover {
       scrollbar-color: var(--Color-Scrollbar-hover) transparent;
     }
-  }
-
-  @else {
+  } @else {
     scrollbar-color: var(--Color-Scrollbar-dark);
 
     &:hover {
@@ -74,9 +72,7 @@
       &:hover {
         background-color: var(--Color-Scrollbar-hover);
       }
-    }
-
-    @else {
+    } @else {
       background-color: var(--Color-Scrollbar-dark);
 
       &:hover {
@@ -86,17 +82,48 @@
   }
 }
 
-@mixin flex($wrap: false, $direction: false, $justify: false, $align-items: false, $align-content: false){
+@mixin flex($wrap: false, $direction: false, $justify: false, $align-items: false, $align-content: false) {
   display: flex;
-  @if $wrap{ flex-wrap: $wrap; };
-  @if $justify{ justify-content: $justify; };
-  @if $align-items{ align-items: $align-items; };
-  @if $align-content{ align-content: $align-content; };
-  @if $direction{ flex-direction: $direction; };
+  @if $wrap {flex-wrap: $wrap;};
+  @if $justify {justify-content: $justify;};
+  @if $align-items {align-items: $align-items;};
+  @if $align-content {align-content: $align-content;};
+  @if $direction {flex-direction: $direction;};
 }
 
-@mixin breakpoint ($bp: 0){
-  @media (min-width: $bp) {
-    @content
+@mixin sectionPadding($default, $mTop: false, $mBottom: false, $pBottom: false, $pTop: false) {
+  padding: $default;
+  @if $mTop {margin-top: rem($mTop)}
+  @if $pTop {padding-top: rem($pTop)}
+  @if $mBottom {margin-bottom: rem($mBottom)}
+  @if $pBottom {padding-bottom: rem($pBottom)}
+}
+
+@mixin position($left: false, $top: false, $right: false, $bottom: false, $pos: absolute) {
+  position: $pos;
+  @if $left {left: rem($left)}
+  @if $top {top: rem($top)}
+  @if $right {right: rem($right)}
+  @if $bottom {bottom: rem($bottom)}
+}
+
+@mixin wh($w: false, $h: false) {
+  @if $w {width: $w}
+  @if $h {height: $h}
+}
+
+@mixin text($size: rem(16), $transform: false, $weight: 'medium', $line-height: false) {
+  font-size: $size;
+
+  @if ($weight == 'medium') {
+    font-weight: var(--FontWeight-Medium);
+  } @else if ($weight == 'regular') {
+    font-weight: var(--FontWeight-Regular);
+  } @else if ($weight == 'light') {
+    font-weight: var(--FontWeight-Light);
+  } @else if ($weight == 'bold') {
+    font-weight: var(--FontWeight-Bold);
   }
+  @if ($transform) {text-transform: uppercase;}
+  @if ($line-height) {line-height: $line-height;}
 }

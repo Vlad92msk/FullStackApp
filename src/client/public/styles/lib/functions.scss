@@ -9,3 +9,23 @@
   }
 }
 
+@function wSize($min, $optimal, $max){
+    $a: rem($min);
+    $b: #{$optimal}vw;
+    $c: rem($max);
+    @return clamp($a, $b, $c);
+}
+
+@function hSize($min, $optimal, $max){
+  $a: rem($min);
+  $b: #{$optimal}vh;
+  $c: rem($max);
+  @return clamp($a, $b, $c);
+}
+
+@function remSize($min, $optimal, $max){
+  $a: rem($min);
+  $b: rem($optimal);
+  $c: rem($max);
+  @return clamp($a, $b, $c);
+}
