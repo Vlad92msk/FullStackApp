@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { concat, delay, interval, map } from 'rxjs'
 import { scan, take } from 'rxjs/operators'
 
-export const useWriteText = ({ myText, speed = 150, myDelay = 150, repeatCount = 0 }: {
-  myText: string,
-  myDelay?: number,
-  speed?: number,
+export interface WriteTextType {
+  myText: string
+  myDelay?: number
+  speed?: number
   repeatCount: number
-}) => {
+}
+
+export const useWriteText = ({ myText, speed = 150, myDelay = 150, repeatCount = 0 }: WriteTextType) => {
   const [name, setName] = useState<string>('')
 
   const writeText$ = interval(speed).pipe(

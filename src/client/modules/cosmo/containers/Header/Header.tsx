@@ -1,38 +1,39 @@
 import React from 'react'
-import { makeCn } from '@shared/utils'
+import { classnames } from '@bem-react/classnames'
 
+import { makeCn } from '@shared/utils'
 import { IconButton } from '@shared/components/IconButton'
 import { Title } from '@shared/components/Title'
-import { useWriteText } from '@shared/hooks'
+import { Section } from '@shared/components/Section'
+import { WriteText } from '@shared/components/WriteText'
 import { Social } from './components/Social'
 
 import styles from './Header.module.scss'
-const cn = makeCn('Header', styles)
+import { section } from '~client/modules/cosmo/moduleGeneralCN'
+const header = makeCn('Header', styles)
 
 
 export const Header: React.FC = () => {
-const description = useWriteText({
-  myText: 'Первый космический',
-  repeatCount: 1
-})
 
   return (
-    <header className={cn()}>
+    <Section className={classnames(section(), header())}>
       <video muted autoPlay loop
-             className={cn('Video')}
+             className={header('Video')}
              src={'/resources/videos/vid.mp4'}
       />
       <Social />
 
-      <div className={cn('Main')}>
-        <img className={cn('Img')} src={'/resources/images/cosmo/cosmo.png'} />
-        <div className={cn('TitleBox')}>
-          <div className={cn('Title')}>Cosmo</div>
-          <div className={cn('Description')}>{description}</div>
+      <div className={header('Main')}>
+        <img className={header('Img')} src={'/resources/images/cosmo/cosmo.png'} alt=''/>
+        <div className={header('TitleBox')}>
+          <div className={header('Title')}>Cosmo</div>
+          <div className={header('Description')}>
+            <WriteText myText={'Первый космический'} repeatCount={1}/>
+          </div>
         </div>
       </div>
 
-      <div className={cn('Bottom')}>
+      <div className={header('Bottom')}>
         <IconButton
           icon={'arrow-down-sharp'}
           size={'medium'}
@@ -40,6 +41,6 @@ const description = useWriteText({
           onClick={event => console.log('1', 1)}
         />
       </div>
-    </header>
+    </Section>
   )
 }

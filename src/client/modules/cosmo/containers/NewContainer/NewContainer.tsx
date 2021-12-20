@@ -1,5 +1,5 @@
 import React from 'react'
-import { NewComponent } from './components/NewComponent'
+import { NewComponent } from './components'
 
 import { makeCn } from '@shared/utils'
 import styles from './NewContainer.module.scss'

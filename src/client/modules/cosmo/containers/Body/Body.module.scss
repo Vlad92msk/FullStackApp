@@ -1,19 +1,10 @@
-@use "../../../../public/styles/lib/functions" as *;
-@use "../../../../public/styles/lib/mixins" as *;
-@import "../../style.module";
-
 .Body {
-  @include sectionPadding($default: $sectionPadding, $pTop: 20);
-  @include flex($direction: column, $justify: space-between, $align-items: center);
-
-  &-Title {
-    @include text(wSize(16, 8, 250), true, 'bold');
-    color: var(--Color-Light--80);
-  }
-
-  &-Description {
-    @include text(wSize(10, 4, 150), true, 'bold');
-    color: var(--Color-Light--80);
-  }
-
+  box-shadow: 0 16px 81px 139px hsl(0deg 0% 1%);
+  background: linear-gradient(to bottom,
+    hsl(0deg 0% 1% / 100%) 0%,
+    hsl(216deg 60% 5% / 80%) 28%,
+    hsl(216deg 60% 5% / 80%) 83%,
+    hsl(0deg 14% 1% / 100%) 100%
+  ),
+  url("../../../../public/resources/images/cosmo/stars.jpg") no-repeat center / cover fixed;
 }

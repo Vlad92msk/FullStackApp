@@ -113,7 +113,7 @@
 }
 
 @mixin text($size: rem(16), $transform: false, $weight: 'medium', $line-height: false) {
-  font-size: $size;
+  font-size: $size!important;
 
   @if ($weight == 'medium') {
     font-weight: var(--FontWeight-Medium);

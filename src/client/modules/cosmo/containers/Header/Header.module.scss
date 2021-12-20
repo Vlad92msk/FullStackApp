@@ -3,10 +3,7 @@
 @import "../../style.module";
 
 .Header {
-  @include sectionPadding($default: $sectionPadding, $pTop: 20);
   @include wh(100%, rem(800));
-  @include flex($direction: column, $justify: space-between, $align-items: center);
-  position: relative;
 
   &-Video {
     @include position(0, 0);
@@ -24,7 +21,7 @@
   &-Img {
     width: 20vw;
   }
-  
+
   &-Title {
     @include text(wSize(16, 8, 250), true, 'bold');
     color: var(--Color-Light--80);

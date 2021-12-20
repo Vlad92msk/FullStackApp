@@ -2,7 +2,7 @@
 @use 'src/client/public/styles/lib/mixins';
 
 .Application {
-  @include mixins.flex($direction: column);
+  @include mixins.flex(wrap);
   width: 100vw;
   height: 100vh;
   overflow: hidden;

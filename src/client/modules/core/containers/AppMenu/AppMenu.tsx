@@ -8,7 +8,7 @@ import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
 import { appQueries } from '~client/modules/core/graphql/appQueries'
-import { Modal, ModalBody } from '@shared/components/Modal'
+import { Modal } from '@shared/components/Modal'
 import { SignInForm } from '~client/modules/core/containers/SignInForm'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
@@ -89,10 +89,9 @@ export const MenuApp = () => {
         />
       </div>
 
-      <Modal open={signIn} size={'medium'} onClose={handleChangeSignIn} className={cn('Modal')}>
-        {() => (
-          <>
-            <ModalBody className={cn('ModalBody')}>
+      <Modal open={signIn} onClose={handleChangeSignIn} className={cn('Modal')}>
+
+            <div className={cn('ModalBody')}>
               <div className={cn('ThumbRow')}>
                 <div className={cn('Thumb', { activeSlide: !!!activeSlide })}>Войти</div>
                 <div className={cn('Thumb', { activeSlide: !!activeSlide })}>Зарегистрироваться</div>
@@ -109,12 +108,9 @@ export const MenuApp = () => {
                   <SwiperSlide><SignUpForm setSignIn={setSignIn} /></SwiperSlide>
                 </Swiper>
               </div>
-            </ModalBody>
-          </>
-        )}
+            </div>
       </Modal>
-    </>
-
+      </>
   )
 }
 

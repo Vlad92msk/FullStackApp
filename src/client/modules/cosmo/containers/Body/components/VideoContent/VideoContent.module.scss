@@ -1,0 +1,66 @@
+@use "./src/client/public/styles/lib/functions" as *;
+@use "./src/client/public/styles/lib/mixins" as *;
+@import "./src/client/modules/cosmo/style.module";
+
+
+.VideoContent {
+  width: 100%;
+  display: flex;
+
+  &-Main {
+    flex: 9;
+  }
+
+  &-Rating {
+    height: 100%;
+    background: var(--Color-Light--5);
+    margin-left: wSize(5, 5, 10);
+    padding: wSize(1, 1, 10);
+    flex: 2;
+  }
+
+  &-Header {
+    @include flex($align-items: center);
+    width: 100%;
+  }
+
+  &-Title {
+    color: $colorBase;
+  }
+
+  &-Body {
+    @include flex(wrap);
+    position: relative;
+    margin-top: rem(50);
+  }
+
+  &-Video {
+    @include text(wSize(10, 1.5, 20), true);
+    flex: 1 1 auto;
+    padding: rem(5);
+    background: var(--Color-RedRose--50);
+    color: var(--Color-Light--100);
+    text-align: center;
+  }
+
+  &-Tabs {
+    flex: 1 1 90%;
+  }
+
+  &-Tab {
+    @include text(wSize(10, 1.5, 20), true);
+    color: var(--Color-RedRose--50) !important;
+  }
+
+  &-ContentVideo {
+    flex: 1 1 25%;
+    height: hSize(150, 30, 300);
+    margin: remSize(1, 10, 15);
+    border: 0;
+  }
+
+
+  &-Modal {
+    @include wh(80vw, wSize(100, 70, 800));
+  }
+}

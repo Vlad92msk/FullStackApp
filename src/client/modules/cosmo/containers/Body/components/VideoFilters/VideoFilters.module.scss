@@ -1,0 +1,36 @@
+@use "./src/client/public/styles/lib/functions" as *;
+@use "./src/client/public/styles/lib/mixins" as *;
+@import "./src/client/modules/cosmo/style.module";
+
+
+.Filters {
+  position: absolute;
+  left: rem(-100);
+  top: 0;
+
+  &-Title {
+    color: $colorBase;
+    margin-bottom: rem(20);
+  }
+
+  &-Item {
+    @include flex($align-items: center);
+    width: 100%;
+    margin-bottom: rem(20);
+  }
+
+  &-Icon {
+    @include wh(rem(25), rem(25));
+    fill: var(--Color-RedRose--50);
+  }
+
+  &-ButtonsBox {
+    @include flex($align-items: center, $direction: column);
+    margin-left: rem(5);
+    width: 100%;
+  }
+
+  &-Button {
+    fill: var(--Color-RedRose--50);
+  }
+}
