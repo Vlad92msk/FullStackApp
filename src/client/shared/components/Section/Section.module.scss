@@ -1,0 +1,15 @@
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins' as *;
+
+.Base {
+  @include flex($direction: column, $justify: space-between, $align-items: center);
+  position: relative;
+  width: 100%;
+
+  &-Img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}

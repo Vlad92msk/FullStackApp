@@ -1,0 +1,10 @@
+.Body {
+  box-shadow: 0 16px 81px 139px hsl(0deg 0% 1%);
+  background: linear-gradient(to bottom,
+    hsl(0deg 0% 1% / 100%) 0%,
+    hsl(216deg 60% 5% / 80%) 28%,
+    hsl(216deg 60% 5% / 80%) 83%,
+    hsl(0deg 14% 1% / 100%) 100%
+  ),
+  url("../../../../public/resources/images/cosmo/stars.jpg") no-repeat center / cover fixed;
+}

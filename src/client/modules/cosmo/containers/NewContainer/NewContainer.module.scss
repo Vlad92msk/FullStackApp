@@ -1,0 +1,19 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../../style.module";
+
+.NewContainer {
+  @include sectionPadding($default: $sectionPadding, $pTop: 20);
+  @include flex($direction: column, $justify: space-between, $align-items: center);
+
+  &-Title {
+    @include text(wSize(16, 8, 250), true, 'bold');
+    color: var(--Color-Light--80);
+  }
+
+  &-Description {
+    @include text(wSize(10, 4, 150), true, 'bold');
+    color: var(--Color-Light--80);
+  }
+
+}

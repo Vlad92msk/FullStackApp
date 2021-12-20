@@ -1,20 +1,18 @@
-import React, { useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { classnames } from '@bem-react/classnames'
 import { Icon } from '@shared/components/Icon'
 import { Popper } from '@shared/components/Popper'
-import { ModalSize, ModalContext } from './model'
 import { cn } from './cn'
-import { Context } from './Context'
 
 export interface ModalProps {
-  children: () => React.ReactNode | React.ReactNode[]
+  children: React.ReactNode | React.ReactNode[]
   className?: string
   open: boolean
-  size: ModalSize
   autoHeight?: boolean
 
   onClose?: () => void
-  isButtonClose?: boolean
+  isBckOnClose?: boolean
+  isOnCloseIcon?: boolean
 }
 
 export const Modal: React.FC<ModalProps> = (props) => {
@@ -22,28 +20,33 @@ export const Modal: React.FC<ModalProps> = (props) => {
     children,
     className,
     open,
-    size,
     autoHeight,
 
     onClose,
+    isBckOnClose,
+    isOnCloseIcon
   } = props
 
-  const contextValue = useMemo<ModalContext>(
-    () => ({
-      size,
-    }),
-    [size]
-  )
+  if (typeof window === 'undefined') {
+    return <></>
+  }
+
+  const handleBckClose = useCallback(() => {
+    if (isBckOnClose && onClose) {
+      onClose()
+    }
+  }, [isBckOnClose])
 
   return (
-    <Popper open={open} anchorEl={document.body} className={classnames(cn(), className)}>
-      <section className={cn('Inner', { size, autoHeight })}>
-        {onClose && (
+    <Popper open={open} anchorEl={document.body} className={cn()}>
+      <span className={cn('Bck')} onClick={handleBckClose}/>
+      <section className={classnames(cn('Inner', { autoHeight }), className)}>
+        {(onClose && isOnCloseIcon) && (
           <span onClick={onClose} className={cn('BlockIconClose')}>
             <Icon icon="close" className={cn('IconClose')} />
           </span>
         )}
-        <Context.Provider value={contextValue}>{open && children()}</Context.Provider>
+        {children}
       </section>
     </Popper>
   )
@@ -51,5 +54,5 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
 Modal.defaultProps = {
   className: null,
-  isButtonClose: true,
+  isBckOnClose: true,
 }

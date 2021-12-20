@@ -1,0 +1,25 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+
+.Social {
+  &-SocialLink {
+    @include flex;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &-SocialButton{
+    width: rem(30)!important;
+    height: rem(30)!important;
+    background: transparent!important;
+    transition: .5s!important;
+
+    &:hover{
+      width: rem(40)!important;
+      height: rem(40)!important;
+      transition: .5s!important;
+    }
+  }
+}
