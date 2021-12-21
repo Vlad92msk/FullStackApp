@@ -1,8 +1,10 @@
+@use "../../../../public/styles/lib/functions" as *;
+
 .Body {
   z-index: 2;
-  -webkit-box-shadow:  0 16px 81px 139px hsl(0deg 0% 1%), 0px -100px 53px -34px hsl(0deg 0% 1%) inset;
-  -moz-box-shadow:  0 16px 81px 139px hsl(0deg 0% 1%), 0px -100px 53px -34px hsl(0deg 0% 1%) inset;
-  box-shadow:  0 16px 81px 139px hsl(0deg 0% 1%), 0px -100px 53px -34px hsl(0deg 0% 1%) inset;
+  -webkit-box-shadow:  0 rem(16) rem(81) rem(139) hsl(0deg 0% 1%), rem(0) rem(-100) rem(53) rem(-34) hsl(0deg 0% 1%) inset;
+  -moz-box-shadow:  0 rem(16) rem(81) rem(139) hsl(0deg 0% 1%), rem(0) rem(-100) rem(53) rem(-34) hsl(0deg 0% 1%) inset;
+  box-shadow:  0 rem(16) rem(81) rem(139) hsl(0deg 0% 1%), rem(0) rem(-100) rem(53) rem(-34) hsl(0deg 0% 1%) inset;
   background: linear-gradient(to bottom,
     hsl(0 0% 1% / 100%) 0%,
     hsl(0 0% 1% / 90%) 100%,
