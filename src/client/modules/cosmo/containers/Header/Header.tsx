@@ -10,6 +10,8 @@ import { Social } from './components/Social'
 
 import styles from './Header.module.scss'
 import { section } from '~client/modules/cosmo/moduleGeneralCN'
+import { Image } from '@shared/components/Image'
+
 const header = makeCn('Header', styles)
 
 
@@ -24,11 +26,13 @@ export const Header: React.FC = () => {
       <Social />
 
       <div className={header('Main')}>
-        <img className={header('Img')} src={'/resources/images/cosmo/cosmo.png'} alt=''/>
+        <div className={header('Img')}>
+          <Image sizePriority={'contain'} path={{ project: 'cosmo', img: 'cosmo' }} />
+        </div>
         <div className={header('TitleBox')}>
           <div className={header('Title')}>Cosmo</div>
           <div className={header('Description')}>
-            <WriteText myText={'Первый космический'} repeatCount={1}/>
+            <WriteText myText={'Первый космический'} repeatCount={1} />
           </div>
         </div>
       </div>

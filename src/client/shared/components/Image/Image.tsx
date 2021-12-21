@@ -14,7 +14,7 @@ export interface ImagePath {
 
 export interface ImageType {
   path: ImagePath
-  sizePriority?: 'width' | 'height' | 'cover'
+  sizePriority?: 'width' | 'height' | 'cover' | 'contain'
   className?: string
 }
 
@@ -27,13 +27,8 @@ export const Image: React.FC<ImageType> = React.memo(({ path, sizePriority, clas
       <source type='image/webp' srcSet={`${src}.webp`} />
       <source type='image/avif' srcSet={`${src}.avif`} />
       <img
+        className={classnames(cn('Img', { sizePriority }), className)}
         src={`${src}.webp`} alt={img}
-        style={(
-          sizePriority === 'width' ? ({ maxWidth: '100%' }) :
-            sizePriority === 'height' ? ({ maxHeight: '100%' }) :
-              ({ height: '100%', width: '100%' })
-        )}
-        className={classnames(cn('Img'), className)}
       />
     </picture>
   )
