@@ -4,11 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
 import { Title } from '@shared/components/Title'
 import { Section } from '@shared/components/Section'
-import { section } from '~client/modules/cosmo/moduleGeneralCN'
 import { useScreenWidth } from '@shared/hooks'
 import { MediaQueries } from '~client/modules/cosmo/types/mediaQueries'
-import styles from './Articles.module.scss'
 
+import { section } from '~client/modules/cosmo/moduleGeneralCN'
+import styles from './Articles.module.scss'
 const cn = makeCn('Articles', styles)
 
 SwiperCore.use([Navigation])
@@ -47,21 +47,8 @@ export const Articles: React.FC<ArticlesType> = () => {
   const screenWidth = useScreenWidth()
 
   const sliderMediaParam = useMemo(() => {
-    if (screenWidth <= MediaQueries.M_768) {
-      return ({
-        slidesPerView: 1,
-        spaceBetween: 0
-      })
-    }
-    if (screenWidth <= MediaQueries.M_1024) {
-      return ({
-        slidesPerView: 2,
-        spaceBetween: 10
-      })
-    }
-
     return ({
-      slidesPerView: 3,
+      slidesPerView: Math.round(screenWidth / 450),
       spaceBetween: 30
     })
   }, [screenWidth])
