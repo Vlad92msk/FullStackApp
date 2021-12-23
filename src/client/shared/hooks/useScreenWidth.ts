@@ -1,18 +1,21 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
+import { map, fromEvent, debounceTime, distinct } from 'rxjs'
+
+
+const screenWidth$ = (typeof window !== 'undefined') && fromEvent(window, 'resize').pipe(
+  debounceTime(400),
+  map(() => window.innerWidth),
+  distinct(),
+)
 
 export const useScreenWidth = (): number => {
-  if (typeof window === 'undefined') return
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
-  const handleResizeWindows = useCallback(() => {
-    setScreenWidth(window.innerWidth);
-  }, []);
+  if (typeof window === 'undefined') return 0
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   useEffect(() => {
-    window.addEventListener('resize', handleResizeWindows);
+    const watchScreenWidth$ = screenWidth$.subscribe(setScreenWidth)
+    return () => watchScreenWidth$.unsubscribe()
+  }, [])
 
-    return () => window.removeEventListener('resize', handleResizeWindows);
-  }, [handleResizeWindows]);
-
-  return screenWidth;
-};
+  return screenWidth
+}
