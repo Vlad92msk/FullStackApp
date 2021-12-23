@@ -2,7 +2,6 @@ import React from 'react'
 import { classnames } from '@bem-react/classnames'
 
 import { makeCn } from '@shared/utils'
-import { IconButton } from '@shared/components/IconButton'
 import { Title } from '@shared/components/Title'
 import { Section } from '@shared/components/Section'
 import { WriteText } from '@shared/components/WriteText'
@@ -35,15 +34,6 @@ export const Header: React.FC = () => {
             <WriteText myText={'Первый космический'} repeatCount={1} />
           </div>
         </div>
-      </div>
-
-      <div className={header('Bottom')}>
-        <IconButton
-          icon={'arrow-down-sharp'}
-          size={'medium'}
-          fill={'light100'}
-          onClick={event => console.log('1', 1)}
-        />
       </div>
     </Section>
   )

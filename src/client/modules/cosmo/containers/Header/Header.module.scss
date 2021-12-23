@@ -3,7 +3,10 @@
 @import "../../style.module";
 
 .Header {
-  @include wh(100%, rem(800));
+  @include wh(100%, clamp(40vh, 60vh, 70vh));
+  @include media-1024 {
+    height: clamp(20vh, 40vh, 40vh);
+  }
 
   &-Video {
     @include position(0, 0);
@@ -34,7 +37,5 @@
     color: var(--Color-Light--80);
   }
 
-  &-Bottom {
-    margin-bottom: rem(50);
-  }
+
 }

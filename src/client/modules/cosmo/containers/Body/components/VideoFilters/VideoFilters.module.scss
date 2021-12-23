@@ -8,7 +8,19 @@
   left: rem(-100);
   top: 0;
 
+  @include media-1024 {
+    width: 100%;
+    position: relative;
+    left: auto;
+    top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+
   &-Title {
+    @include text(wSize(10, 1.5, 16));
     color: $colorBase;
     margin-bottom: rem(20);
   }
@@ -17,10 +29,12 @@
     @include flex($align-items: center);
     width: 100%;
     margin-bottom: rem(20);
+    @include media-1024 {
+      width: auto;
+    }
   }
 
   &-Icon {
-    @include wh(rem(25), rem(25));
     fill: var(--Color-RedRose--50);
   }
 

@@ -1,54 +1,90 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { makeCn } from '@shared/utils'
-import styles from './Articles.module.scss'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
 import { Title } from '@shared/components/Title'
 import { Section } from '@shared/components/Section'
 import { section } from '~client/modules/cosmo/moduleGeneralCN'
+import { useScreenWidth } from '@shared/hooks'
+import { MediaQueries } from '~client/modules/cosmo/types/mediaQueries'
+import styles from './Articles.module.scss'
 
 const cn = makeCn('Articles', styles)
 
 SwiperCore.use([Navigation])
 
+const ARTICLES = [
+  {
+    id: 1,
+    title: 'wedwed',
+    article: ''
+  },
+  {
+    id: 2,
+    title: 'wedwed',
+    article: ''
+  },
+  {
+    id: 3,
+    title: 'wedwed',
+    article: ''
+  },
+  {
+    id: 4,
+    title: 'wedwed',
+    article: ''
+  },
+  {
+    id: 5,
+    title: 'wedwed',
+    article: ''
+  }
+]
+
 type ArticlesType = {}
 
 export const Articles: React.FC<ArticlesType> = () => {
+  const screenWidth = useScreenWidth()
+
+  const sliderMediaParam = useMemo(() => {
+    if (screenWidth <= MediaQueries.M_768) {
+      return ({
+        slidesPerView: 1,
+        spaceBetween: 0
+      })
+    }
+    if (screenWidth <= MediaQueries.M_1024) {
+      return ({
+        slidesPerView: 2,
+        spaceBetween: 10
+      })
+    }
+
+    return ({
+      slidesPerView: 3,
+      spaceBetween: 30
+    })
+  }, [screenWidth])
 
   return (
-    <Section className={section()} noPaddingRight>
+    <Section className={section()} noPaddingRight={screenWidth > MediaQueries.M_768}>
       <div className={cn()}>
         <div className={cn('Title')}>Статьи</div>
         <Swiper
           className={cn('Slider')}
-          slidesPerView={3}
-          spaceBetween={30}
           navigation
+          {...sliderMediaParam}
         >
-          <SwiperSlide className={cn('Slide')}>
-            <div className={cn('Item')}>
-              <div className={cn('ItemImg')}>img</div>
-              <div className={cn('ItemTitle')}>title</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={cn('Slide')}>
-            <div className={cn('Item')}>
-              <div className={cn('ItemImg')}>img</div>
-              <div className={cn('ItemTitle')}>title</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={cn('Slide')}>
-            <div className={cn('Item')}>
-              <div className={cn('ItemImg')}>img</div>
-              <div className={cn('ItemTitle')}>title</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={cn('Slide')}>
-            <div className={cn('Item')}>
-              <div className={cn('ItemImg')}>img</div>
-              <div className={cn('ItemTitle')}>title</div>
-            </div>
-          </SwiperSlide>
+          {
+            ARTICLES.map(({ id, title }) => (
+              <SwiperSlide key={id} className={cn('Slide')}>
+                <div className={cn('Item')}>
+                  <div className={cn('ItemImg')}>img</div>
+                  <div className={cn('ItemTitle')}>{title}</div>
+                </div>
+              </SwiperSlide>
+            ))
+          }
         </Swiper>
       </div>
     </Section>
