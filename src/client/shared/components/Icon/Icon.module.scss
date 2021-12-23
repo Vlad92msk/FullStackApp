@@ -28,4 +28,22 @@
       fill: var(--Color-RedRose--40);
     }
   }
+
+  &--size {
+
+    &_small {
+      width: wSize(5, 5, 14);
+      height: wSize(5, 5, 14);
+    }
+
+    &_ordinary {
+      width: wSize(5, 5, 20);
+      height: wSize(5, 5, 20);
+    }
+
+    &_medium {
+      width: wSize(24, 5, 70);
+      height: wSize(5, 5, 24);
+    }
+  }
 }

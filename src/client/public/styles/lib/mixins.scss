@@ -1,4 +1,5 @@
 @use './functions' as *;
+@use './mediaQueries' as *;
 
 /* Миксин для работы с полифиллом селектора :focus-visible */
 @mixin focusVisible() {
@@ -126,4 +127,37 @@
   }
   @if ($transform) {text-transform: uppercase;}
   @if ($line-height) {line-height: $line-height;}
+}
+
+
+
+// для всех экранов < 1920px
+@mixin media-1920 {
+  @media (max-width: $m1920) {
+    @content
+  }
+}
+// для всех экранов < 1366px
+@mixin media-1366 {
+  @media (max-width: $m1366) {
+    @content
+  }
+}
+// для всех экранов < 1024px
+@mixin media-1024 {
+  @media (max-width: $m1024) {
+    @content
+  }
+}
+// для всех экранов < 768px
+@mixin media-768 {
+  @media (max-width: $m768) {
+    @content
+  }
+}
+// для всех экранов < 360px
+@mixin media-360 {
+  @media (max-width: $m360) {
+    @content
+  }
 }

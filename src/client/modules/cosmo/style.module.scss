@@ -1,7 +1,7 @@
 @use "src/client/public/styles/lib/functions" as *;
 @use "src/client/public/styles/lib/mixins" as *;
 
-$sectionPadding: 0 wSize(10, 12, 200);
+$sectionPadding: 0 clamp(10px, 12vw, 15vw);
 $colorBase: var(--Color-Light--90);
 $colorBase05: var(--Color-Light--50);
 

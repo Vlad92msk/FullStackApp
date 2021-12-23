@@ -14,7 +14,7 @@ export const VideoFilters: React.FC<VideoFiltersType> = React.memo(({ handleSort
   <div className={cn()}>
     <div className={cn('Title')}>Сортировать</div>
     <div className={cn('Item')}>
-      <Icon icon={'calendar'} className={cn('Icon')} />
+      <Icon size={'medium'} icon={'calendar'} className={cn('Icon')} />
       <div className={cn('ButtonsBox')}>
         <IconButton
           onClick={() => handleSort('date', 'asc')}
@@ -31,7 +31,7 @@ export const VideoFilters: React.FC<VideoFiltersType> = React.memo(({ handleSort
       </div>
     </div>
     <div className={cn('Item')}>
-      <Icon icon={'clock'} className={cn('Icon')} />
+      <Icon size={'medium'} icon={'clock'} className={cn('Icon')} />
       <div className={cn('ButtonsBox')}>
         <IconButton
           onClick={() => handleSort('name', 'asc')}

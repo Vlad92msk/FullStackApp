@@ -6,6 +6,9 @@
 .VideoContent {
   width: 100%;
   display: flex;
+  @include media-1024{
+    flex-direction: column-reverse;
+  }
 
   &-Main {
     flex: 9;
@@ -25,6 +28,7 @@
   }
 
   &-Title {
+    @include text(wSize(10, 1.5, 16), true);
     color: $colorBase;
   }
 
@@ -53,10 +57,14 @@
   }
 
   &-ContentVideo {
+    width: 100%;
     flex: 1 1 25%;
     height: hSize(150, 30, 300);
     margin: remSize(1, 10, 15);
     border: 0;
+    @include media-360 {
+      margin: 0;
+    }
   }
 
 
