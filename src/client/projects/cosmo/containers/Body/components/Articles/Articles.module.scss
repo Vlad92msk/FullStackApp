@@ -1,0 +1,42 @@
+@use "./src/client/public/styles/lib/functions" as *;
+@use "./src/client/public/styles/lib/mixins" as *;
+@import "../../../../../cosmo/style.module";
+
+.Articles {
+  margin-top: rem(50);
+  margin-bottom: rem(50);
+  width: 100%;
+
+  &-Title {
+    @include text(wSize(16, 3, 50), true);
+    color: $colorBase;
+    padding: rem(10);
+    text-align: center;
+  }
+
+  &-Slider {
+    width: 100%;
+    height: rem(500);
+  }
+
+  &-Slide {
+    display: flex;
+  }
+
+  &-Item {
+    @include flex($direction: column);
+    background: var(--Color-Light--5);
+    margin-right: rem(1);
+    flex: 1;
+  }
+
+  &-ItemImg {
+    flex: 1;
+  }
+
+  &-ItemTitle {
+    @include flex($align-items: center, $justify: center);
+    color: var(--Color-RedRose--50);
+    height: 10%;
+  }
+}
