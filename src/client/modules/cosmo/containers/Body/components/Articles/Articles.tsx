@@ -1,14 +1,19 @@
-import React, { useMemo } from 'react'
-import { makeCn } from '@shared/utils'
+import React, { useCallback, useMemo } from 'react'
+import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
+
+import { makeCn } from '@shared/utils'
 import { Title } from '@shared/components/Title'
 import { Section } from '@shared/components/Section'
+import { createString } from '@shared/utils/createString'
 import { useScreenWidth } from '@shared/hooks'
-import { MediaQueries } from '~client/modules/cosmo/types/mediaQueries'
 
+import { MediaQueries } from '~public/models/mediaQueries'
+import { CosmoPages } from '~client/modules/cosmo/router'
 import { section } from '~client/modules/cosmo/moduleGeneralCN'
 import styles from './Articles.module.scss'
+
 const cn = makeCn('Articles', styles)
 
 SwiperCore.use([Navigation])
@@ -45,6 +50,14 @@ type ArticlesType = {}
 
 export const Articles: React.FC<ArticlesType> = () => {
   const screenWidth = useScreenWidth()
+  const router = useRouter()
+
+  /**
+   * Формирует URL и переходит по нему
+   */
+  const onOpenArticle = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    router.push(createString([CosmoPages.COSMO, CosmoPages.ARTICLES, e.currentTarget.id], '/'))
+  }, [router])
 
   const sliderMediaParam = useMemo(() => {
     return ({
@@ -64,7 +77,12 @@ export const Articles: React.FC<ArticlesType> = () => {
         >
           {
             ARTICLES.map(({ id, title }) => (
-              <SwiperSlide key={id} className={cn('Slide')}>
+              <SwiperSlide
+                className={cn('Slide')}
+                key={id}
+                id={String(id)}
+                onClick={onOpenArticle}
+              >
                 <div className={cn('Item')}>
                   <div className={cn('ItemImg')}>img</div>
                   <div className={cn('ItemTitle')}>{title}</div>

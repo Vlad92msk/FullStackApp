@@ -1,14 +1,9 @@
-// import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
+import { DefaultObject } from '~public/models/defaultObject.model'
 
 export enum RoleEnum {
   admin = 'admin',
   visitor = 'visitor',
   participant = 'participant',
-}
-
-
-export interface DefaultObject<T = string, K = string> {
-  [key: string]: T;
 }
 
 type RouteType = {
