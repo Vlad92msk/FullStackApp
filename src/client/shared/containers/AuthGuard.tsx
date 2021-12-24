@@ -2,7 +2,7 @@ import React from 'react'
 import { storageGet } from '@shared/utils'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
-import { RoleEnum, ROUTES_PORTFOLIO } from '~client/modules/core/router'
+import { RoleEnum, ROUTES_PORTFOLIO } from '~client/projects/core/router'
 
 type AuthGuardType = {
   roles?: RoleEnum[]

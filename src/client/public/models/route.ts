@@ -1,4 +1,4 @@
-import { CosmoPages } from '~client/modules/cosmo/router'
+import { CosmoPages } from '~client/projects/cosmo/router'
 import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
 
 /**
