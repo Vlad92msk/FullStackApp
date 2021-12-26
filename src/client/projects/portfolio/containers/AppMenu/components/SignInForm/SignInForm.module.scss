@@ -1,0 +1,15 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins";
+
+.SignInForm {
+  @include mixins.flex($wrap: wrap, $justify: center, $align-items: center);
+  padding: rem(30);
+  border: rem(1) solid var(--Color-Background--transparentGrey);
+  box-shadow: 0 0 rem(6) var(--Color-BluePrimrose--50);
+  background: #292d36;
+  height: rem(200);
+
+  &-SubmitButton {
+    margin: rem(20) 0 rem(5) 0;
+  }
+}

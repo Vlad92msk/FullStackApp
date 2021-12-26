@@ -1,12 +1,22 @@
 import React from 'react'
 import { NextPage } from 'next'
-import { App } from '~client/projects/core/containers/App'
+import { App } from '~client/projects/portfolio/containers/App'
 import { addApolloState, initializeApollo } from '~client/apolloSettings/apolloClient'
-import { appQueries } from '~client/projects/core/graphql/appQueries'
+import { appQueries } from '~client/projects/portfolio/graphql/appQueries'
+import { Page } from '@shared/components/page'
+
+import { makeCn } from '@shared/utils'
+import styles from '../../client/projects/portfolio/containers/App/App.module.scss'
+
+const cn = makeCn('Application', styles)
+
 
 const Home: NextPage = () => {
-  if (typeof window === 'undefined') return <div>Loading</div>
-  return <App />
+  return (
+    <Page className={cn()}>
+      <App />
+    </Page>
+  )
 }
 
 export async function getServerSideProps(ctx) {

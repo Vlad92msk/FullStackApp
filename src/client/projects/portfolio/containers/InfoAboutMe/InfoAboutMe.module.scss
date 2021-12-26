@@ -1,0 +1,14 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+//@import "../../style.module";
+
+.InfoAboutMe {
+  width: 50vw;
+  flex: 1 1 50%;
+  height: calc(100% - 56px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-between;
+  padding: rem(20) rem(35);
+}

@@ -1,0 +1,14 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+
+.MySkills {
+  @include flex($justify: center);
+  width: 100%;
+  z-index: 3;
+
+  &-Mesh {
+    @include flex($justify: center);
+    width: rem(427);
+    height: rem(343);
+  }
+}

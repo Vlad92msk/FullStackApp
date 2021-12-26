@@ -1,0 +1,27 @@
+@use '../../../../public/styles/lib/functions' as *;
+
+.Application {
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+  overflow: hidden;
+  background-image: url("/resources/images/bcg.png");
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  //&-PersonContainer {
+  //  width: 100%;
+  //  position: absolute;
+  //  bottom: 0;
+  //  display: flex;
+  //  justify-content: center;
+  //}
+  //
+  //&-Person {
+  //  width: rem(400);
+  //  height: rem(600);
+  //  background: url("/resources/images/person2.png") no-repeat center;
+  //  background-size: cover;
+  //}
+}

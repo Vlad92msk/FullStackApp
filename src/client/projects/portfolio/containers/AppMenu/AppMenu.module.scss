@@ -1,0 +1,73 @@
+@use "./src/client/public/styles/lib/functions" as *;
+@use "./src/client/public/styles/lib/mixins" as *;
+
+.AppMenu {
+  @include flex($justify: space-between);
+  width: 100%;
+  height: rem(56);
+  padding: rem(16) rem(35);
+  background: #293f6863;
+
+  &-MenuButton {
+    fill: var(--Color-MunsellBlue--30);
+  }
+
+  &-MenuItem {
+    fill: var(--Color-MunsellBlue--30);
+    margin: rem(15);
+
+    &:hover {
+      filter: drop-shadow(0 0 rem(5) var(--Color-MunsellBlue--30));
+    }
+  }
+
+  &-UserName {
+    color: var(--Color-MunsellBlue--30);
+  }
+
+  &-Modal {
+    background: transparent;
+  }
+
+  &-ModalBody {
+    @include flex($justify: center, $align-items: center, $direction: column);
+  }
+
+  &-ThumbRow {
+    @include flex($justify: center);
+    width: 100%;
+    margin: rem(40) 0;
+  }
+
+  &-SwiperContainer {
+    @include flex($justify: center, $align-items: center);
+    padding: rem(30) rem(30) rem(10) rem(30);
+    width: rem(500);
+
+    & > * {
+      width: 80%;
+      height: auto;
+    }
+  }
+
+  &-Thumb {
+    @include text(wSize(10, 1.5, 30), true);
+    padding: rem(5) rem(50);
+    color: var(--Color-Text--note);
+    transition: .5s;
+
+    &--activeSlide {
+      text-shadow: 0 0 rem(5) var(--Color-Light--90);
+      color: var(--Color-Text--title);
+      transition: .5s;
+    }
+  }
+
+  &-Item {
+    width: 100%;
+  }
+}
+
+.Ssssssssssss{
+  color: red
+}
