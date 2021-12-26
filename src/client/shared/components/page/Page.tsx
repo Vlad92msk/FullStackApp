@@ -1,28 +1,34 @@
 import React from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { classnames } from '@bem-react/classnames'
+import { AuthGuard, AuthGuardType } from '@shared/containers/AuthGuard'
 
-export interface PageType {
+export interface PageType extends AuthGuardType {
   title?: string
   subTitle?: string
   className?: string
 }
 
-export const Page: NextPage<PageType> = ({ title, subTitle, className, children }) => (
-  <>
-    <Head>
-      <link type='image/png' rel='shortcut icon' href='/resources/images/htmlTag.png' />
-      {(title || subTitle) && (
-        <title>
-          {title} | {subTitle}
-        </title>
-      ) }
-      <meta property='og:title' content='My page title' key='title' />
-    </Head>
-    <div className={classnames(className)}>{children}</div>
-  </>
-)
+export const Page: NextPage<PageType> = (props) => {
+  const {
+    title, subTitle, className, children, roles, defaultErrorComponent, page
+  } = props
+
+  return (
+    <AuthGuard page={page} defaultErrorComponent={defaultErrorComponent} roles={roles}>
+      <Head>
+        <link type='image/png' rel='shortcut icon' href='/resources/images/htmlTag.png' />
+        {(title || subTitle) && (
+          <title>
+            {title} | {subTitle}
+          </title>
+        )}
+        <meta property='og:title' content='My page title' key='title' />
+      </Head>
+      <div className={className}>{children}</div>
+    </AuthGuard>
+  )
+}
 
 Page.defaultProps = {
   title: 'Vlad',

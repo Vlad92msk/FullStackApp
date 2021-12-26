@@ -1,0 +1,11 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+
+.AboutMe {
+  &-InfoBlock {
+    padding-top: rem(20);
+
+    &-InfoRow {
+      padding: rem(10) 0;
+    }
+  }
+}

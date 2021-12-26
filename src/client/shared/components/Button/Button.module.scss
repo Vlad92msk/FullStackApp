@@ -1,0 +1,358 @@
+@import '../../../public/styles/lib/functions';
+@import '../../../public/styles/lib/mixins';
+
+
+/* Миксин для создания селектора пары стиль-цвет */
+@mixin styleTypeColor($styleType, $color) {
+  $this: &;
+
+  &--styleType_#{$styleType}#{$this}--color_#{$color} {
+    @content;
+  }
+}
+
+
+.Button {
+  $this: &;
+
+  position: relative;
+
+  display: flex;
+
+  padding-right: rem(24);
+  padding-left: rem(24);
+
+  cursor: pointer;
+
+  border-radius: rem(8);
+  background: none;
+
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  font-size: rem(16);
+  line-height: rem(24);
+
+
+  &:focus {
+    outline: none;
+  }
+
+  @include focusVisible() {
+    box-shadow: var(--Shadow-Khalifa);
+  }
+
+  &:hover {
+    box-shadow: var(--Shadow-Khalifa);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+
+
+  &--size {
+
+    &_small {
+      height: rem(36);
+
+      #{$this}-Icon {
+        width: rem(16);
+        height: rem(16);
+      }
+    }
+
+    &_medium {
+      height: rem(40);
+    }
+
+    &_large {
+      height: rem(48);
+    }
+  }
+
+
+  &--styleType {
+
+    &_filled {
+      border: none;
+    }
+
+    &_rounded {
+      border-width: rem(1);
+      border-style: solid;
+    }
+  }
+
+  &--icon {
+    padding-right: rem(21);
+    padding-left: rem(21);
+  }
+
+  /* Filled */
+  @include styleTypeColor('filled', 'blue') {
+    color: var(--Color-Light--100);
+    background-color: var(--Color-BluePrimrose--50);
+
+    &:hover {
+      background-color: var(--Color-BluePrimrose--40);
+    }
+
+    @include focusVisible() {
+      background-color: var(--Color-BluePrimrose--40);
+    }
+
+    &:active {
+      background-color: var(--Color-BluePrimrose--60);
+    }
+
+    #{$this}-LoadingBackground {
+      background-color: var(--Color-ProgressBackground);
+    }
+
+    #{$this}-LoadingProgress {
+      background-color: var(--Color-LoadingProgressBackground);
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-Light--100);
+    }
+  }
+
+
+  @include styleTypeColor('filled', 'light') {
+    color: var(--Color-Text--body);
+    background-color: var(--Color-Light--100);
+
+    &:hover {
+      box-shadow: var(--Shadow-Tokyo);
+    }
+
+    @include focusVisible() {
+      box-shadow: var(--Shadow-Tokyo);
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-OldAsphalt--50);
+    }
+  }
+
+  @include styleTypeColor('filled', 'red') {
+    color: var(--Color-Light--100);
+    background-color: var(--Color-RedRose--50);
+
+    &:hover {
+      background-color: var(--Color-RedRose--40);
+    }
+
+    @include focusVisible() {
+      background-color: var(--Color-RedRose--40);
+    }
+
+    &:active {
+      background-color: var(--Color-RedRose--60);
+    }
+
+    #{$this}-LoadingBackground {
+      background-color: var(--Color-RedRose--50);
+    }
+
+    #{$this}-LoadingProgress {
+      background-color: var(--Color-RedRose--50);
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-Light--100);
+    }
+  }
+
+
+  /* Rounded */
+
+  @include styleTypeColor('rounded', 'blue') {
+    color: var(--Color-BluePrimrose--50);
+    border-color: var(--Color-BluePrimrose--50);
+
+    &:hover {
+      color: var(--Color-Light--100);
+      background-color: var(--Color-BluePrimrose--50);
+
+      #{$this}-Icon {
+        fill: var(--Color-Light--100);
+      }
+    }
+
+    @include focusVisible() {
+      color: var(--Color-Light--100);
+      background-color: var(--Color-BluePrimrose--50);
+
+      #{$this}-Icon {
+        fill: var(--Color-Light--100);
+      }
+    }
+
+    &:active {
+      border-color: var(--Color-BluePrimrose--60);
+      background-color: var(--Color-BluePrimrose--60);
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-BluePrimrose--50);
+    }
+  }
+
+
+  @include styleTypeColor('rounded', 'grey') {
+    color: var(--Color-OldAsphalt--50);
+    border-color: var(--Color-OldAsphalt--40);
+
+    &:hover {
+      color: var(--Color-Light--100);
+      border-color: var(--Color-OldAsphalt--50);
+      background-color: var(--Color-OldAsphalt--50);
+
+      #{$this}-Icon {
+        fill: var(--Color-Light--100);
+      }
+    }
+
+    @include focusVisible() {
+      color: var(--Color-Light--100);
+      border-color: var(--Color-OldAsphalt--50);
+      background-color: var(--Color-OldAsphalt--50);
+
+      #{$this}-Icon {
+        fill: var(--Color-Light--100);
+      }
+    }
+
+    #{$this}-LoadingBackground {
+      background-color: var(--Color-OldAsphalt--50);
+    }
+
+    #{$this}-LoadingProgress {
+      background-color: var(--Color-RedRose--50);
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-OldAsphalt--50);
+    }
+  }
+
+  @include styleTypeColor('rounded', 'transparent') {
+    color: var(--Color-BluePrimrose--50);
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      border-color: var(--Color-BluePrimrose--50);
+    }
+
+    @include focusVisible() {
+      border-color: var(--Color-BluePrimrose--50);
+    }
+
+    &:active {
+      border-color: var(--Color-BluePrimrose--50);
+    }
+
+    #{$this}-Icon {
+      fill: var(--Color-BluePrimrose--50);
+    }
+  }
+
+  @include styleTypeColor('rounded', 'red') {
+    color: var(--Color-RedRose--50);
+    border-color: var(--Color-RedRose--50);
+
+    #{$this}-Icon {
+      fill: var(--Color-RedRose--50);
+    }
+
+    &:hover {
+      color: var(--Color-Light--100);
+      background-color: var(--Color-RedRose--50);
+
+      #{$this}-Icon {
+        fill: var(--Color-Light--100);
+      }
+    }
+
+    @include focusVisible() {
+      color: var(--Color-Light--100);
+      background-color: var(--Color-RedRose--50);
+    }
+  }
+
+  &-Inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  &-Icon {
+    width: rem(20);
+    height: rem(20);
+    margin-right: rem(6);
+
+    &--iconPosition {
+
+      &_left {
+        margin-right: rem(6);
+      }
+
+      &_right {
+        order: 2;
+        margin-left: rem(6);
+      }
+    }
+  }
+
+  /* Loadable */
+  &--loading {
+    #{$this}-LoadingBackground {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      border-radius: rem(8);
+    }
+
+    #{$this}-LoadingProgress {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: rem(1);
+
+      height: 100%;
+
+      transition: width 0.3s ease;
+
+      border-top-left-radius: rem(8);
+      border-bottom-left-radius: rem(8);
+    }
+
+    #{$this}-LoadingContainer {
+      width: 100%;
+      height: 100%;
+      display: contents;
+    }
+  }
+}

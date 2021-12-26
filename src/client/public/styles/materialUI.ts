@@ -1,9 +1,9 @@
 export const formStyles = {
   input: {
-    color: '#d39f00'
+    color: 'rgba(255,255,255,0.48)',
   },
   label: {
-    color: '#4794ff',
+    color: 'rgba(255,255,255,0.48)',
     fontStyle: 'italic'
   },
 }
