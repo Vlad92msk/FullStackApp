@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { classnames } from '@bem-react/classnames'
 import { IconName } from '~public/models/icon.model'
 import { IconButton } from '@shared/components/IconButton'
-import { Text } from '@shared/components/Text'
+import { Text, TextSize } from '@shared/components/Text'
 import { makeCn } from '@shared/utils'
 import { IconFill } from '@shared/components/Icon'
 import styles from './TextInput.module.scss'
@@ -18,7 +18,7 @@ export interface TextInputProps {
   iconFill?: IconFill
   iconClick?: () => void
 
-  size?: 'small' | 'medium' | 'large'
+  size?: TextSize
   error?: boolean
   disabled?: boolean
   placeholder?: string
@@ -62,12 +62,14 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
       {icon && <IconButton className={cn('Icon', { iconPosition })} icon={icon} fill={iconFill} onClick={iconClick} />}
       <Text
         as="input"
-        className={cn('Input', { size, error, icon: !!icon && iconPosition })}
+        className={cn('Input', { error, icon: !!icon && iconPosition })}
         type="text"
         disabled={disabled}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        // @ts-ignore
+        size={size}
       />
     </div>
   )
@@ -76,7 +78,6 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
 TextInput.defaultProps = {
   className: null,
   placeholder: 'Введите значение...',
-  size: 'medium',
   iconPosition: 'left',
   iconFill: 'oldAsphalt40',
 }

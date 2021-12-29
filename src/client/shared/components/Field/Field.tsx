@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
 import { classnames } from '@bem-react/classnames'
 import { makeCn } from '@shared/utils'
-import { Text } from '@shared/components/Text'
+import { Text, TextSize } from '@shared/components/Text'
 import { Icon } from '@shared/components/Icon'
 import styles from './Field.module.scss'
 
@@ -16,7 +16,7 @@ export interface FieldOwnProps {
   error?: string
   labelPosition?: 'top' | 'right' | 'left'
   labelColor?: 'inherit' | 'body' | 'title' | 'note' | 'disabled'
-  labelSize?: 'regular' | 'small' | 'extraSmall'
+  labelSize?: TextSize
   isDiv?: boolean
   autoWidth?: boolean
 }

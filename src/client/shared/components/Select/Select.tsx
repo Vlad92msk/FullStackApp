@@ -4,7 +4,7 @@ import { OptionValue, SelectValue, Tokenfield } from './model'
 import { cn } from './cn'
 import { Context } from './Context'
 import { OptionProps } from './Option'
-import { Text } from '@shared/components/Text'
+import { Text, TextSize } from '@shared/components/Text'
 import { ButtonBox } from '@shared/components/ButtonBox'
 import { Icon } from '@shared/components/Icon'
 import { TextInput } from '@shared/components/TextInput'
@@ -14,7 +14,7 @@ import { Popup } from '@shared/components/Popup'
 export interface SelectProps {
   className?: string
   style?: React.CSSProperties
-  size?: 'small' | 'medium' | 'large'
+  size?: TextSize
 
   value: SelectValue
   name?: string
@@ -205,7 +205,7 @@ export const Select: React.FC<SelectProps> = (props) => {
                 ? parsedOptions
                     .filter(({ value: optionValue }) => optionValue === val)
                     .map((el) => (
-                      <Text key={el.value} className={cn('Token')} size={size === 'small' ? 'small' : 'regular'}>
+                      <Text key={el.value} className={cn('Token')} size={size}>
                         <span className={cn('TokenText')}>{el.children}</span>
                         <ButtonBox className={cn('TokenIconCloseBlock')} onClick={() => handleRemoveToken(val)} data-select="token-close">
                           <Icon className={cn('TokenIconClose')} icon="close" />
@@ -230,7 +230,7 @@ export const Select: React.FC<SelectProps> = (props) => {
           {(combobox && searchValue) || (tokenfield && JSON.stringify(value) !== JSON.stringify(nullValue)) ? null : (
             <Text
               className={cn('SelectedValue', { combobox })}
-              size={size === 'small' ? 'small' : 'regular'}
+              size={size}
               color={JSON.stringify(value) === JSON.stringify(nullValue) ? 'disabled' : 'body'}
             >
               {JSON.stringify(value) === JSON.stringify(nullValue) ? (
@@ -310,7 +310,6 @@ export const Select: React.FC<SelectProps> = (props) => {
 
 Select.defaultProps = {
   className: null,
-  size: 'medium',
   placeholder: 'Выберите значение...',
   nullValue: null,
   value: null,

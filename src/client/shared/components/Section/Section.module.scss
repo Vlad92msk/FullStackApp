@@ -2,7 +2,6 @@
 @use 'src/client/public/styles/lib/mixins' as *;
 
 .Base {
-  @include flex($direction: column, $justify: space-between, $align-items: center);
   position: relative;
   width: 100%;
 
@@ -11,5 +10,6 @@
     width: 100%;
     top: 0;
     left: 0;
+    z-index: -1;
   }
 }

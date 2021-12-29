@@ -1,8 +1,8 @@
 @use "../../../../../../public/styles/lib/functions" as *;
-@use "../../../../../../public/styles/lib/mixins";
+@use "../../../../../../public/styles/lib/mixins" as *;
 
 .Form {
-  @include mixins.flex($wrap: wrap, $justify: center, $align-items: center);
+  @include flex($wrap: wrap, $justify: center, $align-items: center);
   padding: rem(30);
   border: rem(1) solid var(--Color-Background--transparentGrey);
   box-shadow: 0 0 rem(6) var(--Color-BluePrimrose--50);

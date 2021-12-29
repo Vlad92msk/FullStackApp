@@ -60,19 +60,5 @@
     &--error {
       border-color: var(--Color-RedRose--50) !important;
     }
-
-    &--size {
-      &_small {
-        height: rem(36);
-      }
-
-      &_medium {
-        height: rem(40);
-      }
-
-      &_large {
-        height: rem(48);
-      }
-    }
   }
 }

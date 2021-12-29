@@ -1,10 +1,9 @@
 import React from 'react'
 import { makeCn } from '@shared/utils'
-import styles from './AboutMe.module.scss'
-import { Title } from '@shared/components/Title'
 import { FieldRow } from '@shared/components/FieldRow'
 import { Text } from '@shared/components/Text'
 import { Line } from '@shared/components/Line'
+import styles from './AboutMe.module.scss'
 
 
 const cn = makeCn('AboutMe', styles)
@@ -13,35 +12,21 @@ const cn = makeCn('AboutMe', styles)
 export const AboutMe = () => {
   return (
     <FieldRow className={cn()} width={'100'} direction={'column'}>
-      <Title className={cn('Title')} size={'1'}>
-        Фирсов Влад
-      </Title>
-      <Text color={'title'}>тел: 4646-465-54</Text>
+      <Text size={'8'} color={'title'} children={'Фирсов Влад'} />
+      <Text color={'title'} size={'5'} children={'тел: 4646-465-54'} />
       <Line />
       <FieldRow className={cn('InfoBlock')} wrap={'wrap'} width={'100'}>
-        <FieldRow className={cn('InfoRow')} width={'100'}>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>Возраст</Text>
-          </FieldRow>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>28 лет</Text>
-          </FieldRow>
+        <FieldRow width={'100'}>
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'Возраст'} />
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'28 лет'} />
         </FieldRow>
-        <FieldRow className={cn('InfoRow')} width={'100'}>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>Специальность</Text>
-          </FieldRow>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>Frontend-разработчик</Text>
-          </FieldRow>
+        <FieldRow width={'100'}>
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'Специальность'}/>
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'Frontend-разработчик'} />
         </FieldRow>
-        <FieldRow className={cn('InfoRow')} width={'100'}>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>Стаж</Text>
-          </FieldRow>
-          <FieldRow width={'50'}>
-            <Text color={'body'}>1 год</Text>
-          </FieldRow>
+        <FieldRow width={'100'}>
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'Стаж'}/>
+          <Text className={cn('InfoItem')} color={'body'} size={'4'} children={'1 год'}/>
         </FieldRow>
       </FieldRow>
     </FieldRow>

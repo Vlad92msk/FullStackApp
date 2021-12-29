@@ -25,7 +25,7 @@ export const Page: NextPage<PageType> = (props) => {
         )}
         <meta property='og:title' content='My page title' key='title' />
       </Head>
-      <div className={className}>{children}</div>
+      {children}
     </AuthGuard>
   )
 }

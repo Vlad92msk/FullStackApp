@@ -14,7 +14,7 @@ const makeClassNameMaker = withNaming({ e: '-', m: '--', v: '_' })
 
 export const makeCn = (scopeName: string, styles: IStyles) => {
   const makeClassName = makeClassNameMaker(scopeName);
-  // if (typeof window === 'undefined') return null
+
   return (
     elemNameOrBlockMods?: ElemNameOrBlockModsType,
     elemModsOrBlockMix?: ElemModsOrBlockMixType,
