@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
 
       <div className={header('Main')}>
         <div className={header('Img')}>
-          <Image sizePriority={'cover'} path={{ project: 'cosmo', img: 'cosmo' }} />
+          <Image sizePriority={'contain'} path={{ project: 'cosmo', img: 'cosmo' }} />
         </div>
         <div className={header('TitleBox')}>
           <div className={header('Title')}>Cosmo</div>
