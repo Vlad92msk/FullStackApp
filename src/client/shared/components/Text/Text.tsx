@@ -6,8 +6,10 @@ import styles from './Text.module.scss'
 
 const cn = makeCn('Text', styles)
 
+export type TextSize = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
+
 export interface TextOwnProps {
-  size?: 'regular' | 'small' | 'extraSmall' | 'large' | 'extraLarge'
+  size?: TextSize
   weight?: 'regular' | 'medium' | 'bold'
   color?: 'inherit' | 'body' | 'title' | 'note' | 'disabled'
   textTransform?: 'uppercase'
@@ -26,7 +28,7 @@ export const Text = <E extends React.ElementType = typeof DEFAULT_ELEMENT>(props
 
 Text.defaultProps = {
   className: null,
-  size: 'regular',
+  size: '3',
   weight: 'regular',
   color: 'inherit',
 } as Partial<TextOwnProps>

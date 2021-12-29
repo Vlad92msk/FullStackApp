@@ -22,9 +22,8 @@
   }
 
   &-Img {
+    @include wh(20vw, 100%);
     position: relative;
-    width: 20vw;
-    height: 100%;
   }
 
   &-Title {

@@ -45,7 +45,7 @@ export const HoneycombMesh: FC<HoneycombMeshType> = React.memo((props) => {
 
   useEffect(() => {
     setTop(
-      [...mesh].reduce((acc, item, index) => {
+      mesh.reduce((acc, item, index) => {
         if (index === 0) {
           return [0]
         }

@@ -29,3 +29,10 @@
   $c: rem($max);
   @return clamp(#{$a}, #{$b}, #{$c});
 }
+
+@function vMaxSize($min, $optimal, $max) {
+  $a: rem($min);
+  $b: #{$optimal}vmax;
+  $c: rem($max);
+  @return clamp(#{$a}, #{$b}, #{$c});
+}

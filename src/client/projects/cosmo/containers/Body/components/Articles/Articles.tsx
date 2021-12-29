@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
 
 import { makeCn } from '@shared/utils'
-import { Title } from '@shared/components/Title'
 import { Section } from '@shared/components/Section'
 import { createString } from '@shared/utils/createString'
 import { useScreenWidth } from '@shared/hooks'

@@ -14,6 +14,7 @@ import { LocalStorageEnum } from '~public/models/localStorage'
 import { SignInForm, SignUpForm } from './components'
 
 import styles from './AppMenu.module.scss'
+import { Text } from '@shared/components/Text'
 
 SwiperCore.use([EffectCube])
 
@@ -87,8 +88,8 @@ export const MenuApp = () => {
       <Modal open={signIn} onClose={handleChangeSignIn} className={cn('Modal')}>
         <div className={cn('ModalBody')}>
           <div className={cn('ThumbRow')}>
-            <div className={cn('Thumb', { activeSlide: !!!activeSlide })}>Войти</div>
-            <div className={cn('Thumb', { activeSlide: !!activeSlide })}>Зарегистрироваться</div>
+            <Text className={cn('Thumb')} size={'7'} color={!Boolean(activeSlide) ? 'title' : 'note'} children={'Войти'} />
+            <Text className={cn('Thumb')} size={'7'} color={Boolean(activeSlide) ? 'title' : 'note'} children={'Зарегистрироваться'} />
           </div>
           <div className={cn('SwiperContainer')}>
             <Swiper

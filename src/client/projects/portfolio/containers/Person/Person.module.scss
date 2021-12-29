@@ -1,0 +1,15 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+
+.Person {
+  height: min(64vh, 80vw);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+
+  @include media-768 {
+    position: inherit;
+  }
+}

@@ -13,7 +13,7 @@ const cn = makeCn('Application', styles)
 
 const Home: NextPage = () => {
   return (
-    <Page className={cn()}>
+    <Page>
       <App />
     </Page>
   )

@@ -4,6 +4,5 @@
   height: rem(1);
   background: var(--Color-Portfolio-Line);
   width: 100%;
-  margin-top: rem(12);
-  margin-bottom: rem(12);
+  margin: wSize(1, 0.5, 12) 0;
 }

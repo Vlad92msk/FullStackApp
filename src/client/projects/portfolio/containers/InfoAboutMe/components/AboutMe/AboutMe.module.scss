@@ -2,10 +2,10 @@
 
 .AboutMe {
   &-InfoBlock {
-    padding-top: rem(20);
+    margin-top: rem(20);
+  }
 
-    &-InfoRow {
-      padding: rem(10) 0;
-    }
+  &-InfoItem {
+    width: 50%;
   }
 }

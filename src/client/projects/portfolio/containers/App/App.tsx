@@ -2,7 +2,12 @@ import React from 'react'
 import { MenuApp } from '~client/projects/portfolio/containers/AppMenu'
 import { InfoAboutMe } from '../InfoAboutMe'
 import { InfoAboutMySkills } from '../InfoAboutMySkills'
+import { Person } from '../Person'
+import { Section } from '@shared/components/Section'
+import { makeCn } from '@shared/utils'
+import styles from './App.module.scss'
 
+const cn = makeCn('Application', styles)
 
 export const App = () => {
   /**
@@ -12,13 +17,16 @@ export const App = () => {
    * Каждый контейнер состоит из отдельных компонентов (имеющих отношение только к нему)
    */
   return (
-    <>
+    <Section className={cn()} imgClassName={cn('Img')} bcgImg={{
+      path: {
+        img: 'bcg',
+        project: 'portfolio'
+      },
+    }}>
       <MenuApp />
       <InfoAboutMe />
       <InfoAboutMySkills />
-      {/*<div className={cn('PersonContainer')}>*/}
-      {/*  <div className={cn('Person')} />*/}
-      {/*</div>*/}
-    </>
+      <Person />
+    </Section>
   )
 }

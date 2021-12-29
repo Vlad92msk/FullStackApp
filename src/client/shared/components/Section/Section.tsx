@@ -31,7 +31,7 @@ export const Section: React.FC<SectionType> = React.memo((
       className={classnames(cn(), className)}
       style={{...paddings}}
     >
-      { bcgImg && <Image className={imgClassName} path={bcgImg.path} sizePriority={bcgImg.sizePriority }/> }
+      { bcgImg && <Image className={classnames(imgClassName, cn('Img'))} path={bcgImg.path} sizePriority={bcgImg.sizePriority }/> }
       {children}
     </section>
   )

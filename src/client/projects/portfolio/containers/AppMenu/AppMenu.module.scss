@@ -51,14 +51,11 @@
   }
 
   &-Thumb {
-    @include text(wSize(10, 1.5, 30), true);
     padding: rem(5) rem(50);
-    color: var(--Color-Text--note);
     transition: .5s;
 
     &--activeSlide {
       text-shadow: 0 0 rem(5) var(--Color-Light--90);
-      color: var(--Color-Text--title);
       transition: .5s;
     }
   }
@@ -66,8 +63,4 @@
   &-Item {
     width: 100%;
   }
-}
-
-.Ssssssssssss{
-  color: red
 }

@@ -1,27 +1,22 @@
 @use '../../../../public/styles/lib/functions' as *;
+@use "../../../../public/styles/lib/mixins" as *;
 
 .Application {
+  @include flex(wrap, row, space-between, center);
   width: 100vw;
   height: 80vh;
   position: relative;
   overflow: hidden;
-  background-image: url("/resources/images/bcg.png");
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
 
-  //&-PersonContainer {
-  //  width: 100%;
-  //  position: absolute;
-  //  bottom: 0;
-  //  display: flex;
-  //  justify-content: center;
-  //}
-  //
-  //&-Person {
-  //  width: rem(400);
-  //  height: rem(600);
-  //  background: url("/resources/images/person2.png") no-repeat center;
-  //  background-size: cover;
-  //}
+  @include media-768 {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  &-Img {
+    @include media-768 {
+      position: fixed;
+
+    }
+  }
 }

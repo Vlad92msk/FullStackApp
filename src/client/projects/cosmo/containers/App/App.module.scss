@@ -1,10 +1,8 @@
 @use 'src/client/public/styles/lib/functions' as *;
-@use 'src/client/public/styles/lib/mixins';
+@use 'src/client/public/styles/lib/mixins' as * ;
 
 .Application {
-  @include mixins.flex(wrap);
-  width: 100vw;
-  height: 100vh;
+  @include wh(100vw, 100vh);
   overflow: hidden;
   overflow-y: auto;
 }

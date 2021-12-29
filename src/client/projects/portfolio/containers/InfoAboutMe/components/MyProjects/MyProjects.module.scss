@@ -1,11 +1,29 @@
 @use '../../../../../../public/styles/lib/functions' as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
 
 .MyProjects {
+  @include flex($align-items: center, $justify: center);
   height: 50%;
-  width: 75%;
+  width: 100%;
+
+  @include media-768 {
+    @include flex($direction: column);
+    margin-top: rem(20);
+  }
 
   &-Mesh {
+    @include flex($justify: center);
     width: 100%;
+    height: rem(200);
+  }
+
+  &-Title {
+    display: none;
+
+    @include media-768 {
+      display: flex;
+      width: 100%;
+    }
   }
 
   &-Icon {
