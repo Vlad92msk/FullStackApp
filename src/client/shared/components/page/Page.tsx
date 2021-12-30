@@ -6,12 +6,11 @@ import { AuthGuard, AuthGuardType } from '@shared/containers/AuthGuard'
 export interface PageType extends AuthGuardType {
   title?: string
   subTitle?: string
-  className?: string
 }
 
 export const Page: NextPage<PageType> = (props) => {
   const {
-    title, subTitle, className, children, roles, defaultErrorComponent, page
+    title, subTitle, children, roles, defaultErrorComponent, page
   } = props
 
   return (

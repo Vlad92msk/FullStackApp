@@ -1,4 +1,3 @@
-import { CosmoPages } from '~client/projects/cosmo/router'
 import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
 
 /**
@@ -18,4 +17,4 @@ export type RouteParamWithoutSubRoutes = Omit<RouteParam, "subRoutes">;
  * Структура проекта ввиде объекта
  * Каждое свойтсво - отдельная папка Page
  */
-export type ProjectNormalizeObject = Record<CosmoPages, RouteParamWithoutSubRoutes>
+export type ProjectNormalizeObject<T extends string> = Record<T, RouteParamWithoutSubRoutes>

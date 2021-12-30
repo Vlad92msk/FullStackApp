@@ -25,4 +25,4 @@ export const PROJECT_ROUTES: ProjectStructureRoutes = {
 }
 
 export const routesArray = createProjectRoutesData<ProjectStructureRoutes>(PROJECT_ROUTES)
-export const routesObject = currentProjectRoutesObject(routesArray)
+export const routesObject = currentProjectRoutesObject<PortfolioPages>(routesArray)

@@ -9,7 +9,7 @@ import styles from './AboutMe.module.scss'
 const cn = makeCn('AboutMe', styles)
 
 
-export const AboutMe = () => {
+export const AboutMe: React.FC = () => {
   return (
     <FieldRow className={cn()} width={'100'} direction={'column'}>
       <Text size={'8'} color={'title'} children={'Фирсов Влад'} />

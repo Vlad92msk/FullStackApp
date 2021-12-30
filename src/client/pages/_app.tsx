@@ -12,12 +12,7 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
  * Предотвращает ошибку
  * Expected server HTML to contain a matching <div> in <div>.
  */
-// const SafeHydrate = ({ children }) => {
-//   if (window === 'undefined') {
-//     return     <div suppressHydrationWarning>
-//       {typeof window === 'undefined' ? null : children}
-//     </div>
-//   }
+// function SafeHydrate({ children }) {
 //   return (
 //     <div suppressHydrationWarning>
 //       {typeof window === 'undefined' ? null : children}
@@ -28,6 +23,7 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
   const apolloClient = useApollo(pageProps)
+  if (typeof window === 'undefined') return <div>Loading...</div>
 
   return (
       <ApolloProvider client={apolloClient}>
