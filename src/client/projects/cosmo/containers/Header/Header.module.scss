@@ -4,6 +4,7 @@
 
 .Header {
   @include wh(100%, clamp(40vh, 60vh, 70vh));
+  @include flex($direction: column);
   @include media-1024 {
     height: clamp(20vh, 40vh, 40vh);
   }

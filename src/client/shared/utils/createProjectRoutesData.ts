@@ -20,4 +20,4 @@ export const createProjectRoutesData = <T>(obj: T) => takeSubRoutes(values(obj))
 /**
  * Плоский Объект из страниц (роутов) текущего проекта
  */
-export const currentProjectRoutesObject = (arr: RouteParamWithoutSubRoutes[]) => toObjectData(arr, 'page') as ProjectNormalizeObject
+export const currentProjectRoutesObject = <T extends string>(arr: RouteParamWithoutSubRoutes[]) => toObjectData(arr, 'page') as ProjectNormalizeObject<T>

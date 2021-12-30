@@ -2,6 +2,7 @@ import React, { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { makeCn } from '@shared/utils'
 import { HoneycombMesh } from '~client/shared/components/HoneycombMesh'
+import { ROUTES_ALL } from '~client/projects/routesAll'
 import { Icon } from '@shared/components/Icon'
 import { Text } from '@shared/components/Text'
 import styles from './MyProjects.module.scss'
@@ -10,7 +11,10 @@ const cn = makeCn('MyProjects', styles)
 
 export const MyProjects: FC = () => {
   const router = useRouter()
-  const handleProjectCheck = useCallback((page: string) => router.push(page), [router])
+
+  const handleGoCosmo = useCallback(() => {
+    ROUTES_ALL && router.push(ROUTES_ALL.COSMO)
+  }, [router])
 
   return <div className={cn()}>
     <Text className={cn('Title')} size={'8'} color={'title'} children={'Проекты'} />
@@ -38,7 +42,7 @@ export const MyProjects: FC = () => {
             icon={'cosmo-button'}
             fill={'light100'}
             className={cn('Icon')}
-            onClick={() => handleProjectCheck('cosmo')}
+            onClick={handleGoCosmo}
           />
         }
       ]}
