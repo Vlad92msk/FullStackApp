@@ -1,8 +1,6 @@
 name: telegram
-on:
-  push:
-  pull_request:
-  
+on: [push, pull_request, watch]
+
 jobs:
   telegram:
     runs-on: ubuntu-latest
@@ -13,9 +11,13 @@ jobs:
         to: ${{ secrets.TELEGRAM_CHAT_ID }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-            ${{ github.actor }} created ${{github.event_name}} commit:
+            Произошли изменения:
+            
+            Пользователь: ${{ github.actor }}
+            Действие: ${{github.event_name}}:
+            
             Commit message: ${{ github.event.commits[0].message }}
             
             Repository: ${{ github.repository }}
             
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            Посмотреть изменения: https://github.com/${{ github.repository }}/commit/${{github.sha}}
