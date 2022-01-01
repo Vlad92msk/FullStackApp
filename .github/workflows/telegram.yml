@@ -2,7 +2,7 @@ name: telegram
 on:
   push:
   pull_request:
-  commit_comment:
+  
 jobs:
   telegram:
     runs-on: ubuntu-latest
