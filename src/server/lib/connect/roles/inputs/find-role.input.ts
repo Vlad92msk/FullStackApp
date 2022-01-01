@@ -1,6 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql'
 import { IsString, IsNumber, IsEnum } from 'class-validator'
 import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
+import { enumMessage } from '~server/utils/enumeration'
 
 @InputType()
 export class FindRoleInput {
@@ -8,7 +9,7 @@ export class FindRoleInput {
   @Field({ nullable: true })
   id?: number
 
-  @IsEnum(RoleEnum, { message: `Значение может быть: ${Object.values(RoleEnum).join(', ')}.` })
+  @IsEnum(RoleEnum, { message: enumMessage(RoleEnum) })
   @Field({ nullable: true })
   value?: RoleEnum
 

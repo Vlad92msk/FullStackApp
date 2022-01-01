@@ -1,12 +1,13 @@
 import { InputType, Field } from '@nestjs/graphql'
 import { IsString, IsNotEmpty, IsEnum } from 'class-validator'
-import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
+import { enumMessage } from '~server/utils/enumeration'
+import { RoleEnum } from '../interfaces/role'
 
 @InputType()
 export class CreateRoleInput {
   @IsNotEmpty({ message: 'Значение не может быть пустым' })
   @IsString({ message: 'Значение должно быть строкой' })
-  @IsEnum(RoleEnum, { message: `Значение может быть: ${Object.values(RoleEnum).join(', ')}.` })
+  @IsEnum(RoleEnum, { message: enumMessage(RoleEnum) })
   @Field()
   value: RoleEnum
 

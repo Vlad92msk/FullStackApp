@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
 import { IconName } from '~public/models/icon.model'
+import { Specialty } from '../interfaces/specialty'
 
 @ObjectType()
 @Entity('Skills')
@@ -19,5 +20,5 @@ export class Skill {
 
   @Field({ description: 'Специальность (Frontend/Backend/Other)' })
   @Column({ name: 'specialty' })
-  specialty: 'backend' | 'frontend' | 'other'
+  specialty: Specialty
 }
