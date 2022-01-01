@@ -1,0 +1,2 @@
+# FullStackApp
+Учебное fullstack-приложение
