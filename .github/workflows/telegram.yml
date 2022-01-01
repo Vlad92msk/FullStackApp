@@ -1,5 +1,5 @@
 name: telegram
-on: [push, pull_request, watch]
+on: [push, pull_request, commit_comment]
 
 jobs:
   telegram:
@@ -14,10 +14,10 @@ jobs:
             Произошли изменения:
             
             Пользователь: ${{ github.actor }}
-            Действие: ${{github.event_name}}:
+            Действие: ${{github.event_name}}
             
-            Commit message: ${{ github.event.commits[0].message }}
+            Детализация: ${{ github.event.commits[0].message }}
             
-            Repository: ${{ github.repository }}
+            Репозиторий: ${{ github.repository }}
             
             Посмотреть изменения: https://github.com/${{ github.repository }}/commit/${{github.sha}}
