@@ -8,7 +8,7 @@ import { CreateSkillInput } from './inputs/create-skill.input'
 import { FindSkillInput } from './inputs/find-skill.input'
 import { catchErrorCustom } from '~server/utils/catchErrorCustom'
 import { MyObservable } from '~server/types'
-
+//test actions
 @Injectable()
 export class SkillsService {
   constructor(
