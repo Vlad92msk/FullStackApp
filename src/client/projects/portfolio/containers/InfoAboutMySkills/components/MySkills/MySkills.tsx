@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { useQuery } from '@apollo/client'
 import { makeCn } from '@shared/utils'
-import { appQueries } from '~client/projects/portfolio/graphql/appQueries'
+import { useFindAllSkillsQuery } from '~client/projects/gql-generated-hooks'
 import { HoneycombMesh } from '@shared/components/HoneycombMesh'
 import { ResponseApi } from '@shared/components/ResponseApi'
 import styles from './MySkills.module.scss'
@@ -15,12 +14,7 @@ interface MySkillsType {
 }
 
 export const MySkills: FC<MySkillsType> = ({ el }) => {
-
-  const {
-    data: { findAllSkills = [] } = {},
-    loading,
-    error
-  } = useQuery(appQueries.FIND_SKILLS)
+  const { loading, data: { findAllSkills } = {}, error } = useFindAllSkillsQuery()
 
   return (
     <div className={cn()}>
@@ -28,12 +22,11 @@ export const MySkills: FC<MySkillsType> = ({ el }) => {
         <HoneycombMesh
           className={cn('Mesh')}
           othersElements={el('honeycomb')}
-          userElements={[
-            ...findAllSkills.map(({ position, specialty, name }) => ({
-              position,
-              element: el(name, specialty)
-            }))
-          ]}
+          userElements={findAllSkills?.map(({ position, specialty, name }) => ({
+            position,
+            element: el(name, specialty)
+          }))
+          }
         />
       </ResponseApi>
     </div>

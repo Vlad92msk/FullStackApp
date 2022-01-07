@@ -3,10 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { TextField } from '@material-ui/core'
-import { useLazyQuery } from '@apollo/client'
-import { appQueries } from '~client/projects/portfolio/graphql/appQueries'
 import { SignInInput } from '~server/lib/connect/auth/inputs/signIn.input'
-import { IconButton } from '@shared/components/IconButton'
 import { makeCn, storageSet } from '@shared/utils'
 import { LocalStorageEnum } from '~public/models/localStorage'
 import { makeStyles } from '@material-ui/core/styles'
@@ -14,6 +11,7 @@ import { FormEnums } from '~public/models/formEnums'
 import { formStyles } from '~public/styles/materialUI'
 import styles from './SignInForm.module.scss'
 import { Button } from '@shared/components/Button'
+import { useAuthSignInLazyQuery } from '~client/projects/gql-generated-hooks'
 
 /**
  * Стили
@@ -47,13 +45,13 @@ export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
   /**
    * Query - Войти
    */
-  const [authSignIn, { loading }] = useLazyQuery(appQueries.LOG_IN, {
+  const [authSignIn, { loading }] = useAuthSignInLazyQuery({
     fetchPolicy: 'network-only',
     onCompleted({ authSignIn }) {
       if (authSignIn)
         storageSet(LocalStorageEnum.USER, authSignIn)
-        setSignIn(false)
-    },
+      setSignIn(false)
+    }
   })
 
   const onSubmit = ({ password, email }: SignInInput) => authSignIn({

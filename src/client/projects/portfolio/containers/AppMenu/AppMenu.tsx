@@ -1,20 +1,19 @@
 import React, { useCallback, useState } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { useMutation } from '@apollo/client'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { EffectCube, Navigation } from 'swiper/core'
 
 import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
-import { appQueries } from '~client/projects/portfolio/graphql/appQueries'
 import { Modal } from '@shared/components/Modal'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
 import { SignInForm, SignUpForm } from './components'
 
-import styles from './AppMenu.module.scss'
 import { Text } from '@shared/components/Text'
+import { useAuthSignOutMutation } from '~client/projects/gql-generated-hooks'
+import styles from './AppMenu.module.scss'
 
 SwiperCore.use([EffectCube])
 
@@ -23,6 +22,8 @@ const cn = makeCn('AppMenu', styles)
 
 
 export const MenuApp = () => {
+
+  const [onHandleLogOut] = useAuthSignOutMutation()
 
   const [signIn, setSignIn] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
@@ -33,7 +34,7 @@ export const MenuApp = () => {
   const handleChangeSignIn = useCallback(() => {
     setSignIn((prev) => !prev)
   }, [])
-  const [onHandleLogOut] = useMutation(appQueries.LOG_OUT)
+
   const handleLogOut = useCallback(() => {
     storageRemove(LocalStorageEnum.USER)
     return onHandleLogOut()

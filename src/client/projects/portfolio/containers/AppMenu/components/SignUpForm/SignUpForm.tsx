@@ -1,18 +1,16 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { IconButton } from '@shared/components/IconButton'
 import { CreateUsersInput } from '~server/lib/connect/users/inputs/create-user.input'
-import { appQueries } from '~client/projects/portfolio/graphql/appQueries'
 import { FormEnums } from '~public/models/formEnums'
 import { makeCn } from '@shared/utils'
 import { formStyles } from '~public/styles/materialUI'
 import styles from './SignUpForm.module.scss'
 import { Button } from '@shared/components/Button'
+import { useAuthSignUpMutation } from '~client/projects/gql-generated-hooks'
 
 
 /**
@@ -50,20 +48,20 @@ export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
   /**
    * Mutation - Зарегистрироваться
    */
-  const [authSignUp] = useMutation(appQueries.SIGN_UP, {
+  const [authSignUp] = useAuthSignUpMutation({
     onCompleted({ authSignUp }) {
       if (authSignUp) setSignIn(false)
     }
   })
 
-  const onSubmit = ({password, email, name}: CreateUsersInput) => authSignUp({
+  const onSubmit = ({ password, email, name }: CreateUsersInput) => authSignUp({
     variables: {
       authSignUpUser: { name, email, password }
     },
     /**
      * TODO: Убрать когда будет реализовано подтверждение по почте
      */
-    onCompleted({authSignUp}){
+    onCompleted({ authSignUp }) {
       if (authSignUp) console.log('authSignUp', authSignUp)
     }
   })
@@ -95,7 +93,7 @@ export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
         iconPosition={'left'}
         styleType={'filled'}
         color={'blue'}
-        disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!!nameWatch?.length  || !!errors.email || !!errors.password || !!errors.name}
+        disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!!nameWatch?.length || !!errors.email || !!errors.password || !!errors.name}
       >
         Зарегистрироваться
       </Button>
