@@ -1,0 +1,25 @@
+query FindAllSkills {
+  findAllSkills {
+    name
+    specialty
+    position
+    id
+  }
+}
+
+query AuthSignIn($authSignInUser: SignInInput!) {
+  authSignIn(signInInput: $authSignInUser) {
+    email
+    name
+    uRoles
+  }
+}
+mutation AuthSignOut {
+  authSignOut
+}
+
+mutation AuthSignUp ($authSignUpUser: CreateUsersInput!){
+  authSignUp(user: $authSignUpUser) {
+    email
+  }
+}

@@ -16,8 +16,8 @@ export const makeCn = (scopeName: string, styles: IStyles) => {
   const makeClassName = makeClassNameMaker(scopeName);
 
   return (
-    elemNameOrBlockMods?: ElemNameOrBlockModsType,
-    elemModsOrBlockMix?: ElemModsOrBlockMixType,
+    elemNameOrBlockMods?: any,
+    elemModsOrBlockMix?: any,
     elemMix?: ElemMixType,
   ) => {
     const classNames = makeClassName(elemNameOrBlockMods, elemModsOrBlockMix, elemMix).split(' ');

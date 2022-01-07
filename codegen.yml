@@ -1,0 +1,8 @@
+schema: schema.gql
+documents: './src/client/projects/**/graphql/*.gql'
+generates:
+  ./src/client/projects/gql-generated-hooks.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

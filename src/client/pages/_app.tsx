@@ -23,7 +23,7 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
   const apolloClient = useApollo(pageProps)
-  if (typeof window === 'undefined') return <div>Loading...</div>
+  // if (typeof window === 'undefined') return <div>Loading...</div>
 
   return (
       <ApolloProvider client={apolloClient}>

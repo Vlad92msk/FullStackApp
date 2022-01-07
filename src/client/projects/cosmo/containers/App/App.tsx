@@ -20,7 +20,7 @@ export const App = () => {
     <Section className={cn()}>
       <Header />
       <Body />
-      <Footer/>
+      <Footer />
     </Section>
   )
 }
