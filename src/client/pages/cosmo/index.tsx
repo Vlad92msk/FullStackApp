@@ -4,7 +4,7 @@ import { Page } from '@shared/components/page'
 
 
 const Index: NextPage = () => (
-  <Page subTitle={'Cosmo'}>
+  <Page page={'COSMO'} subTitle={'Cosmo'}>
     <App />
   </Page>
 )
