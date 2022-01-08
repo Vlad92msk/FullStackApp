@@ -12,19 +12,26 @@ export type AuthGuardType = {
 }
 export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, defaultErrorComponent, children }) => {
   const user: User = storageGet(LocalStorageEnum.USER)
+  const pageName = ROUTES_ALL[page]
 
   /**
    * Если ни роли, ни страница не указаны - пропустить [или]
-   * Если указана страница, но в ее ролях пустой массив - пропустить [или]
+   * Если пользователь попал на страницу 404 [или]
+   * Если указана страница, и в списке доступных ролей есть "Посетитель" - пропустить [или]
    * Если в ролях пользователя указана роль для страницы - пропустить [или]
    * Если Роли указаны и есть в профиле - пропустить
    */
   if ((!roles && !page) ||
-    (page && !routesAll[page].allowRoles.length) ||
-    (page && user && user.uRoles.some((role: RoleEnum) => routesAll[page].allowRoles.includes(role))) ||
+    (page === 'ERROR_404') ||
+    (page && routesAll[pageName].allowRoles.includes(RoleEnum.visitor)) ||
+    (page && user && user.uRoles.some((role: RoleEnum) => routesAll[pageName].allowRoles.includes(role))) ||
     (roles && user && user.uRoles.some((role: RoleEnum) => roles.includes(role)))
   ) return <>{children}</>
 
 
   return defaultErrorComponent ? <div>Недостаточно прав</div> : null
+}
+
+AuthGuard.defaultProps = {
+  defaultErrorComponent: true
 }
