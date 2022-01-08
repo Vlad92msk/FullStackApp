@@ -37,8 +37,8 @@ export const Section: React.FC<SectionType> = React.memo((
     >
       {bcgImg &&
       <Image className={classnames(imgClassName, cn('Img'))} path={bcgImg.path} sizePriority={bcgImg.sizePriority} />}
-      <ErrorBoundary FallbackComponent={ErrorFallBack} resetKeys={resetKeys || []}>
-        {children}
+      <ErrorBoundary FallbackComponent={ErrorFallBack} resetKeys={resetKeys}>
+        {children || null}
       </ErrorBoundary>
     </section>
   )
