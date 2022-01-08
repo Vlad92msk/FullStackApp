@@ -66,6 +66,7 @@ type Pops ={
 }
 export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, pageProps: Pops) => {
   pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
+  return pageProps
 }
 
 export const useApollo = (pageProps: unknown): ApolloClient<NormalizedCacheObject> => {
