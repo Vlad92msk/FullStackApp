@@ -8,30 +8,49 @@ import { ROUTES_ALL, routesAll } from '~client/projects/routesAll'
 export type AuthGuardType = {
   roles?: RoleEnum[]
   page?: keyof typeof ROUTES_ALL
-  defaultErrorComponent?: boolean
 }
-export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, defaultErrorComponent, children }) => {
-  const user: User = storageGet(LocalStorageEnum.USER)
+export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, children }) => {
+  /**
+   * Если пользователь попал на 404 страницу - пропустить
+   * Если не указано имя страницы и роли доступа к ней - пропустить
+   */
+  if (page === 'ERROR_404' || !Boolean(roles && page)) return <>{children}</>
+
+
   const pageName = ROUTES_ALL[page]
+  const allowPageRoles = routesAll[pageName].allowRoles
 
   /**
-   * Если ни роли, ни страница не указаны - пропустить [или]
-   * Если пользователь попал на страницу 404 [или]
-   * Если указана страница, и в списке доступных ролей есть "Посетитель" - пропустить [или]
-   * Если в ролях пользователя указана роль для страницы - пропустить [или]
-   * Если Роли указаны и есть в профиле - пропустить
+   * Если имя страницы указано (значит она есть в списке Роутов)
+   * и в списке роутов для данной страницы указано "Посетитель" - пропустить
    */
-  if ((!roles && !page) ||
-    (page === 'ERROR_404') ||
-    (page && routesAll[pageName].allowRoles.includes(RoleEnum.visitor)) ||
-    (page && user && user.uRoles.some((role: RoleEnum) => routesAll[pageName].allowRoles.includes(role))) ||
-    (roles && user && user.uRoles.some((role: RoleEnum) => roles.includes(role)))
-  ) return <>{children}</>
+  if (page && allowPageRoles.includes(RoleEnum.visitor)) return <>{children}</>
 
 
-  return defaultErrorComponent ? <div>Недостаточно прав</div> : null
-}
 
-AuthGuard.defaultProps = {
-  defaultErrorComponent: true
+  const user: User = storageGet(LocalStorageEnum.USER)
+  /**
+   * Если нет пользователя (не авторизован) - дальше проверять бессмысленно
+   */
+  if (!Boolean(user)) return <div>Недостаточно прав</div>
+  /**
+   * Если имя страницы указано/не указано - не важно,
+   * Но указаны роли
+   * То берется инф о пользователе из Куков
+   * Если у пользователя есть права указанные в ролях - пропустить
+   */
+  if (roles && user.uRoles.some((role: RoleEnum) => roles.includes(role))) return <>{children}</>
+  /**
+   * Если Указано имя страницы
+   * Но не указаны роли
+   * То берется инф о пользователе из Куков
+   * Берется список доступных ролей из списка Роутов
+   * Если у пользователя есть права указанные в ролях - пропустить
+   */
+  if ((page && !roles) && user.uRoles.some((role: RoleEnum) => allowPageRoles.includes(role))) return <>{children}</>
+
+  /**
+   * TODO: Потом как нибудь стилизовать
+   */
+  return <div>Недостаточно прав</div>
 }
