@@ -26,3 +26,9 @@ export const Token = createParamDecorator(
     return getNestCookie(CookieEnum.TOKEN, getCookie)
   }
 );
+
+export const ProjectLanguage = createParamDecorator(
+  (data: any, context: ExecutionContext): string => {
+    return GqlExecutionContext.create(context).getContext().req.headers.userlanguage
+  }
+);

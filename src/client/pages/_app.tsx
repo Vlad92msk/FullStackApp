@@ -7,6 +7,7 @@ import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/scrollbar/scrollbar.min.css'
 import 'swiper/components/pagination/pagination.min.css'
 import 'swiper/components/effect-cube/effect-cube.min.css'
+import { storageSet } from '@shared/utils'
 
 /**
  * Предотвращает ошибку
@@ -22,6 +23,13 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
+  if (typeof window !== 'undefined') {
+    /**
+     * TODO: сделаь переключение
+     */
+    storageSet('userLanguage', 'en')
+  }
+
   const apolloClient = useApollo(pageProps)
   // if (typeof window === 'undefined') return <div>Loading...</div>
 

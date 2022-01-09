@@ -15,10 +15,10 @@ export const ResponseApi: React.FC<ResponseApiType> = ({ status, errors, childre
   if (!findFirstError) return <>{children}</>
 
   return (<div>
-    <div>NetworkError-name: {findFirstError.networkError.name}</div>
-    <div>NetworkError-message: {findFirstError.networkError.message}</div>
-    <div>ExtraInfo: {findFirstError.extraInfo}</div>
-    <div>Message: {findFirstError.message}</div>
+    <div>NetworkError-name: {findFirstError.networkError?.name}</div>
+    <div>NetworkError-message: {findFirstError.networkError?.message}</div>
+    <div>ExtraInfo: {findFirstError?.extraInfo}</div>
+    <div>Message: {findFirstError?.message}</div>
     <div>GraphQLErrors-message: {findFirstError.graphQLErrors.map(({ message }) => message)}</div>
   </div>)
 }

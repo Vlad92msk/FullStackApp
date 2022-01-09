@@ -36,7 +36,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
    * Запрашиваем статью
    */
   const { data: { articlesFindOne } } = await apolloClient.query<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>({
-    query: ArticlesFindOneDocument, variables: {
+    query: ArticlesFindOneDocument,
+    variables: {
       searchParam: { id: Number(query.id) }
     }
   })
