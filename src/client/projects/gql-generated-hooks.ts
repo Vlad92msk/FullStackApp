@@ -15,6 +15,16 @@ export type Scalars = {
   Float: number;
 };
 
+/** Стаьи о космосе */
+export type Article = {
+  __typename?: 'Article';
+  /** Текст статьи */
+  article: Scalars['String'];
+  id: Scalars['Float'];
+  /** Название статьи */
+  title: Scalars['String'];
+};
+
 export type CreateRoleInput = {
   description: Scalars['String'];
   value: Scalars['String'];
@@ -34,6 +44,15 @@ export type CreateUsersInput = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
+};
+
+/** Найти статью */
+export type FindArticleInput = {
+  /** Текст стаьи */
+  article?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Float']>;
+  /** Название стаьи */
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type FindRoleInput = {
@@ -116,6 +135,10 @@ export type MutationUsersUpdateGiveNewRoleArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  /** Найти статьи */
+  articlesFindAll: Array<Article>;
+  /** Найти 1 статью по условию */
+  articlesFindOne: Article;
   /** Войти */
   authSignIn: User;
   /** Найти умения */
@@ -130,6 +153,16 @@ export type Query = {
   usersFindAllByParam: Array<User>;
   /** Найти 1 юзера по условию */
   usersFindOneByParam: User;
+};
+
+
+export type QueryArticlesFindAllArgs = {
+  searchParam?: InputMaybe<FindArticleInput>;
+};
+
+
+export type QueryArticlesFindOneArgs = {
+  searchParam: FindArticleInput;
 };
 
 
@@ -206,10 +239,19 @@ export type User = {
   uRoles: Array<Scalars['String']>;
 };
 
-export type FindAllSkillsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ArticlesFindAllQueryVariables = Exact<{
+  searchParam?: InputMaybe<FindArticleInput>;
+}>;
 
 
-export type FindAllSkillsQuery = { __typename?: 'Query', findAllSkills: Array<{ __typename?: 'Skill', name: string, specialty: string, position: number, id: number }> };
+export type ArticlesFindAllQuery = { __typename?: 'Query', articlesFindAll: Array<{ __typename?: 'Article', article: string, id: number, title: string }> };
+
+export type ArticlesFindOneQueryVariables = Exact<{
+  searchParam: FindArticleInput;
+}>;
+
+
+export type ArticlesFindOneQuery = { __typename?: 'Query', articlesFindOne: { __typename?: 'Article', article: string, id: number, title: string } };
 
 export type AuthSignInQueryVariables = Exact<{
   authSignInUser: SignInInput;
@@ -230,44 +272,86 @@ export type AuthSignUpMutationVariables = Exact<{
 
 export type AuthSignUpMutation = { __typename?: 'Mutation', authSignUp: { __typename?: 'User', email: string } };
 
+export type FindAllSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const FindAllSkillsDocument = gql`
-    query FindAllSkills {
-  findAllSkills {
-    name
-    specialty
-    position
+
+export type FindAllSkillsQuery = { __typename?: 'Query', findAllSkills: Array<{ __typename?: 'Skill', name: string, specialty: string, position: number, id: number }> };
+
+
+export const ArticlesFindAllDocument = gql`
+    query ArticlesFindAll($searchParam: FindArticleInput) {
+  articlesFindAll(searchParam: $searchParam) {
+    article
     id
+    title
   }
 }
     `;
 
 /**
- * __useFindAllSkillsQuery__
+ * __useArticlesFindAllQuery__
  *
- * To run a query within a React component, call `useFindAllSkillsQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindAllSkillsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useArticlesFindAllQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlesFindAllQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFindAllSkillsQuery({
+ * const { data, loading, error } = useArticlesFindAllQuery({
  *   variables: {
+ *      searchParam: // value for 'searchParam'
  *   },
  * });
  */
-export function useFindAllSkillsQuery(baseOptions?: Apollo.QueryHookOptions<FindAllSkillsQuery, FindAllSkillsQueryVariables>) {
+export function useArticlesFindAllQuery(baseOptions?: Apollo.QueryHookOptions<ArticlesFindAllQuery, ArticlesFindAllQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FindAllSkillsQuery, FindAllSkillsQueryVariables>(FindAllSkillsDocument, options);
+        return Apollo.useQuery<ArticlesFindAllQuery, ArticlesFindAllQueryVariables>(ArticlesFindAllDocument, options);
       }
-export function useFindAllSkillsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllSkillsQuery, FindAllSkillsQueryVariables>) {
+export function useArticlesFindAllLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesFindAllQuery, ArticlesFindAllQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FindAllSkillsQuery, FindAllSkillsQueryVariables>(FindAllSkillsDocument, options);
+          return Apollo.useLazyQuery<ArticlesFindAllQuery, ArticlesFindAllQueryVariables>(ArticlesFindAllDocument, options);
         }
-export type FindAllSkillsQueryHookResult = ReturnType<typeof useFindAllSkillsQuery>;
-export type FindAllSkillsLazyQueryHookResult = ReturnType<typeof useFindAllSkillsLazyQuery>;
-export type FindAllSkillsQueryResult = Apollo.QueryResult<FindAllSkillsQuery, FindAllSkillsQueryVariables>;
+export type ArticlesFindAllQueryHookResult = ReturnType<typeof useArticlesFindAllQuery>;
+export type ArticlesFindAllLazyQueryHookResult = ReturnType<typeof useArticlesFindAllLazyQuery>;
+export type ArticlesFindAllQueryResult = Apollo.QueryResult<ArticlesFindAllQuery, ArticlesFindAllQueryVariables>;
+export const ArticlesFindOneDocument = gql`
+    query ArticlesFindOne($searchParam: FindArticleInput!) {
+  articlesFindOne(searchParam: $searchParam) {
+    article
+    id
+    title
+  }
+}
+    `;
+
+/**
+ * __useArticlesFindOneQuery__
+ *
+ * To run a query within a React component, call `useArticlesFindOneQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlesFindOneQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticlesFindOneQuery({
+ *   variables: {
+ *      searchParam: // value for 'searchParam'
+ *   },
+ * });
+ */
+export function useArticlesFindOneQuery(baseOptions: Apollo.QueryHookOptions<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>(ArticlesFindOneDocument, options);
+      }
+export function useArticlesFindOneLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>(ArticlesFindOneDocument, options);
+        }
+export type ArticlesFindOneQueryHookResult = ReturnType<typeof useArticlesFindOneQuery>;
+export type ArticlesFindOneLazyQueryHookResult = ReturnType<typeof useArticlesFindOneLazyQuery>;
+export type ArticlesFindOneQueryResult = Apollo.QueryResult<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>;
 export const AuthSignInDocument = gql`
     query AuthSignIn($authSignInUser: SignInInput!) {
   authSignIn(signInInput: $authSignInUser) {
@@ -368,3 +452,40 @@ export function useAuthSignUpMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AuthSignUpMutationHookResult = ReturnType<typeof useAuthSignUpMutation>;
 export type AuthSignUpMutationResult = Apollo.MutationResult<AuthSignUpMutation>;
 export type AuthSignUpMutationOptions = Apollo.BaseMutationOptions<AuthSignUpMutation, AuthSignUpMutationVariables>;
+export const FindAllSkillsDocument = gql`
+    query FindAllSkills {
+  findAllSkills {
+    name
+    specialty
+    position
+    id
+  }
+}
+    `;
+
+/**
+ * __useFindAllSkillsQuery__
+ *
+ * To run a query within a React component, call `useFindAllSkillsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindAllSkillsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindAllSkillsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFindAllSkillsQuery(baseOptions?: Apollo.QueryHookOptions<FindAllSkillsQuery, FindAllSkillsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindAllSkillsQuery, FindAllSkillsQueryVariables>(FindAllSkillsDocument, options);
+      }
+export function useFindAllSkillsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllSkillsQuery, FindAllSkillsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindAllSkillsQuery, FindAllSkillsQueryVariables>(FindAllSkillsDocument, options);
+        }
+export type FindAllSkillsQueryHookResult = ReturnType<typeof useFindAllSkillsQuery>;
+export type FindAllSkillsLazyQueryHookResult = ReturnType<typeof useFindAllSkillsLazyQuery>;
+export type FindAllSkillsQueryResult = Apollo.QueryResult<FindAllSkillsQuery, FindAllSkillsQueryVariables>;

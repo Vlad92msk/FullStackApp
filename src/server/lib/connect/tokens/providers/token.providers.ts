@@ -1,10 +1,12 @@
 import { PostgreConstants } from '~server/db/db.constants'
 import { createProvider } from '~server/utils'
 
+const { CONNECT_DB: { connect, repository, tokens } } = PostgreConstants
+
 export const TokenProviders = createProvider([
   {
-    connect: [PostgreConstants.connect_db.connect],
-    repository: PostgreConstants.connect_db.repository,
-    name: PostgreConstants.connect_db.tokens.name,
+    connect: [connect],
+    repository: repository,
+    name: tokens.name,
   },
 ])

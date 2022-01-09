@@ -10,7 +10,7 @@ import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
 @Injectable()
 export class RoleService {
   constructor(
-    @Inject(PostgreConstants.connect_db.repository)
+    @Inject(PostgreConstants.CONNECT_DB.repository)
     private readonly roleRepository: Repository<Role>
   ) {}
 

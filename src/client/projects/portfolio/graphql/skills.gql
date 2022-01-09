@@ -1,0 +1,8 @@
+query FindAllSkills {
+  findAllSkills {
+    name
+    specialty
+    position
+    id
+  }
+}

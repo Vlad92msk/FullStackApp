@@ -18,7 +18,7 @@ config()
 @Injectable()
 export class TokenService {
   constructor(
-    @Inject(PostgreConstants.connect_db.repository)
+    @Inject(PostgreConstants.CONNECT_DB.repository)
     private readonly tokenRepository: Repository<Token>
   ) {}
 

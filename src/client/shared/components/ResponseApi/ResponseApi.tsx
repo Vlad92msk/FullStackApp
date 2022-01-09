@@ -1,5 +1,6 @@
 import React from 'react'
 import { ApolloError } from '@apollo/client'
+import { Loader } from '@shared/components/Loader'
 
 interface ResponseApiType {
   status: boolean[]
@@ -10,7 +11,7 @@ export const ResponseApi: React.FC<ResponseApiType> = ({ status, errors, childre
   const isLoad = Array.from(new Set(status)).every((i) => i === false)
   const findFirstError = errors.find((err) => !!err)
 
-  if (!isLoad) return <div>Loading...</div>
+  if (!isLoad) return <Loader />
   if (!findFirstError) return <>{children}</>
 
   return (<div>

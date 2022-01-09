@@ -4,6 +4,7 @@ import { ConnectModule } from '~server/lib/connect/connection.module'
 import { PortfolioModule } from '~server/lib/portfolio/portfolio.module'
 import { NextStartModule } from '~server/lib/nextJStart/nextStart.module'
 import { AuthMiddleware } from '~server/lib/connect/auth/middleware/auth.middleware'
+import { CosmoModule } from '~server/lib/cosmo/cosmo.module'
 
 
 @Module({
@@ -21,6 +22,7 @@ import { AuthMiddleware } from '~server/lib/connect/auth/middleware/auth.middlew
     ConnectModule,
     PortfolioModule,
     NextStartModule,
+    CosmoModule
   ],
 })
 export class AppModule {

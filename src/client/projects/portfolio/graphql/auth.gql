@@ -1,12 +1,3 @@
-query FindAllSkills {
-  findAllSkills {
-    name
-    specialty
-    position
-    id
-  }
-}
-
 query AuthSignIn($authSignInUser: SignInInput!) {
   authSignIn(signInInput: $authSignInUser) {
     email

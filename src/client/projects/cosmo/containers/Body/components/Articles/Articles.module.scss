@@ -8,8 +8,7 @@
   width: 100%;
 
   &-Title {
-    @include text(wSize(16, 3, 50), true);
-    color: $colorBase;
+    color: $colorBase !important;
     padding: rem(10);
     text-align: center;
   }

@@ -19,7 +19,7 @@ export class UserService {
   private readonly saltRounds = 10
 
   constructor(
-    @Inject(PostgreConstants.connect_db.repository)
+    @Inject(PostgreConstants.CONNECT_DB.repository)
     private readonly userRepository: Repository<User>,
     private readonly roleService: RoleService
   ) {}

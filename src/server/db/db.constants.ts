@@ -1,14 +1,19 @@
 export const PostgreConstants = {
-  connect_db: {
+  CONNECT_DB: {
     repository: 'CONNECT_REPOSITORY',
     connect: 'CONNECT_DB',
     users: { name: 'User' },
     tokens: { name: 'Token' },
     roles: { name: 'Role' },
   },
-  portfolio: {
+  PORTFOLIO: {
     repository: 'PORTFOLIO_REPOSITORY',
     connect: 'PORTFOLIO_DB',
     skills: { name: 'Skill' },
+  },
+  COSMO: {
+    repository: 'COSMO_REPOSITORY',
+    connect: 'COSMO_DB',
+    articles: { name: 'Article' },
   },
 }
