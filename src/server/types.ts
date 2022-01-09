@@ -7,3 +7,6 @@ export enum VALIDATE_MESSAGE {
   IS_STRING = 'Значение должно быть строкой',
   IS_NUMBER = 'Значение должно быть числом'
 }
+
+
+export type LanguageSupported = 'ru' | 'en'

@@ -4,7 +4,7 @@ import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import { CookieEnum } from '~public/models/cookie'
-import { getCookie, storageRemove } from '@shared/utils'
+import { getCookie, storageGet, storageRemove } from '@shared/utils'
 import { LocalStorageEnum } from '~public/models/localStorage'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
@@ -16,6 +16,9 @@ const createApolloClient = () => new ApolloClient({
     link: new HttpLink({
       uri: `http://localhost:3000/graphql`,
       // credentials: 'same-origin',
+      headers: {
+        userLanguage: storageGet('userLanguage')
+      }
     }),
     cache: new InMemoryCache({
       typePolicies: {

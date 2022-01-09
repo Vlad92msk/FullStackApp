@@ -12,8 +12,12 @@ export const PostgreConstants = {
     skills: { name: 'Skill' },
   },
   COSMO: {
-    repository: 'COSMO_REPOSITORY',
     connect: 'COSMO_DB',
+
+    repository: 'COSMO_REPOSITORY',
     articles: { name: 'Article' },
+
+    repository_EN: 'COSMO_REPOSITORY_EN',
+    articles_en: { name: 'Article_en' },
   },
 }
