@@ -12,7 +12,7 @@ import { MyObservable } from '~server/types'
 @Injectable()
 export class SkillsService {
   constructor(
-    @Inject(PostgreConstants.portfolio.repository)
+    @Inject(PostgreConstants.PORTFOLIO.repository)
     readonly skillRepository: Repository<Skill>
   ) {
   }

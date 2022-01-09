@@ -1,18 +1,13 @@
 import { PostgreConstants } from '~server/db/db.constants'
 import { createProvider } from '~server/utils'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
+
+const { CONNECT_DB: { connect, repository, users } } = PostgreConstants
+
 
 export const UsersProviders = createProvider([
   {
-    connect: [PostgreConstants.connect_db.connect],
-    repository: PostgreConstants.connect_db.repository,
-    name: PostgreConstants.connect_db.users.name,
+    connect: [connect],
+    repository: repository,
+    name: users.name,
   },
 ])
-
-// export const UsersProviders = [
-//   {
-//     provide: PostgreConstants.connect_db.repository,
-//     useValue: Users,
-//   },
-// ]

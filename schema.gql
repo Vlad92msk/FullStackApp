@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""Стаьи о космосе"""
+type Article {
+  """Текст статьи"""
+  article: String!
+  id: Float!
+
+  """Название статьи"""
+  title: String!
+}
+
 input CreateRoleInput {
   description: String!
   value: String!
@@ -23,6 +33,16 @@ input CreateUsersInput {
   email: String!
   name: String!
   password: String!
+}
+
+"""Найти статью"""
+input FindArticleInput {
+  """Текст стаьи"""
+  article: String
+  id: Float
+
+  """Название стаьи"""
+  title: String
 }
 
 input FindRoleInput {
@@ -69,6 +89,12 @@ type Mutation {
 }
 
 type Query {
+  """Найти статьи"""
+  articlesFindAll(searchParam: FindArticleInput): [Article!]!
+
+  """Найти 1 статью по условию"""
+  articlesFindOne(searchParam: FindArticleInput!): Article!
+
   """Войти"""
   authSignIn(signInInput: SignInInput!): User!
 

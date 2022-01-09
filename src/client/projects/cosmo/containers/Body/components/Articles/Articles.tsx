@@ -7,49 +7,31 @@ import { makeCn } from '@shared/utils'
 import { Section } from '@shared/components/Section'
 import { createString } from '@shared/utils/createString'
 import { useScreenWidth } from '@shared/hooks'
+import { ResponseApi } from '@shared/components/ResponseApi'
+import { Text } from '@shared/components/Text'
 
 import { MediaQueries } from '~public/models/mediaQueries'
 import { CosmoPages } from '~client/projects/cosmo/router'
 import { section } from '~client/projects/cosmo/moduleGeneralCN'
 import styles from './Articles.module.scss'
+import { useArticlesFindAllQuery } from '~client/projects/gql-generated-hooks'
 
 const cn = makeCn('Articles', styles)
 
 SwiperCore.use([Navigation])
 
-const ARTICLES = [
-  {
-    id: 1,
-    title: 'wedwed',
-    article: ''
-  },
-  {
-    id: 2,
-    title: 'wedwed',
-    article: ''
-  },
-  {
-    id: 3,
-    title: 'wedwed',
-    article: ''
-  },
-  {
-    id: 4,
-    title: 'wedwed',
-    article: ''
-  },
-  {
-    id: 5,
-    title: 'wedwed',
-    article: ''
-  }
-]
 
 type ArticlesType = {}
 
 export const Articles: React.FC<ArticlesType> = () => {
   const screenWidth = useScreenWidth()
   const router = useRouter()
+
+  const {
+    data: { articlesFindAll = [] } = {},
+    loading,
+    error
+  } = useArticlesFindAllQuery()
 
   /**
    * Формирует URL и переходит по нему
@@ -68,14 +50,14 @@ export const Articles: React.FC<ArticlesType> = () => {
   return (
     <Section className={section()} noPaddingRight={screenWidth > MediaQueries.M_768}>
       <div className={cn()}>
-        <div className={cn('Title')}>Статьи</div>
-        <Swiper
-          className={cn('Slider')}
-          navigation
-          {...sliderMediaParam}
-        >
-          {
-            ARTICLES.map(({ id, title }) => (
+        <Text as={'h2'} size={'7'} textTransform={'uppercase'} className={cn('Title')} children={'Статьи'} />
+        <ResponseApi status={[loading]} errors={[error]}>
+          <Swiper
+            className={cn('Slider')}
+            navigation
+            {...sliderMediaParam}
+          >
+            {articlesFindAll.map(({ id, title }) => (
               <SwiperSlide
                 className={cn('Slide')}
                 key={id}
@@ -84,12 +66,12 @@ export const Articles: React.FC<ArticlesType> = () => {
               >
                 <div className={cn('Item')}>
                   <div className={cn('ItemImg')}>img</div>
-                  <div className={cn('ItemTitle')}>{title}</div>
+                  <Text as={'h3'} className={cn('ItemTitle')}>{title}</Text>
                 </div>
               </SwiperSlide>
-            ))
-          }
-        </Swiper>
+            ))}
+          </Swiper>
+        </ResponseApi>
       </div>
     </Section>
   )

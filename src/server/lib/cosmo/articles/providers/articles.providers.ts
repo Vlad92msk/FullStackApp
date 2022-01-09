@@ -1,13 +1,12 @@
 import { PostgreConstants } from '~server/db/db.constants'
 import { createProvider } from '~server/utils'
 
-const { CONNECT_DB: { connect, repository, roles } } = PostgreConstants
+const { COSMO: { connect, repository, articles } } = PostgreConstants
 
-
-export const RolesProviders = createProvider([
+export const ArticlesProviders = createProvider([
   {
     connect: [connect],
     repository: repository,
-    name: roles.name,
-  },
+    name: articles.name
+  }
 ])

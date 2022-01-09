@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { makeCn } from '@shared/utils'
 import lodash from 'lodash'
+import { classnames } from '@bem-react/classnames'
+import { Tab, Tabs } from '@material-ui/core'
+
+import { Modal } from '@shared/components/Modal'
+import { Text } from '@shared/components/Text'
+import { Section } from '@shared/components/Section'
+import { useBooleanState } from '@shared/hooks'
+import { makeCn } from '@shared/utils'
+
+import { VideoFilters, NewAddVideos } from '../../components'
+import { section } from '~client/projects/cosmo/moduleGeneralCN'
 
 import styles from './VideoContent.module.scss'
-import { Tab, Tabs } from '@material-ui/core'
-import { Modal } from '@shared/components/Modal'
-import { useBooleanState } from '@shared/hooks'
-import { VideoFilters, NewAddVideos } from '../../components'
-import { classnames } from '@bem-react/classnames'
-import { Section } from '@shared/components/Section'
-import { section } from '~client/projects/cosmo/moduleGeneralCN'
 
 const cn = makeCn('VideoContent', styles)
 
@@ -94,7 +97,7 @@ export const VideoContent: React.FC = () => {
             >
               {videos.map(({ key, id }) => <Tab className={cn('Tab')} key={key + id} value={key} label={key} />)}
             </Tabs>
-            <div className={cn('Video')}>video</div>
+            <Text size={'4'} textTransform={'uppercase'} className={cn('Video')} children={'video'} />
           </div>
           <div className={cn('Body')}>
             <VideoFilters handleSort={handleSort} />
@@ -107,7 +110,7 @@ export const VideoContent: React.FC = () => {
           </div>
         </div>
         <div className={cn('Rating')}>
-          <div className={cn('Title')}>Недавно добавлены</div>
+          <Text size={'3'} textTransform={'uppercase'} className={cn('Title')} children={'Недавно добавлены'} />
           <NewAddVideos videos={data} handleOpenModal={handleOpenModal} />
         </div>
       </div>

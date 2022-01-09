@@ -1,0 +1,15 @@
+query ArticlesFindAll($searchParam: FindArticleInput) {
+  articlesFindAll(searchParam: $searchParam) {
+    article
+    id
+    title
+  }
+}
+
+query ArticlesFindOne($searchParam: FindArticleInput!) {
+  articlesFindOne(searchParam: $searchParam) {
+    article
+    id
+    title
+  }
+}

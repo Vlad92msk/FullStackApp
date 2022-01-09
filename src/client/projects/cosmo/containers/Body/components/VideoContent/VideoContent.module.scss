@@ -28,7 +28,6 @@
   }
 
   &-Title {
-    @include text(wSize(10, 1.5, 16), true);
     color: $colorBase;
   }
 
@@ -39,9 +38,7 @@
   }
 
   &-Video {
-    @include text(wSize(10, 1.5, 20), true);
     flex: 1 1 auto;
-    padding: rem(5);
     background: var(--Color-RedRose--50);
     color: var(--Color-Light--100);
     text-align: center;
