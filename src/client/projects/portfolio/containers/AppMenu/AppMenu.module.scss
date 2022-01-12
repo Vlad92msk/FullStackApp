@@ -21,9 +21,18 @@
     }
   }
 
+  &-User {
+    width: rem(100);
+  }
+
   &-UserName {
     color: var(--Color-MunsellBlue--30);
   }
+
+  &-Lang {
+    //width: rem(100);
+  }
+
 
   &-Modal {
     background: transparent;
