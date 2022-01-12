@@ -11,13 +11,13 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
-const createApolloClient = () => new ApolloClient({
+const createApolloClient = (lang: string) => new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       uri: `http://localhost:3000/graphql`,
       // credentials: 'same-origin',
       headers: {
-        userLanguage: storageGet('userLanguage')
+        userLanguage: lang
       }
     }),
     cache: new InMemoryCache({
@@ -32,9 +32,15 @@ const createApolloClient = () => new ApolloClient({
   })
 
 
-export const initializeApollo = (initialState = null) => {
-  const _apolloClient = apolloClient ?? createApolloClient()
+export const initializeApollo = (lang: string, initialState = null) => {
 
+  // @ts-ignore
+  const prevStateLang = apolloClient && apolloClient.link.options?.headers.userLanguage
+  /**
+   * Если клиент есть и его язык равен тому, что выбрал пользователь - запускаем его
+   * если нет - создаем новый клиент с актуальным языком
+   */
+  const _apolloClient = (Boolean(apolloClient) && prevStateLang === lang) ? apolloClient : createApolloClient(lang)
   // Если уже есть данные
   if (initialState) {
     // Получить существующий кеш, загруженный во время выборки данных на стороне клиента
@@ -43,7 +49,7 @@ export const initializeApollo = (initialState = null) => {
     // Объединить существующий кеш с данными, переданными из getStaticProps / getServerSideProps
     const data = merge(initialState, existingCache, {
       // объединять массивы, используя равенство объектов (как в наборах)
-      arrayMerge: (destinationArray, sourceArray) => [...sourceArray, ...destinationArray.filter((d) => sourceArray.every((s) => !isEqual(d, s)))],
+      arrayMerge: (destinationArray, sourceArray) => [...sourceArray, ...destinationArray.filter((d) => sourceArray.every((s) => !isEqual(d, s)))]
     })
 
     // Восстановить кеш с объединенными данными
@@ -52,8 +58,8 @@ export const initializeApollo = (initialState = null) => {
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === 'undefined') return _apolloClient
 
-   // Чистит localStorage если пользователь вышел/не авторизирован
-  if (!getCookie(CookieEnum.TOKEN)) storageRemove(LocalStorageEnum.USER);
+  // Чистит localStorage если пользователь вышел/не авторизирован
+  if (!getCookie(CookieEnum.TOKEN)) storageRemove(LocalStorageEnum.USER)
 
 
   // Для SSG и SSR всегда создавайте нового клиента Apollo.
@@ -62,8 +68,8 @@ export const initializeApollo = (initialState = null) => {
   return _apolloClient
 }
 
-type Pops ={
-  props:{
+type Pops = {
+  props: {
     [key: string]: any
   }
 }
@@ -72,9 +78,9 @@ export const addApolloState = (client: ApolloClient<NormalizedCacheObject>, page
   return pageProps
 }
 
-export const useApollo = (pageProps: unknown): ApolloClient<NormalizedCacheObject> => {
+export const useApollo = (lang: string, pageProps: unknown): ApolloClient<NormalizedCacheObject> => {
   const state = pageProps[APOLLO_STATE_PROP_NAME]
-  return useMemo(() => initializeApollo(state), [state])
+  return useMemo(() => initializeApollo(lang, state), [state, lang])
 }
 export type ApolloStateType = ReturnType<typeof useApollo>
 
@@ -83,6 +89,7 @@ export type ApolloStateType = ReturnType<typeof useApollo>
  * @param options
  */
 export const getCache = (options: DataProxy.ReadQueryOptions<NormalizedCacheObject, unknown>): NormalizedCacheObject => {
-  const apolloClient = initializeApollo()
+  const language: string = storageGet('userLanguage')
+  const apolloClient = initializeApollo(language)
   return apolloClient.cache.readQuery(options)
 }

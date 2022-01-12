@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useContext } from 'react'
 import ReactTooltip from 'react-tooltip'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { EffectCube, Navigation } from 'swiper/core'
@@ -7,13 +7,15 @@ import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
 import { Modal } from '@shared/components/Modal'
+import { ProjectLanguage } from '~client/pages/_app'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
 import { LocalStorageEnum } from '~public/models/localStorage'
-import { SignInForm, SignUpForm } from './components'
 
+import { SignInForm, SignUpForm } from './components'
 import { Text } from '@shared/components/Text'
 import { useAuthSignOutMutation } from '~client/projects/gql-generated-hooks'
 import styles from './AppMenu.module.scss'
+import { Option, Select } from '@shared/components/Select'
 
 SwiperCore.use([EffectCube])
 
@@ -22,6 +24,11 @@ const cn = makeCn('AppMenu', styles)
 
 
 export const MenuApp = () => {
+  /**
+   * Переключение языка
+   */
+  const { language, setLanguage } = useContext(ProjectLanguage)
+  const changeLang = useCallback((val) => setLanguage(val), [setLanguage])
 
   const [onHandleLogOut] = useAuthSignOutMutation()
 
@@ -43,7 +50,14 @@ export const MenuApp = () => {
   return (
     <>
       <div className={cn()}>
-        <div className={cn('UserName')}>{user?.name}</div>
+        <div className={cn('User')}>
+          <div className={cn('UserName')}>{user?.name}</div>
+          {/*TODO: Стилизовать как нибудь*/}
+          <Select className={cn('Lang')} onChange={changeLang} value={language} placeholder={''}>
+            <Option value={'ru'}>ru</Option>
+            <Option value={'en'}>en</Option>
+          </Select>
+        </div>
         <SpeedDial
           buttonClassname={cn('MenuButton')}
           icon={'share'}
@@ -89,8 +103,10 @@ export const MenuApp = () => {
       <Modal open={signIn} onClose={handleChangeSignIn} className={cn('Modal')}>
         <div className={cn('ModalBody')}>
           <div className={cn('ThumbRow')}>
-            <Text className={cn('Thumb')} size={'7'} color={!Boolean(activeSlide) ? 'title' : 'note'} children={'Войти'} />
-            <Text className={cn('Thumb')} size={'7'} color={Boolean(activeSlide) ? 'title' : 'note'} children={'Зарегистрироваться'} />
+            <Text className={cn('Thumb')} size={'7'} color={!Boolean(activeSlide) ? 'title' : 'note'}
+                  children={'Войти'} />
+            <Text className={cn('Thumb')} size={'7'} color={Boolean(activeSlide) ? 'title' : 'note'}
+                  children={'Зарегистрироваться'} />
           </div>
           <div className={cn('SwiperContainer')}>
             <Swiper
