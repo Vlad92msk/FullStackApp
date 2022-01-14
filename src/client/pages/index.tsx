@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   )
 }
 
-export async function getServerSideProps(ctx: GetServerSideProps) {
+export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   const apolloClient = initializeApollo()
   const { data: { findAllSkills } } = await apolloClient.query<FindAllSkillsQuery>({ query: FindAllSkillsDocument })
 
