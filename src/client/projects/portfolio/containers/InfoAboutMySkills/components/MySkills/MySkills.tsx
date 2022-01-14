@@ -19,7 +19,7 @@ export const MySkills: FC<MySkillsType> = ({ el }) => {
   return (
     <div className={cn()}>
       <ResponseApi status={[loading]} errors={[error]}>
-        <HoneycombMesh
+        {() => <HoneycombMesh
           className={cn('Mesh')}
           othersElements={el('honeycomb')}
           userElements={findAllSkills?.map(({ position, specialty, name }) => ({
@@ -27,7 +27,7 @@ export const MySkills: FC<MySkillsType> = ({ el }) => {
             element: el(name, specialty)
           }))
           }
-        />
+        />}
       </ResponseApi>
     </div>
   )

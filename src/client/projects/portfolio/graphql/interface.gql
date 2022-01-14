@@ -1,0 +1,10 @@
+fragment portfolioInterface on Interface_ru {
+  id, age, enterEmail, enterLogin, enterPassword, enterEmail, toComeIn, telephone, surname, speciality, skillsAndAbilities, register,
+  patronymic, name, message, experience
+}
+
+query FindInterface {
+  userInterfacePortfolioFindAll {
+    ...portfolioInterface
+  }
+}
