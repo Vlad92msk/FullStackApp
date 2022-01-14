@@ -59,6 +59,52 @@ input FindUserInput {
   status: String
 }
 
+"""Интерфейс портфолио (ru)"""
+type Interface_ru {
+  """Возраст"""
+  age: String!
+
+  """Введите емайл"""
+  enterEmail: String!
+
+  """Введите логин"""
+  enterLogin: String!
+
+  """Введите пароль"""
+  enterPassword: String!
+
+  """Стаж"""
+  experience: String!
+  id: Float!
+
+  """Сообщение"""
+  message: String!
+
+  """Имя"""
+  name: String!
+
+  """Отчество"""
+  patronymic: String!
+
+  """Зарегистрироваться"""
+  register: String!
+
+  """Умения и навыки"""
+  skillsAndAbilities: String!
+
+  """Специальность"""
+  speciality: String!
+
+  """Фамилия"""
+  surname: String!
+
+  """Телефон"""
+  telephone: String!
+
+  """Войти"""
+  toComeIn: String!
+}
+
 type Mutation {
   """Выйти"""
   authSignOut: Boolean!
@@ -106,6 +152,9 @@ type Query {
 
   """Найти роль"""
   rolesFindOne(params: FindRoleInput!): Role!
+
+  """Получить интерфейс портфолио"""
+  userInterfacePortfolioFindAll: Interface_ru!
 
   """Найти всех юзеров"""
   usersFindAll: [User!]!

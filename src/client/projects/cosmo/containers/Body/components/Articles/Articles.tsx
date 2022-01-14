@@ -52,7 +52,7 @@ export const Articles: React.FC<ArticlesType> = () => {
       <div className={cn()}>
         <Text as={'h2'} size={'7'} textTransform={'uppercase'} className={cn('Title')} children={'Статьи'} />
         <ResponseApi status={[loading]} errors={[error]}>
-          <Swiper
+          {() => <Swiper
             className={cn('Slider')}
             navigation
             {...sliderMediaParam}
@@ -70,7 +70,7 @@ export const Articles: React.FC<ArticlesType> = () => {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper>}
         </ResponseApi>
       </div>
     </Section>

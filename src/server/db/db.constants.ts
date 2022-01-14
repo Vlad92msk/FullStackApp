@@ -4,12 +4,26 @@ export const PostgreConstants = {
     connect: 'CONNECT_DB',
     users: { name: 'User' },
     tokens: { name: 'Token' },
-    roles: { name: 'Role' },
+    roles: { name: 'Role' }
   },
   PORTFOLIO: {
-    repository: 'PORTFOLIO_REPOSITORY',
     connect: 'PORTFOLIO_DB',
+
+    repository: 'PORTFOLIO_REPOSITORY',
     skills: { name: 'Skill' },
+
+    tables: {
+      INTERFACE: {
+        ru: {
+          repository: 'REPOSITORY_INTERFACE_RU',
+          data_base: 'Interface_ru'
+        },
+        en: {
+          repository: 'REPOSITORY_INTERFACE_EN',
+          data_base: 'Interface_en'
+        }
+      }
+    }
   },
   COSMO: {
     connect: 'COSMO_DB',
@@ -18,6 +32,6 @@ export const PostgreConstants = {
     articles: { name: 'Article' },
 
     repository_EN: 'COSMO_REPOSITORY_EN',
-    articles_en: { name: 'Article_en' },
-  },
+    articles_en: { name: 'Article_en' }
+  }
 }

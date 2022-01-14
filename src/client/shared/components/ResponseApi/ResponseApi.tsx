@@ -5,6 +5,7 @@ import { Loader } from '@shared/components/Loader'
 interface ResponseApiType {
   status: boolean[]
   errors: ApolloError[]
+  children: () => JSX.Element
 }
 
 export const ResponseApi: React.FC<ResponseApiType> = ({ status, errors, children }) => {
@@ -12,7 +13,7 @@ export const ResponseApi: React.FC<ResponseApiType> = ({ status, errors, childre
   const findFirstError = errors.find((err) => !!err)
 
   if (!isLoad) return <Loader />
-  if (!findFirstError) return <>{children}</>
+  if (!findFirstError) return children()
 
   return (<div>
     <div>NetworkError-name: {findFirstError.networkError?.name}</div>

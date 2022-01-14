@@ -69,6 +69,40 @@ export type FindUserInput = {
   status?: InputMaybe<Scalars['String']>;
 };
 
+/** Интерфейс портфолио (ru) */
+export type Interface_Ru = {
+  __typename?: 'Interface_ru';
+  /** Возраст */
+  age: Scalars['String'];
+  /** Введите емайл */
+  enterEmail: Scalars['String'];
+  /** Введите логин */
+  enterLogin: Scalars['String'];
+  /** Введите пароль */
+  enterPassword: Scalars['String'];
+  /** Стаж */
+  experience: Scalars['String'];
+  id: Scalars['Float'];
+  /** Сообщение */
+  message: Scalars['String'];
+  /** Имя */
+  name: Scalars['String'];
+  /** Отчество */
+  patronymic: Scalars['String'];
+  /** Зарегистрироваться */
+  register: Scalars['String'];
+  /** Умения и навыки */
+  skillsAndAbilities: Scalars['String'];
+  /** Специальность */
+  speciality: Scalars['String'];
+  /** Фамилия */
+  surname: Scalars['String'];
+  /** Телефон */
+  telephone: Scalars['String'];
+  /** Войти */
+  toComeIn: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Выйти */
@@ -147,6 +181,8 @@ export type Query = {
   rolesFindAll: Array<Role>;
   /** Найти роль */
   rolesFindOne: Role;
+  /** Получить интерфейс портфолио */
+  userInterfacePortfolioFindAll: Interface_Ru;
   /** Найти всех юзеров */
   usersFindAll: Array<User>;
   /** Найти всех юзеров по условию */
@@ -272,12 +308,38 @@ export type AuthSignUpMutationVariables = Exact<{
 
 export type AuthSignUpMutation = { __typename?: 'Mutation', authSignUp: { __typename?: 'User', email: string } };
 
+export type PortfolioInterfaceFragment = { __typename?: 'Interface_ru', id: number, age: string, enterEmail: string, enterLogin: string, enterPassword: string, toComeIn: string, telephone: string, surname: string, speciality: string, skillsAndAbilities: string, register: string, patronymic: string, name: string, message: string, experience: string };
+
+export type FindInterfaceQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindInterfaceQuery = { __typename?: 'Query', userInterfacePortfolioFindAll: { __typename?: 'Interface_ru', id: number, age: string, enterEmail: string, enterLogin: string, enterPassword: string, toComeIn: string, telephone: string, surname: string, speciality: string, skillsAndAbilities: string, register: string, patronymic: string, name: string, message: string, experience: string } };
+
 export type FindAllSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FindAllSkillsQuery = { __typename?: 'Query', findAllSkills: Array<{ __typename?: 'Skill', name: string, specialty: string, position: number, id: number }> };
 
-
+export const PortfolioInterfaceFragmentDoc = gql`
+    fragment portfolioInterface on Interface_ru {
+  id
+  age
+  enterEmail
+  enterLogin
+  enterPassword
+  enterEmail
+  toComeIn
+  telephone
+  surname
+  speciality
+  skillsAndAbilities
+  register
+  patronymic
+  name
+  message
+  experience
+}
+    `;
 export const ArticlesFindAllDocument = gql`
     query ArticlesFindAll($searchParam: FindArticleInput) {
   articlesFindAll(searchParam: $searchParam) {
@@ -452,6 +514,40 @@ export function useAuthSignUpMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AuthSignUpMutationHookResult = ReturnType<typeof useAuthSignUpMutation>;
 export type AuthSignUpMutationResult = Apollo.MutationResult<AuthSignUpMutation>;
 export type AuthSignUpMutationOptions = Apollo.BaseMutationOptions<AuthSignUpMutation, AuthSignUpMutationVariables>;
+export const FindInterfaceDocument = gql`
+    query FindInterface {
+  userInterfacePortfolioFindAll {
+    ...portfolioInterface
+  }
+}
+    ${PortfolioInterfaceFragmentDoc}`;
+
+/**
+ * __useFindInterfaceQuery__
+ *
+ * To run a query within a React component, call `useFindInterfaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindInterfaceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindInterfaceQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFindInterfaceQuery(baseOptions?: Apollo.QueryHookOptions<FindInterfaceQuery, FindInterfaceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindInterfaceQuery, FindInterfaceQueryVariables>(FindInterfaceDocument, options);
+      }
+export function useFindInterfaceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindInterfaceQuery, FindInterfaceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindInterfaceQuery, FindInterfaceQueryVariables>(FindInterfaceDocument, options);
+        }
+export type FindInterfaceQueryHookResult = ReturnType<typeof useFindInterfaceQuery>;
+export type FindInterfaceLazyQueryHookResult = ReturnType<typeof useFindInterfaceLazyQuery>;
+export type FindInterfaceQueryResult = Apollo.QueryResult<FindInterfaceQuery, FindInterfaceQueryVariables>;
 export const FindAllSkillsDocument = gql`
     query FindAllSkills {
   findAllSkills {

@@ -11,7 +11,8 @@ import { FormEnums } from '~public/models/formEnums'
 import { formStyles } from '~public/styles/materialUI'
 import styles from './SignInForm.module.scss'
 import { Button } from '@shared/components/Button'
-import { useAuthSignInLazyQuery } from '~client/projects/gql-generated-hooks'
+import { useAuthSignInLazyQuery, useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
+import { ResponseApi } from '@shared/components/ResponseApi'
 
 /**
  * Стили
@@ -35,17 +36,30 @@ type SignInFormType = {
 export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
   const classes = useStyles()
 
+  const {
+    data: {
+      userInterfacePortfolioFindAll: userInterface
+    } = {},
+    loading: userInterfaceLoading,
+    error: userInterfaceError
+  } = useFindInterfaceQuery()
+
   /**
    * Форма
    */
-  const { register, handleSubmit, formState: { errors }, watch } = useForm<SignInInput>({ resolver: yupResolver(schema) })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch
+  } = useForm<SignInInput>({ resolver: yupResolver(schema) })
   const emailWatch = watch('email')
   const passwordWatch = watch('password')
 
   /**
    * Query - Войти
    */
-  const [authSignIn, { loading }] = useAuthSignInLazyQuery({
+  const [authSignIn, { loading, error }] = useAuthSignInLazyQuery({
     fetchPolicy: 'network-only',
     onCompleted({ authSignIn }) {
       if (authSignIn)
@@ -66,29 +80,33 @@ export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn()}>
-      <TextField
-        fullWidth {...register('email')} label={'Введите email...'} error={!!errors.email}
-        helperText={errors.email?.message}
-        inputProps={{ className: classes.input }}
-        InputLabelProps={{ className: classes.label }}
-      />
-      <TextField
-        fullWidth {...register('password')} label={'Введите пароль...'} error={!!errors.password}
-        helperText={errors.password?.message}
-        inputProps={{ className: classes.input }}
-        InputLabelProps={{ className: classes.label }}
-      />
-      <Button
-        className={cn('SubmitButton')}
-        type='submit'
-        icon={loading ? 'trash' : 'exit'}
-        iconPosition={'left'}
-        styleType={'filled'}
-        color={'blue'}
-        disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!errors.email || !!errors.password}
-      >
-        Войти
-      </Button>
+      <ResponseApi status={[userInterfaceLoading, loading]} errors={[userInterfaceError, error]}>
+        {() => <>
+          <TextField
+            fullWidth {...register('email')} label={`${userInterface.enterEmail}...`} error={!!errors.email}
+            helperText={errors.email?.message}
+            inputProps={{ className: classes.input }}
+            InputLabelProps={{ className: classes.label }}
+          />
+          <TextField
+            fullWidth {...register('password')} label={`${userInterface.enterPassword}...`} error={!!errors.password}
+            helperText={errors.password?.message}
+            inputProps={{ className: classes.input }}
+            InputLabelProps={{ className: classes.label }}
+          />
+          <Button
+            className={cn('SubmitButton')}
+            type='submit'
+            icon={loading ? 'trash' : 'exit'}
+            iconPosition={'left'}
+            styleType={'filled'}
+            color={'blue'}
+            disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!errors.email || !!errors.password}
+          >
+            {userInterface.toComeIn}
+          </Button>
+        </>}
+      </ResponseApi>
     </form>
   )
 }

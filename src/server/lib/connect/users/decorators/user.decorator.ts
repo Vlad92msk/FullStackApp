@@ -29,6 +29,6 @@ export const Token = createParamDecorator(
 
 export const ProjectLanguage = createParamDecorator(
   (data: any, context: ExecutionContext): string => {
-    return GqlExecutionContext.create(context).getContext().req.headers.userlanguage
+    return GqlExecutionContext.create(context).getContext().req.headers.userlanguage || 'ru'
   }
 );

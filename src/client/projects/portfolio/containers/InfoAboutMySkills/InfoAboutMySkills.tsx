@@ -6,6 +6,9 @@ import { Icon } from '@shared/components/Icon'
 import { MySkills } from './components'
 import { IconName } from '~public/models/icon.model'
 import styles from './InfoAboutMySkills.module.scss'
+import { useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
+import { ResponseApi } from '@shared/components/ResponseApi'
+
 const cn = makeCn('InfoAboutMySkills', styles)
 
 
@@ -14,6 +17,15 @@ export type SpecialtyType = 'backend' | 'frontend' | 'other'
 
 export const InfoAboutMySkills: React.FC = () => {
   const [specialty, setSpecialty] = useState<SpecialtyType>('other')
+
+  const {
+    data: {
+      userInterfacePortfolioFindAll: userInterface
+    } = {},
+    loading,
+    error
+  } = useFindInterfaceQuery()
+
   const el = useMemo(() => (icon: IconName, spec?: SpecialtyType) => (
     <Icon
       icon={icon}
@@ -30,11 +42,15 @@ export const InfoAboutMySkills: React.FC = () => {
 
   return (
     <div className={cn()}>
-      <Text className={cn('Title')} size={'8'} color={'title'} children={' Умения и навыки'} />
-      <MySkills el={el} />
-      <div className={cn('SpecialtyText')}>
-        <Text color={'body'} size={'8'} textTransform={'uppercase'} children={specialty} />
-      </div>
+      <ResponseApi status={[loading]} errors={[error]}>
+        {() => <>
+          <Text className={cn('Title')} size={'8'} color={'title'} children={userInterface.skillsAndAbilities} />
+          <MySkills el={el} />
+          <div className={cn('SpecialtyText')}>
+            <Text color={'body'} size={'8'} textTransform={'uppercase'} children={specialty} />
+          </div>
+        </>}
+      </ResponseApi>
     </div>
   )
 }
