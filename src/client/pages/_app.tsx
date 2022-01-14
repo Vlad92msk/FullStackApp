@@ -29,28 +29,7 @@ export const ProjectLanguage = React.createContext({
 
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
-  const [language, setLanguage] = useState<string>()
-
-  /**
-   * Если страница обновляется или заходим впервые
-   */
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const languageStorage: string = storageGet('userLanguage')
-      /**
-       * Если в сторе есть указание языка - ставим его
-       */
-      if (languageStorage) {
-        setLanguage(languageStorage)
-      }
-      /**
-       * Если нет - по умолчанию Русский
-       */
-      else {
-        setLanguage('ru')
-      }
-    }
-  }, [])
+  const [language, setLanguage] = useState<string>(() => storageGet('userLanguage') ||'ru')
 
   /**
    * Меняем язык в меню - меняем и в сторе
