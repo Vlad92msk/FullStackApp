@@ -11,12 +11,12 @@ const {
 export const UserInterfaceProviders = createProvider([
   {
     connect: [connect],
-    repository: ru.repository,
-    name: ru.data_base
+    repository: ru.rep__interface_portfolio,
+    name: ru.name__interface_portfolio
   },
   {
     connect: [connect],
-    repository: en.repository,
-    name: en.data_base
+    repository: en.rep__interface_portfolio,
+    name: en.name__interface_portfolio
   }
 ])

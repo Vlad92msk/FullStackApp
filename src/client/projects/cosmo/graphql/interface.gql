@@ -1,0 +1,9 @@
+fragment cosmoInterface on Interface_cosmo_ru {
+  id, articles, firstSpace, recentlyAdded, sort
+}
+
+query CosmoInterface {
+  userInterfaceCosmoFindAll {
+    ...cosmoInterface
+  }
+}

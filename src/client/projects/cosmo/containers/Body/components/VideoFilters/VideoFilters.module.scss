@@ -5,6 +5,7 @@
 
 .Filters {
   position: absolute;
+  text-align: center;
   left: rem(-100);
   top: 0;
 
@@ -20,8 +21,7 @@
 
 
   &-Title {
-    @include text(wSize(10, 1.5, 16));
-    color: $colorBase;
+    color: $colorBase !important;
     margin-bottom: rem(20);
   }
 

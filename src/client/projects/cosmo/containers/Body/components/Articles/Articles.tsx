@@ -14,7 +14,7 @@ import { MediaQueries } from '~public/models/mediaQueries'
 import { CosmoPages } from '~client/projects/cosmo/router'
 import { section } from '~client/projects/cosmo/moduleGeneralCN'
 import styles from './Articles.module.scss'
-import { useArticlesFindAllQuery } from '~client/projects/gql-generated-hooks'
+import { useArticlesFindAllQuery, useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
 
 const cn = makeCn('Articles', styles)
 
@@ -28,9 +28,15 @@ export const Articles: React.FC<ArticlesType> = () => {
   const router = useRouter()
 
   const {
+    data: { userInterfaceCosmoFindAll: userInterface } = {},
+    loading: userInterfaceLoading,
+    error: userInterfaceError
+  } = useCosmoInterfaceQuery()
+
+  const {
     data: { articlesFindAll = [] } = {},
-    loading,
-    error
+    loading: articlesFindAllLoading,
+    error: articlesFindAllError
   } = useArticlesFindAllQuery()
 
   /**
@@ -50,27 +56,33 @@ export const Articles: React.FC<ArticlesType> = () => {
   return (
     <Section className={section()} noPaddingRight={screenWidth > MediaQueries.M_768}>
       <div className={cn()}>
-        <Text as={'h2'} size={'7'} textTransform={'uppercase'} className={cn('Title')} children={'Статьи'} />
-        <ResponseApi status={[loading]} errors={[error]}>
-          {() => <Swiper
-            className={cn('Slider')}
-            navigation
-            {...sliderMediaParam}
-          >
-            {articlesFindAll.map(({ id, title }) => (
-              <SwiperSlide
-                className={cn('Slide')}
-                key={id}
-                id={String(id)}
-                onClick={onOpenArticle}
-              >
-                <div className={cn('Item')}>
-                  <div className={cn('ItemImg')}>img</div>
-                  <Text as={'h3'} className={cn('ItemTitle')}>{title}</Text>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>}
+        <ResponseApi
+          status={[articlesFindAllLoading, userInterfaceLoading]}
+          errors={[articlesFindAllError, userInterfaceError]}
+        >
+          {() => <>
+            <Text as={'h2'} size={'7'} textTransform={'uppercase'} className={cn('Title')}
+                  children={userInterface.articles} />
+            <Swiper
+              className={cn('Slider')}
+              navigation
+              {...sliderMediaParam}
+            >
+              {articlesFindAll.map(({ id, title }) => (
+                <SwiperSlide
+                  className={cn('Slide')}
+                  key={id}
+                  id={String(id)}
+                  onClick={onOpenArticle}
+                >
+                  <div className={cn('Item')}>
+                    <div className={cn('ItemImg')}>img</div>
+                    <Text as={'h3'} className={cn('ItemTitle')}>{title}</Text>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>}
         </ResponseApi>
       </div>
     </Section>

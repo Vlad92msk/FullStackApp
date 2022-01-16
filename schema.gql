@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 """Стаьи о космосе"""
-type Article {
+type Article_ru {
   """Текст статьи"""
   article: String!
   id: Float!
@@ -57,6 +57,22 @@ input FindUserInput {
   name: String
   password: String
   status: String
+}
+
+"""Интерфейс космо (ru)"""
+type Interface_cosmo_ru {
+  """Статьи"""
+  articles: String!
+
+  """Первый космический"""
+  firstSpace: String!
+  id: Float!
+
+  """Недавно добавлены"""
+  recentlyAdded: String!
+
+  """Сортировать"""
+  sort: String!
 }
 
 """Интерфейс портфолио (ru)"""
@@ -136,10 +152,10 @@ type Mutation {
 
 type Query {
   """Найти статьи"""
-  articlesFindAll(searchParam: FindArticleInput): [Article!]!
+  articlesFindAll(searchParam: FindArticleInput): [Article_ru!]!
 
   """Найти 1 статью по условию"""
-  articlesFindOne(searchParam: FindArticleInput!): Article!
+  articlesFindOne(searchParam: FindArticleInput!): Article_ru!
 
   """Войти"""
   authSignIn(signInInput: SignInInput!): User!
@@ -152,6 +168,9 @@ type Query {
 
   """Найти роль"""
   rolesFindOne(params: FindRoleInput!): Role!
+
+  """Получить интерфейс космо"""
+  userInterfaceCosmoFindAll: Interface_cosmo_ru!
 
   """Получить интерфейс портфолио"""
   userInterfacePortfolioFindAll: Interface_ru!
