@@ -1,26 +1,28 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
-import { catchError, from, map, of, switchMap } from 'rxjs'
-import { Article } from './entitys/articles.entity'
+import { catchError, from, of, switchMap } from 'rxjs'
+
+import { createLanguageVariables, CreateLanguageVariablesType } from '~server/utils/createLanguageVariables'
+import { Article_en } from '~server/lib/cosmo/articles/entitys/articles_en.entity'
 import { PostgreConstants } from '~server/db/db.constants'
-import { FindArticleInput } from './inputs/find-article.input'
 import { catchErrorCustom } from '~server/utils/catchErrorCustom'
 import { LanguageSupported, MyObservable } from '~server/types'
 import { ArticleErrors } from '~server/lib/cosmo/articles/errors'
-import { Article_en } from '~server/lib/cosmo/articles/entitys/articles_en.entity'
-import { createLanguageVariables, CreateLanguageVariablesType } from '~server/utils/createLanguageVariables'
 
+import { FindArticleInput } from './inputs/find-article.input'
+import { Article_ru } from './entitys/articles.entity'
 
+const { COSMO: { schemas: { ARTICLES } } } = PostgreConstants
 
 @Injectable()
 export class ArticlesService {
   private readonly langVar:CreateLanguageVariablesType
 
   constructor(
-    @Inject(PostgreConstants.COSMO.repository)
-    readonly articleRepository: Repository<Article>,
+    @Inject(ARTICLES.ru.rep__base_articles)
+    readonly articleRepository: Repository<Article_ru>,
 
-    @Inject(PostgreConstants.COSMO.repository_EN)
+    @Inject(ARTICLES.en.rep__base_articles)
     readonly articleRepository_en: Repository<Article_en>
   ) {
     /**
@@ -34,7 +36,7 @@ export class ArticlesService {
    * @param where
    * @param language
    */
-  public findAllArticles = ([language, where]: [LanguageSupported, FindArticleInput]): MyObservable<Article[]> => from(
+  public findAllArticles = ([language, where]: [LanguageSupported, FindArticleInput]): MyObservable<Article_ru[]> => from(
     this.langVar[language].find(where ? { where, order: { id: 'ASC' } } : { order: { id: 'ASC' } })
   ).pipe(
     switchMap((data) => of(data)),
@@ -46,7 +48,7 @@ export class ArticlesService {
    * Найти 1 статью
    * @param where
    */
-  public findOneArticles = (where: FindArticleInput): MyObservable<Article> => from(
+  public findOneArticles = (where: FindArticleInput): MyObservable<Article_ru> => from(
     this.langVar['ru'].findOne(where)
   ).pipe(
     switchMap((data) => of(data)),

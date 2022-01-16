@@ -9,7 +9,7 @@ export interface ArticleType {
 
 
 @ObjectType({ description: 'Стаьи о космосе' })
-@Entity('Articles_en', { database: 'cosmo' })
+@Entity('Articles_en', { database: 'cosmo', schema: 'articles' })
 export class Article_en implements ArticleType {
   @Field()
   @PrimaryGeneratedColumn({ name: 'id' })

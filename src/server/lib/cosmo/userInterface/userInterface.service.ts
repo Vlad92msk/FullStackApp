@@ -5,22 +5,22 @@ import { PostgreConstants } from '~server/db/db.constants'
 import { catchErrorCustom } from '~server/utils/catchErrorCustom'
 import { LanguageSupported, MyObservable } from '~server/types'
 import { createLanguageVariables, CreateLanguageVariablesType } from '~server/utils/createLanguageVariables'
-import { Interface_ru } from './entitys/userInterface_ru.entity'
-import { Interface_en } from './entitys/userInterface_en.entity'
+import { Interface_cosmo_ru } from './entitys/userInterface_ru.entity'
+import { Interface_cosmo_en } from './entitys/userInterface_en.entity'
 import { UserInterfaceErrors } from './errors'
 
-const { PORTFOLIO: { tables: { INTERFACE } } } = PostgreConstants
+const { COSMO: { schemas: { INTERFACE } } } = PostgreConstants
 
 @Injectable()
 export class UserInterfaceService {
   private readonly langVar: CreateLanguageVariablesType
 
   constructor(
-    @Inject(INTERFACE.ru.rep__interface_portfolio)
-    readonly interfaceRepository_ru: Repository<Interface_ru>,
+    @Inject(INTERFACE.ru.rep__interface_cosmo)
+    readonly interfaceRepository_ru: Repository<Interface_cosmo_ru>,
 
-    @Inject(INTERFACE.en.rep__interface_portfolio)
-    readonly interfaceRepository_en: Repository<Interface_en>
+    @Inject(INTERFACE.en.rep__interface_cosmo)
+    readonly interfaceRepository_en: Repository<Interface_cosmo_en>
   ) {
     /**
      * Создает объект для переключения на базу данных с соответствующим языком
@@ -32,7 +32,7 @@ export class UserInterfaceService {
    * Получить интерфейс
    * @param language
    */
-  public findUserInterface = ([language]: [LanguageSupported]): MyObservable<Interface_ru> => from(
+  public findUserInterface = ([language]: [LanguageSupported]): MyObservable<Interface_cosmo_ru> => from(
     this.langVar[language].findOneOrFail(1)
   ).pipe(
     switchMap((data) => of(data)),

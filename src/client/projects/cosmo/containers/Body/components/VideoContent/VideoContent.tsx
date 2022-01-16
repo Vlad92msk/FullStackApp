@@ -7,11 +7,13 @@ import { Modal } from '@shared/components/Modal'
 import { Text } from '@shared/components/Text'
 import { Section } from '@shared/components/Section'
 import { useBooleanState } from '@shared/hooks'
+import { ResponseApi } from '@shared/components/ResponseApi'
 import { makeCn } from '@shared/utils'
 
 import { VideoFilters, NewAddVideos } from '../../components'
-import { section } from '~client/projects/cosmo/moduleGeneralCN'
 
+import { useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
+import { section } from '~client/projects/cosmo/moduleGeneralCN'
 import styles from './VideoContent.module.scss'
 
 const cn = makeCn('VideoContent', styles)
@@ -57,6 +59,12 @@ export const VideoContent: React.FC = () => {
   const [open, handleOpen, handleClose] = useBooleanState(false)
   const [openModalVideo, setOpenModalVideo] = useState<string>(null)
   const [videos, setVideos] = useState(data)
+
+  const {
+    data: { userInterfaceCosmoFindAll: userInterface } = {},
+    loading, error
+  } = useCosmoInterfaceQuery()
+
 
   useEffect(() => {
     setVideos(data)
@@ -110,8 +118,13 @@ export const VideoContent: React.FC = () => {
           </div>
         </div>
         <div className={cn('Rating')}>
-          <Text size={'3'} textTransform={'uppercase'} className={cn('Title')} children={'Недавно добавлены'} />
-          <NewAddVideos videos={data} handleOpenModal={handleOpenModal} />
+          <ResponseApi status={[loading]} errors={[error]}>
+            {() => <>
+              <Text size={'3'} textTransform={'uppercase'} className={cn('Title')}
+                    children={userInterface.recentlyAdded} />
+              <NewAddVideos videos={data} handleOpenModal={handleOpenModal} />
+            </>}
+          </ResponseApi>
         </div>
       </div>
       <Modal open={open} onClose={handleClose} className={cn('Modal')}>

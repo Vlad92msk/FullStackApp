@@ -5,7 +5,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,8 +16,8 @@ export type Scalars = {
 };
 
 /** Стаьи о космосе */
-export type Article = {
-  __typename?: 'Article';
+export type Article_Ru = {
+  __typename?: 'Article_ru';
   /** Текст статьи */
   article: Scalars['String'];
   id: Scalars['Float'];
@@ -67,6 +67,20 @@ export type FindUserInput = {
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<Scalars['String']>;
+};
+
+/** Интерфейс космо (ru) */
+export type Interface_Cosmo_Ru = {
+  __typename?: 'Interface_cosmo_ru';
+  /** Статьи */
+  articles: Scalars['String'];
+  /** Первый космический */
+  firstSpace: Scalars['String'];
+  id: Scalars['Float'];
+  /** Недавно добавлены */
+  recentlyAdded: Scalars['String'];
+  /** Сортировать */
+  sort: Scalars['String'];
 };
 
 /** Интерфейс портфолио (ru) */
@@ -170,9 +184,9 @@ export type MutationUsersUpdateGiveNewRoleArgs = {
 export type Query = {
   __typename?: 'Query';
   /** Найти статьи */
-  articlesFindAll: Array<Article>;
+  articlesFindAll: Array<Article_Ru>;
   /** Найти 1 статью по условию */
-  articlesFindOne: Article;
+  articlesFindOne: Article_Ru;
   /** Войти */
   authSignIn: User;
   /** Найти умения */
@@ -181,6 +195,8 @@ export type Query = {
   rolesFindAll: Array<Role>;
   /** Найти роль */
   rolesFindOne: Role;
+  /** Получить интерфейс космо */
+  userInterfaceCosmoFindAll: Interface_Cosmo_Ru;
   /** Получить интерфейс портфолио */
   userInterfacePortfolioFindAll: Interface_Ru;
   /** Найти всех юзеров */
@@ -280,14 +296,21 @@ export type ArticlesFindAllQueryVariables = Exact<{
 }>;
 
 
-export type ArticlesFindAllQuery = { __typename?: 'Query', articlesFindAll: Array<{ __typename?: 'Article', article: string, id: number, title: string }> };
+export type ArticlesFindAllQuery = { __typename?: 'Query', articlesFindAll: Array<{ __typename?: 'Article_ru', article: string, id: number, title: string }> };
 
 export type ArticlesFindOneQueryVariables = Exact<{
   searchParam: FindArticleInput;
 }>;
 
 
-export type ArticlesFindOneQuery = { __typename?: 'Query', articlesFindOne: { __typename?: 'Article', article: string, id: number, title: string } };
+export type ArticlesFindOneQuery = { __typename?: 'Query', articlesFindOne: { __typename?: 'Article_ru', article: string, id: number, title: string } };
+
+export type CosmoInterfaceFragment = { __typename?: 'Interface_cosmo_ru', id: number, articles: string, firstSpace: string, recentlyAdded: string, sort: string };
+
+export type CosmoInterfaceQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CosmoInterfaceQuery = { __typename?: 'Query', userInterfaceCosmoFindAll: { __typename?: 'Interface_cosmo_ru', id: number, articles: string, firstSpace: string, recentlyAdded: string, sort: string } };
 
 export type AuthSignInQueryVariables = Exact<{
   authSignInUser: SignInInput;
@@ -320,6 +343,15 @@ export type FindAllSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FindAllSkillsQuery = { __typename?: 'Query', findAllSkills: Array<{ __typename?: 'Skill', name: string, specialty: string, position: number, id: number }> };
 
+export const CosmoInterfaceFragmentDoc = gql`
+    fragment cosmoInterface on Interface_cosmo_ru {
+  id
+  articles
+  firstSpace
+  recentlyAdded
+  sort
+}
+    `;
 export const PortfolioInterfaceFragmentDoc = gql`
     fragment portfolioInterface on Interface_ru {
   id
@@ -414,6 +446,40 @@ export function useArticlesFindOneLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ArticlesFindOneQueryHookResult = ReturnType<typeof useArticlesFindOneQuery>;
 export type ArticlesFindOneLazyQueryHookResult = ReturnType<typeof useArticlesFindOneLazyQuery>;
 export type ArticlesFindOneQueryResult = Apollo.QueryResult<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>;
+export const CosmoInterfaceDocument = gql`
+    query CosmoInterface {
+  userInterfaceCosmoFindAll {
+    ...cosmoInterface
+  }
+}
+    ${CosmoInterfaceFragmentDoc}`;
+
+/**
+ * __useCosmoInterfaceQuery__
+ *
+ * To run a query within a React component, call `useCosmoInterfaceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCosmoInterfaceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCosmoInterfaceQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCosmoInterfaceQuery(baseOptions?: Apollo.QueryHookOptions<CosmoInterfaceQuery, CosmoInterfaceQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CosmoInterfaceQuery, CosmoInterfaceQueryVariables>(CosmoInterfaceDocument, options);
+      }
+export function useCosmoInterfaceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CosmoInterfaceQuery, CosmoInterfaceQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CosmoInterfaceQuery, CosmoInterfaceQueryVariables>(CosmoInterfaceDocument, options);
+        }
+export type CosmoInterfaceQueryHookResult = ReturnType<typeof useCosmoInterfaceQuery>;
+export type CosmoInterfaceLazyQueryHookResult = ReturnType<typeof useCosmoInterfaceLazyQuery>;
+export type CosmoInterfaceQueryResult = Apollo.QueryResult<CosmoInterfaceQuery, CosmoInterfaceQueryVariables>;
 export const AuthSignInDocument = gql`
     query AuthSignIn($authSignInUser: SignInInput!) {
   authSignIn(signInInput: $authSignInUser) {
