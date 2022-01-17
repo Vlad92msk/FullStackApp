@@ -14,7 +14,7 @@ export type FindArticleInputType = Pick<ArticleType, 'id' | 'title' | 'article'>
 @InputType({ description: 'Найти статью' })
 export class FindArticleInput implements FindArticleInputType {
   @Field({ nullable: true })
-  @IsNumber(null, { message: VALIDATE_MESSAGE.IS_NUMBER })
+  @IsNumber()
   id?: number
 
   @Field({ name: 'article', description: 'Текст стаьи', nullable: true })

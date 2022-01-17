@@ -27,12 +27,18 @@ export const Articles: React.FC<ArticlesType> = () => {
   const screenWidth = useScreenWidth()
   const router = useRouter()
 
+  /**
+   * Интерфейс
+   */
   const {
     data: { userInterfaceCosmoFindAll: userInterface } = {},
     loading: userInterfaceLoading,
-    error: userInterfaceError
+    error: userInterfaceError,
   } = useCosmoInterfaceQuery()
 
+  /**
+   * Статьи
+   */
   const {
     data: { articlesFindAll = [] } = {},
     loading: articlesFindAllLoading,
@@ -43,7 +49,7 @@ export const Articles: React.FC<ArticlesType> = () => {
    * Формирует URL и переходит по нему
    */
   const onOpenArticle = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    router.push(createString([CosmoPages.COSMO, CosmoPages.ARTICLES, e.currentTarget.id], '/'))
+    router.push(createString([router.query.lang, CosmoPages.COSMO, CosmoPages.ARTICLES, e.currentTarget.id], '/'))
   }, [router])
 
   const sliderMediaParam = useMemo(() => {

@@ -64,7 +64,7 @@ export const PostgreConstants = {
           name__base_articles: 'Article_ru',
         },
         en: {
-          rep__base_articles: 'REPOSITORY_ARTICLES_EN',
+          rep__base_articles: 'REPOSITORY__BASE_ARTICLES__EN',
           name__base_articles: 'Article_en'
         }
       }

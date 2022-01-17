@@ -1,16 +1,17 @@
 import React, { useCallback, useState, useContext } from 'react'
+import { useRouter } from 'next/router'
 import ReactTooltip from 'react-tooltip'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { EffectCube } from 'swiper/core'
 
+import SwiperCore, { EffectCube } from 'swiper/core'
 import { makeCn, storageGet, storageRemove } from '@shared/utils'
 import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@shared/components/IconButton'
 import { Modal } from '@shared/components/Modal'
 import { Text } from '@shared/components/Text'
 import { Option, Select } from '@shared/components/Select'
-import { ResponseApi } from '@shared/components/ResponseApi'
 
+import { ResponseApi } from '@shared/components/ResponseApi'
 import { useAuthSignOutMutation, useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
 import { ProjectLanguage } from '~client/pages/_app'
 import { User } from '~server/lib/connect/users/entitys/user.entity'
@@ -25,6 +26,7 @@ const cn = makeCn('AppMenu', styles)
 
 
 export const MenuApp = () => {
+  const { push } = useRouter()
   const {
     data: {
       userInterfacePortfolioFindAll: userInterface
@@ -37,7 +39,9 @@ export const MenuApp = () => {
    * Переключение языка
    */
   const { language, setLanguage } = useContext(ProjectLanguage)
-  const changeLang = useCallback((val) => setLanguage(val), [setLanguage])
+  const changeLang = useCallback(async (lang) =>
+      await push({ query: { lang } })
+    , [setLanguage])
 
   const [onHandleLogOut] = useAuthSignOutMutation()
 

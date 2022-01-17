@@ -1,20 +1,23 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { makeCn } from '@shared/utils'
-import { HoneycombMesh } from '~client/shared/components/HoneycombMesh'
-import { ROUTES_ALL } from '~client/projects/routesAll'
 import { Icon } from '@shared/components/Icon'
 import { Text } from '@shared/components/Text'
+
+import { HoneycombMesh } from '~client/shared/components/HoneycombMesh'
+import { ROUTES_ALL } from '~client/projects/routesAll'
+import { ProjectLanguage } from '~client/pages/_app'
 import styles from './MyProjects.module.scss'
 
 const cn = makeCn('MyProjects', styles)
 
 export const MyProjects: FC = () => {
   const router = useRouter()
+  const { language } = useContext(ProjectLanguage)
 
   const handleGoCosmo = useCallback(() => {
-    ROUTES_ALL && router.push(ROUTES_ALL.COSMO)
-  }, [router])
+    ROUTES_ALL && router.push(`/${language}/${ROUTES_ALL.COSMO}`)
+  }, [router, language])
 
   return <div className={cn()}>
     <Text className={cn('Title')} size={'8'} color={'title'} children={'Проекты'} />
