@@ -27,8 +27,15 @@ export const Token = createParamDecorator(
   }
 );
 
+
+export const languageVariants = ['ru', 'en']
+export const DEFAULT_LANGUAGE = 'ru'
+
 export const ProjectLanguage = createParamDecorator(
   (data: any, context: ExecutionContext): string => {
-    return GqlExecutionContext.create(context).getContext().req.headers.userlanguage || 'ru'
+    const userlanguage = GqlExecutionContext.create(context).getContext().req.headers.userlanguage
+    if (userlanguage !== 'undefined' && languageVariants.includes(userlanguage)) return userlanguage
+
+    return DEFAULT_LANGUAGE
   }
 );

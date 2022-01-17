@@ -1,32 +1,20 @@
 import React from 'react'
-import { NextPage, GetServerSideProps } from 'next'
-import { App } from '~client/projects/portfolio/containers/App'
-import { addApolloState, initializeApollo } from '~client/apolloSettings/apolloClient'
-import { FindAllSkillsDocument, FindAllSkillsQuery } from '~client/projects/gql-generated-hooks'
+import { GetServerSideProps, NextPage } from 'next'
+import { DEFAULT_LANGUAGE } from '~client/pages/_app'
 
-import { Page } from '@shared/components/page'
-import { makeCn } from '@shared/utils'
-import styles from '../../client/projects/portfolio/containers/App/App.module.scss'
+/**
+ * Корень проекта - Портфолио
+ * @constructor
+ */
+const Home: NextPage = () => <></>
+export const getServerSideProps: GetServerSideProps = async () => {
 
-const cn = makeCn('Application', styles)
-
-
-const Home: NextPage = () => {
-  return (
-    <Page page={'PORTFOLIO'}>
-      <App />
-    </Page>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
-  const apolloClient = initializeApollo()
-  const { data: { findAllSkills } } = await apolloClient.query<FindAllSkillsQuery>({ query: FindAllSkillsDocument })
-
-  return addApolloState(apolloClient, {
-    props: {
-      findAllSkills
-    }
+  return ({
+    redirect: {
+      destination: `/${DEFAULT_LANGUAGE}/portfolio`,
+      permanent: true
+    },
+    props: {}
   })
 }
 

@@ -22,8 +22,10 @@ export class ArticlesResolver {
 
   @Query(() => Article_ru, { description: 'Найти 1 статью по условию' })
   articlesFindOne(
+    @ProjectLanguage() language: LanguageSupported,
     @Args({ name: 'searchParam', type: () => FindArticleInput }) searchParam: FindArticleInput
-  ): MyObservable<Article_ru> {
-    return from(this.articlesService.findOneArticles(searchParam))
+  ) {
+   return from(this.articlesService.findOneArticles([language, searchParam]))
   }
+
 }

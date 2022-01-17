@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { ApolloClient, DataProxy, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { concatPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
@@ -32,16 +32,16 @@ const createApolloClient = (lang: string) => new ApolloClient({
   })
 
 
-export const initializeApollo = (lang?: string, initialState = null) => {
-  const languageStorage: string = lang || storageGet('userLanguage')
-
+export const initializeApollo = (lang: string, initialState = null) => {
   // @ts-ignore
   const prevStateLang = apolloClient && apolloClient.link.options?.headers.userLanguage
   /**
    * Если клиент есть и его язык равен тому, что выбрал пользователь - запускаем его
    * если нет - создаем новый клиент с актуальным языком
    */
-  const _apolloClient = (Boolean(apolloClient) && prevStateLang === languageStorage) ? apolloClient : createApolloClient(languageStorage)
+  const _apolloClient = (Boolean(apolloClient) && prevStateLang === lang) ? apolloClient : createApolloClient(lang)
+  // const _apolloClient = createApolloClient(lang)
+
   // Если уже есть данные
   if (initialState) {
     // Получить существующий кеш, загруженный во время выборки данных на стороне клиента

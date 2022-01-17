@@ -22,6 +22,11 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 //   )
 // }
 
+export const languageVariants = ['ru', 'en']
+export const DEFAULT_LANGUAGE = 'ru'
+
+export const isValidLanguage = (lang: any) => languageVariants.includes(String(lang))
+
 export const ProjectLanguage = React.createContext({
   language: '',
   setLanguage: null
@@ -29,7 +34,7 @@ export const ProjectLanguage = React.createContext({
 
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
-  const [language, setLanguage] = useState<string>(() => storageGet('userLanguage') ||'ru')
+  const [language, setLanguage] = useState<string>(() => storageGet('userLanguage') || DEFAULT_LANGUAGE)
 
   /**
    * Меняем язык в меню - меняем и в сторе

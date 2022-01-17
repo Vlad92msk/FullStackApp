@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
-import { catchError, from, of, switchMap } from 'rxjs'
+import { catchError, from, map, of, switchMap } from 'rxjs'
 
 import { createLanguageVariables, CreateLanguageVariablesType } from '~server/utils/createLanguageVariables'
 import { Article_en } from '~server/lib/cosmo/articles/entitys/articles_en.entity'
@@ -16,12 +16,11 @@ const { COSMO: { schemas: { ARTICLES } } } = PostgreConstants
 
 @Injectable()
 export class ArticlesService {
-  private readonly langVar:CreateLanguageVariablesType
+  private readonly langVar: CreateLanguageVariablesType
 
   constructor(
     @Inject(ARTICLES.ru.rep__base_articles)
     readonly articleRepository: Repository<Article_ru>,
-
     @Inject(ARTICLES.en.rep__base_articles)
     readonly articleRepository_en: Repository<Article_en>
   ) {
@@ -46,13 +45,15 @@ export class ArticlesService {
 
   /**
    * Найти 1 статью
-   * @param where
    */
-  public findOneArticles = (where: FindArticleInput): MyObservable<Article_ru> => from(
-    this.langVar['ru'].findOne(where)
+  public findOneArticles = ([language, where]: [LanguageSupported, FindArticleInput]): MyObservable<Article_ru> => from(
+    this.langVar[language].findOne({ where })
   ).pipe(
-    switchMap((data) => of(data)),
-    catchError((err) => catchErrorCustom(`${this.findOneArticles.name} - ${ArticleErrors.FIND_ONE_ARTICLES}`))
+    /**
+     * FIXME: убрать потом пустой объект и придумать как читать ошибку на клиенте если не находит нужного значения в БД
+     */
+    map((data: Article_ru) => data || ({ id: 0, article: '', title: '' })),
+    catchError((err) => catchErrorCustom(err))
   )
 
 
