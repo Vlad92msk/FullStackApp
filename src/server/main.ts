@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.use(cookieParser());
   app.enableCors();
-  await app.listen(process.env.LOCAL_HOST_NUMBER)
-  console.log(`Project is running running at: http://${process.env.LOCAL_HOST}${process.env.LOCAL_HOST_NUMBER}/`)
+  await app.listen(process.env.LOCAL_HOST_NUMBER || 3000)
+  console.log(`Project is running running at: http://${process.env.LOCAL_HOST}${process.env.LOCAL_HOST_NUMBER || 3000}/`)
 }
 
 bootstrap()
