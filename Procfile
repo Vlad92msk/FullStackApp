@@ -1,1 +1,1 @@
-web: node ./server/main
+web: node server/main
