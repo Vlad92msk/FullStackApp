@@ -14,7 +14,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>
 const createApolloClient = (lang: string) => new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: `http://localhost:3000/graphql`,
+      uri: `http://${process.env.HOST}:${process.env.PORT}/graphql`,
       // credentials: 'same-origin',
       headers: {
         userLanguage: lang

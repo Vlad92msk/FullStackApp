@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
-import { Connection, ConnectionOptions, createConnection, EntitySchema } from 'typeorm'
+import { Connection, createConnection } from 'typeorm'
 import { config } from 'dotenv'
 config()
 
@@ -16,7 +16,6 @@ const defaultOptions: TypeOrmModuleOptions  = {
 type createDbProviderType = {
   provide: string
   dbName: string
-  entities?: (string | Function | EntitySchema<any>)[]
 }
 
 type Provider = {
@@ -24,7 +23,7 @@ type Provider = {
   useFactory: () => Promise<Connection>
 }
 
-export const createDbProvider = ({ provide, dbName, entities}: createDbProviderType): Provider => ({
+export const createDbProvider = ({ provide, dbName }: createDbProviderType): Provider => ({
   provide,
   useFactory: async () =>
     await createConnection({
@@ -33,6 +32,5 @@ export const createDbProvider = ({ provide, dbName, entities}: createDbProviderT
       name: dbName,
       database: dbName,
       entities: [`dist/server/lib/${dbName}/**/entitys/*.entity{.ts,.js}`],
-      // entities,
     }),
 })

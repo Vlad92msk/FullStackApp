@@ -9,14 +9,14 @@ const { CONNECT_DB, COSMO, PORTFOLIO } = PostgreConstants
 export const databaseProviders = [
   createDbProvider({
     provide: CONNECT_DB.connect,
-    dbName: process.env.POSTGRES_DB_NAME
+    dbName: 'connect',
   }),
   createDbProvider({
     provide: PORTFOLIO.connect,
-    dbName: process.env.POSTGRES_DB_PORTFOLIO
+    dbName: 'portfolio',
   }),
   createDbProvider({
     provide: COSMO.connect,
-    dbName: process.env.POSTGRES_DB_COSMO
+    dbName: 'cosmo',
   })
 ]
