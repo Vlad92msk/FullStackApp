@@ -1,8 +1,9 @@
-FROM node:14-alpine
-RUN npm install --global yarn
+FROM node:16.13.0-alpine
 WORKDIR /app
 ADD package.json package.json
-RUN yarn --production
+ADD yarn.lock yarn.lock
+RUN yarn
 ADD . .
+
 RUN yarn build
-CMD ["node", ".dist/server/main.js"]
+#CMD ["node", "/app/dist/server/main.js"]
