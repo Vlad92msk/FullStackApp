@@ -4,40 +4,44 @@ services:
     image: postgres:14-alpine
     container_name: postgres
     ports:
-      - "5432:5432"
+      - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
     volumes:
-      - ./pg_data:/var/lib/postgresql/data/pgdata
+      - ./pg_data:/var/lib/postgresql/data
     environment:
-      PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_DB: main_db
-      POSTGRES_USER: vlad
-      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_USER: ${POSTGRES_DB_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD}
     restart: always
 
   app:
-    image: portfolio_app
-    container_name: app
-    environment:
-      HOST: localhost
-      PORT: 3000
-      POSTGRES_DB_HOST: localhost
-      POSTGRES_DB_PORT: 5432
-      POSTGRES_DB_USERNAME: vlad
-      POSTGRES_DB_PASSWORD: password
-    ports:
-      - "3000:3000"
     links:
       - postgres
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
     restart: always
-
-
-  nginx:
-    image: nginx:1.17.1-alpine
-    container_name: nginx
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      POSTGRES_DB_HOST: postgres
+      POSTGRES_DB_PORT: ${POSTGRES_DB_PORT}
+      POSTGRES_DB_USERNAME: ${POSTGRES_DB_USERNAME}
+      POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
     ports:
-      - "80:8000"
-    links:
-      - app
+      - ${PORT}:${PORT}
 
+
+#  nginx:
+#    image: nginx:1.17.1-alpine
+#    container_name: nginx
+#    volumes:
+#      - ./default.conf:/etc/nginx/conf.d/default.conf
+#    ports:
+#      - "8000:8000"
+#    links:
+#      - app
+#    depends_on:
+#      - app

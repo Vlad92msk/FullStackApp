@@ -31,6 +31,6 @@ export const createDbProvider = ({ provide, dbName }: createDbProviderType): Pro
       type: 'postgres',
       name: dbName,
       database: dbName,
-      entities: [`dist/server/lib/${dbName}/**/entitys/*.entity{.ts,.js}`],
+      entities: [__dirname + `/../lib/${dbName}/**/entitys/*.entity{.ts,.js}`],
     }),
 })

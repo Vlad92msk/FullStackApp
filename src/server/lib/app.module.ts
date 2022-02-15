@@ -21,8 +21,8 @@ import { CosmoModule } from '~server/lib/cosmo/cosmo.module'
     }),
     ConnectModule,
     PortfolioModule,
-    NextStartModule,
-    CosmoModule
+    CosmoModule,
+    NextStartModule
   ],
 })
 export class AppModule {
