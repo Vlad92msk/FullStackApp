@@ -1,4 +1,4 @@
-FROM alpine
+FROM node:16.13.0-alpine
 RUN apk add git \
     && apk add yarn \
     && git clone https://github.com/Vlad92msk/FullStackApp.git \
