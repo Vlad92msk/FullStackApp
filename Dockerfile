@@ -1,11 +1,12 @@
-FROM node:16.13.0-alpine
+FROM alpine
 RUN apk add git \
+    && apk add yarn \
     && git clone https://github.com/Vlad92msk/FullStackApp.git \
-    && cd FullStackApp \
-    && yarn
+    && cd ./FullStackApp \
+    && yarn \
+    && yarn build
 
-WORKDIR ./FullStackApp
-RUN yarn build
-CMD ["node", "/FullStackApp/dist/server/main.js"]
+WORKDIR ./FullStackApp_v2/server
+CMD yarn start:prod
 
-EXPOSE 3000
+EXPOSE ${APP_PORT}

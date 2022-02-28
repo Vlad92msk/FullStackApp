@@ -36,3 +36,7 @@ lerna-debug.log*
 
 # files
 .env
+.env.prod
+
+/database
+/pgadmin
