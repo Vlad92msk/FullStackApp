@@ -15,8 +15,11 @@ async function bootstrap() {
   const port = Number(config.get<number>('main.port'))
   const host = String(config.get<string>('main.host'))
 
-  await app.listen(port, () => {
-    console.log(`Сервер доступен - http://${host}:${port}/graphql`)
+  // await app.listen(port, () => {
+  //   console.log(`Сервер доступен - http://${host}:${port}/graphql`)
+  // })
+  await app.listen(4000, () => {
+    console.log(`Сервер доступен - http://localhost:4000/graphql`)
   })
 }
 

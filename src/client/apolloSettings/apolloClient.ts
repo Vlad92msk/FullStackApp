@@ -12,13 +12,12 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 const uri = `http://${process.env.APP_HOST}:${process.env.APP_PORT}/graphql`
-console.log('uri', uri)
 
 const createApolloClient = (userLanguage: string) => new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       headers: { userLanguage },
-      uri
+      uri: `http://localhost:4000/graphql`
     }),
     cache: new InMemoryCache({
       typePolicies: {
