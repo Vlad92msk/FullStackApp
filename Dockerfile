@@ -6,7 +6,7 @@ RUN apk add git \
     && yarn \
     && yarn build
 
-WORKDIR ./FullStackApp_v2/server
-CMD yarn start:prod
+WORKDIR /FullStackApp
+CMD ["node", "dist/server/main.js"]
 
 EXPOSE ${APP_PORT}
