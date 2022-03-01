@@ -1,10 +1,10 @@
 import { Resolver, Query, Args } from '@nestjs/graphql'
 import { from } from 'rxjs'
 
-import { LanguageSupported, MyObservable } from '~server/types'
-import { Article_ru } from '~server/lib/cosmo/articles/entitys/articles.entity'
-import { FindArticleInput } from '~server/lib/cosmo/articles/inputs/find-article.input'
-import { ProjectLanguage } from '~server/lib/connect/users/decorators/user.decorator'
+import { LanguageSupported, MyObservable } from '@server/types'
+import { Article_ru } from '@server_lib/cosmo/articles/entitys/articles.entity'
+import { FindArticleInput } from '@server_lib/cosmo/articles/inputs/find-article.input'
+import { ProjectLanguage } from '@server_lib/connect/users/decorators/user.decorator'
 import { ArticlesService } from './articles.service'
 
 @Resolver(() => Article_ru)

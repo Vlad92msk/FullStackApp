@@ -1,13 +1,13 @@
 import React from 'react'
-import { Icon } from '@shared/components/Icon'
-import { IconButton } from '@shared/components/IconButton'
-import { makeCn } from '@shared/utils'
-import { Text } from '@shared/components/Text'
-import { ResponseApi } from '@shared/components/ResponseApi'
 
-import { useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
+import { Icon } from '@client_shared/components/Icon'
+import { IconButton } from '@client_shared/components/IconButton'
+import { makeCn } from '@client_shared/utils'
+import { Text } from '@client_shared/components/Text'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { useCosmoInterfaceQuery } from '@client_projects/gql-generated-hooks'
+
 import styles from './VideoFilters.module.scss'
-
 const cn = makeCn('Filters', styles)
 
 

@@ -1,5 +1,5 @@
-import { RouteParam } from '~public/models/route'
-import { createProjectRoutesData, currentProjectRoutesObject } from '@shared/utils/createProjectRoutesData'
+import { RouteParam } from '@client_public/models/route'
+import { createProjectRoutesData, currentProjectRoutesObject } from '@client_shared/utils/createProjectRoutesData'
 
 export enum RoleEnum {
   admin = 'admin',

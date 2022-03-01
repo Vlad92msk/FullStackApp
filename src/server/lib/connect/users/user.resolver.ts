@@ -2,13 +2,13 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql'
 import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
 import { from, Observable } from 'rxjs'
 
+import { UpdateUserRolesInput } from '@server_lib/connect/users/inputs/update-userRoles.input'
+import { User } from '@server_lib/connect/users/entitys/user.entity'
 import { UserService } from './user.service'
 import { CreateUsersInput } from './inputs/create-user.input'
 import { UpdateUserInput } from './inputs/update-user.input'
 import { FindUserInput } from './inputs/find-user.input'
 import { AuthGuard } from '../auth/guards/auth-guard'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
-import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
 
 @UsePipes(new ValidationPipe())
 @Resolver(() => User)

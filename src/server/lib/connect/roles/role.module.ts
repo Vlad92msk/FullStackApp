@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
-import { DatabaseModule } from '~server/db/db.module'
+
+import { UserService } from '@server_lib/connect/users/user.service'
+import { DatabaseModule } from '@server_db/db.module'
 import { RolesProviders } from './providers/role.providers'
 import { RoleService } from './role.service'
 import { RoleResolver } from './role.resolver'
-import { UserService } from '~server/lib/connect/users/user.service'
 
 @Module({
   imports: [DatabaseModule],

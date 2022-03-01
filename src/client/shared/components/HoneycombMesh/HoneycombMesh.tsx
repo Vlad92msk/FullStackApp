@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useEffect, useState } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '@shared/utils'
-import styles from './HoneycombMesh.module.scss'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './HoneycombMesh.module.scss'
 const cn = makeCn('HoneycombMesh', styles)
 
 interface HoneycombMeshType {

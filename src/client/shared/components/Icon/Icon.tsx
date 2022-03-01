@@ -1,10 +1,10 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { IconName } from '~public/models/icon.model'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '../../utils'
-import styles from './Icon.module.scss'
+import { IconName } from '@client_public/models/icon.model'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './Icon.module.scss'
 const cn = makeCn('Icon', styles)
 
 export type IconFill = 'oldAsphalt50' | 'oldAsphalt40' | 'bluePrimrose50' | 'light100' | 'redRose40'

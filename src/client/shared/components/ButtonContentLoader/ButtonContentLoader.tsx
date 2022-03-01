@@ -1,9 +1,8 @@
 import React from 'react';
 import { classnames } from '@bem-react/classnames';
+import { makeCn } from '@client_shared/utils'
 
 import styles from './ButtonContentLoader.module.scss';
-import { makeCn } from '@shared/utils'
-
 const cn = makeCn('ButtonContentLoader', styles);
 
 

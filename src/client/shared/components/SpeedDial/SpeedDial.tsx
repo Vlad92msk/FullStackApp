@@ -1,12 +1,14 @@
 import React, { FC, useCallback, useEffect, useState } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { FieldRow } from '@shared/components/FieldRow'
-import { makeCn } from '@shared/utils'
-import styles from './SpeedDial.module.scss'
-import { IconName } from '~public/models/icon.model'
-import { IconButton } from '@shared/components/IconButton'
 
+import { FieldRow } from '@client_shared/components/FieldRow'
+import { makeCn } from '@client_shared/utils'
+import { IconName } from '@client_public/models/icon.model'
+import { IconButton } from '@client_shared/components/IconButton'
+
+import styles from './SpeedDial.module.scss'
 const cn = makeCn('SpeedDial', styles)
+
 
 interface SpeedDialType {
   className?: string

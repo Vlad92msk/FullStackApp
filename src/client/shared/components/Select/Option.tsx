@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { classnames } from '@bem-react/classnames'
+
+import { IconName } from '@client_public/models/icon.model'
+import { Icon } from '@client_shared/components/Icon'
+import { Text } from '@client_shared/components/Text'
+import { Checkbox } from '@client_shared/components/Checkbox'
 import { OptionValue } from './model'
-import { cn } from './cn'
 import { Context } from './Context'
-import { IconName } from '~public/models/icon.model'
-import { Icon } from '@shared/components/Icon'
-import { Text } from '@shared/components/Text'
-import { Checkbox } from '@shared/components/Checkbox'
+import { cn } from './cn'
+
 
 export interface OptionProps {
   className?: string

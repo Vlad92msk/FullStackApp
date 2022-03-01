@@ -1,15 +1,16 @@
 import React, { FC, useCallback, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { makeCn } from '@shared/utils'
-import { Icon } from '@shared/components/Icon'
-import { Text } from '@shared/components/Text'
 
-import { HoneycombMesh } from '~client/shared/components/HoneycombMesh'
-import { ROUTES_ALL } from '~client/projects/routesAll'
-import { ProjectLanguage } from '~client/pages/_app'
+import { makeCn } from '@client_shared/utils'
+import { Icon } from '@client_shared/components/Icon'
+import { Text } from '@client_shared/components/Text'
+import { HoneycombMesh } from '@client_shared/components/HoneycombMesh'
+import { ROUTES_ALL } from '@client_projects/routesAll'
+import { ProjectLanguage } from '@client_pages/_app'
+
 import styles from './MyProjects.module.scss'
-
 const cn = makeCn('MyProjects', styles)
+
 
 export const MyProjects: FC = () => {
   const router = useRouter()

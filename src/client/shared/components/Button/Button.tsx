@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box';
 import { classnames } from '@bem-react/classnames';
-import { IconName } from '~public/models/icon.model'
-import { Icon } from '@shared/components/Icon'
-import { ButtonContentLoader } from '@shared/components/ButtonContentLoader'
 
-import { makeCn } from '../../utils'
+import { ButtonContentLoader } from '@client_shared/components/ButtonContentLoader'
+import { IconName } from '@client_public/models/icon.model'
+import { Icon } from '@client_shared/components/Icon'
+import { makeCn } from '@client_shared/utils'
+
 import styles from './Button.module.scss';
-
 const cn = makeCn('Button', styles);
 
 export type ButtonStyleType = 'filled' | 'rounded';

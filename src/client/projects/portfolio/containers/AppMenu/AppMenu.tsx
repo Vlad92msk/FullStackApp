@@ -2,27 +2,23 @@ import React, { useCallback, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 import ReactTooltip from 'react-tooltip'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
 import SwiperCore, { EffectCube } from 'swiper/core'
-import { makeCn, storageGet, storageRemove } from '@shared/utils'
-import { SpeedDial } from '@shared/components/SpeedDial/SpeedDial'
-import { IconButton } from '@shared/components/IconButton'
-import { Modal } from '@shared/components/Modal'
-import { Text } from '@shared/components/Text'
-import { Option, Select } from '@shared/components/Select'
 
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { useAuthSignOutMutation, useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
-import { ProjectLanguage } from '~client/pages/_app'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
-import { LocalStorageEnum } from '~public/models/localStorage'
+import { useAuthSignOutMutation, useFindInterfaceQuery, User } from '@client_projects/gql-generated-hooks'
+import { makeCn, storageGet, storageRemove } from '@client_shared/utils'
+import { SpeedDial } from '@client_shared/components/SpeedDial/SpeedDial'
+import { IconButton } from '@client_shared/components/IconButton'
+import { Modal } from '@client_shared/components/Modal'
+import { Text } from '@client_shared/components/Text'
+import { Option, Select } from '@client_shared/components/Select'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { ProjectLanguage } from '@client_pages/_app'
+import { LocalStorageEnum } from '@client_public/models/localStorage'
 import { SignInForm, SignUpForm } from './components'
+
 import styles from './AppMenu.module.scss'
-
-SwiperCore.use([EffectCube])
-
-
 const cn = makeCn('AppMenu', styles)
+SwiperCore.use([EffectCube])
 
 
 export const MenuApp = () => {

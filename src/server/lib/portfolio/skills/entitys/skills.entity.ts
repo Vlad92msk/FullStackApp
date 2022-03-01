@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
-import { IconName } from '~public/models/icon.model'
+
+import { IconName } from '@client_public/models/icon.model'
 import { Specialty } from '../interfaces/specialty'
 
 @ObjectType()

@@ -1,4 +1,4 @@
-import { LanguageSupported } from '~server/types'
+import { LanguageSupported } from '@server/types'
 import { Repository } from 'typeorm'
 
 export const createLanguageVariables = (lags: LanguageSupported[], repos: Repository<any>[]) => {

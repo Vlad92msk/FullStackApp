@@ -1,12 +1,13 @@
 import React from 'react'
-import { MenuApp } from '~client/projects/portfolio/containers/AppMenu'
+
+import { MenuApp } from '@client_projects/portfolio/containers/AppMenu'
+import { Section } from '@client_shared/components/Section'
+import { makeCn } from '@client_shared/utils'
 import { InfoAboutMe } from '../InfoAboutMe'
 import { InfoAboutMySkills } from '../InfoAboutMySkills'
 import { Person } from '../Person'
-import { Section } from '@shared/components/Section'
-import { makeCn } from '@shared/utils'
-import styles from './App.module.scss'
 
+import styles from './App.module.scss'
 const cn = makeCn('Application', styles)
 
 export const App = () => {

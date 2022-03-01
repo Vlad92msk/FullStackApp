@@ -1,15 +1,16 @@
 import React, { Children, isValidElement, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { classnames } from '@bem-react/classnames'
+
+import { Text, TextSize } from '@client_shared/components/Text'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { Icon } from '@client_shared/components/Icon'
+import { TextInput } from '@client_shared/components/TextInput'
+import { BlockContentLoader } from '@client_shared/components/BlockContentLoader'
+import { Popup } from '@client_shared/components/Popup'
 import { OptionValue, SelectValue, Tokenfield } from './model'
-import { cn } from './cn'
-import { Context } from './Context'
 import { OptionProps } from './Option'
-import { Text, TextSize } from '@shared/components/Text'
-import { ButtonBox } from '@shared/components/ButtonBox'
-import { Icon } from '@shared/components/Icon'
-import { TextInput } from '@shared/components/TextInput'
-import { BlockContentLoader } from '@shared/components/BlockContentLoader'
-import { Popup } from '@shared/components/Popup'
+import { Context } from './Context'
+import { cn } from './cn'
 
 export interface SelectProps {
   className?: string

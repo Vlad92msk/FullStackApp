@@ -3,20 +3,19 @@ import lodash from 'lodash'
 import { classnames } from '@bem-react/classnames'
 import { Tab, Tabs } from '@material-ui/core'
 
-import { Modal } from '@shared/components/Modal'
-import { Text } from '@shared/components/Text'
-import { Section } from '@shared/components/Section'
-import { useBooleanState } from '@shared/hooks'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { makeCn } from '@shared/utils'
-
+import { Modal } from '@client_shared/components/Modal'
+import { Text } from '@client_shared/components/Text'
+import { Section } from '@client_shared/components/Section'
+import { useBooleanState } from '@client_shared/hooks'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { makeCn } from '@client_shared/utils'
+import { useCosmoInterfaceQuery } from '@client_projects/gql-generated-hooks'
+import { section } from '@client_projects/cosmo/moduleGeneralCN'
 import { VideoFilters, NewAddVideos } from '../../components'
 
-import { useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
-import { section } from '~client/projects/cosmo/moduleGeneralCN'
 import styles from './VideoContent.module.scss'
-
 const cn = makeCn('VideoContent', styles)
+
 
 const baseUrl = 'https://www.youtube.com/embed/'
 

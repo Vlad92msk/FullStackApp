@@ -2,16 +2,16 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import SpeedDial from '@material-ui/lab/SpeedDial'
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
-import { makeCn } from '@shared/utils'
-import { useBooleanState } from '@shared/hooks'
-import { Icon } from '@shared/components/Icon'
+
+import { socialStyles } from '@client_projects/cosmo/containers/Header/components/Social/materialUI'
+import { makeCn } from '@client_shared/utils'
+import { useBooleanState } from '@client_shared/hooks'
+import { Icon } from '@client_shared/components/Icon'
 
 import styles from './Social.module.scss'
-import { socialStyles } from '~client/projects/cosmo/containers/Header/components/Social/materialUI'
-
-
 const cn = makeCn('Social', styles)
 const useStyles = makeStyles(() => socialStyles)
+
 
 const socialLinks = [
   {

@@ -1,13 +1,14 @@
 import React from 'react'
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '../../utils'
+
+import { makeCn } from '@client_shared/utils'
+import { IconName } from '@client_public/models/icon.model'
+import { Icon, IconFill } from '@client_shared/components/Icon'
 
 import styles from './IconButton.module.scss'
-import { IconName } from '~public/models/icon.model'
-import { Icon, IconFill } from '@shared/components/Icon'
-
 const cn = makeCn('IconButton', styles)
+
 
 export interface ButtonOwnProps {
   className?: string

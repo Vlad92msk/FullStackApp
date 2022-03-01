@@ -1,8 +1,8 @@
 import React from 'react'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '@shared/utils'
-import styles from './FieldRow.module.scss'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './FieldRow.module.scss'
 const cn = makeCn('FieldRow', styles)
 
 export interface FieldRowProps {

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { Icon } from '@shared/components/Icon'
-import { Popper } from '@shared/components/Popper'
+import { Icon } from '@client_shared/components/Icon'
+import { Popper } from '@client_shared/components/Popper'
 import { cn } from './cn'
 
 export interface ModalProps {

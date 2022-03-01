@@ -1,6 +1,6 @@
 import { values } from 'lodash'
-import { ProjectNormalizeObject, RouteParam, RouteParamWithoutSubRoutes } from '~public/models/route'
-import { toObjectData } from '@shared/utils/toObjectData'
+import { ProjectNormalizeObject, RouteParam, RouteParamWithoutSubRoutes } from '@client_public/models/route'
+import { toObjectData } from '@client_shared/utils/toObjectData'
 
 /**
  * Рекурсивно достает инф. из суб-роутов если они есть

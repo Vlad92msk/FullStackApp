@@ -1,11 +1,13 @@
 import React, { useCallback, useRef } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '@shared/utils'
-import { ButtonBox } from '@shared/components/ButtonBox'
-import { Icon } from '@shared/components/Icon'
-import styles from './Checkbox.module.scss'
 
+import { makeCn } from '@client_shared/utils'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { Icon } from '@client_shared/components/Icon'
+
+import styles from './Checkbox.module.scss'
 const cn = makeCn('Checkbox', styles)
+
 
 export interface CheckboxProps {
   className?: string

@@ -1,10 +1,11 @@
 import React from 'react'
 import { classnames } from '@bem-react/classnames'
-import { createString } from '@shared/utils/createString'
-import { makeCn } from '../../utils'
+import { createString } from '@client_shared/utils/createString'
+import { makeCn } from '@client_shared/utils'
 
 import styles from './Image.module.scss'
 const cn = makeCn('Image', styles)
+
 
 export interface ImagePath {
   project?: string

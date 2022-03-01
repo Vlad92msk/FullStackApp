@@ -1,5 +1,5 @@
-import { PostgreConstants } from '~server/db/db.constants'
-import { createProvider } from '~server/utils'
+import { PostgreConstants } from '@server_db/db.constants'
+import { createProvider } from '@server_utils/createProvider.utils'
 
 
 const { PORTFOLIO: { connect, repository, skills } } = PostgreConstants

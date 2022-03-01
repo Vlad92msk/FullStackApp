@@ -1,12 +1,13 @@
 import { Injectable, NestMiddleware } from '@nestjs/common'
+import { NextFunction, Request } from 'express'
 import { Response } from 'express'
 import * as moment from 'moment'
 import { config } from 'dotenv'
-import { UserService } from '~server/lib/connect/users/user.service'
-import { NextFunction, Request } from 'express'
-import { TokenService } from '~server/lib/connect/tokens/token.service'
-import { getNestCookie } from '~server/utils/getNestCookie'
-import { CookieEnum } from '~server/lib/connect/auth/types/cookie'
+
+import { UserService } from '@server_lib/connect/users/user.service'
+import { TokenService } from '@server_lib/connect/tokens/token.service'
+import { getNestCookie } from '@server_utils/getNestCookie'
+import { CookieEnum } from '@server_lib/connect/auth/types/cookie'
 
 config()
 

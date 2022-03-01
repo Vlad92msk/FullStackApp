@@ -2,12 +2,13 @@ import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { classnames } from '@bem-react/classnames'
 
-import { ErrorFallBack } from '@shared/components/ErrorFallBack'
-import { makeCn } from '@shared/utils'
-import { Image, ImageType } from '@shared/components/Image'
-import styles from './Section.module.scss'
+import { ErrorFallBack } from '@client_shared/components/ErrorFallBack'
+import { Image, ImageType } from '@client_shared/components/Image'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './Section.module.scss'
 const cn = makeCn('Base', styles)
+
 
 type SectionType = {
   className?: string

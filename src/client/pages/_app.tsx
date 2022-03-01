@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from '../apolloSettings/apolloClient'
 import { NextPage } from 'next'
-import { storageGet, storageSet } from '@shared/utils'
+
+import { useApollo } from '../apolloSettings/apolloClient'
+import { ApolloProvider } from '@apollo/client'
+import { storageGet, storageSet } from '@client_shared/utils'
 import '~public/styles/base.scss'
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'

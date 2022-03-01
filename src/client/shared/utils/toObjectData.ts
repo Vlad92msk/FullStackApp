@@ -1,4 +1,4 @@
-import { DefaultObject } from '~public/models/defaultObject.model'
+import { DefaultObject } from '@client_public/models/defaultObject.model'
 
 /**
  * @description - Массив объектов переводит в объект с клюем по элементу

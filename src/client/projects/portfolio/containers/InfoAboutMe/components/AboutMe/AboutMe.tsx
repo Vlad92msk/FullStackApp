@@ -1,14 +1,15 @@
 import React from 'react'
-import { makeCn } from '@shared/utils'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { FieldRow } from '@shared/components/FieldRow'
-import { Text } from '@shared/components/Text'
-import { Line } from '@shared/components/Line'
-import { useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
+
+import { useFindInterfaceQuery } from '@client_projects/gql-generated-hooks'
+import { makeCn } from '@client_shared/utils'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { FieldRow } from '@client_shared/components/FieldRow'
+import { Text } from '@client_shared/components/Text'
+import { Line } from '@client_shared/components/Line'
+
 import styles from './AboutMe.module.scss'
-
-
 const cn = makeCn('AboutMe', styles)
+
 
 export const AboutMe: React.FC = () => {
   const {

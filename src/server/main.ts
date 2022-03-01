@@ -2,7 +2,7 @@ import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import * as cookieParser from 'cookie-parser'
 import { config } from 'dotenv'
-import { AppModule } from '~server/lib/app.module'
+import { AppModule } from '@server_lib/app.module'
 
 config()
 
@@ -16,7 +16,7 @@ async function bootstrap() {
   const host = String(config.get<string>('main.host'))
 
   await app.listen(port, () => {
-    console.log(`Сервер доступен - http://${host}:${port}/graphql`)
+    console.log(`Сервер доступен - http://${host}:${port}`)
   })
 
 }

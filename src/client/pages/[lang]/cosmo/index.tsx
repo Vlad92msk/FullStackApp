@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
-import { App } from '~client/projects/cosmo/containers/App'
-import { Page } from '@shared/components/page'
+import { App } from '@client_projects/cosmo/containers/App'
+import { Page } from '@client_shared/components/page'
 
 
 const Index: NextPage = () => (

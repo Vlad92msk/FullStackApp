@@ -4,12 +4,12 @@ import { GraphQLError } from 'graphql'
 import * as bcrypt from 'bcrypt'
 import * as moment from 'moment'
 
+import { User } from '@server_lib/connect/users/entitys/user.entity'
 import { UserService } from '../users/user.service'
 import { TokenService } from '../tokens/token.service'
 import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { StatusEnum } from '../users/interfaces/status'
 import { SignInInput } from './inputs/signIn.input'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
 
 @Injectable()
 export class AuthService {

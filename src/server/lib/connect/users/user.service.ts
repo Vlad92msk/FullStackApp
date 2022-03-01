@@ -3,16 +3,17 @@ import { Repository } from 'typeorm'
 import { GraphQLError } from 'graphql'
 import * as bcrypt from 'bcrypt'
 
-import { PostgreConstants } from '~server/db/db.constants'
+import { User } from '../../connect/users/entitys/user.entity'
+import { RoleService } from '../../connect/roles/role.service'
+import { RoleEnum } from '../../connect/roles/interfaces/role'
+import { UpdateUserRolesInput } from '../../connect/users/inputs/update-userRoles.input'
+import { userErrors } from '../../connect/users/errors'
+import { PostgreConstants } from '@server_db/db.constants'
 import { StatusEnum } from './interfaces/status'
 import { CreateUsersInput } from './inputs/create-user.input'
 import { UpdateUserInput } from './inputs/update-user.input'
 import { FindUserInput } from './inputs/find-user.input'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
-import { RoleService } from '~server/lib/connect/roles/role.service'
-import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
-import { UpdateUserRolesInput } from '~server/lib/connect/users/inputs/update-userRoles.input'
-import { userErrors } from '~server/lib/connect/users/errors'
+
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloError } from '@apollo/client'
-import { Loader } from '@shared/components/Loader'
+import { Loader } from '@client_shared/components/Loader'
 
 interface ResponseApiType {
   status: boolean[]

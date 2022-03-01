@@ -3,21 +3,19 @@ import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper/core'
 
-import { makeCn } from '@shared/utils'
-import { Section } from '@shared/components/Section'
-import { createString } from '@shared/utils/createString'
-import { useScreenWidth } from '@shared/hooks'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { Text } from '@shared/components/Text'
+import { makeCn } from '@client_shared/utils'
+import { Section } from '@client_shared/components/Section'
+import { createString } from '@client_shared/utils/createString'
+import { useScreenWidth } from '@client_shared/hooks'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { Text } from '@client_shared/components/Text'
+import { useArticlesFindAllQuery, useCosmoInterfaceQuery } from '@client_projects/gql-generated-hooks'
+import { MediaQueries } from '@client_public/models/mediaQueries'
+import { CosmoPages } from '@client_projects/cosmo/router'
+import { section } from '@client_projects/cosmo/moduleGeneralCN'
 
-import { MediaQueries } from '~public/models/mediaQueries'
-import { CosmoPages } from '~client/projects/cosmo/router'
-import { section } from '~client/projects/cosmo/moduleGeneralCN'
 import styles from './Articles.module.scss'
-import { useArticlesFindAllQuery, useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
-
 const cn = makeCn('Articles', styles)
-
 SwiperCore.use([Navigation])
 
 

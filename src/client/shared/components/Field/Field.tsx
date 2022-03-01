@@ -1,12 +1,14 @@
 import React from 'react'
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '@shared/utils'
-import { Text, TextSize } from '@shared/components/Text'
-import { Icon } from '@shared/components/Icon'
-import styles from './Field.module.scss'
 
+import { makeCn } from '@client_shared/utils'
+import { Text, TextSize } from '@client_shared/components/Text'
+import { Icon } from '@client_shared/components/Icon'
+
+import styles from './Field.module.scss'
 const cn = makeCn('Field', styles)
+
 
 export interface FieldOwnProps {
   className?: string

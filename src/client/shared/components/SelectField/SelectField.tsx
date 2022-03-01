@@ -1,6 +1,6 @@
 import React from 'react'
+import { Field, FieldProps } from '@client_shared/components/Field'
 import { Select } from '../Select'
-import { Field, FieldProps } from '@shared/components/Field'
 
 export type SelectFieldProps = FieldProps<typeof Select>
 

@@ -1,4 +1,4 @@
-import { RoleEnum } from '~server/lib/connect/roles/interfaces/role'
+import { RoleEnum } from '@server/lib/connect/roles/interfaces/role'
 
 /**
  * Содержимое Роута

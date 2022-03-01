@@ -5,14 +5,12 @@ import * as yup from 'yup'
 import { TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { makeCn } from '@shared/utils'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { Button } from '@shared/components/Button'
-import { useAuthSignUpMutation, useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
-
-import { CreateUsersInput } from '~server/lib/connect/users/inputs/create-user.input'
-import { formStyles } from '~public/styles/materialUI'
-import { FormEnums } from '~public/models/formEnums'
+import { useAuthSignUpMutation, useFindInterfaceQuery, CreateUsersInput } from '@client_projects/gql-generated-hooks'
+import { makeCn } from '@client_shared/utils'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { Button } from '@client_shared/components/Button'
+import { formStyles } from '@client_public/styles/materialUI'
+import { FormEnums } from '@client_public/models/formEnums'
 import styles from './SignUpForm.module.scss'
 
 

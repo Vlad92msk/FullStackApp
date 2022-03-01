@@ -1,6 +1,6 @@
 import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import { DEFAULT_LANGUAGE } from '~client/pages/_app'
+import { DEFAULT_LANGUAGE } from '@client_pages/_app'
 
 /**
  * Корень проекта - Портфолио

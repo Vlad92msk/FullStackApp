@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react'
-import { makeCn } from '@shared/utils'
-import { Text } from '@shared/components/Text'
-import { Icon } from '@shared/components/Icon'
 
+import { useFindInterfaceQuery } from '@client_projects/gql-generated-hooks'
+import { makeCn } from '@client_shared/utils'
+import { Text } from '@client_shared/components/Text'
+import { Icon } from '@client_shared/components/Icon'
+import { IconName } from '@client_public/models/icon.model'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
 import { MySkills } from './components'
-import { IconName } from '~public/models/icon.model'
-import styles from './InfoAboutMySkills.module.scss'
-import { useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
-import { ResponseApi } from '@shared/components/ResponseApi'
 
+import styles from './InfoAboutMySkills.module.scss'
 const cn = makeCn('InfoAboutMySkills', styles)
 
 

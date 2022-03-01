@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { AuthGuard, AuthGuardType } from '@shared/containers/AuthGuard'
-import { languageVariants, ProjectLanguage } from '~client/pages/_app'
+import { AuthGuard, AuthGuardType } from '@client_shared/containers/AuthGuard'
+import { languageVariants, ProjectLanguage } from '@client_pages/_app'
 
 export interface PageType extends AuthGuardType {
   title?: string

@@ -2,10 +2,10 @@ import { Inject, Injectable } from '@nestjs/common'
 import { GraphQLError } from 'graphql'
 import { Repository } from 'typeorm'
 
-import { PostgreConstants } from '~server/db/db.constants'
+import { PostgreConstants } from '@server_db/db.constants'
 import { CreateRoleInput } from './inputs/create-role.input'
-import { Role } from '~server/lib/connect/roles/entitys/role.entity'
-import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
+import { Role } from '../../connect/roles/entitys/role.entity'
+import { FindRoleInput } from '../../connect/roles/inputs/find-role.input'
 
 @Injectable()
 export class RoleService {

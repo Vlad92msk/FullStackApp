@@ -1,17 +1,16 @@
 import React from 'react'
 import { classnames } from '@bem-react/classnames'
 
-import { makeCn } from '@shared/utils'
-import { Section } from '@shared/components/Section'
-import { WriteText } from '@shared/components/WriteText'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { Image } from '@shared/components/Image'
-
-import { useCosmoInterfaceQuery } from '~client/projects/gql-generated-hooks'
-import { section } from '~client/projects/cosmo/moduleGeneralCN'
+import { makeCn } from '@client_shared/utils'
+import { Section } from '@client_shared/components/Section'
+import { WriteText } from '@client_shared/components/WriteText'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { Image } from '@client_shared/components/Image'
+import { useCosmoInterfaceQuery } from '@client_projects/gql-generated-hooks'
+import { section } from '@client_projects/cosmo/moduleGeneralCN'
 import { Social } from './components/Social'
-import styles from './Header.module.scss'
 
+import styles from './Header.module.scss'
 const header = makeCn('Header', styles)
 
 

@@ -1,8 +1,9 @@
 import { Resolver, Query } from '@nestjs/graphql'
 import { from } from 'rxjs'
+
+import { ProjectLanguage } from '@server_lib/connect/users/decorators/user.decorator'
+import { LanguageSupported, MyObservable } from '@server/types'
 import { UserInterfaceService } from './userInterface.service'
-import { LanguageSupported, MyObservable } from '~server/types'
-import { ProjectLanguage } from '~server/lib/connect/users/decorators/user.decorator'
 import { Interface_ru } from './entitys/userInterface_ru.entity'
 
 @Resolver(() => Interface_ru)

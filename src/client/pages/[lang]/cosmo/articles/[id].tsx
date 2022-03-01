@@ -1,16 +1,17 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { Page } from '@shared/components/page'
-import { ssrResult, getSSR } from '@shared/utils/getSsrFuncs'
-import { ResponseApi } from '@shared/components/ResponseApi'
-import { Section } from '@shared/components/Section'
-import { Button } from '@shared/components/Button'
+
+import { Page } from '@client_shared/components/page'
+import { ssrResult, getSSR } from '@client_shared/utils/getSsrFuncs'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+import { Section } from '@client_shared/components/Section'
+import { Button } from '@client_shared/components/Button'
 import {
   ArticlesFindOneDocument,
   ArticlesFindOneQuery,
   ArticlesFindOneQueryVariables,
   ArticlesFindOneQueryResult
-} from '~client/projects/gql-generated-hooks'
+} from '@client_projects/gql-generated-hooks'
 
 type ArticlesQuery = {
   article: ArticlesFindOneQueryResult

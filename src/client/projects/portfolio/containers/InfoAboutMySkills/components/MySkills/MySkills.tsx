@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { makeCn } from '@shared/utils'
-import { useFindAllSkillsQuery } from '~client/projects/gql-generated-hooks'
-import { HoneycombMesh } from '@shared/components/HoneycombMesh'
-import { ResponseApi } from '@shared/components/ResponseApi'
+
+import { makeCn } from '@client_shared/utils'
+import { useFindAllSkillsQuery } from '@client_projects/gql-generated-hooks'
+import { HoneycombMesh } from '@client_shared/components/HoneycombMesh'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
+
 import styles from './MySkills.module.scss'
-
-
 const cn = makeCn('MySkills', styles)
 
 

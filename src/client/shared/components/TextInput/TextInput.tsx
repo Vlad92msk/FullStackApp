@@ -1,13 +1,15 @@
 import React, { useCallback } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { IconName } from '~public/models/icon.model'
-import { IconButton } from '@shared/components/IconButton'
-import { Text, TextSize } from '@shared/components/Text'
-import { makeCn } from '@shared/utils'
-import { IconFill } from '@shared/components/Icon'
-import styles from './TextInput.module.scss'
 
+import { IconName } from '@client_public/models/icon.model'
+import { IconButton } from '@client_shared/components/IconButton'
+import { Text, TextSize } from '@client_shared/components/Text'
+import { makeCn } from '@client_shared/utils'
+import { IconFill } from '@client_shared/components/Icon'
+
+import styles from './TextInput.module.scss'
 const cn = makeCn('TextInput', styles)
+
 
 export interface TextInputProps {
   className?: string

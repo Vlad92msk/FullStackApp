@@ -3,17 +3,15 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Page } from '@shared/components/page'
-import { storageGet } from '@shared/utils'
-import { Text } from '@shared/components/Text'
-import { Button } from '@shared/components/Button'
-
-import { ROUTES_ALL, routesAll } from '~client/projects/routesAll'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
-import { RoleEnum } from '~client/projects/cosmo/router'
-import { DEFAULT_LANGUAGE, ProjectLanguage } from '~client/pages/_app'
-import { LocalStorageEnum } from '~public/models/localStorage'
-
+import { Page } from '@client_shared/components/page'
+import { storageGet } from '@client_shared/utils'
+import { Text } from '@client_shared/components/Text'
+import { Button } from '@client_shared/components/Button'
+import { ROUTES_ALL, routesAll } from '@client_projects/routesAll'
+import { RoleEnum } from '@client_projects/cosmo/router'
+import { DEFAULT_LANGUAGE, ProjectLanguage } from '@client_pages/_app'
+import { LocalStorageEnum } from '@client_public/models/localStorage'
+import { User } from '@client_projects/gql-generated-hooks'
 
 const ErrorPage: NextPage = () => {
   const { back } = useRouter()

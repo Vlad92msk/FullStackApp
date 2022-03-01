@@ -1,11 +1,13 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql'
 import { from, Observable } from 'rxjs'
+import { UsePipes, ValidationPipe } from '@nestjs/common'
 
+
+import { Role } from '../../connect/roles/entitys/role.entity'
+import { FindRoleInput } from '../../connect/roles/inputs/find-role.input'
 import { RoleService } from './role.service'
 import { CreateRoleInput } from './inputs/create-role.input'
-import { Role } from '~server/lib/connect/roles/entitys/role.entity'
-import { FindRoleInput } from '~server/lib/connect/roles/inputs/find-role.input'
-import { UsePipes, ValidationPipe } from '@nestjs/common'
+
 
 @UsePipes(new ValidationPipe())
 @Resolver(() => Role)

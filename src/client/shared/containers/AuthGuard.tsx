@@ -1,9 +1,11 @@
 import React from 'react'
-import { storageGet } from '@shared/utils'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
-import { LocalStorageEnum } from '~public/models/localStorage'
-import { RoleEnum } from '~client/projects/portfolio/router'
-import { ROUTES_ALL, routesAll } from '~client/projects/routesAll'
+
+import { storageGet } from '@client_shared/utils'
+import { LocalStorageEnum } from '@client_public/models/localStorage'
+import { RoleEnum } from '@client_projects/portfolio/router'
+import { ROUTES_ALL, routesAll } from '@client_projects/routesAll'
+import { User } from '@client/projects/gql-generated-hooks'
+
 
 export type AuthGuardType = {
   roles?: RoleEnum[]

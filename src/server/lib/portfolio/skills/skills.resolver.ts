@@ -1,9 +1,10 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql'
 import { from } from 'rxjs'
+
+import { MyObservable } from '@server/types'
 import { SkillsService } from './skills.service'
 import { Skill } from '../skills/entitys/skills.entity'
 import { CreateSkillInput } from '../skills/inputs/create-skill.input'
-import { MyObservable } from '~server/types'
 
 @Resolver(() => Skill)
 export class SkillsResolver {

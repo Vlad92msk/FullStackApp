@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
 import { classnames } from '@bem-react/classnames'
-import { makeCn } from '@shared/utils'
-import styles from './Text.module.scss'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './Text.module.scss'
 const cn = makeCn('Text', styles)
+
 
 export type TextSize = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
 

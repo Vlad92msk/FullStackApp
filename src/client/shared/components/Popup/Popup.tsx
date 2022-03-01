@@ -1,10 +1,11 @@
 import React from 'react'
 import { ClickAwayListener, PopperProps } from '@material-ui/core'
-import { Popper } from '@shared/components/Popper'
-import { makeCn } from '@shared/utils'
-import styles from './Popup.module.scss'
+import { Popper } from '@client_shared/components/Popper'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './Popup.module.scss'
 export const cn = makeCn('Popup', styles)
+
 
 export interface PopupProps extends PopperProps {
   children: React.ReactNode | React.ReactNode[]

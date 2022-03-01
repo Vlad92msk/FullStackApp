@@ -1,4 +1,4 @@
+import { makeCn } from '@client_shared/utils'
 import styleCosmo from './style.module.scss'
-import { makeCn } from '@shared/utils'
 
 export const section = makeCn('Section', styleCosmo)

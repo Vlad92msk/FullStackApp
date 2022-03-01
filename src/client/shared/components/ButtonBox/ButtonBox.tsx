@@ -2,9 +2,9 @@ import React from 'react'
 import { Box, PolymorphicComponentProps } from 'react-polymorphic-box'
 import { classnames } from '@bem-react/classnames'
 
-import styles from './ButtonBox.module.scss'
-import { makeCn } from '@shared/utils'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './ButtonBox.module.scss'
 const cn = makeCn('ButtonBox', styles)
 
 export interface ButtonBoxOwnProps {

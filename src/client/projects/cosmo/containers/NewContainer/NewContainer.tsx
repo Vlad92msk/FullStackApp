@@ -1,7 +1,8 @@
 import React from 'react'
+
+import { makeCn } from '@client_shared/utils'
 import { NewComponent } from './components'
 
-import { makeCn } from '@shared/utils'
 import styles from './NewContainer.module.scss'
 const cn = makeCn('NewContainer', styles)
 

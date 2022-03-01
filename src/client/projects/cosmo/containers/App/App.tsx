@@ -3,7 +3,7 @@ import { Header } from '../Header'
 import { Body } from '../Body'
 import { Footer } from '../Footer'
 
-import { makeCn } from '@shared/utils'
+import { makeCn } from '@client_shared/utils'
 import styles from './App.module.scss'
 
 const cn = makeCn('Application', styles)

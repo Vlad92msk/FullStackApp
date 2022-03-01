@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common'
+
+import { DatabaseModule } from '@server_db/db.module'
 import { ArticlesProviders } from './providers/articles.providers'
 import { ArticlesService } from './articles.service'
 import { ArticlesResolver } from './articles.resolver'
-import { DatabaseModule } from '~server/db/db.module'
 
 @Module({
   imports: [DatabaseModule],

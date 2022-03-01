@@ -1,10 +1,10 @@
 import React from 'react'
 import { NextPage, GetServerSideProps } from 'next'
-import { App } from '~client/projects/portfolio/containers/App'
-import { FindAllSkillsDocument, FindAllSkillsQuery } from '~client/projects/gql-generated-hooks'
 
-import { Page } from '@shared/components/page'
-import { getSSR, ssrResult } from '@shared/utils/getSsrFuncs'
+import { App } from '@client_projects/portfolio/containers/App'
+import { FindAllSkillsDocument, FindAllSkillsQuery } from '@client_projects/gql-generated-hooks'
+import { Page } from '@client_shared/components/page'
+import { getSSR, ssrResult } from '@client_shared/utils/getSsrFuncs'
 
 
 const Home: NextPage = () => {

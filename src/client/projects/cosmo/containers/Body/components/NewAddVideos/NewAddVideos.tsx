@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
-import { makeCn } from '@shared/utils'
-import styles from './NewAddVideos.module.scss'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './NewAddVideos.module.scss'
 const cn = makeCn('NewAddVideos', styles)
 
 type NewAddVideosType = {

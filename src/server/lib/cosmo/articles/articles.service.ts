@@ -2,12 +2,12 @@ import { Inject, Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
 import { catchError, from, map, of, switchMap } from 'rxjs'
 
-import { createLanguageVariables, CreateLanguageVariablesType } from '~server/utils/createLanguageVariables'
-import { Article_en } from '~server/lib/cosmo/articles/entitys/articles_en.entity'
-import { PostgreConstants } from '~server/db/db.constants'
-import { catchErrorCustom } from '~server/utils/catchErrorCustom'
-import { LanguageSupported, MyObservable } from '~server/types'
-import { ArticleErrors } from '~server/lib/cosmo/articles/errors'
+import { createLanguageVariables, CreateLanguageVariablesType } from '@server_utils/createLanguageVariables'
+import { Article_en } from '@server_lib/cosmo/articles/entitys/articles_en.entity'
+import { PostgreConstants } from '@server_db/db.constants'
+import { catchErrorCustom } from '@server_utils/catchErrorCustom'
+import { LanguageSupported, MyObservable } from '@server/types'
+import { ArticleErrors } from '@server_lib/cosmo/articles/errors'
 
 import { FindArticleInput } from './inputs/find-article.input'
 import { Article_ru } from './entitys/articles.entity'
@@ -38,7 +38,7 @@ export class ArticlesService {
   public findAllArticles = ([language, where]: [LanguageSupported, FindArticleInput]): MyObservable<Article_ru[]> => from(
     this.langVar[language].find(where ? { where, order: { id: 'ASC' } } : { order: { id: 'ASC' } })
   ).pipe(
-    switchMap((data) => of(data)),
+    switchMap((data:Article_ru[]) => of(data)),
     catchError((err) => catchErrorCustom(`${this.findAllArticles.name} - ${ArticleErrors.FIND_ALL_ARTICLES}`))
   )
 

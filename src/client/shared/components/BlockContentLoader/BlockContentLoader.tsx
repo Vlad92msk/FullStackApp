@@ -1,9 +1,10 @@
 import React from 'react'
 import { classnames } from '@bem-react/classnames'
-import styles from './BlockContentLoader.module.scss'
-import { makeCn } from '@shared/utils'
+import { makeCn } from '@client_shared/utils'
 
+import styles from './BlockContentLoader.module.scss'
 const cn = makeCn('BlockContentLoader', styles)
+
 
 export interface BlockContentLoaderProps {
   isLoading?: boolean

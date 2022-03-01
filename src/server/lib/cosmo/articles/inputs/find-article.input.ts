@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql'
 import { IsNumber, IsString } from 'class-validator'
-import { ArticleType } from '~server/lib/cosmo/articles/entitys/articles.entity'
-import { VALIDATE_MESSAGE } from '~server/types'
+import { ArticleType } from '@server_lib/cosmo/articles/entitys/articles.entity'
+import { VALIDATE_MESSAGE } from '@server/types'
 
 /**
  * На будущее

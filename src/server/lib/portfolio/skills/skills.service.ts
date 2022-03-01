@@ -1,13 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Repository } from 'typeorm'
 import { catchError, from, map, of, switchMap } from 'rxjs'
-import { Skill } from './entitys/skills.entity'
-import { PostgreConstants } from '~server/db/db.constants'
 import { GraphQLError } from 'graphql'
+
+import { catchErrorCustom } from '@server_utils/catchErrorCustom'
+import { MyObservable } from '@server/types'
+import { PostgreConstants } from '@server_db/db.constants'
+import { Skill } from './entitys/skills.entity'
 import { CreateSkillInput } from './inputs/create-skill.input'
 import { FindSkillInput } from './inputs/find-skill.input'
-import { catchErrorCustom } from '~server/utils/catchErrorCustom'
-import { MyObservable } from '~server/types'
+
 //
 @Injectable()
 export class SkillsService {

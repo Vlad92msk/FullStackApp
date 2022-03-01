@@ -1,10 +1,12 @@
 import { Controller, Post, Body, ValidationPipe, Get, Query } from '@nestjs/common'
+import { from, Observable, of } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
+
+import { User } from '@server_lib/connect/users/entitys/user.entity'
 import { AuthService } from './auth.service'
 import { CreateUsersInput } from '../users/inputs/create-user.input'
 import { ConfirmAccountInput } from './inputs/confirm-account.input'
-import { from, Observable, of } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
-import { User } from '~server/lib/connect/users/entitys/user.entity'
+
 
 @Controller('auth')
 export class AuthController {

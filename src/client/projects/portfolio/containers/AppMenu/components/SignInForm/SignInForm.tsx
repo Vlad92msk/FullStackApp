@@ -1,18 +1,18 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import { TextField } from '@material-ui/core'
-import { SignInInput } from '~server/lib/connect/auth/inputs/signIn.input'
-import { makeCn, storageSet } from '@shared/utils'
-import { LocalStorageEnum } from '~public/models/localStorage'
 import { makeStyles } from '@material-ui/core/styles'
-import { FormEnums } from '~public/models/formEnums'
-import { formStyles } from '~public/styles/materialUI'
+import * as yup from 'yup'
+
+import { useAuthSignInLazyQuery, useFindInterfaceQuery, SignInInput } from '@client_projects/gql-generated-hooks'
+import { makeCn, storageSet } from '@client_shared/utils'
+import { LocalStorageEnum } from '@client_public/models/localStorage'
+import { FormEnums } from '@client_public/models/formEnums'
+import { formStyles } from '@client_public/styles/materialUI'
+import { Button } from '@client_shared/components/Button'
+import { ResponseApi } from '@client_shared/components/ResponseApi'
 import styles from './SignInForm.module.scss'
-import { Button } from '@shared/components/Button'
-import { useAuthSignInLazyQuery, useFindInterfaceQuery } from '~client/projects/gql-generated-hooks'
-import { ResponseApi } from '@shared/components/ResponseApi'
 
 /**
  * Стили
