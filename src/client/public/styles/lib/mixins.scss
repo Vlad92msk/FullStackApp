@@ -102,10 +102,10 @@
 
 @mixin position($left: false, $top: false, $right: false, $bottom: false, $pos: absolute) {
   position: $pos;
-  @if $left {left: rem($left)}
-  @if $top {top: rem($top)}
-  @if $right {right: rem($right)}
-  @if $bottom {bottom: rem($bottom)}
+  @if $left {left: $left}
+  @if $top {top: $top}
+  @if $right {right: $right}
+  @if $bottom {bottom: $bottom}
 }
 
 @mixin wh($w: false, $h: false) {

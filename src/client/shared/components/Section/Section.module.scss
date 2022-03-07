@@ -6,10 +6,24 @@
   width: 100%;
 
   &-Img {
-    position: absolute;
+    @include position(0, 0);
     width: 100%;
-    top: 0;
-    left: 0;
     z-index: -1;
+  }
+}
+
+.SectionChange {
+  &--type {
+    &_horizontal {
+      @include flex();
+      overflow: hidden;
+      overflow-x: auto;
+    }
+
+    &_vertical {
+      @include flex($direction: column);
+      overflow: hidden;
+      overflow-y: auto;
+    }
   }
 }

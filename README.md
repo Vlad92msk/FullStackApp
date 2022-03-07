@@ -221,5 +221,26 @@ ___
 ```
 Для проекта так же созана группа в `Telegram`, куда `Telegram-bot` через `Github-actions` отправляет уведомления о действиях в ветку мастер
 
+## Разработка
+### Комиты: frontend
+   ```
+CLIENT--*project_name/all* [
+* text
+]
+```
+
+### Комиты: backend
+   ```
+SERVER--*project_name/all* [
+* text
+]
+```
+
+### Комиты: frontend+backend
+   ```
+CLIENT-SERVER--*project_name/all* [
+* text
+]
+```
 
 *PS: еще буду дописывать README*

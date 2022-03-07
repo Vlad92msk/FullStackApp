@@ -4,6 +4,7 @@ import { createString } from '@client_shared/utils/createString'
 import { makeCn } from '@client_shared/utils'
 
 import styles from './Image.module.scss'
+
 const cn = makeCn('Image', styles)
 
 

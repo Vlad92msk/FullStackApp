@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { classnames } from '@bem-react/classnames'
 
 import { ErrorFallBack } from '@client_shared/components/ErrorFallBack'
 import { Image, ImageType } from '@client_shared/components/Image'
 import { makeCn } from '@client_shared/utils'
+import { SectionContext } from './Context'
 
 import styles from './Section.module.scss'
 const cn = makeCn('Base', styles)
@@ -24,6 +25,8 @@ export const Section: React.FC<SectionType> = React.memo((
   { bcgImg, className, imgClassName, noPaddingLeft, noPaddingRight, noPaddingTop, noPaddingBottom, resetKeys, children }
 ) => {
 
+  const { ref } = useContext(SectionContext)
+
   const paddings = [
     noPaddingLeft && { paddingLeft: 0 },
     noPaddingRight && { paddingRight: 0 },
@@ -35,6 +38,7 @@ export const Section: React.FC<SectionType> = React.memo((
     <section
       className={classnames(cn(), className)}
       style={{ ...paddings }}
+      ref={ref}
     >
       {bcgImg &&
       <Image className={classnames(imgClassName, cn('Img'))} path={bcgImg.path} sizePriority={bcgImg.sizePriority} />}

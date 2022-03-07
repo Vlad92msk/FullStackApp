@@ -16,5 +16,7 @@ export const Footer: React.FC = () => (
     bcgImg={{
       path:{ project: 'cosmo', img: 'footer' },
     }}
-  />
+  >
+    <span style={{height: 'inherit'}} />
+  </Section>
 )
