@@ -2,24 +2,45 @@
 @use "../../../../../../public/styles/lib/mixins" as *;
 
 .Social {
-  &-SocialLink {
-    @include flex;
+  @include flex($justify: end, $align-items: center);
+  @include position($pos: relative);
+  height: rem(30);
 
-    img {
-      width: 100%;
+  &-SocialRow {
+    @include flex($justify: center, $align-items: center);
+    @include position;
+
+    &--type {
+      &_left {
+        flex-direction: row-reverse;
+      }
+
+      &_top {
+        flex-direction: column-reverse;
+      }
+
+      &_bottom {
+        flex-direction: column;
+      }
+
+      &_right {
+        flex-direction: row;
+      }
     }
   }
 
-  &-SocialButton{
-    width: rem(30)!important;
-    height: rem(30)!important;
-    background: transparent!important;
-    transition: .5s!important;
+  &-SocialItem {
+    width: rem(30);
+    position: absolute;
+  }
 
-    &:hover{
-      width: rem(40)!important;
-      height: rem(40)!important;
-      transition: .5s!important;
+  &-SocialLink {
+    display: flex;
+    width: rem(30);
+    height: rem(30);
+
+    & img {
+      height: 100%;
     }
   }
 }

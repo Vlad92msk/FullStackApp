@@ -6,7 +6,6 @@ import SwiperCore, { EffectCube } from 'swiper/core'
 
 import { useAuthSignOutMutation, useFindInterfaceQuery, User } from '@client_projects/gql-generated-hooks'
 import { makeCn, storageGet, storageRemove } from '@client_shared/utils'
-import { SpeedDial } from '@client_shared/components/SpeedDial/SpeedDial'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Modal } from '@client_shared/components/Modal'
 import { Text } from '@client_shared/components/Text'
@@ -14,9 +13,11 @@ import { Option, Select } from '@client_shared/components/Select'
 import { ResponseApi } from '@client_shared/components/ResponseApi'
 import { ProjectLanguage } from '@client_pages/_app'
 import { LocalStorageEnum } from '@client_public/models/localStorage'
-import { SignInForm, SignUpForm } from './components'
+import { SpeedDail } from '@client_shared/components/SpeedDial/SpeedDial'
 
+import { SignInForm, SignUpForm } from './components'
 import styles from './AppMenu.module.scss'
+
 const cn = makeCn('AppMenu', styles)
 SwiperCore.use([EffectCube])
 
@@ -56,6 +57,7 @@ export const MenuApp = () => {
     return onHandleLogOut()
   }, [onHandleLogOut])
 
+
   return (
     <ResponseApi status={[loading]} errors={[error]}>
       {() => <>
@@ -68,48 +70,43 @@ export const MenuApp = () => {
               <Option value={'en'}>en</Option>
             </Select>
           </div>
-          <SpeedDial
-            buttonClassname={cn('MenuButton')}
-            icon={'share'}
-            direction={'left'}
-            size={'medium'}
-            elements={[
-              <>
-                {!user &&
-                (<>
-                  <IconButton className={cn('MenuItem')} icon={'sign-in'} onClick={handleChangeSignIn}
-                              data-for='sign-in'
-                              data-tip />
-                  <ReactTooltip id={'sign-in'} type={'dark'} place={'bottom'}>
-                    {userInterface.toComeIn}
-                  </ReactTooltip>
-                </>)
+          <div className={cn('MenuButton')}>
+            <SpeedDail
+              gap={80}
+              elements={[
+                !user && {
+                  id: 1,
+                  element: (<>
+                    <IconButton className={cn('MenuItem')} icon={'sign-in'} onClick={handleChangeSignIn}
+                                data-for='sign-in'
+                                data-tip />
+                    <ReactTooltip id={'sign-in'} type={'dark'} place={'bottom'}>
+                      {userInterface?.toComeIn}
+                    </ReactTooltip>
+                  </>)
+                },
+                user && {
+                  id: 2,
+                  element: (<>
+                    <IconButton className={cn('MenuItem')} icon={'exit'} onClick={handleLogOut} data-for='exit'
+                                data-tip />
+                    <ReactTooltip id={'exit'} type={'dark'} place={'bottom'}>
+                      Выйти
+                    </ReactTooltip>
+                  </>)
+                },
+                {
+                  id: 3,
+                  element: (<>
+                    <IconButton className={cn('MenuItem')} icon={'message-square'} data-for='message' data-tip />
+                    <ReactTooltip id={'message'} type={'dark'} place={'bottom'}>
+                      {userInterface?.message}
+                    </ReactTooltip>
+                  </>)
                 }
-              </>,
-              <>
-                {user &&
-                (<>
-                  <IconButton className={cn('MenuItem')} icon={'exit'} onClick={handleLogOut} data-for='exit'
-                              data-tip />
-                  <ReactTooltip id={'exit'} type={'dark'} place={'bottom'}>
-                    Выйти
-                  </ReactTooltip>
-                </>)}
-              </>,
-              // <AuthGuard roles={[RoleEnum.participant]}>
-              //   <IconButton key={3} className={cn('MenuItem')} icon={'info-2'} data-for='info' data-tip />
-              //   <ReactTooltip id={'info'} type={'dark'} place={'bottom'}>
-              //     Информация
-              //   </ReactTooltip>
-              // </AuthGuard>,
-              <>
-                <IconButton className={cn('MenuItem')} icon={'message-square'} data-for='message' data-tip />
-                <ReactTooltip id={'message'} type={'dark'} place={'bottom'}>
-                  {userInterface.message}
-                </ReactTooltip>
-              </>
-            ]}
-          />
+              ]}
+            />
+          </div>
         </div>
 
         <Modal open={signIn} onClose={handleChangeSignIn} className={cn('Modal')}>

@@ -1,84 +1,111 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import SpeedDial from '@material-ui/lab/SpeedDial'
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
+import React, { useCallback, useState } from 'react'
+import ReactTooltip from 'react-tooltip'
 
-import { socialStyles } from '@client_projects/cosmo/containers/Header/components/Social/materialUI'
+import { SpeedDailElement } from '@client_shared/components/SpeedDial/types/speedDailElement'
+import { SpeedDail } from '@client_shared/components/SpeedDial/SpeedDial'
+import { SocialType } from '../../components/Social/types/social'
 import { makeCn } from '@client_shared/utils'
-import { useBooleanState } from '@client_shared/hooks'
-import { Icon } from '@client_shared/components/Icon'
 
 import styles from './Social.module.scss'
-const cn = makeCn('Social', styles)
-const useStyles = makeStyles(() => socialStyles)
+
+export const cn = makeCn('Social', styles)
 
 
-const socialLinks = [
+const socialLinks: SpeedDailElement[] = [
   {
-    icon: (
-      <a className={cn('SocialLink')} href='https://vk.com/kosmo_official'>
-        <img alt='' src='https://img.icons8.com/color/2x/vk-circled.png' />
-      </a>
+    element: (
+      <>
+        <a
+          className={cn('SocialLink')}
+          href='https://telega.at/kosmo_off'
+          data-for='Telegram'
+          data-tip
+        >
+          <img alt='Telegram' src='https://img.icons8.com/fluent/2x/telegram-app.png' />
+        </a>
+        <ReactTooltip id={'Telegram'} type={'dark'} place={'bottom'}>
+          Telegram
+        </ReactTooltip>
+      </>
     ),
-    name: 'Vk'
+    id: 1
   },
   {
-    icon: (
-      <a className={cn('SocialLink')} href='https://instagram.com/off_kosmo'>
-        <img alt='' src='https://img.icons8.com/fluent/2x/instagram-new.png' />
-      </a>
+    element: (
+      <>
+        <a
+          className={cn('SocialLink')}
+          href='https://www.youtube.com/channel/UChfeK9NHpgHrO-4384Q9NjQ?sub_confirmation=1'
+          data-for='YouTube'
+          data-tip
+        >
+          <img
+            alt='YouTube'
+            src='https://img.icons8.com/flat_round/2x/youtube-play.png'
+          />
+        </a>
+        <ReactTooltip id={'YouTube'} type={'dark'} place={'bottom'}>
+          YouTube
+        </ReactTooltip>
+      </>
     ),
-    name: 'Instagram'
+    id: 2
   },
   {
-    icon: (
-      <a
-        className={cn('SocialLink')}
-        href='https://www.youtube.com/channel/UChfeK9NHpgHrO-4384Q9NjQ?sub_confirmation=1'
-      >
-        <img
-          alt=''
-          src='https://img.icons8.com/flat_round/2x/youtube-play.png'
-        />
-      </a>
+    element: (
+      <>
+        <a
+          className={cn('SocialLink')}
+          href='https://instagram.com/off_kosmo'
+          data-for='Instagram'
+          data-tip
+        >
+          <img
+            alt='Instagram'
+            src='https://img.icons8.com/fluent/2x/instagram-new.png'
+          />
+        </a>
+        <ReactTooltip id={'Instagram'} type={'dark'} place={'bottom'}>
+          Instagram
+        </ReactTooltip>
+      </>
     ),
-    name: 'YouTube'
+    id: 3
   },
   {
-    icon: (
-      <a className={cn('SocialLink')} href='https://telega.at/kosmo_off'>
-        <img alt='' src='https://img.icons8.com/fluent/2x/telegram-app.png' />
-      </a>
+    element: (
+      <>
+        <a
+          className={cn('SocialLink')}
+          href='https://vk.com/kosmo_official'
+          data-for='Vk'
+          data-tip
+        >
+          <img
+            alt=''
+            src='https://img.icons8.com/color/2x/vk-circled.png'
+          />
+        </a>
+        <ReactTooltip id={'Vk'} type={'dark'} place={'bottom'}>
+          Vk
+        </ReactTooltip>
+      </>
     ),
-    name: 'Telegram'
+    id: 4
   }
 ]
 
 
-export const Social: React.FC = () => {
-  const { actions, fab, root } = useStyles()
-  const [open, handleOpen, handleClose] = useBooleanState(false)
+export const Social: React.FC<SocialType> = React.memo(() => {
+  const [open, handleOpen] = useState(false)
+
+  const handleChangeSocial = useCallback(() => {
+    handleOpen(prev => !prev)
+  }, [])
 
   return (
-    <SpeedDial
-      ariaLabel='Body'
-      icon={<Icon icon={'share'} />}
-      onClose={handleClose}
-      onOpen={handleOpen}
-      open={open}
-      direction='left'
-      classes={{ root, fab, actions }}
-    >
-      {socialLinks.map((link) => (
-        <SpeedDialAction
-          key={link.name}
-          icon={link.icon}
-          tooltipTitle={link.name}
-          tooltipPlacement='bottom'
-          onClick={handleClose}
-          className={cn('SocialButton')}
-        />
-      ))}
-    </SpeedDial>
+    <div className={cn()}>
+      <SpeedDail elements={socialLinks} />
+    </div>
   )
-}
+})

@@ -9,15 +9,19 @@
   background: #293f6863;
 
   &-MenuButton {
+    @include flex($justify: end, $align-items: center);
+    @include position($pos: relative);
+    height: rem(30);
     fill: var(--Color-MunsellBlue--30);
   }
 
   &-MenuItem {
-    fill: var(--Color-MunsellBlue--30);
-    margin: rem(15);
+    display: flex;
+    width: rem(30);
+    height: rem(30);
 
-    &:hover {
-      filter: drop-shadow(0 0 rem(5) var(--Color-MunsellBlue--30));
+    & img {
+      height: 100%;
     }
   }
 
