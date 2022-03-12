@@ -1,28 +1,26 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Navigation } from 'swiper/core'
+import SwiperCore, { Pagination, EffectCoverflow } from 'swiper/core'
 
 import { makeCn } from '@client_shared/utils'
 import { Section } from '@client_shared/components/Section'
 import { createString } from '@client_shared/utils/createString'
-import { useScreenWidth } from '@client_shared/hooks'
 import { ResponseApi } from '@client_shared/components/ResponseApi'
 import { Text } from '@client_shared/components/Text'
 import { useArticlesFindAllQuery, useCosmoInterfaceQuery } from '@client_projects/gql-generated-hooks'
-import { MediaQueries } from '@client_public/models/mediaQueries'
 import { CosmoPages } from '@client_projects/cosmo/router'
 import { section } from '@client_projects/cosmo/moduleGeneralCN'
 
 import styles from './Articles.module.scss'
+
 const cn = makeCn('Articles', styles)
-SwiperCore.use([Navigation])
+SwiperCore.use([Pagination, EffectCoverflow])
 
 
 type ArticlesType = {}
 
 export const Articles: React.FC<ArticlesType> = () => {
-  const screenWidth = useScreenWidth()
   const router = useRouter()
 
   /**
@@ -31,7 +29,7 @@ export const Articles: React.FC<ArticlesType> = () => {
   const {
     data: { userInterfaceCosmoFindAll: userInterface } = {},
     loading: userInterfaceLoading,
-    error: userInterfaceError,
+    error: userInterfaceError
   } = useCosmoInterfaceQuery()
 
   /**
@@ -50,27 +48,33 @@ export const Articles: React.FC<ArticlesType> = () => {
     router.push(createString([router.query.lang, CosmoPages.COSMO, CosmoPages.ARTICLES, e.currentTarget.id], '/'))
   }, [router])
 
-  const sliderMediaParam = useMemo(() => {
-    return ({
-      slidesPerView: Math.round(screenWidth / 450),
-      spaceBetween: 30
-    })
-  }, [screenWidth])
-
   return (
-    <Section className={section()} noPaddingRight={screenWidth > MediaQueries.M_768}>
+    <Section className={section()} noPaddingRight noPaddingLeft>
       <div className={cn()}>
         <ResponseApi
           status={[articlesFindAllLoading, userInterfaceLoading]}
           errors={[articlesFindAllError, userInterfaceError]}
         >
           {() => <>
-            <Text as={'h2'} size={'7'} textTransform={'uppercase'} className={cn('Title')}
-                  children={userInterface.articles} />
+            <Text
+              className={cn('Title')}
+              as={'h2'}
+              size={'7'}
+              textTransform={'uppercase'}
+              children={userInterface.articles}
+            />
             <Swiper
               className={cn('Slider')}
-              navigation
-              {...sliderMediaParam}
+              effect={'coverflow'}
+              centeredSlides={true}
+              slidesPerView={5}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 5,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true
+              }}
             >
               {articlesFindAll.map(({ id, title }) => (
                 <SwiperSlide

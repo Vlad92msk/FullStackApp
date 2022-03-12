@@ -6,7 +6,7 @@
 .VideoContent {
   width: 100%;
   display: flex;
-  @include media-1024{
+  @include media-1024 {
     flex-direction: column-reverse;
   }
 
@@ -38,10 +38,11 @@
   }
 
   &-Video {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     background: var(--Color-RedRose--50);
     color: var(--Color-Light--100);
     text-align: center;
+    padding: 0 rem(5);
   }
 
   &-Tabs {
@@ -50,7 +51,7 @@
 
   &-Tab {
     @include text(wSize(10, 1.5, 20), true);
-    color: var(--Color-RedRose--50) !important;
+    color: var(--Color-RedRose--50);
   }
 
   &-ContentVideo {
@@ -64,6 +65,9 @@
     }
   }
 
+  &-TabUnderLine {
+    background: var(--Color-RedRose--50);
+  }
 
   &-Modal {
     @include wh(80vw, wSize(100, 70, 800));
