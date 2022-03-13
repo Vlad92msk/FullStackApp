@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+
 import { AuthGuard, AuthGuardType } from '@client_shared/containers/AuthGuard'
 import { languageVariants, ProjectLanguage } from '@client_pages/_app'
+import { WithTransition } from '@client/shared/containers/MotionPage'
 
 export interface PageType extends AuthGuardType {
   title?: string
@@ -22,7 +24,7 @@ export const Page: NextPage<PageType> = React.memo(({ title, subTitle, children,
   useEffect(() => {
     if (!isQueryLangCorrect) {
       push({
-        query:{
+        query: {
           lang: language
         }
       })
@@ -49,16 +51,18 @@ export const Page: NextPage<PageType> = React.memo(({ title, subTitle, children,
 
   return (
     <AuthGuard page={page} roles={roles}>
-      <Head>
-        <link type='image/png' rel='shortcut icon' href='/resources/images/htmlTag.png' />
-        {(title || subTitle) && (
-          <title>
-            {`${title} | ${subTitle} [${language}]`}
-          </title>
-        )}
-        <meta property='og:title' content='My page title' key='title' />
-      </Head>
-      {children}
+      <WithTransition>
+        <Head>
+          <link type='image/png' rel='shortcut icon' href='/resources/images/htmlTag.png' />
+          {(title || subTitle) && (
+            <title>
+              {`${title} | ${subTitle} [${language}]`}
+            </title>
+          )}
+          <meta property='og:title' content='My page title' key='title' />
+        </Head>
+        {children}
+      </WithTransition>
     </AuthGuard>
   )
 })

@@ -9,7 +9,6 @@ import { makeCn, storageGet, storageRemove } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Modal } from '@client_shared/components/Modal'
 import { Text } from '@client_shared/components/Text'
-import { Option, Select } from '@client_shared/components/Select'
 import { ResponseApi } from '@client_shared/components/ResponseApi'
 import { ProjectLanguage } from '@client_pages/_app'
 import { LocalStorageEnum } from '@client_public/models/localStorage'
@@ -36,8 +35,9 @@ export const MenuApp = () => {
    * Переключение языка
    */
   const { language, setLanguage } = useContext(ProjectLanguage)
-  const changeLang = useCallback(async (lang) =>
-      await push({ query: { lang } })
+  const changeLang = useCallback((lang) => {
+      return push({ query: { lang: lang.target.value } })
+    }
     , [setLanguage])
 
   const [onHandleLogOut] = useAuthSignOutMutation()
@@ -64,11 +64,24 @@ export const MenuApp = () => {
         <div className={cn()}>
           <div className={cn('User')}>
             <div className={cn('UserName')}>{user?.name}</div>
-            {/*TODO: Стилизовать как нибудь*/}
-            <Select className={cn('Lang')} onChange={changeLang} value={language} placeholder={''}>
-              <Option value={'ru'}>ru</Option>
-              <Option value={'en'}>en</Option>
-            </Select>
+            <div style={{
+              display: 'flex',
+              overflow: 'hidden',
+              borderRadius: '15px',
+              width: 'fit-content'
+            }}>
+              <input onChange={changeLang} className={cn('RadioInput')} type={'radio'} value={'ru'} name={'lang'}
+                     id={'ru'} checked={language === 'ru'} />
+              <label className={cn('RadioLabel')} htmlFor={'ru'}>ru</label>
+
+              <input onChange={changeLang} className={cn('RadioInput')} type={'radio'} value={'en'} name={'lang'}
+                     id={'en'} checked={language === 'en'} />
+              <label className={cn('RadioLabel')} htmlFor={'en'}>en</label>
+
+              <input onChange={changeLang} className={cn('RadioInput')} type={'radio'} value={'fr'} name={'lang'}
+                     id={'fr'} checked={language === 'fr'} />
+              <label className={cn('RadioLabel')} htmlFor={'fr'}>fr</label>
+            </div>
           </div>
           <div className={cn('MenuButton')}>
             <SpeedDail

@@ -27,6 +27,7 @@
 
   &-User {
     width: rem(100);
+    z-index: 3;
   }
 
   &-UserName {
@@ -37,6 +38,26 @@
     //width: rem(100);
   }
 
+  &-RadioInput {
+    display: none;
+
+    &:checked + label {
+      background: #536989;
+    }
+  }
+
+  &-RadioLabel {
+    padding: rem(3) rem(14);
+    color: white;
+    background: #7d8ecd;
+
+    cursor: pointer;
+    transition: .5s;
+
+    &:not(:last-of-type) {
+      border-right: rem(1) solid transparent;
+    }
+  }
 
   &-Modal {
     background: transparent;

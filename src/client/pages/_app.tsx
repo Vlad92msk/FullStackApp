@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
-
-import { useApollo } from '../apolloSettings/apolloClient'
 import { ApolloProvider } from '@apollo/client'
+import { AnimatePresence } from 'framer-motion'
+import { useRouter } from 'next/router'
+
+import { Loader } from '@client_shared/components/Loader'
 import { storageGet, storageSet } from '@client_shared/utils'
+import { useApollo } from '../apolloSettings/apolloClient'
+
 import '@client_public/styles/base.scss'
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'
@@ -36,6 +40,25 @@ export const ProjectLanguage = React.createContext({
 
 const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unknown }) => {
   const [language, setLanguage] = useState<string>(() => storageGet('userLanguage') || DEFAULT_LANGUAGE)
+  const [loading, setLoading] = useState<boolean>(false)
+  const { events } = useRouter()
+
+
+  useEffect(() => {
+    const loadingOn = () => setLoading(true)
+    const loadingOff = () => setLoading(false)
+
+    events.on('routeChangeStart', loadingOn)
+    events.on('routeChangeComplete', loadingOff)
+    events.on('routeChangeError', loadingOff)
+
+
+    return () => {
+      events.off('routeChangeStart', loadingOn)
+      events.off('routeChangeComplete', loadingOff)
+      events.off('routeChangeError', loadingOff)
+    }
+  }, [events])
 
   /**
    * Меняем язык в меню - меняем и в сторе
@@ -49,7 +72,11 @@ const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unkno
   return (
     <ProjectLanguage.Provider value={{ language, setLanguage }}>
       <ApolloProvider client={apolloClient}>
-        <Component {...pageProps} />
+        {loading ? <Loader /> : (
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} />
+          </AnimatePresence>
+        )}
       </ApolloProvider>
     </ProjectLanguage.Provider>
   )
