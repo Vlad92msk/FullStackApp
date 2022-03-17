@@ -1,0 +1,14 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+$height: hSize(40, 5, 60);
+$width: clamp(100px, 15vw, 300px);
+
+.Profile {
+  @include flex($align-items: center);
+  background: var(--SOCIAL--Background-Card);
+  border-radius: $borderRadiusCard;
+  height: $height;
+
+}

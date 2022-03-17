@@ -1,0 +1,56 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+$height: hSize(40, 5, 60);
+$width: clamp(100px, 15vw, 300px);
+
+.Header {
+  @include flex($align-items: center);
+  background: var(--SOCIAL--Background-Card);
+  border-radius: $borderRadiusCard;
+  height: $height;
+
+  &-AppsSwitch {
+    padding: $componentPadding;
+    width: $width;
+  }
+
+  &-Main {
+    margin: $componentPadding;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &-Gap {
+    width: rem(1);
+    height: 100%;
+    background: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-GapMin {
+    display: block;
+    width: rem(1);
+    height: rem(20);
+    margin: 0 rem(5);
+    background: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-User {
+    display: flex;
+    align-items: center;
+  }
+
+  &-UserPhoto {
+    @include flex($justify: center, $align-items: center);
+    width: rem(20);
+    height: rem(20);
+    margin: 0 rem(5);
+  }
+
+  &-UserName {
+    color: var(--SOCIAL--Color-Text-Main);
+  }
+}

@@ -157,3 +157,6 @@ export type IconName =
   | 'sign-in'
   | 'settings-2'
   | 'info-2'
+  | 'friends'
+  | 'analytics'
+  | 'hash'

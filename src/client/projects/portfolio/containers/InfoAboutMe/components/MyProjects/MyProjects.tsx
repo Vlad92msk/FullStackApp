@@ -1,24 +1,20 @@
-import React, { FC, useCallback, useContext } from 'react'
-import { useRouter } from 'next/router'
+import React, { FC } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { HoneycombMesh } from '@client_shared/components/HoneycombMesh'
+import { useRouterPush } from '@client_shared/hooks/useRouterPush'
 import { ROUTES_ALL } from '@client_projects/routesAll'
-import { ProjectLanguage } from '@client_pages/_app'
 
 import styles from './MyProjects.module.scss'
 const cn = makeCn('MyProjects', styles)
 
 
 export const MyProjects: FC = () => {
-  const router = useRouter()
-  const { language } = useContext(ProjectLanguage)
+  const handleGoCosmo = useRouterPush(ROUTES_ALL.COSMO)
+  const handleGoSocial = useRouterPush(ROUTES_ALL.SOCIAL)
 
-  const handleGoCosmo = useCallback(() => {
-    ROUTES_ALL && router.push(`/${language}/${ROUTES_ALL.COSMO}`)
-  }, [router, language])
 
   return <div className={cn()}>
     <Text className={cn('Title')} size={'8'} color={'title'} children={'Проекты'} />
@@ -47,6 +43,15 @@ export const MyProjects: FC = () => {
             fill={'light100'}
             className={cn('Icon')}
             onClick={handleGoCosmo}
+          />
+        },
+        {
+          position: 4,
+          element: <Icon
+            icon={'social-vk'}
+            fill={'light100'}
+            className={cn('Icon')}
+            onClick={handleGoSocial}
           />
         }
       ]}

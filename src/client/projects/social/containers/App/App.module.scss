@@ -1,0 +1,25 @@
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins' as * ;
+
+$sectionPadding: 0 clamp(0px, 8vw, 15vw);
+$componentPadding: clamp(2px, 1vh, rem(15)) clamp(2px, 2vw, rem(15));
+$borderRadiusCard: rem(5);
+
+.Application {
+  @include wh(100vw, 100vh);
+  @include sectionPadding($default: $sectionPadding, $pTop: 20);
+
+  &-Main{
+    display: flex;
+    margin-top: rem(20);
+  }
+
+  &-Content{
+    padding: $componentPadding;
+    background: var(--SOCIAL--Background-Card);
+    border-radius: $borderRadiusCard;
+    flex: 1 1 auto;
+    margin: 0 rem(5);
+  }
+
+}
