@@ -8,6 +8,7 @@
   width: $width;
   background: var(--SOCIAL--Background-Card);
   border-radius: $borderRadiusCard;
+  place-self: flex-start;
 
   &-Header {
     @include flex($align-items: center, $justify: space-between)

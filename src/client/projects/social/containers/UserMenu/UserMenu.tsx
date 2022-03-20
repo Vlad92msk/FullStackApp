@@ -39,15 +39,15 @@ export const UserMenu: React.FC = () => {
       <div className={cn('Any')}>
         <div className={cn('Row')}>
           <ButtonBox className={cn('Button')} onClick={setOpen} onClickCapture={onClose}>
-            <Icon className={cn('ButtonIcon')} size={'medium'} icon={'friends'} />
+            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'friends'} />
             <Text className={cn('ButtonText')} size={'2'} children={'1'} />
           </ButtonBox>
           <ButtonBox className={cn('Button')} onClick={setOpen} onClickCapture={onClose}>
-            <Icon className={cn('ButtonIcon')} size={'medium'} icon={'message-square'} />
+            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'} />
             <Text className={cn('ButtonText')} size={'2'} children={'2'} />
           </ButtonBox>
           <ButtonBox className={cn('Button')} onClick={setOpen} onClickCapture={onClose}>
-            <Icon className={cn('ButtonIcon')} size={'medium'} icon={'hash'} />
+            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'hash'} />
             <Text className={cn('ButtonText')} size={'2'} children={'3'} />
           </ButtonBox>
         </div>

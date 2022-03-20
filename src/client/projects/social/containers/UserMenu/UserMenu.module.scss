@@ -8,6 +8,7 @@
   width: clamp(200px, 30vw, rem(350));
   background: var(--SOCIAL--Background-Card);
   border-radius: $borderRadiusCard;
+  place-self: flex-start;
 
   &-Main {
     @include flex($direction: column);

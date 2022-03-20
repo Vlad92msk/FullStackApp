@@ -9,16 +9,13 @@ $borderRadiusCard: rem(5);
   @include wh(100vw, 100vh);
   @include sectionPadding($default: $sectionPadding, $pTop: 20);
 
-  &-Main{
+  &-Main {
     display: flex;
     margin-top: rem(20);
   }
 
-  &-Content{
-    padding: $componentPadding;
-    background: var(--SOCIAL--Background-Card);
-    border-radius: $borderRadiusCard;
-    flex: 1 1 auto;
+  &-Content {
+    flex: 1 1;
     margin: 0 rem(5);
   }
 

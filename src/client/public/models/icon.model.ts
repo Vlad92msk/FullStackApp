@@ -160,3 +160,7 @@ export type IconName =
   | 'friends'
   | 'analytics'
   | 'hash'
+  | 'music'
+  | 'photo'
+  | 'video'
+  | 'groups'

@@ -72,11 +72,11 @@ const MyApp = ({ Component, pageProps }: { Component: NextPage; pageProps: unkno
   return (
     <ProjectLanguage.Provider value={{ language, setLanguage }}>
       <ApolloProvider client={apolloClient}>
-        {loading ? <Loader /> : (
+
           <AnimatePresence exitBeforeEnter>
             <Component {...pageProps} />
           </AnimatePresence>
-        )}
+
       </ApolloProvider>
     </ProjectLanguage.Provider>
   )

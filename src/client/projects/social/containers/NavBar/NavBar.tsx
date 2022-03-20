@@ -30,25 +30,25 @@ export const NavBar: React.FC = () => {
         <ul>
           <li>
             <ButtonBox onClick={() => console.log('1', 1)}>
-              <Icon className={cn('Icon')} size={'small'} icon={'bell'} />
+              <Icon className={cn('Icon')} size={'ordinary'} icon={'photo'} />
               <Text className={cn('Text')} children={'Фото'} />
             </ButtonBox>
           </li>
           <li>
             <ButtonBox onClick={() => console.log('1', 1)}>
-              <Icon className={cn('Icon')} size={'small'} icon={'bell'} />
+              <Icon className={cn('Icon')} size={'ordinary'} icon={'video'} />
               <Text className={cn('Text')} children={'Видео'} />
             </ButtonBox>
           </li>
           <li>
             <ButtonBox onClick={() => console.log('1', 1)}>
-              <Icon className={cn('Icon')} size={'small'} icon={'bell'} />
+              <Icon className={cn('Icon')} size={'ordinary'} icon={'groups'} />
               <Text className={cn('Text')} children={'Группы'} />
             </ButtonBox>
           </li>
           <li>
             <ButtonBox onClick={() => console.log('1', 1)}>
-              <Icon className={cn('Icon')} size={'small'} icon={'bell'} />
+              <Icon className={cn('Icon')} size={'ordinary'} icon={'music'} />
               <Text className={cn('Text')} children={'Музыка'} />
             </ButtonBox>
           </li>
