@@ -1,1 +1,1 @@
-export * from './NewComponent/NewComponent'
+export * from './ProfileCard/ProfileCard'

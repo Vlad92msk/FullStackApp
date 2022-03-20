@@ -14,7 +14,7 @@ import styles from './UserMenu.module.scss'
 const cn = makeCn('UserMenu', styles)
 
 
-export const UserMenu: React.FC = () => {
+export const UserMenu: React.FC = React.memo(() => {
   const [open, setOpen, onClose] = useBooleanState(false)
 
   return (
@@ -96,4 +96,4 @@ export const UserMenu: React.FC = () => {
       </div>
     </section>
   )
-}
+})

@@ -11,8 +11,7 @@ import { ButtonBox } from '@client/shared/components/ButtonBox'
 const cn = makeCn('NavBar', styles)
 
 
-export const NavBar: React.FC = () => {
-
+export const NavBar: React.FC = React.memo(() => {
   return (
     <section className={cn()}>
       <div className={cn('Header')}>
@@ -56,4 +55,4 @@ export const NavBar: React.FC = () => {
       </nav>
     </section>
   )
-}
+})
