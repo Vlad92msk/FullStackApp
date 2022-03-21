@@ -4,10 +4,9 @@
 
 .ProfileCard {
   @include flex($direction: column);
-  flex: 0 1 auto;
-  margin: rem(10);
-  width: clamp(12.5rem, 16vw, 25rem);
-  height: rem(200);
+  flex: 1 1 clamp(12.5rem, 33%, 25rem);
+  margin: rem(1);
+  height: wSize(150, 33, 250);
   overflow: hidden;
   transition: height 1.5s;
 
@@ -18,15 +17,10 @@
     animation-timing-function: linear;
   }
 
-  @include media-768 {
-    flex: 1 1 auto;
-  }
-
 
   &-Button {
     @include flex($justify: center, $align-items: center);
     background: var(--SOCIAL--Background-Card);
-    border-radius: $borderRadiusCard;
     padding: $componentPadding;
 
     width: 100%;
@@ -44,14 +38,29 @@
   }
 
   &-ContentContainer {
-    @include flex($direction: column);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     padding: $componentPadding;
     margin-top: rem(15);
     overflow: hidden;
     width: 100%;
+
+    @include media-1366 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-1024 {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 
-  &-Gap{
+  &-Add {
+    @include flex($justify: center, $align-items: center);
+    background: rgb(41 46 67 / 57%);
+    border-radius: $borderRadiusCard;
+  }
+
+  &-Gap {
     height: rem(1);
     margin-top: rem(10);
     background: var(--SOCIAL--Background-Card);
@@ -61,11 +70,12 @@
 @keyframes card-animate {
   0% {
     height: rem(180);
-    width: clamp(12.5rem, 16vw, 25rem);
+    flex: 1 1 clamp(12.5rem, 33%, 25rem);
     order: -1;
   }
   100% {
-    width: 100%;
+    margin-bottom: rem(20);
+    flex: 1 1 100%;
     height: auto;
     order: -1;
   }

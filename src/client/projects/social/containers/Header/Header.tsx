@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
       <div className={cn('AppsSwitch')}>S</div>
       <span className={cn('Gap')}/>
       <div className={cn('Main')}>
-        <IconButton icon={'bell'}  fill={'oldAsphalt50'} />
+        <IconButton icon={'bell'} size={'ordinary'} fill={'oldAsphalt50'} />
         <span className={cn('GapMin')}/>
         <div className={cn('User')}>
           <div className={cn('UserPhoto')}>O</div>

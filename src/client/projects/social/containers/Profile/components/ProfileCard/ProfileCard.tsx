@@ -6,6 +6,7 @@ import { makeCn } from '@client_shared/utils'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Text } from '@client_shared/components/Text'
 import styles from './ProfileCard.module.scss'
+import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('ProfileCard', styles)
 
@@ -58,6 +59,8 @@ export const ProfileCard: React.FC<CardType> = React.memo(({ name, title, childr
       >
         <Text
           className={cn('Title')}
+          size={'5'}
+          textTransform={'uppercase'}
           children={title}
         />
       </ButtonBox>
@@ -70,6 +73,9 @@ export const ProfileCard: React.FC<CardType> = React.memo(({ name, title, childr
           transition={transition}
         >
           {children}
+          <div className={cn('Add')}>
+            <IconButton onClick={() => 1} icon={'plus'} fill={'oldAsphalt40'} size={'large'} />
+          </div>
         </motion.div>
       )}
       {isActive && <motion.span

@@ -1,0 +1,92 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.MainCard {
+  @include flex($direction: column);
+  background: var(--SOCIAL--Background-Card);
+  border-radius: $borderRadiusCard;
+  padding: rem(25);
+  margin: rem(1);
+
+  &-Date {
+    display: inline-flex;
+    flex: 0 1 auto;
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    color: var(--SOCIAL--Color-Text-Main);
+    text-shadow: 0 0 rem(4) #ffffffb8;
+    padding: rem(5) rem(15);
+    border-radius: $borderRadiusCard;
+    width: fit-content;
+  }
+
+  &-Title {
+    text-transform: uppercase;
+    color: var(--SOCIAL--Color-Text-Main);
+    margin: rem(14) 0 rem(7) 0;
+  }
+
+  &-Description {
+    color: var(--SOCIAL--Color-Text-System);
+    margin: rem(7) 0;
+    overflow: hidden;
+    font-style: italic;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+
+  &-ButtonsRow {
+    display: flex;
+    align-items: center;
+    margin: rem(7) 0;
+  }
+
+  &-Button {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child) {
+      margin-left: rem(5);
+    }
+  }
+
+  &-ButtonIcon {
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+
+  &-AuthorRow {
+    display: flex;
+    align-items: center;
+    margin-top: rem(15);
+    position: relative;
+  }
+
+
+  &-AuthorName {
+    color: var(--SOCIAL--Color-Text-Main);
+    margin-left: rem(5);
+  }
+
+  &-AuthorImg {
+    width: rem(25);
+    height: rem(25);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &-AuthorName {
+    color: var(--SOCIAL--Color-Text-Main);
+    justify-self: start;
+    flex: 1 1 auto;
+    margin-left: rem(10);
+  }
+
+}

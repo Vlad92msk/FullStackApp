@@ -164,3 +164,5 @@ export type IconName =
   | 'photo'
   | 'video'
   | 'groups'
+  | 'heart'
+  | 'heart-fill'

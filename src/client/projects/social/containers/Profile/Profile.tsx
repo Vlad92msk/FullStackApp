@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { ProfileCard } from '@client/projects/social/containers/Profile/components'
+import { MainCard, ProfileCard } from '@client/projects/social/containers/Profile/components'
 import styles from './Profile.module.scss'
 
 const cn = makeCn('Profile', styles)
@@ -17,7 +17,16 @@ export const Profile: React.FC = React.memo(() => {
       <div className={cn('Container')}>
 
         <ProfileCard name={'photo'} title={'Фото'}>
-          <div>photo</div>
+          <MainCard
+            description={'В пресс-службе Росгвардии заявили, что российские подразделения в\n' +
+            '        ходе операции в городе Изюм в Харьковской области взяли в плен нескольких лидеров националистических\n' +
+            '        формирований и пособников Службы безопасности Украин'}
+            title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'}
+          />
+          <MainCard title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'} />
+          <MainCard description={'dwed'} title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'} />
+          <MainCard title={'tittle'} date={'июль 02, 2002'} />
+          <MainCard title={'tittle'} date={'июль 02, 2002'} />
         </ProfileCard>
 
         <ProfileCard name={'video'} title={'Видео'}>

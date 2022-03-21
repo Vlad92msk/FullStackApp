@@ -44,5 +44,5 @@ export const IconButton = <E extends React.ElementType = typeof DEFAULT_ELEMENT>
 IconButton.defaultProps = {
   className: null,
   type: 'button',
-  size: 'medium'
+  size: 'ordinary'
 } as Partial<ButtonOwnProps>
