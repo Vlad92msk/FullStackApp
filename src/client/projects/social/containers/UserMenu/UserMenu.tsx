@@ -21,7 +21,7 @@ export const UserMenu: React.FC = React.memo(() => {
     <section className={cn()}>
       <div className={cn('Main')}>
         <div className={cn('Photo')}>
-          <Image sizePriority={'cover'} path={{
+          <Image path={{
             img: 'ava',
             project: 'social'
           }} />

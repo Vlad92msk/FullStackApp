@@ -166,3 +166,4 @@ export type IconName =
   | 'groups'
   | 'heart'
   | 'heart-fill'
+  | 'dislike'

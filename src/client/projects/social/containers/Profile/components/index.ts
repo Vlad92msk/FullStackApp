@@ -1,2 +1,3 @@
 export * from './ProfileCard/ProfileCard'
-export * from './MainCard/MainCard'
+export * from './AlbumCard/AlbumCard'
+export * from './PhotoCard/PhotoCard'

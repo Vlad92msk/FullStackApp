@@ -2,10 +2,9 @@
 @use "../../../../../../public/styles/lib/mixins" as *;
 @import "../../../App/App.module.scss";
 
-.MainCard {
+.AlbumCard {
   @include flex($direction: column);
   background: var(--SOCIAL--Background-Card);
-  border-radius: $borderRadiusCard;
   padding: rem(25);
   margin: rem(1);
 
@@ -16,7 +15,6 @@
     color: var(--SOCIAL--Color-Text-Main);
     text-shadow: 0 0 rem(4) #ffffffb8;
     padding: rem(5) rem(15);
-    border-radius: $borderRadiusCard;
     width: fit-content;
   }
 

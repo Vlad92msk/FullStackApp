@@ -40,7 +40,6 @@
   &-ContentContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: $componentPadding;
     margin-top: rem(15);
     overflow: hidden;
     width: 100%;
@@ -57,7 +56,6 @@
   &-Add {
     @include flex($justify: center, $align-items: center);
     background: rgb(41 46 67 / 57%);
-    border-radius: $borderRadiusCard;
   }
 
   &-Gap {

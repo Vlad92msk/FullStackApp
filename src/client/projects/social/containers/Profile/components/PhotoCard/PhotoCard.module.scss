@@ -1,0 +1,127 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.PhotoCard {
+  @include flex($direction: column);
+  background: var(--SOCIAL--Background-Card);
+  padding: rem(5);
+  margin: rem(1);
+  overflow: hidden;
+
+  &-Row {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &-Photo {
+    @include flex($justify: center, $align-items: center);
+    height: rem(250);
+    width: 100%;
+    position: relative;
+  }
+
+  &-ButtonsGroup {
+    @include flex($direction: column);
+    background: rgb(139 139 139 / 11%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    margin-left: rem(5);
+  }
+
+  &-Button {
+    display: flex;
+    margin: rem(5);
+  }
+
+  &-ButtonIcon {
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+
+  &-TitleRow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    margin: rem(5);
+  }
+
+  &-Column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+    padding: rem(5);
+    text-align: right;
+  }
+
+  &-Description {
+    width: 100%;
+    color: var(--SOCIAL--Color-Text-Main);
+    margin: rem(7) 0;
+    overflow: hidden;
+    font-style: italic;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  &-AuthorRow {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: rem(10) 0;
+  }
+
+  &-AuthorImg {
+    width: rem(25);
+    height: rem(25);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &-AuthorName {
+    color: var(--SOCIAL--Color-Text-Main);
+    justify-self: start;
+    flex: 1 1 auto;
+    margin-left: rem(10);
+  }
+
+  &-Modal {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  &-ModalPhotoContainer {
+    position: relative;
+    width: 100%;
+    height: 60%;
+  }
+
+  &-Chat {
+    width: 100%;
+    height: 40%;
+    border: rem(1) solid var(--SOCIAL--Color-Text-System);
+    padding: rem(10);
+  }
+
+
+}

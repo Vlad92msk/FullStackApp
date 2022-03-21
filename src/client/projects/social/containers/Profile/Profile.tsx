@@ -2,14 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { MainCard, ProfileCard } from '@client/projects/social/containers/Profile/components'
+import { AlbumCard, PhotoCard, ProfileCard } from '@client/projects/social/containers/Profile/components'
+import { PHOTO_ALBUMS } from './data/photoAlbums.data'
 import styles from './Profile.module.scss'
+import { useRouter } from 'next/router'
+import { PHOTO } from '@client/projects/social/containers/Profile/data/photos.data'
 
 const cn = makeCn('Profile', styles)
 
 
 export const Profile: React.FC = React.memo(() => {
-
+  const { query: { layout, albumId } } = useRouter()
 
   return (
     <div className={cn()}>
@@ -17,16 +20,16 @@ export const Profile: React.FC = React.memo(() => {
       <div className={cn('Container')}>
 
         <ProfileCard name={'photo'} title={'Фото'}>
-          <MainCard
-            description={'В пресс-службе Росгвардии заявили, что российские подразделения в\n' +
-            '        ходе операции в городе Изюм в Харьковской области взяли в плен нескольких лидеров националистических\n' +
-            '        формирований и пособников Службы безопасности Украин'}
-            title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'}
-          />
-          <MainCard title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'} />
-          <MainCard description={'dwed'} title={'tittle'} date={'июль 02, 2002'} authorName={'Фамилия Имя'} />
-          <MainCard title={'tittle'} date={'июль 02, 2002'} />
-          <MainCard title={'tittle'} date={'июль 02, 2002'} />
+          {
+            (layout === 'photo' && !Boolean(albumId)) ? PHOTO_ALBUMS.map((album) => (
+              <AlbumCard
+                key={album.id}
+                {...album}
+              />
+            )) : PHOTO.map((photo) => (
+              <PhotoCard key={photo.id} id={photo.id} {...photo} />
+            ))
+          }
         </ProfileCard>
 
         <ProfileCard name={'video'} title={'Видео'}>
