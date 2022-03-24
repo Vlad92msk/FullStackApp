@@ -8,7 +8,6 @@
   padding: rem(5);
   margin: rem(1);
   overflow: hidden;
-
   &-Row {
     display: flex;
     width: 100%;
@@ -106,8 +105,9 @@
   }
 
   &-Modal {
-    width: 80vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--SOCIAL--Background-Card) !important;
   }
 
   &-ModalPhotoContainer {
@@ -119,9 +119,12 @@
   &-Chat {
     width: 100%;
     height: 40%;
-    border: rem(1) solid var(--SOCIAL--Color-Text-System);
     padding: rem(10);
   }
 
-
+  &-ChatTest {
+    height: 100%;
+    width: 100%;
+    padding: rem(30);
+  }
 }
