@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { classnames } from '@bem-react/classnames'
+import { motion } from 'framer-motion'
+
 import { createString } from '@client_shared/utils/createString'
 import { makeCn } from '@client_shared/utils'
 
@@ -20,7 +22,8 @@ export interface ImageType {
   className?: string
 }
 
-export const Image: React.FC<ImageType> = React.memo(({ path, sizePriority, className }) => {
+export const Image: React.FC<ImageType> = forwardRef((props, ref: any) => {
+  const { className, sizePriority, path } = props
   const { project, page, img } = path
   const src = `/resources/images/${createString([project, page, img], '/')}`
 
@@ -29,12 +32,15 @@ export const Image: React.FC<ImageType> = React.memo(({ path, sizePriority, clas
       <source type='image/webp' srcSet={`${src}.webp`} />
       <source type='image/avif' srcSet={`${src}.avif`} />
       <img
+        ref={ref}
         className={classnames(cn('Img', { sizePriority }), className)}
         src={`${src}.webp`} alt={img}
       />
     </picture>
   )
 })
+
+export const MImage = motion(Image)
 
 Image.defaultProps = {
   path: {} as ImagePath,

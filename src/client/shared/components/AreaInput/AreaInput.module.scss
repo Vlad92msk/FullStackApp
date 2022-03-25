@@ -3,13 +3,13 @@
 
 
 .AreaInput {
-  height: rem(80);
+  height: fit-content;
 
   &-Input {
     @include placeholderColor(var(--Color-Text--disabled));
 
-    width: 100%;
-    height: 100%;
+    width: fit-content;
+    height: fit-content;
     padding: rem(12) rem(16);
 
     border-width: rem(1);

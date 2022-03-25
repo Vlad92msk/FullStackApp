@@ -3,11 +3,12 @@
 @import "../../../App/App.module.scss";
 
 .PhotoCard {
-  @include flex($direction: column);
+  @include flex();
   background: var(--SOCIAL--Background-Card);
   padding: rem(5);
   margin: rem(1);
   overflow: hidden;
+
   &-Row {
     display: flex;
     width: 100%;
@@ -116,15 +117,67 @@
     height: 60%;
   }
 
-  &-Chat {
-    width: 100%;
-    height: 40%;
+  &-ChatContainer {
+    height: 100%;
+    overflow-x: hidden;
     padding: rem(10);
+    display: flex;
+    flex-direction: column;
+    ::-webkit-scrollbar {
+      width: rem(0);
+      height: rem(0);
+    }
   }
 
-  &-ChatTest {
-    height: 100%;
+  &-ChatFilter {
     width: 100%;
-    padding: rem(30);
+    margin: 0 rem(20);
+  }
+
+  &-ChatBox {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  &-ChatBoxColumn {
+    display: flex;
+    flex-direction: column;
+    background: var(--SOCIAL--Background-Card);
+  }
+
+  &-ChatAuthorImg {
+    width: rem(25);
+    height: rem(25);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  &-ChatAuthorRow {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: rem(10) 0;
+  }
+
+  &-Chat {
+    flex: 0 1 auto;
+    margin: rem(0) rem(20) rem(20) rem(20);
+    background: #44475299;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    max-width: 90%;
+    //&:before {
+    //  content: '';
+    //  position: absolute;
+    //  right: 100%;
+    //  top: 50%;
+    //  width: rem(10);
+    //  height: rem(1);
+    //  background: #65baba;
+    //}
   }
 }

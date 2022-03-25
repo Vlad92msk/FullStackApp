@@ -13,6 +13,7 @@ export type AnimationToggleComponentType = {
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
   setRef?: (ref: React.MutableRefObject<HTMLDivElement>) => void
+  onToggle?: React.Dispatch<any>
   animations?: {
     active: AnimateParams[],
     close: AnimateParams[]
@@ -26,13 +27,17 @@ export const AnimationToggleComponent: React.FC<AnimationToggleComponentType> = 
     setRef,
     onMouseLeave,
     onMouseEnter,
+    onToggle,
     animations
   }) => {
   const ref = useRef<HTMLDivElement>(null)
   const animate = useAnimation()
 
   const [open, setOpen] = useState(null)
-  const handleToggle = useCallback(() => setOpen(prev => !prev), [])
+  const handleToggle = useCallback(() => {
+    setOpen(prev => !prev)
+    onToggle(prev => !prev)
+  }, [])
 
   const [{ active, close }, setAnim] = useState(animations || { active: [], close: [] })
 
@@ -48,13 +53,28 @@ export const AnimationToggleComponent: React.FC<AnimationToggleComponentType> = 
               position: 'fixed',
               top: ref?.current?.offsetTop,
               left: ref?.current?.offsetLeft,
+              width: ref?.current?.offsetWidth,
+              height: ref?.current?.offsetHeight,
+              padding: '0%',
               zIndex: 10
             },
             transitionOverride: { duration: .1 }
           },
           {
-            animate: { top: '1%', left: '1%' },
+            animate: {
+              top: '1%',
+              left: '1%'
+            },
             transitionOverride: { delay: .1, duration: 2 }
+          },
+          {
+            animate: {
+              width: '98%',
+              height: '98%',
+              alignItems: 'center',
+              padding: '4%'
+            },
+            transitionOverride: { delay: 2.1, duration: 1 }
           }
         ],
         close: [

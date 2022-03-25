@@ -13,6 +13,7 @@ export interface AreaInputProps {
   className?: string;
   style?: React.CSSProperties;
   size?: 'regular' | 'small';
+  maxWidth?: number;
   name?: string;
   value?: string;
   placeholder?: string;
@@ -33,6 +34,7 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = (props) => {
     error,
     disabled,
     onChange,
+    maxWidth
   } = props;
 
 
@@ -47,6 +49,9 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = (props) => {
         as="textarea"
         color={disabled ? 'disabled' : 'body'}
         className={cn('Input', { error: !!error, size })}
+        style={{
+          maxWidth
+        }}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
