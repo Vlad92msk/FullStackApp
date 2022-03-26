@@ -13,7 +13,7 @@ export interface AreaInputProps {
   className?: string;
   style?: React.CSSProperties;
   size?: 'regular' | 'small';
-  maxWidth?: number;
+  maxWidth?: string;
   name?: string;
   value?: string;
   placeholder?: string;

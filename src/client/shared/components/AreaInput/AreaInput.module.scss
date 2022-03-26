@@ -8,7 +8,7 @@
   &-Input {
     @include placeholderColor(var(--Color-Text--disabled));
 
-    width: fit-content;
+    width: inherit;
     height: fit-content;
     padding: rem(12) rem(16);
 

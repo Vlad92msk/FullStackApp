@@ -10,22 +10,12 @@ import { Icon } from '@client/shared/components/Icon'
 import { Image, MImage } from '@client/shared/components/Image'
 import { useRouter } from 'next/router'
 import { PhotoType } from '@client/projects/social/containers/Profile/data/photos.data'
-import { InputLabel } from '@material-ui/core'
-import { Modal } from '@client/shared/components/Modal'
-import { useBooleanState } from '@client/shared/hooks'
 import { TextInput } from '@client/shared/components/TextInput'
 import { AreaInput } from '@client/shared/components/AreaInput'
-import { AnimationToggleComponent } from '@client/shared/components/AnimationToggleComponent'
 import { useMainAnim } from './functions/main.animate'
 
 const cn = makeCn('PhotoCard', styles)
 
-
-const initialTranslateX = { transform: 'translateX(100%)' }
-const animateTranslateX = { transform: 'translateX(0%)' }
-const initialTranslateY = { transform: 'translateY(100%)' }
-const animateTranslateY = { transform: 'translateY(0%)' }
-const transition = { duration: .5 }
 
 export interface PhotoCardType extends PhotoType {
 }
@@ -46,21 +36,35 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     title
   } = props
   const [comment, setComment] = useState(null)
-  const [isHover, setHover] = useState(null)
+  const [isHover, setHover] = useState(false)
   const [open, setOpen] = useState(null)
   const ref = useRef<HTMLDivElement>(null)
+  const { push, query: { lang, layout, albumId } } = useRouter()
+
+  /**
+   * Открыть фотоальбом
+   */
+  useEffect(() => {
+    if (open === null) {
+      return
+    }
+    if (open) {
+      push({
+        query: { lang, layout, albumId, id }
+      })
+    } else {
+      push({
+        query: { lang, layout, albumId }
+      })
+    }
+
+  }, [open])
 
   const toggleCard = useCallback(() => {
     setOpen(prev => !prev)
   }, [])
 
   const main = useMainAnim(open, ref)
-
-  const dwed = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    console.log('1', 1)
-  }, [])
 
   return (
     <motion.div
@@ -69,12 +73,16 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
       animate={main}
     >
       <div className={cn('Column')} style={{ width: '100%' }}>
-        <div className={cn('Row')} style={{height: open? '100%': null, transition: '2s'}}>
+        <div className={cn('Row')} style={{
+          height: open ? '100%' : null,
+          transition: '2s',
+          flexDirection: open ? 'column' : 'row'
+        }}>
           <ButtonBox
             className={cn('Photo')}
-            style={{height: open? '100%': null, transition: '2s'}}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+            style={{ height: open ? '100%' : null, transition: '2s' }}
+            onMouseEnter={() => !open && setHover(true)}
+            onMouseLeave={() => !open && setHover(false)}
             onClick={toggleCard}
           >
             <MImage
@@ -91,50 +99,42 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
             />
           </ButtonBox>
           <AnimatePresence exitBeforeEnter initial={false}>
-            {isHover && (
-              <motion.div
-                className={cn('TitleRow')}
-                initial={initialTranslateY}
-                animate={animateTranslateY}
-                exit={initialTranslateY}
-                transition={transition}
-              >
-                <ButtonBox className={cn('Button')} onClick={() => 1}>
-                  <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'eye-off'} fill={'oldAsphalt50'} />
-                  <Text className={cn('ButtonText')} size={'2'} children={'45'} />
-                </ButtonBox>
-                <Text className={cn('Date')} size={'2'} children={date} />
-              </motion.div>
-            )}
+            <motion.div
+              className={cn('TitleRow')}
+              data-hover={isHover}
+              data-open={open}
+            >
+              <ButtonBox className={cn('Button')} onClick={() => 1}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'eye-off'} fill={'oldAsphalt50'} />
+                <Text className={cn('ButtonText')} size={'2'} children={'45'} />
+              </ButtonBox>
+              <Text className={cn('Date')} size={'2'} children={date} />
+            </motion.div>
           </AnimatePresence>
           <AnimatePresence exitBeforeEnter initial={false}>
-            {isHover && (
-              <motion.div
-                initial={initialTranslateX}
-                animate={animateTranslateX}
-                exit={initialTranslateX}
-                transition={transition}
-                className={cn('ButtonsGroup')}
-              >
-                <div className={cn('Button')}>
-                  <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'heart'} fill={'redRose40'} />
-                  <Text className={cn('ButtonText')} size={'2'} children={likeCount || 0} />
-                </div>
-                <div className={cn('Button')}>
-                  <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'dislike'} fill={'bluePrimrose50'} />
-                  <Text className={cn('ButtonText')} size={'2'} children={disLikeCounts || 0} />
-                </div>
-                <div className={cn('Button')}>
-                  <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'}
-                        fill={'bluePrimrose50'} />
-                  <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
-                </div>
-                <div className={cn('Button')}>
-                  <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'hash'} fill={'oldAsphalt40'} />
-                  <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
-                </div>
-              </motion.div>
-            )}
+            <motion.div
+              className={cn('ButtonsGroup')}
+              data-hover={isHover}
+              data-open={open}
+            >
+              <div className={cn('Button')}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'heart'} fill={'redRose40'} />
+                <Text className={cn('ButtonText')} size={'2'} children={likeCount || 0} />
+              </div>
+              <div className={cn('Button')}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'dislike'} fill={'bluePrimrose50'} />
+                <Text className={cn('ButtonText')} size={'2'} children={disLikeCounts || 0} />
+              </div>
+              <div className={cn('Button')}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'}
+                      fill={'bluePrimrose50'} />
+                <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
+              </div>
+              <div className={cn('Button')}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'hash'} fill={'oldAsphalt40'} />
+                <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
+              </div>
+            </motion.div>
           </AnimatePresence>
         </div>
         {authorName && (
@@ -157,7 +157,6 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
             animate={{ width: '50%', transition: { duration: 2 } }}
             exit={{ width: '1%', transition: { duration: 2 } }}
             transition={{ duration: 2 }}
-            onClick={dwed}
           >
             <div className={cn('ChatFilter')}>filters</div>
             <div className={cn('ChatBox')}>
@@ -169,9 +168,45 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
                       project: 'social'
                     }} />
                   </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
                 </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
+                <AreaInput maxWidth={'100%'} className={cn('Chat')} onChange={setComment} value={comment} />
+              </div>
+              <div className={cn('Column')}>
+                <div className={cn('ChatAuthorRow')}>
+                  <div className={cn('ChatAuthorImg')}>
+                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
+                      img: 'ava',
+                      project: 'social'
+                    }} />
+                  </div>
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
+                </div>
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
+              </div>
+              <div className={cn('Column')}>
+                <div className={cn('ChatAuthorRow')}>
+                  <div className={cn('ChatAuthorImg')}>
+                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
+                      img: 'ava',
+                      project: 'social'
+                    }} />
+                  </div>
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
+                </div>
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
+              </div>
+              <div className={cn('Column')}>
+                <div className={cn('ChatAuthorRow')}>
+                  <div className={cn('ChatAuthorImg')}>
+                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
+                      img: 'ava',
+                      project: 'social'
+                    }} />
+                  </div>
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
+                </div>
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
               </div>
               <div className={cn('Column')}>
                 <div className={cn('ChatAuthorRow')}>
@@ -183,7 +218,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
                   </div>
                   <Text className={cn('AuthorName')} children={authorName} size={'1'} />
                 </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
               </div>
               <div className={cn('Column')}>
                 <div className={cn('ChatAuthorRow')}>
@@ -193,9 +228,9 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
                       project: 'social'
                     }} />
                   </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
                 </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
               </div>
               <div className={cn('Column')}>
                 <div className={cn('ChatAuthorRow')}>
@@ -205,45 +240,9 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
                       project: 'social'
                     }} />
                   </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
+                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
                 </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-                </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-                </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-                </div>
-                <AreaInput maxWidth={300} className={cn('Chat')} onChange={setComment} value={comment} />
+                <Text className={cn('Chat')} children={'Комментарий 123'} />
               </div>
             </div>
           </motion.div>
