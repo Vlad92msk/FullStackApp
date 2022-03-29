@@ -10,7 +10,7 @@
   overflow: hidden;
 
   &-Row {
-    display: flex;
+    @include flex();
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -18,8 +18,7 @@
 
   &-Photo {
     @include flex($justify: center, $align-items: center);
-    height: rem(250);
-    width: 100%;
+    @include wh(100%, rem(250));
     position: relative;
     z-index: 1;
   }
@@ -35,10 +34,12 @@
     margin-left: rem(5);
     transform: translateX(100%);
     transition: transform .5s;
+    z-index: 3;
 
     &[data-hover="true"] {
       transform: translateX(0%);
       transition: transform .5s;
+
     }
 
     &[data-open="true"] {
@@ -51,8 +52,9 @@
   }
 
   &-Button {
-    display: flex;
+    @include flex();
     margin: rem(5);
+    cursor: pointer;
   }
 
   &-ButtonIcon {
@@ -74,6 +76,7 @@
     width: 100%;
     transform: translateY(100%);
     transition: transform .5s;
+    z-index: 3;
 
     &[data-hover="true"] {
       transform: translateY(0%);
@@ -93,8 +96,7 @@
   }
 
   &-Column {
-    display: flex;
-    flex-direction: column;
+    @include flex($direction: column);
   }
 
   &-Date {
@@ -104,9 +106,7 @@
   }
 
   &-AuthorBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex($justify: space-between, $align-items: center);
     z-index: 2;
   }
 
@@ -120,28 +120,6 @@
     width: fit-content;
   }
 
-  &-AuthorRow {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: rem(10) 0;
-  }
-
-  &-AuthorImg {
-    width: rem(25);
-    height: rem(25);
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  &-AuthorName {
-    color: var(--SOCIAL--Color-Text-Main);
-    justify-self: start;
-    flex: 1 1 auto;
-    margin-left: rem(10);
-  }
-
   &-Title {
     color: var(--SOCIAL--Color-Text-Main);
     padding: rem(10) 0;
@@ -152,17 +130,5 @@
     padding: rem(10) 0;
     max-height: 20%;
     overflow-y: auto;
-  }
-
-  &-Modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--SOCIAL--Background-Card) !important;
-  }
-
-  &-ModalPhotoContainer {
-    position: relative;
-    width: 100%;
-    height: 60%;
   }
 }

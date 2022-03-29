@@ -12,6 +12,7 @@ import { PhotoType } from '@client/projects/social/containers/Profile/data/photo
 import { useMainAnim } from './functions/main.animate'
 import { Comments } from '@client/projects/social/containers/Comments'
 import styles from './PhotoCard.module.scss'
+import { UserSmall } from '@client/projects/social/components'
 
 const cn = makeCn('PhotoCard', styles)
 
@@ -34,11 +35,20 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     authorName,
     title
   } = props
-  const [comment, setComment] = useState(null)
   const [isHover, setHover] = useState(false)
   const [open, setOpen] = useState(null)
+  const [isOpenComments, setOpenComments] = useState(null)
   const ref = useRef<HTMLDivElement>(null)
   const { push, query: { lang, layout, albumId } } = useRouter()
+
+  /**
+   * Автоматически закрыть комментарии если закрывается сама модалка
+   */
+  useEffect(() => {
+    if (!open) {
+      setOpenComments(false)
+    }
+  }, [open])
 
   /**
    * Открыть фотоальбом
@@ -131,7 +141,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
                 <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'dislike'} fill={'bluePrimrose50'} />
                 <Text className={cn('ButtonText')} size={'2'} children={disLikeCounts || 0} />
               </div>
-              <div className={cn('Button')}>
+              <div className={cn('Button')} onClick={() => setOpenComments(prev => !prev)}>
                 <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'}
                       fill={'bluePrimrose50'} />
                 <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
@@ -145,15 +155,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
         </div>
         {authorName && (
           <div className={cn('AuthorBox')}>
-            <div className={cn('AuthorRow')}>
-              <div className={cn('AuthorImg')}>
-                <Image path={{
-                  img: 'ava',
-                  project: 'social'
-                }} />
-              </div>
-              <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-            </div>
+            <UserSmall userName={authorName} img={'ava'} />
             {open && (
               <Text
                 className={cn('Subscribe')}
@@ -186,7 +188,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
           </>
         )}
       </div>
-      {open && (<Comments />)}
+      <Comments isOpenComments={isOpenComments} />
     </motion.div>
   )
 })

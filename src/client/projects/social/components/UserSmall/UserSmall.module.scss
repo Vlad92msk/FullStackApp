@@ -1,0 +1,25 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+
+
+.UserSmall {
+  @include flex($align-items: center);
+  position: relative;
+  margin: rem(10) 0;
+
+  &-Img {
+    @include wh(rem(25), rem(25));
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &-Name {
+    color: var(--SOCIAL--Color-Text-Main);
+    justify-self: start;
+    flex: 1 1 auto;
+    margin-left: rem(10);
+    padding: rem(2) rem(10);
+    width: fit-content;
+  }
+}

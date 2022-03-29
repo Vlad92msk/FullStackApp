@@ -55,38 +55,15 @@
     padding: rem(10);
   }
 
-  &-AuthorImgWrapper {
-    width: rem(25);
-    height: rem(25);
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 2;
-  }
-
   &-AuthorRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex($align-items: center, $justify: space-between);
     margin: rem(10) 0;
   }
 
-  &-AuthorRowLeft {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
 
   &-AuthorName {
     background: linear-gradient(to right, #ff3865, #ff7978);
-    color: var(--SOCIAL--Color-Text-Main);
     text-shadow: 0 0 rem(4) #ffffffb8;
-    justify-self: start;
-    margin-left: rem(10);
-    display: inline-flex;
-    flex: 0 1 auto;
-    padding: rem(2) rem(10);
-    width: fit-content;
   }
 
 
@@ -96,7 +73,7 @@
   }
 
   &-Button {
-    display: flex;
+    @include flex();
     margin: rem(5);
     cursor: pointer;
 
@@ -124,9 +101,7 @@
   }
 
   &-AnswerCommentAuthorRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex($justify: space-between, $align-items: center);
     margin: rem(5) 0;
   }
 }
