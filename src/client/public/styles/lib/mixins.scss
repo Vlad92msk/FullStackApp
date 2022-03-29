@@ -55,8 +55,8 @@
 @mixin scrollbar($light-theme: true) {
 
   ::-webkit-scrollbar {
-    width: rem(16);
-    height: rem(16);
+    width: rem(10);
+    height: rem(10);
   }
 
   ::-webkit-scrollbar-thumb {

@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
+import { useRouter } from 'next/router'
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import styles from './PhotoCard.module.scss'
 import { Button } from '@client/shared/components/Button'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image, MImage } from '@client/shared/components/Image'
-import { useRouter } from 'next/router'
 import { PhotoType } from '@client/projects/social/containers/Profile/data/photos.data'
-import { TextInput } from '@client/shared/components/TextInput'
-import { AreaInput } from '@client/shared/components/AreaInput'
 import { useMainAnim } from './functions/main.animate'
+import { Comments } from '@client/projects/social/containers/Comments'
+import styles from './PhotoCard.module.scss'
 
 const cn = makeCn('PhotoCard', styles)
 
@@ -72,7 +71,14 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
       className={cn()}
       animate={main}
     >
-      <div className={cn('Column')} style={{ width: '100%' }}>
+      <div
+        className={cn('Column')}
+        style={{
+          width: '100%',
+          background: open ? '#2b3041' : null,
+          padding: open ? '24px' : null
+        }}
+      >
         <div className={cn('Row')} style={{
           height: open ? '100%' : null,
           transition: '2s',
@@ -138,116 +144,49 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
           </AnimatePresence>
         </div>
         {authorName && (
-          <div className={cn('AuthorRow')}>
-            <div className={cn('AuthorImg')}>
-              <Image path={{
-                img: 'ava',
-                project: 'social'
-              }} />
+          <div className={cn('AuthorBox')}>
+            <div className={cn('AuthorRow')}>
+              <div className={cn('AuthorImg')}>
+                <Image path={{
+                  img: 'ava',
+                  project: 'social'
+                }} />
+              </div>
+              <Text className={cn('AuthorName')} children={authorName} size={'1'} />
             </div>
-            <Text className={cn('AuthorName')} children={authorName} size={'1'} />
+            {open && (
+              <Text
+                className={cn('Subscribe')}
+                size={'1'}
+                onClick={() => console.log('subscribe')}
+                children={'Подписаться'} />
+            )}
           </div>
         )}
+        {open && (
+          <>
+            <Text className={cn('Title')} children={'Title'} />
+            <Text className={cn('Description')}>
+              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
+              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
+              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
+              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
+              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
+              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
+              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
+              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
+              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
+              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
+              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
+              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
+              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
+              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
+              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
+            </Text>
+          </>
+        )}
       </div>
-      {
-        open && (
-          <motion.div
-            className={cn('ChatContainer')}
-            initial={{ width: '0%' }}
-            animate={{ width: '50%', transition: { duration: 2 } }}
-            exit={{ width: '1%', transition: { duration: 2 } }}
-            transition={{ duration: 2 }}
-          >
-            <div className={cn('ChatFilter')}>filters</div>
-            <div className={cn('ChatBox')}>
-              <div className={cn('ChatBoxColumn')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <AreaInput maxWidth={'100%'} className={cn('Chat')} onChange={setComment} value={comment} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-              <div className={cn('Column')}>
-                <div className={cn('ChatAuthorRow')}>
-                  <div className={cn('ChatAuthorImg')}>
-                    <Image sizePriority={open ? 'contain' : 'cover'} path={{
-                      img: 'ava',
-                      project: 'social'
-                    }} />
-                  </div>
-                  <Text className={cn('ChatAuthorName')} children={authorName} size={'1'} />
-                </div>
-                <Text className={cn('Chat')} children={'Комментарий 123'} />
-              </div>
-            </div>
-          </motion.div>
-        )
-      }
+      {open && (<Comments />)}
     </motion.div>
   )
 })

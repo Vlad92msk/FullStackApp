@@ -1,0 +1,145 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+%user_comment {
+  flex: 0 1 auto;
+  margin: rem(0) rem(0) rem(0) rem(20);
+  position: relative;
+  width: 97%;
+  color: var(--SOCIAL--Color-Text-Main);
+}
+
+
+.Comments {
+  @include flex($direction: column);
+  @include wh(50%, 100%);
+  overflow: hidden;
+  padding: rem(10);
+  margin-left: 2%;
+
+  &-Comment {
+    @include flex($direction: column);
+    margin-bottom: rem(20);
+    position: relative;
+    overflow: hidden;
+  }
+
+  &-Filter {
+    width: 100%;
+    margin: 0 rem(20);
+  }
+
+  &-Container {
+    @include wh(100%, 100%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: rem(8);
+  }
+
+  &-AuthorComment {
+    @include flex($direction: column);
+  }
+
+  &-AuthorCommentInput {
+    @extend %user_comment
+  }
+
+  &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-UserComment {
+    @extend %user_comment;
+    background: rgb(123 129 155 / 14%);
+    padding: rem(10);
+  }
+
+  &-AuthorImgWrapper {
+    width: rem(25);
+    height: rem(25);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  &-AuthorRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: rem(10) 0;
+  }
+
+  &-AuthorRowLeft {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &-AuthorName {
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    color: var(--SOCIAL--Color-Text-Main);
+    text-shadow: 0 0 rem(4) #ffffffb8;
+    justify-self: start;
+    margin-left: rem(10);
+    display: inline-flex;
+    flex: 0 1 auto;
+    padding: rem(2) rem(10);
+    width: fit-content;
+  }
+
+
+  &-ButtonsGroup {
+    @include flex($justify: space-between);
+    margin-left: rem(20);
+  }
+
+  &-Button {
+    display: flex;
+    margin: rem(5);
+    cursor: pointer;
+
+    &:last-child {
+      justify-self: end;
+    }
+  }
+
+  &-ButtonIcon {
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+  &-AnswerContainer {
+    @include flex($direction: column);
+    margin-left: 10%;
+  }
+
+  &-AnswerComment {
+    @include flex($direction: column);
+    position: relative;
+  }
+
+  &-AnswerCommentAuthorRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: rem(5) 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

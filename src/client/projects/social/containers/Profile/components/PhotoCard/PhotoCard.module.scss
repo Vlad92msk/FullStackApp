@@ -21,6 +21,7 @@
     height: rem(250);
     width: 100%;
     position: relative;
+    z-index: 1;
   }
 
   &-ButtonsGroup {
@@ -41,6 +42,7 @@
     }
 
     &[data-open="true"] {
+      transform: translateX(0%);
       position: relative;
       flex-direction: row;
       width: 100%;
@@ -80,6 +82,7 @@
 
     &[data-open="true"] {
       position: relative;
+      transform: translateY(0%);
       transition-delay: .5s;
     }
   }
@@ -100,16 +103,21 @@
     text-align: right;
   }
 
-  &-Description {
-    width: 100%;
+  &-AuthorBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+
+  &-Subscribe {
+    display: inline-flex;
+    flex: 0 1 auto;
+    background: linear-gradient(to right, #ff3865, #ff7978);
     color: var(--SOCIAL--Color-Text-Main);
-    margin: rem(7) 0;
-    overflow: hidden;
-    font-style: italic;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
+    text-shadow: 0 0 rem(4) #ffffffb8;
+    padding: rem(5) rem(15);
+    width: fit-content;
   }
 
   &-AuthorRow {
@@ -134,6 +142,18 @@
     margin-left: rem(10);
   }
 
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+  }
+
+  &-Description {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+    max-height: 20%;
+    overflow-y: auto;
+  }
+
   &-Modal {
     width: 100vw;
     height: 100vh;
@@ -144,79 +164,5 @@
     position: relative;
     width: 100%;
     height: 60%;
-  }
-
-  &-ChatContainer {
-    height: 100%;
-    overflow-x: hidden;
-    padding: rem(10);
-    display: flex;
-    flex-direction: column;
-
-    ::-webkit-scrollbar {
-      width: rem(0);
-      height: rem(0);
-    }
-  }
-
-  &-ChatFilter {
-    width: 100%;
-    margin: 0 rem(20);
-  }
-
-  &-ChatBox {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-  }
-
-  &-ChatBoxColumn {
-    display: flex;
-    flex-direction: column;
-    background: var(--SOCIAL--Background-Card);
-  }
-
-  &-ChatAuthorImg {
-    width: rem(25);
-    height: rem(25);
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 2;
-  }
-
-  &-ChatAuthorRow {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: rem(10) 0;
-  }
-
-  &-Chat {
-    flex: 0 1 auto;
-    margin: rem(0) rem(20) rem(20) rem(20);
-    background: #44475299;
-    position: relative;
-    width: 100%;
-    max-width: 90%;
-    padding: rem(10);
-    border-radius: rem(5);
-    color: var(--SOCIAL--Color-Text-Main);
-    //&:before {
-    //  content: '';
-    //  position: absolute;
-    //  right: 100%;
-    //  top: 50%;
-    //  width: rem(10);
-    //  height: rem(1);
-    //  background: #65baba;
-    //}
-  }
-
-  &-ChatAuthorName {
-    color: var(--SOCIAL--Color-Text-System);
-    justify-self: start;
-    flex: 1 1 auto;
-    margin-left: rem(10);
   }
 }

@@ -4,10 +4,10 @@ import { ControlsAnimationDefinition } from 'framer-motion/types/animation/types
 
 const openEl: ControlsAnimationDefinition = {
   position: 'fixed',
-  left: '1%',
-  top: '1%',
-  width: '98%',
-  height: '98%',
+  left: '0%',
+  top: '0%',
+  width: '100%',
+  height: '100%',
   padding: '5%',
   background: '#202538'
 }
@@ -64,6 +64,8 @@ export const useMainAnim = (open: boolean, ref: React.MutableRefObject<HTMLDivEl
         zIndex: null,
         background: null
       }, { delay: 2, duration: .1 })
+
+
     }
   }, [animate, open, ref, initial])
 
