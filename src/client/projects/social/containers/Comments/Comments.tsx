@@ -40,7 +40,7 @@ export const Comments: React.FC<CommentsType> = React.memo(
                answers,
                commentId
              }) => (
-              <div className={cn('Comment')}>
+              <div key={commentId} className={cn('Comment')}>
                 <div className={cn('AuthorRow')}>
                   <UserSmall textClassName={cn('AuthorName')} userName={commentAuthor} img={'ava'} />
                   <Text className={cn('Date')} children={commentDate} size={'1'} />
@@ -64,9 +64,10 @@ export const Comments: React.FC<CommentsType> = React.memo(
                        commentDate,
                        commentDescription,
                        likeCount,
-                       disLikeCounts
+                       disLikeCounts,
+                      commentId
                      }) => (
-                      <div className={cn('AnswerComment')}>
+                      <div key={commentId} className={cn('AnswerComment')}>
                         <div className={cn('AnswerCommentAuthorRow')}>
                           <UserSmall textClassName={cn('AuthorName')} userName={commentAuthor} img={'ava'} />
                           <Text className={cn('Date')} children={commentDate} size={'1'} />

@@ -21,6 +21,11 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: rem(8);
+
+    @include media-768 {
+      overflow: auto;
+      padding: rem(8) 0;
+    }
   }
 
   &-AuthorComment {

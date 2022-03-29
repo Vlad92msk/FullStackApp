@@ -5,9 +5,14 @@
 .PhotoCard {
   @include flex();
   background: var(--SOCIAL--Background-Card);
-  padding: rem(5);
   margin: rem(1);
   overflow: hidden;
+
+  @include media-768 {
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+  }
 
   &-Row {
     @include flex();
@@ -21,6 +26,10 @@
     @include wh(100%, rem(250));
     position: relative;
     z-index: 1;
+
+    @include media-768 {
+      min-height: 30vh;
+    }
   }
 
   &-ButtonsGroup {
@@ -130,5 +139,11 @@
     padding: rem(10) 0;
     max-height: 20%;
     overflow-y: auto;
+
+    @include media-768 {
+      padding: rem(10) 0;
+      max-height: initial;
+      overflow-y: initial;
+    }
   }
 }

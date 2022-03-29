@@ -9,7 +9,7 @@ import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image, MImage } from '@client/shared/components/Image'
 import { PhotoType } from '@client/projects/social/containers/Profile/data/photos.data'
-import { useMainAnim } from './functions/main.animate'
+import { initialEl, useMainAnim } from './functions/main.animate'
 import { Comments } from '@client/projects/social/containers/Comments'
 import styles from './PhotoCard.module.scss'
 import { UserSmall } from '@client/projects/social/components'
@@ -40,6 +40,8 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
   const [isOpenComments, setOpenComments] = useState(null)
   const ref = useRef<HTMLDivElement>(null)
   const { push, query: { lang, layout, albumId } } = useRouter()
+  const main = useMainAnim(open, ref)
+
 
   /**
    * Автоматически закрыть комментарии если закрывается сама модалка
@@ -73,7 +75,6 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     setOpen(prev => !prev)
   }, [])
 
-  const main = useMainAnim(open, ref)
 
   return (
     <motion.div
@@ -91,27 +92,23 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
       >
         <div className={cn('Row')} style={{
           height: open ? '100%' : null,
-          transition: '2s',
           flexDirection: open ? 'column' : 'row'
         }}>
           <ButtonBox
             className={cn('Photo')}
-            style={{ height: open ? '100%' : null, transition: '2s' }}
+            style={{ height: open ? '100%' : null }}
             onMouseEnter={() => !open && setHover(true)}
             onMouseLeave={() => !open && setHover(false)}
             onClick={toggleCard}
           >
             <MImage
-              initial={open ? { objectFit: 'cover' } : { objectFit: 'contain' }}
+              initial={open ? { objectFit: 'contain' } : { objectFit: 'cover' }}
               animate={open ? { objectFit: 'contain' } : {
                 objectFit: 'cover',
                 transition: { delay: 2 }
               }}
               exit={{ objectFit: 'cover', transition: { delay: 2 } }}
-              path={{
-                img: 'ava',
-                project: 'social'
-              }}
+              path={{ img: 'ava', project: 'social' }}
             />
           </ButtonBox>
           <AnimatePresence exitBeforeEnter initial={false}>
