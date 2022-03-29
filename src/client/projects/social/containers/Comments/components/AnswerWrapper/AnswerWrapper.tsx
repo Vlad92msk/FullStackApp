@@ -24,7 +24,7 @@ export const AnswerWrapper: React.FC<AnswerWrapperType> = React.memo(({ isOpenCo
           animate={animate}
           exit={initial}
           initial={initial}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: .7 }}
         >
           {children}
         </motion.div>

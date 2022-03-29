@@ -24,7 +24,7 @@ export const CommentsWrapper: React.FC<CommentsWrapperType> = React.memo(({ isOp
           animate={animate}
           exit={initial}
           initial={initial}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1 }}
         >
           {children}
         </motion.div>

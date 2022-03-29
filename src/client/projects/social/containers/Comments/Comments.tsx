@@ -54,6 +54,10 @@ export const Comments: React.FC<CommentsType> = React.memo(
                   onOpenAnswer={setOpenCommentId}
                 />
                 <AnswerWrapper isOpenComments={openCommentId === commentId}>
+                  <div className={cn('AuthorComment')}>
+                    <AreaInput onChange={setComment} value={comment} />
+                    <Text className={cn('Send', { disabled: !comment?.length })} children={'Отправить'} size={'1'} />
+                  </div>
                   {answers.map(
                     ({
                        commentAuthor,

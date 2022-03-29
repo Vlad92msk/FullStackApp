@@ -60,5 +60,6 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
 
 AreaInput.defaultProps = {
   className: null,
-  placeholder: 'Введите значение...'
+  placeholder: 'Введите комментарий...',
+  size: '2'
 }

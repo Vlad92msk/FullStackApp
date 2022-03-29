@@ -33,7 +33,7 @@
     cursor: pointer;
 
     &--disabled {
-      cursor: none;
+      cursor: auto;
       color: var(--SOCIAL--Color-Text-System);
     }
   }
