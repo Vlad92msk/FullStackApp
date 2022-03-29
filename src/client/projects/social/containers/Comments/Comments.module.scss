@@ -2,21 +2,7 @@
 @use "../../../../public/styles/lib/mixins" as *;
 @import "../App/App.module.scss";
 
-%user_comment {
-  flex: 0 1 auto;
-  margin: rem(0) rem(0) rem(0) rem(20);
-  position: relative;
-  width: 97%;
-  color: var(--SOCIAL--Color-Text-Main);
-}
-
-
 .Comments {
-  @include flex($direction: column);
-  @include wh(50%, 100%);
-  overflow: hidden;
-  padding: rem(10);
-  margin-left: 2%;
 
   &-Comment {
     @include flex($direction: column);
@@ -41,8 +27,15 @@
     @include flex($direction: column);
   }
 
-  &-AuthorCommentInput {
-    @extend %user_comment
+  &-Send {
+    color: var(--SOCIAL--Color-Text-Main);
+    align-self: end;
+    cursor: pointer;
+
+    &--disabled {
+      cursor: none;
+      color: var(--SOCIAL--Color-Text-System);
+    }
   }
 
   &-Date {
@@ -50,7 +43,11 @@
   }
 
   &-UserComment {
-    @extend %user_comment;
+    flex: 0 1 auto;
+    margin: rem(0) rem(0) rem(0) rem(20);
+    position: relative;
+    width: 97%;
+    color: var(--SOCIAL--Color-Text-Main);
     background: rgb(123 129 155 / 14%);
     padding: rem(10);
   }
@@ -66,34 +63,6 @@
     text-shadow: 0 0 rem(4) #ffffffb8;
   }
 
-
-  &-ButtonsGroup {
-    @include flex($justify: space-between);
-    margin-left: rem(20);
-  }
-
-  &-Button {
-    @include flex();
-    margin: rem(5);
-    cursor: pointer;
-
-    &:last-child {
-      justify-self: end;
-    }
-  }
-
-  &-ButtonIcon {
-  }
-
-  &-ButtonText {
-    color: var(--SOCIAL--Color-Text-System);
-    margin-left: rem(5);
-  }
-
-  &-AnswerContainer {
-    @include flex($direction: column);
-    margin-left: 10%;
-  }
 
   &-AnswerComment {
     @include flex($direction: column);

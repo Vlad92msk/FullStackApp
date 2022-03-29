@@ -1,0 +1,12 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.CommentsWrapper {
+  @include flex($direction: column);
+  @include wh(50%, 100%);
+  overflow: hidden;
+  padding: rem(10);
+  margin-left: 2%;
+}
+

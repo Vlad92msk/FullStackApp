@@ -1,0 +1,44 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+
+
+.AreaInput {
+  @include wh(100%, fit-content);
+  flex: 0 1 auto;
+  position: relative;
+  color: var(--SOCIAL--Color-Text-System);
+
+  &-Input {
+    @include placeholderColor(var(--Color-Text--disabled));
+    @include wh(inherit, fit-content);
+    padding: rem(12) rem(16);
+    background: transparent;
+    border-width: rem(1);
+    border-style: solid;
+    border-radius: rem(3);
+    color: var(--SOCIAL--Color-Text-System);
+    max-width: 100%;
+
+    &--error {
+      border-color: var(--Color-RedRose--50);
+    }
+
+
+    &:empty {
+      border-color: var(--SOCIAL--Color-Text-System);
+      color: var(--SOCIAL--Color-Text-Main);
+    }
+
+
+    &:focus {
+      border-color: var(--SOCIAL--Color-Text-Main);
+      color: var(--SOCIAL--Color-Text-Main);
+      outline: none;
+    }
+
+    &:disabled {
+      border-color: var(--Color-OldAsphalt--30);
+      background: var(--Color-OldAsphalt--10);
+    }
+  }
+}
