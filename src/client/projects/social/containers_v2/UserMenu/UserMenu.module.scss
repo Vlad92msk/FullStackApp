@@ -1,0 +1,110 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module";
+
+$photoSize: clamp(100px, 18vw, rem(300));
+
+.UserMenu {
+  @include flex($direction: column);
+  background: var(--SOCIAL--Background-Card);
+  border-radius: $borderRadiusCard;
+  width: 50%;
+
+  &-Main {
+    @include flex($align-items: center);
+    padding: $componentPadding;
+  }
+
+  &-Photo {
+    @include flex($justify: center, $align-items: center);
+    @include wh($photoSize, $photoSize);
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &-UserName {
+    color: var(--SOCIAL--Color-Text-Main);
+  }
+
+  &-Column {
+    @include flex($direction: column);
+    margin-left: rem(10);
+    flex: 1 1 auto;
+  }
+
+  &-Row {
+    @include flex($justify: space-between);
+    margin: rem(2.5) 0;
+  }
+
+  &-Hash {
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-VisitsCount {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+  &-Gap {
+    width: 100%;
+    height: rem(1);
+    background-color: var(--SOCIAL--Color-Text-System);
+    margin: rem(10) 0;
+  }
+
+  &-Any {
+    padding: $componentPadding;
+  }
+
+  &-Button {
+    @include flex($align-items: center);
+  }
+
+  &-ButtonIcon {
+    fill: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-ButtonText {
+    margin-left: rem(5);
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-FriendsRow {
+    @include flex($justify: center, $align-items: center);
+    margin: rem(10) 0;
+  }
+
+  &-FriendsImgContainer {
+    width: rem(40);
+    height: rem(40);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &-FriendsUserName {
+    color: var(--SOCIAL--Color-Text-Main);
+    justify-self: start;
+    flex: 1 1 auto;
+    margin-left: rem(10);
+  }
+
+  &-FriendsStatus {
+    width: rem(5);
+    height: rem(5);
+    border-radius: 50%;
+
+    &--status {
+      &_online {
+        background: var(--SOCIAL--Color-Status-Online);
+      }
+
+      &_offline {
+        background: var(--SOCIAL--Color-Status-Offline);
+      }
+    }
+  }
+}

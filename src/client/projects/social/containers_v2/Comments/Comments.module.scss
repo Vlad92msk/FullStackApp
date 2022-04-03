@@ -1,0 +1,94 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+.Comments {
+
+  &-Comment {
+    @include flex($direction: column);
+    margin-bottom: rem(20);
+    position: relative;
+    overflow: hidden;
+  }
+
+  &-Filter {
+    width: 100%;
+    margin: 0 rem(20);
+  }
+
+  &-Container {
+    @include wh(100%, 100%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: rem(8);
+
+    @include media-768 {
+      overflow: auto;
+      padding: rem(8) 0;
+    }
+  }
+
+  &-AuthorComment {
+    @include flex($direction: column);
+  }
+
+  &-Send {
+    color: var(--SOCIAL--Color-Text-Main);
+    align-self: end;
+    cursor: pointer;
+
+    &--disabled {
+      cursor: auto;
+      color: var(--SOCIAL--Color-Text-System);
+    }
+  }
+
+  &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-UserComment {
+    flex: 0 1 auto;
+    margin: rem(0) rem(0) rem(0) rem(20);
+    position: relative;
+    width: 97%;
+    color: var(--SOCIAL--Color-Text-Main);
+    background: rgb(123 129 155 / 14%);
+    padding: rem(10);
+  }
+
+  &-AuthorRow {
+    @include flex($align-items: center, $justify: space-between);
+    margin: rem(10) 0;
+  }
+
+
+  &-AuthorName {
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    text-shadow: 0 0 rem(4) #ffffffb8;
+  }
+
+
+  &-AnswerComment {
+    @include flex($direction: column);
+    position: relative;
+  }
+
+  &-AnswerCommentAuthorRow {
+    @include flex($justify: space-between, $align-items: center);
+    margin: rem(5) 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

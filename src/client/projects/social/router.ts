@@ -9,17 +9,35 @@ export enum RoleEnum {
 
 export enum SocialPages {
   SOCIAL = 'social',
+  SOCIAL_PHOTO = 'photo',
+  SOCIAL_VIDEO = 'video',
 }
 
 /**
  * Роуты проекта
  */
-export type ProjectStructureRoutes = Record<SocialPages.SOCIAL, RouteParam>
+export type ProjectStructureRoutes = Record<SocialPages, RouteParam>
 
 export const PROJECT_ROUTES: ProjectStructureRoutes = {
   [SocialPages.SOCIAL]: {
     page: 'social',
     title: 'Соц.сеть',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
+  [SocialPages.SOCIAL_PHOTO]: {
+    page: 'photo',
+    title: 'Фото',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
+  [SocialPages.SOCIAL_VIDEO]: {
+    page: 'video',
+    title: 'Видео',
     allowRoles: [RoleEnum.visitor],
     subRoutes: {
 

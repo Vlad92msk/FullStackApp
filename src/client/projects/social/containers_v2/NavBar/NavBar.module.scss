@@ -1,0 +1,46 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+.NavBar {
+  padding: $componentPadding;
+  width: 10%;
+
+  &-Header {
+    @include flex($align-items: center, $justify: space-between)
+  }
+
+  &-Nav {
+    & ul {
+      padding: 0;
+      margin: 0;
+
+      & li {
+        @include flex();
+        list-style: none;
+
+        & > * {
+          @include flex($align-items: center);
+          padding: 0 rem(5);
+          margin: rem(5) 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &-Icon {
+    fill: var(--SOCIAL--Color-Text-Main);
+  }
+
+  &-Text {
+    margin-left: rem(5);
+    color: var(--SOCIAL--Color-Text-Main);
+  }
+
+  &-Button {
+    & > *:hover {
+      background-color: transparent !important;
+    }
+  }
+}

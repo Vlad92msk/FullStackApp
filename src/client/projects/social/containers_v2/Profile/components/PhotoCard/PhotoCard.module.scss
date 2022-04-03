@@ -1,0 +1,149 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.PhotoCard {
+  @include flex();
+  background: var(--SOCIAL--Background-Card);
+  margin: rem(1);
+  overflow: hidden;
+
+  @include media-768 {
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+  }
+
+  &-Row {
+    @include flex();
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &-Photo {
+    @include flex($justify: center, $align-items: center);
+    @include wh(100%, rem(250));
+    position: relative;
+    z-index: 1;
+
+    @include media-768 {
+      min-height: 30vh;
+    }
+  }
+
+  &-ButtonsGroup {
+    @include flex($direction: column);
+    position: absolute;
+
+    background: rgb(139 139 139 / 11%);
+    top: 0;
+    right: 0;
+    width: fit-content;
+    margin-left: rem(5);
+    transform: translateX(100%);
+    transition: transform .5s;
+    z-index: 3;
+
+    &[data-hover="true"] {
+      transform: translateX(0%);
+      transition: transform .5s;
+
+    }
+
+    &[data-open="true"] {
+      transform: translateX(0%);
+      position: relative;
+      flex-direction: row;
+      width: 100%;
+      transition-delay: .5s;
+    }
+  }
+
+  &-Button {
+    @include flex();
+    margin: rem(5);
+    cursor: pointer;
+  }
+
+  &-ButtonIcon {
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+
+  &-TitleRow {
+    position: absolute;
+    flex-direction: column;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform .5s;
+    z-index: 3;
+
+    &[data-hover="true"] {
+      transform: translateY(0%);
+      transition: transform .5s;
+    }
+
+    &[data-open="true"] {
+      position: relative;
+      transform: translateY(0%);
+      transition-delay: .5s;
+    }
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    margin: rem(5);
+  }
+
+  &-Column {
+    @include flex($direction: column);
+  }
+
+  &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+    padding: rem(5);
+    text-align: right;
+  }
+
+  &-AuthorBox {
+    @include flex($justify: space-between, $align-items: center);
+    z-index: 2;
+  }
+
+  &-Subscribe {
+    display: inline-flex;
+    flex: 0 1 auto;
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    color: var(--SOCIAL--Color-Text-Main);
+    text-shadow: 0 0 rem(4) #ffffffb8;
+    padding: rem(5) rem(15);
+    width: fit-content;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+  }
+
+  &-Description {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+    max-height: 20%;
+    overflow-y: auto;
+
+    @include media-768 {
+      padding: rem(10) 0;
+      max-height: initial;
+      overflow-y: initial;
+    }
+  }
+}

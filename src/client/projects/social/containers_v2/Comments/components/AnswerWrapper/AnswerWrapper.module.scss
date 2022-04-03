@@ -1,0 +1,9 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.AnswerWrapper {
+  @include flex($direction: column);
+  margin-left: 10%;
+}
+
