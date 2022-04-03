@@ -2,11 +2,14 @@ import { GetServerSideProps, NextPage } from 'next'
 import { App } from '@client_projects/social/containers_v2/App'
 import { Page } from '@client_shared/components/page'
 import { getSSR, ssrResult } from '@client/shared/utils/getSsrFuncs'
+import { Profile } from '@client/projects/social/containers_v2/Profile'
 
 
 const UserPage: NextPage = () => (
   <Page page={'SOCIAL'} subTitle={'Social'}>
-    <App />
+    <App>
+      <Profile />
+    </App>
   </Page>
 )
 

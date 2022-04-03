@@ -6,7 +6,9 @@ import { getSSR, ssrResult } from '@client/shared/utils/getSsrFuncs'
 
 const SocialPhoto: NextPage = () => (
   <Page page={'SOCIAL'} subTitle={'Social'}>
-    <div>video</div>
+    <App>
+      <div>Видео</div>
+    </App>
   </Page>
 )
 
