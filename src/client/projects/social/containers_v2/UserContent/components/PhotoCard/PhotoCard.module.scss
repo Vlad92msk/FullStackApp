@@ -4,9 +4,8 @@
 
 .PhotoCard {
   @include flex();
-  background: var(--SOCIAL--Background-Card);
   margin: rem(1);
-  overflow: hidden;
+  flex: 0 1 clamp(150px, 50%, 49.5%);
 
   @include media-768 {
     overflow-x: hidden;
@@ -117,6 +116,7 @@
   &-AuthorBox {
     @include flex($justify: space-between, $align-items: center);
     z-index: 2;
+    padding: 0 rem(10);
   }
 
   &-Subscribe {

@@ -8,7 +8,7 @@ import { Button } from '@client/shared/components/Button'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image, MImage } from '@client/shared/components/Image'
-import { PhotoType } from '@client/projects/social/containers/Profile/data/photos.data'
+import { PhotoType } from '../../data/photos.data'
 import { initialEl, useMainAnim } from './functions/main.animate'
 import { Comments } from '@client/projects/social/containers/Comments'
 import styles from './PhotoCard.module.scss'
@@ -18,6 +18,7 @@ const cn = makeCn('PhotoCard', styles)
 
 
 export interface PhotoCardType extends PhotoType {
+  userId: number
 }
 
 export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
@@ -33,7 +34,9 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     hash,
     likeUsersIds,
     authorName,
-    title
+    title,
+    userId,
+    authorId
   } = props
   const [isHover, setHover] = useState(false)
   const [open, setOpen] = useState(null)
@@ -150,7 +153,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
             </motion.div>
           </AnimatePresence>
         </div>
-        {authorName && (
+        {((userId !== authorId) && authorName) && (
           <div className={cn('AuthorBox')}>
             <UserSmall userName={authorName} img={'ava'} />
             {open && (

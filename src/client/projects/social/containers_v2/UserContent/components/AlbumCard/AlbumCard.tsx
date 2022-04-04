@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
@@ -8,7 +9,9 @@ import { Button } from '@client/shared/components/Button'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image } from '@client/shared/components/Image'
-import { useRouter } from 'next/router'
+import { PhotoType } from '../../data/photos.data'
+import { PhotoCard } from '@client/projects/social/containers_v2/UserContent/components'
+import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('AlbumCard', styles)
 
@@ -26,53 +29,68 @@ export type MainCardType = {
   date: string
   likeCount?: number
   commentsCount?: number
+  photo: PhotoType[]
+  userId: number
 }
 
 export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
-  const { id, title, date, authorName, description, commentsCount, likeCount } = props
-  const { push, query: { lang, layout } } = useRouter()
-
+  const { id, title, date, authorName, description, commentsCount, likeCount, photo, userId } = props
+  const [open, setOpen] = useState(false)
   /**
    * Открыть фотоальбом
    */
   const handleMore = useCallback(() => {
-    push({
-      query: { lang, layout, albumId: id }
-    })
-  }, [layout, lang, id])
+    setOpen(prev => !prev)
+  }, [])
+
 
   return (
-    <div className={cn()}>
-      <Text className={cn('Date')} size={'2'} children={date} />
-      <Text className={cn('Title')} children={title} />
-      {description && (
-        <Text className={cn('Description')} size={'1'} children={description} />
-      )}
-      <div className={cn('ButtonsRow')}>
-        <ButtonBox className={cn('Button')} onClick={() => 1}>
-          <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'heart-fill'} fill={'redRose40'} />
-          <Text className={cn('ButtonText')} size={'2'} children={likeCount || 0} />
-        </ButtonBox>
-        <ButtonBox className={cn('Button')} onClick={() => 1}>
-          <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'} fill={'bluePrimrose50'} />
-          <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
-        </ButtonBox>
-        <ButtonBox className={cn('Button')} onClick={handleMore}>
-          <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'arrow-right'} fill={'bluePrimrose50'} />
-          <Text className={cn('ButtonText')} size={'1'} children={'Открыть'} />
-        </ButtonBox>
-      </div>
-      {authorName && (
-        <div className={cn('AuthorRow')}>
-          <div className={cn('AuthorImg')}>
-            <Image sizePriority={'cover'} path={{
-              img: 'ava',
-              project: 'social'
-            }} />
+    <div className={cn({ active: open})}>
+      {!open ? (
+          <>
+            <Text className={cn('Date')} size={'2'} children={date} />
+            <Text className={cn('Title')} children={title} />
+            {description && (
+              <Text className={cn('Description')} size={'1'} children={description} />
+            )}
+            <div className={cn('ButtonsRow')}>
+              <ButtonBox className={cn('Button')} onClick={() => 1}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'heart-fill'} fill={'redRose40'} />
+                <Text className={cn('ButtonText')} size={'2'} children={likeCount || 0} />
+              </ButtonBox>
+              <ButtonBox className={cn('Button')} onClick={() => 1}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'}
+                      fill={'bluePrimrose50'} />
+                <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
+              </ButtonBox>
+              <ButtonBox className={cn('Button')} onClick={handleMore}>
+                <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'arrow-right'} fill={'bluePrimrose50'} />
+                <Text className={cn('ButtonText')} size={'1'} children={'Открыть'} />
+              </ButtonBox>
+            </div>
+            {authorName && (
+              <div className={cn('AuthorRow')}>
+                <div className={cn('AuthorImg')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('AuthorName')} children={authorName} size={'1'} />
+              </div>
+            )}
+          </>
+        ) :
+        (<>
+          <div className={cn('GoBack')}>
+            <Text className={cn('Title')} children={title} />
+            <IconButton icon={'arrow-left'} onClick={handleMore} />
           </div>
-          <Text className={cn('AuthorName')} children={authorName} size={'1'} />
-        </div>
-      )}
+          <div className={cn('Photos')}>
+            {photo.map((photo) => (<PhotoCard key={photo.id} id={photo.id} userId={userId} {...photo} />))}
+          </div>
+        </>)
+      }
     </div>
   )
 })

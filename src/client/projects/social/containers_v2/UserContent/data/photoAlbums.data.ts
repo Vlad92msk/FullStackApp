@@ -41,3 +41,5 @@ export const PHOTO_ALBUMS = [
     description: null,
   },
 ]
+
+export type PhotoAlbumType = typeof PHOTO_ALBUMS[0]

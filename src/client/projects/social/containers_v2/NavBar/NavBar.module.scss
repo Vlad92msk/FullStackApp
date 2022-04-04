@@ -4,7 +4,6 @@
 
 .NavBar {
   padding: $componentPadding;
-  width: 10%;
 
   &-Header {
     @include flex($align-items: center, $justify: space-between)
