@@ -7,17 +7,14 @@ $borderRadiusCard: rem(5);
 
 .Application {
   @include wh(100vw, 100vh);
-  @include sectionPadding($default: $sectionPadding, $pTop: 20);
+  @include sectionPadding($default: $sectionPadding);
   display: flex;
   align-items: center;
 
 
   &-Content {
-    width: 90%;
-    display: flex;
-    align-items: center;
-    flex: 1 1 auto;
-    height: 100%;
+    @include wh(100%, 100%);
+    display: grid;
+    grid-template-columns: 2fr 5fr;
   }
-
 }

@@ -14,7 +14,7 @@ const cn = makeCn('UserContent', styles)
 
 
 export const UserContent: React.FC = React.memo(() => {
-  const { push, query: { lang, user_id, layout, albumId } } = useRouter()
+  const { push, query: { lang, user_id, layout } } = useRouter()
 
   const dwed = useMemo(() => {
     let dwedsss = {

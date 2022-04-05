@@ -4,13 +4,28 @@
 
 .AlbumCard {
   @include flex($direction: column);
-  background: var(--SOCIAL--Background-Card);
+  border-radius: $borderRadiusCard;
   padding: rem(25);
-  margin: rem(1);
-  flex: 1 1 clamp(100px, 45%, 50%);
+  flex: 0 1 clamp(100px, 30%, 50%);
+  border: rem(1) solid var(--SOCIAL--Color-Text-System);
+  background: var(--SOCIAL--Background-Card);
 
   &--active {
-    flex: 1 1 100%;
+    //display: grid;
+    //grid-auto-columns: revert;
+    //grid-template-columns: repeat(3, 1fr);
+
+    grid-column-end: 4;
+    grid-column-start: 1;
+
+    @include media-1024 {
+      grid-column-end: 3;
+      grid-column-start: 1;
+    }
+    @include media-768 {
+      grid-column-end: 2;
+      grid-column-start: 1;
+    }
   }
 
   &-GoBack {
@@ -21,7 +36,17 @@
   }
 
   &-Photos {
-    @include flex(wrap);
+    display: grid;
+    grid-auto-columns: revert;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1px, 2vw, rem(40));
+
+    @include media-1024 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-768 {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 
   &-Date {
@@ -60,6 +85,10 @@
   &-Button {
     display: flex;
     align-items: center;
+
+    &[data-pointer-disable="true"] {
+      pointer-events: none;
+    }
 
     &:not(:first-child) {
       margin-left: rem(5);

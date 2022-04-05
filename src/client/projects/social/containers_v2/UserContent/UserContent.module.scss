@@ -6,8 +6,7 @@
   @include flex($direction: column);
   flex: 1 1 auto;
   max-height: 100%;
-  margin: 0 rem(10);
-  background: var(--SOCIAL--Background-Card);
+  margin-left: rem(20);
   padding: rem(20);
   border-radius: $borderRadiusCard;
 

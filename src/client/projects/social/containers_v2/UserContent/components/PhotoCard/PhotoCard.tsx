@@ -42,7 +42,7 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
   const [open, setOpen] = useState(null)
   const [isOpenComments, setOpenComments] = useState(null)
   const ref = useRef<HTMLDivElement>(null)
-  const { push, query: { lang, layout, albumId } } = useRouter()
+  const { push, query: { lang, user_id, layout, albumId } } = useRouter()
   const main = useMainAnim(open, ref)
 
 
@@ -64,11 +64,11 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     }
     if (open) {
       push({
-        query: { lang, layout, albumId, id }
+        query: { lang, layout, albumId, user_id, id }
       })
     } else {
       push({
-        query: { lang, layout, albumId }
+        query: { lang, layout, albumId, user_id }
       })
     }
 

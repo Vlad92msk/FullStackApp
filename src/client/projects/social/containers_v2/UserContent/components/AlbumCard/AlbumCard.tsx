@@ -35,14 +35,27 @@ export type MainCardType = {
 
 export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
   const { id, title, date, authorName, description, commentsCount, likeCount, photo, userId } = props
+  const { push, query: { lang, user_id, layout } } = useRouter()
   const [open, setOpen] = useState(false)
   /**
    * Открыть фотоальбом
    */
   const handleMore = useCallback(() => {
+    if (!photo.length) return
     setOpen(prev => !prev)
-  }, [])
 
+    if (open) {
+      push({
+        query: { lang, layout, user_id }
+      })
+    }
+
+    if (!open) {
+      push({
+        query: { lang, layout, user_id, albumId: id }
+      })
+    }
+  }, [lang, layout, user_id, open])
 
   return (
     <div className={cn({ active: open})}>
@@ -63,7 +76,7 @@ export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
                       fill={'bluePrimrose50'} />
                 <Text className={cn('ButtonText')} size={'2'} children={commentsCount || 0} />
               </ButtonBox>
-              <ButtonBox className={cn('Button')} onClick={handleMore}>
+              <ButtonBox className={cn('Button')} data-pointer-disable={!photo.length}  onClick={handleMore}>
                 <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'arrow-right'} fill={'bluePrimrose50'} />
                 <Text className={cn('ButtonText')} size={'1'} children={'Открыть'} />
               </ButtonBox>

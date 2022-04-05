@@ -8,10 +8,10 @@ $photoSize: clamp(100px, 18vw, rem(300));
   @include flex($direction: column);
   background: var(--SOCIAL--Background-Card);
   border-radius: $borderRadiusCard;
-  width: 50%;
+  height: 100%;
 
   &-Main {
-    @include flex($align-items: center);
+    @include flex($align-items: center, $direction: column);
     padding: $componentPadding;
   }
 
@@ -20,8 +20,8 @@ $photoSize: clamp(100px, 18vw, rem(300));
     @include wh($photoSize, $photoSize);
     flex-shrink: 0;
     position: relative;
-    border-radius: 50%;
     overflow: hidden;
+    z-index: 1;
   }
 
   &-UserName {
@@ -31,7 +31,7 @@ $photoSize: clamp(100px, 18vw, rem(300));
   &-Column {
     @include flex($direction: column);
     margin-left: rem(10);
-    flex: 1 1 auto;
+    width: 100%;
   }
 
   &-Row {

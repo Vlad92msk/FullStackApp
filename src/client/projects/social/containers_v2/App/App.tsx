@@ -10,7 +10,7 @@ const cn = makeCn('Application', styles)
 export const App: React.FC = ({ children }) => {
 
   return (
-    <Section className={cn()} bcgImg={{
+    <Section noPaddingRight className={cn()} bcgImg={{
       path: {
         img: 'bkg',
         project: 'social'
