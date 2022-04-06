@@ -14,7 +14,9 @@
 
   &-TabButtons {
     @include flex();
-    padding: rem(10) 0;
+    padding: rem(30) 0;
+    margin-bottom: rem(30);
+    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
 
     & > * {
       flex: 1 1 auto;
@@ -32,6 +34,7 @@
     @include flex();
     width: 100%;
     margin: rem(10) 0;
+    padding: 0 rem(10);
   }
 
   &-FiltersRow {
@@ -65,12 +68,17 @@
   &-Container {
     @include flex($direction: column);
     margin-top: clamp(1px, 1vh, rem(20));
-    height: 90vh;
+    height: 80vh;
   }
 
   &-Photos {
+    margin-top: clamp(1px, 1vh, rem(20));
+    height: 80vh;
+    overflow-y: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
+
 
     @include media-1024 {
       grid-template-columns: repeat(2, 1fr);
