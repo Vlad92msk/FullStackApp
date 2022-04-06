@@ -11,7 +11,6 @@ export const Profile = () => {
 
   return (
     <>
-      <UserMenu />
       <UserContent />
     </>
   )

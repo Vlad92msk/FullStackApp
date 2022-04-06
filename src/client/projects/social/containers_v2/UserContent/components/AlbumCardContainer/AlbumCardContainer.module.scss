@@ -5,6 +5,8 @@
 .AlbumCardContainer {
   @include flex($direction: column);
   flex: 1 1 100%;
+  overflow-y: auto;
+  padding-right: clamp(1px, 1vw, rem(15));
 
   &-Container {
     @include flex($direction: column);

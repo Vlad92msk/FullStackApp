@@ -8,7 +8,7 @@ $photoSize: clamp(100px, 18vw, rem(300));
   @include flex($direction: column);
   background: var(--SOCIAL--Background-Card);
   border-radius: $borderRadiusCard;
-  height: 100%;
+  height: 100vh;
 
   &-Main {
     @include flex($align-items: center, $direction: column);

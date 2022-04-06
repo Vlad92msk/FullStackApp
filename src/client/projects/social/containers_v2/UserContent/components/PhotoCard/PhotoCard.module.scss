@@ -8,8 +8,6 @@
   flex: 0 1 clamp(100px, 30%, 50%);
 
   @include media-1024 {
-    overflow-x: hidden;
-    overflow-y: auto;
     flex-direction: column;
     flex: 1 1 100%;
   }

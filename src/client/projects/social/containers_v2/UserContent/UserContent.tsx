@@ -67,7 +67,8 @@ export const UserContent: React.FC = React.memo(() => {
                   display: 'flex',
                   overflow: 'hidden',
                   borderRadius: '15px',
-                  width: 'fit-content'
+                  width: 'fit-content',
+                  border: '1px solid #6c738b'
                 }}>
                   <input
                     className={cn('RadioInput')}

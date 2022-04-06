@@ -4,11 +4,7 @@
 
 .UserContent {
   @include flex($direction: column);
-  flex: 1 1 auto;
-  max-height: 100%;
-  margin-left: rem(20);
-  padding: rem(20);
-  border-radius: $borderRadiusCard;
+  height: 100vh;
 
   &-Title {
     width: 100%;
@@ -50,14 +46,13 @@
     display: none;
 
     &:checked + label {
-      background: #536989;
+      background: var(--SOCIAL--Color-Text-System);
     }
   }
 
   &-RadioLabel {
     padding: rem(3) rem(14);
     color: white;
-    background: #7d8ecd;
 
     cursor: pointer;
     transition: .5s;
@@ -68,9 +63,8 @@
   }
 
   &-Container {
-    @include flex($wrap: wrap, $justify: space-between, $align-content: flex-start);
-    flex: 1 1 100%;
-    overflow-y: auto;
-    padding: rem(10) 0;
+    @include flex($direction: column);
+    margin-top: clamp(1px, 1vh, rem(20));
+    height: 90vh;
   }
 }
