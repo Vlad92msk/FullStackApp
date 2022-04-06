@@ -101,9 +101,11 @@ export const UserContent: React.FC = React.memo(() => {
                 userId={USER_ID}
               />
             )}
-            {
-              group === 'free' && PHOTO.map((photo) => (<PhotoCard userId={USER_ID} key={photo.id} id={photo.id} {...photo} />))
-            }
+            <div className={cn('Photos')}>
+              {
+                group === 'free' && PHOTO.map((photo) => (<PhotoCard userId={USER_ID} key={photo.id} id={photo.id} {...photo} />))
+              }
+            </div>
           </>
         )
       case 'video':
