@@ -123,10 +123,10 @@ export const UserContent: React.FC = React.memo(() => {
   return (
     <div className={cn()}>
       <div className={cn('TabButtons')}>
-        <Text data-active={layout === 'wall'} onClick={() => handleOpenCard('wall')} children={'Стена'} />
-        <Text data-active={layout === 'photo'} onClick={() => handleOpenCard('photo')} children={'Фото'} />
-        <Text data-active={layout === 'video'} onClick={() => handleOpenCard('video')} children={'Видео'} />
-        <Text data-active={layout === 'work'} onClick={() => handleOpenCard('work')} children={'Работа'} />
+        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'wall'} onClick={() => handleOpenCard('wall')} children={'Стена'} />
+        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'photo'} onClick={() => handleOpenCard('photo')} children={'Фото'} />
+        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'video'} onClick={() => handleOpenCard('video')} children={'Видео'} />
+        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'work'} onClick={() => handleOpenCard('work')} children={'Работа'} />
       </div>
 
       <div className={cn('Container')}>

@@ -2,7 +2,7 @@
 @use "../../../../public/styles/lib/mixins" as *;
 @import "../App/App.module";
 
-$photoSize: clamp(100px, 18vw, rem(300));
+$photoSize: clamp(100px, 18vw, rem(250));
 
 .UserMenu {
   @include flex($direction: column);
@@ -43,6 +43,13 @@ $photoSize: clamp(100px, 18vw, rem(300));
     color: var(--SOCIAL--Color-Text-System);
   }
 
+  &-Description {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+    max-height: 20vh;
+    overflow-y: auto;
+  }
+
   &-VisitsCount {
     color: var(--SOCIAL--Color-Text-System);
     margin-left: rem(5);
@@ -57,6 +64,8 @@ $photoSize: clamp(100px, 18vw, rem(300));
 
   &-Any {
     padding: $componentPadding;
+    display: flex;
+    overflow: auto;
   }
 
   &-Button {

@@ -31,6 +31,14 @@ export const UserMenu: React.FC = React.memo(() => {
           <Text className={cn('UserName')} size={'8'} weight={'medium'} children={'Firsov'} />
           <Text className={cn('UserName')} size={'8'} weight={'medium'} children={'Vlad'} />
           <Text className={cn('Hash')} size={'2'} children={'#firsovv'} />
+          <Text className={cn('Description')} size={'2'}>
+            Любой текст который я хочу написать о себе, дать объявление и тд
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+          </Text>
           <span className={cn('Gap')} />
           <div className={cn('Row')}>
             <ButtonBox className={cn('Button')} onClick={setOpen} onClickCapture={onClose}>
@@ -46,7 +54,6 @@ export const UserMenu: React.FC = React.memo(() => {
               <Text className={cn('ButtonText')} size={'2'} children={'3'} />
             </ButtonBox>
           </div>
-
         </div>
       </div>
       <div className={cn('Any')}>
@@ -56,8 +63,8 @@ export const UserMenu: React.FC = React.memo(() => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              style={{ overflow: 'hidden', marginTop: '20px' }}
-              transition={{ duration: .5, ease: 'easeIn', power: 20 }}
+              style={{ width: '100%' }}
+              transition={{ duration: .5, power: 20 }}
             >
               <div className={cn('FriendsRow')}>
                 <div className={cn('FriendsImgContainer')}>
@@ -66,7 +73,7 @@ export const UserMenu: React.FC = React.memo(() => {
                     project: 'social'
                   }} />
                 </div>
-                <Text className={cn('FriendsUserName')} children={'dwed wed'} />
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
                 <span className={cn('FriendsStatus', { status: 'online' })} />
               </div>
               <div className={cn('FriendsRow')}>
@@ -76,7 +83,7 @@ export const UserMenu: React.FC = React.memo(() => {
                     project: 'social'
                   }} />
                 </div>
-                <Text className={cn('FriendsUserName')} children={'dwed wed'} />
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
                 <span className={cn('FriendsStatus', { status: 'online' })} />
               </div>
               <div className={cn('FriendsRow')}>
@@ -86,8 +93,108 @@ export const UserMenu: React.FC = React.memo(() => {
                     project: 'social'
                   }} />
                 </div>
-                <Text className={cn('FriendsUserName')} children={'dwed wed'} />
-                <span className={cn('FriendsStatus', { status: 'offline' })} />
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'dwed wed'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
+              </div>
+              <div className={cn('FriendsRow')}>
+                <div className={cn('FriendsImgContainer')}>
+                  <Image sizePriority={'cover'} path={{
+                    img: 'ava',
+                    project: 'social'
+                  }} />
+                </div>
+                <Text className={cn('FriendsUserName')} size={'2'} children={'Последний'} />
+                <span className={cn('FriendsStatus', { status: 'online' })} />
               </div>
             </motion.div>
           )}
