@@ -5,7 +5,7 @@
 .NavBar {
   @include flex($align-items: center, $justify: center);
   padding: 0 clamp(5px, 6vw, rem(10));
-  background: var(--SOCIAL--Background-Card);
+  background: var(--SOCIAL--Background-Card-Opacity);
   height: 100vh;
 
   &-Header {

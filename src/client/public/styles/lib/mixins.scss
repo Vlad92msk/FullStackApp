@@ -85,36 +85,66 @@
 
 @mixin flex($wrap: false, $direction: false, $justify: false, $align-items: false, $align-content: false) {
   display: flex;
-  @if $wrap {flex-wrap: $wrap;};
-  @if $justify {justify-content: $justify;};
-  @if $align-items {align-items: $align-items;};
-  @if $align-content {align-content: $align-content;};
-  @if $direction {flex-direction: $direction;};
+  @if $wrap {
+    flex-wrap: $wrap;
+  };
+  @if $justify {
+    justify-content: $justify;
+  };
+  @if $align-items {
+    align-items: $align-items;
+  };
+  @if $align-content {
+    align-content: $align-content;
+  };
+  @if $direction {
+    flex-direction: $direction;
+  };
 }
 
 @mixin sectionPadding($default, $mTop: false, $mBottom: false, $pBottom: false, $pTop: false) {
   padding: $default;
-  @if $mTop {margin-top: rem($mTop)}
-  @if $pTop {padding-top: rem($pTop)}
-  @if $mBottom {margin-bottom: rem($mBottom)}
-  @if $pBottom {padding-bottom: rem($pBottom)}
+  @if $mTop {
+    margin-top: rem($mTop)
+  }
+  @if $pTop {
+    padding-top: rem($pTop)
+  }
+  @if $mBottom {
+    margin-bottom: rem($mBottom)
+  }
+  @if $pBottom {
+    padding-bottom: rem($pBottom)
+  }
 }
 
 @mixin position($left: false, $top: false, $right: false, $bottom: false, $pos: absolute) {
   position: $pos;
-  @if $left {left: $left}
-  @if $top {top: $top}
-  @if $right {right: $right}
-  @if $bottom {bottom: $bottom}
+  @if $left {
+    left: $left
+  }
+  @if $top {
+    top: $top
+  }
+  @if $right {
+    right: $right
+  }
+  @if $bottom {
+    bottom: $bottom
+  }
 }
 
 @mixin wh($w: false, $h: false) {
-  @if $w {width: $w}
-  @if $h {height: $h}
+  @if $w {
+    width: $w
+  }
+  @if $h {
+    height: $h
+  }
 }
 
 @mixin text($size: rem(16), $transform: false, $weight: 'medium', $line-height: false) {
-  font-size: $size!important;
+  font-size: $size !important;
 
   @if ($weight == 'medium') {
     font-weight: var(--FontWeight-Medium);
@@ -125,10 +155,19 @@
   } @else if ($weight == 'bold') {
     font-weight: var(--FontWeight-Bold);
   }
-  @if ($transform) {text-transform: uppercase;}
-  @if ($line-height) {line-height: $line-height;}
+  @if ($transform) {
+    text-transform: uppercase;
+  }
+  @if ($line-height) {
+    line-height: $line-height;
+  }
 }
 
+@mixin textEllipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 
 // для всех экранов < 1920px
@@ -137,24 +176,28 @@
     @content
   }
 }
+
 // для всех экранов < 1366px
 @mixin media-1366 {
   @media (max-width: $m1366) {
     @content
   }
 }
+
 // для всех экранов < 1024px
 @mixin media-1024 {
   @media (max-width: $m1024) {
     @content
   }
 }
+
 // для всех экранов < 768px
 @mixin media-768 {
   @media (max-width: $m768) {
     @content
   }
 }
+
 // для всех экранов < 360px
 @mixin media-360 {
   @media (max-width: $m360) {

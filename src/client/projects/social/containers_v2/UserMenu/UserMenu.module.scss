@@ -6,13 +6,17 @@ $photoSize: clamp(100px, 18vw, rem(250));
 
 .UserMenu {
   @include flex($direction: column);
-  background: var(--SOCIAL--Background-Card);
+  background: var(--SOCIAL--Background-Card-Opacity);
   border-radius: $borderRadiusCard;
   height: 100vh;
+  position: relative;
 
   &-Main {
     @include flex($align-items: center, $direction: column);
     padding: $componentPadding;
+    z-index: 4;
+    background: var(--SOCIAL--Background-Card);
+    opacity: 1;
   }
 
   &-Photo {
@@ -63,57 +67,25 @@ $photoSize: clamp(100px, 18vw, rem(250));
   }
 
   &-Any {
+    background: var(--SOCIAL--Background-Card);
+    z-index: 4;
     padding: $componentPadding;
     display: flex;
-    overflow: auto;
+    height: 100%;
   }
 
   &-Button {
-    @include flex($align-items: center);
   }
 
   &-ButtonIcon {
     fill: var(--SOCIAL--Color-Text-System);
+    margin-right: rem(10);
   }
 
   &-ButtonText {
+    @include flex($align-items: center);
     margin-left: rem(5);
     color: var(--SOCIAL--Color-Text-System);
-  }
-
-  &-FriendsRow {
-    @include flex($justify: center, $align-items: center);
-    margin: rem(10) 0;
-  }
-
-  &-FriendsImgContainer {
-    width: rem(40);
-    height: rem(40);
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  &-FriendsUserName {
-    color: var(--SOCIAL--Color-Text-Main);
-    justify-self: start;
-    flex: 1 1 auto;
-    margin-left: rem(10);
-  }
-
-  &-FriendsStatus {
-    width: rem(5);
-    height: rem(5);
-    border-radius: 50%;
-
-    &--status {
-      &_online {
-        background: var(--SOCIAL--Color-Status-Online);
-      }
-
-      &_offline {
-        background: var(--SOCIAL--Color-Status-Offline);
-      }
-    }
+    cursor: pointer;
   }
 }

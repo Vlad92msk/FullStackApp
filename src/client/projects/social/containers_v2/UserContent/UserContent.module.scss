@@ -31,14 +31,14 @@
   }
 
   &-FiltersContainer {
-    @include flex();
+    @include flex($justify: space-between);
     width: 100%;
     margin: rem(10) 0;
     padding: 0 rem(10);
   }
 
   &-FiltersRow {
-    width: 100%;
+    //width: 100%;
   }
 
   &-FiltersSwitcher {

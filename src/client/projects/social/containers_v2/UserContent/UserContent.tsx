@@ -90,7 +90,7 @@ export const UserContent: React.FC = React.memo(() => {
                     id={'free'}
                     checked={group === 'free'}
                   />
-                  <label className={cn('RadioLabel')} htmlFor={'free'}>свободно</label>
+                  <label className={cn('RadioLabel')} htmlFor={'free'}>все фото</label>
                 </div>
               </div>
             </div>
@@ -128,7 +128,6 @@ export const UserContent: React.FC = React.memo(() => {
         <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'video'} onClick={() => handleOpenCard('video')} children={'Видео'} />
         <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'work'} onClick={() => handleOpenCard('work')} children={'Работа'} />
       </div>
-
       <div className={cn('Container')}>
         {layoutTab}
       </div>

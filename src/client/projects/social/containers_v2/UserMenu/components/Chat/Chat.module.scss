@@ -1,0 +1,30 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.Chat {
+  background: var(--SOCIAL--Background-Card);
+  position: absolute;
+  padding: $componentPadding;
+  top: 0;
+  height: 100%;
+  width: clamp(200px, 10vw, rem(500));
+  z-index: 2;
+  border: rem(1) solid var(--SOCIAL--Color-Text-System);
+  border-left: transparent;
+  border-bottom: transparent;
+  display: grid;
+  grid-template-rows: 5% auto 5%;
+
+  &-Header {
+    @include flex($align-items: center);
+  }
+
+  &-MainContainer {
+    overflow-y: auto;
+  }
+
+  &-Footer {
+    @include flex($align-items: center, $justify: space-between);
+  }
+}

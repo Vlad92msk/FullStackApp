@@ -1,1 +1,2 @@
-export * from './NewComponent/NewComponent'
+export * from './Friends/Friends'
+export * from './Chat/Chat'

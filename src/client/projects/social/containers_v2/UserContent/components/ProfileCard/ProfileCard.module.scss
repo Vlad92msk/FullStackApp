@@ -20,7 +20,7 @@
 
   &-Button {
     @include flex($justify: center, $align-items: center);
-    background: var(--SOCIAL--Background-Card);
+    background: var(--SOCIAL--Background-Card-Opacity);
     padding: $componentPadding;
 
     width: 100%;
@@ -61,7 +61,7 @@
   &-Gap {
     height: rem(1);
     margin-top: rem(10);
-    background: var(--SOCIAL--Background-Card);
+    background: var(--SOCIAL--Background-Card-Opacity);
   }
 }
 

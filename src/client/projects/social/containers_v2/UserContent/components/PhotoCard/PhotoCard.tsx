@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
-import { useRouter } from 'next/router'
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { Button } from '@client/shared/components/Button'
-import { ButtonBox } from '@client/shared/components/ButtonBox'
-import { Icon } from '@client/shared/components/Icon'
-import { Image, MImage } from '@client/shared/components/Image'
+import { Button } from '@client_shared/components/Button'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { Icon } from '@client_shared/components/Icon'
+import { Image, MImage } from '@client_shared/components/Image'
+import { Comments } from '@client/projects/social/containers_v2/Comments'
+import { UserSmall } from '@client/projects/social/components'
 import { PhotoType } from '../../data/photos.data'
 import { initialEl, useMainAnim } from './functions/main.animate'
-import { Comments } from '@client/projects/social/containers/Comments'
 import styles from './PhotoCard.module.scss'
-import { UserSmall } from '@client/projects/social/components'
 
 const cn = makeCn('PhotoCard', styles)
 
@@ -42,7 +41,6 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
   const [open, setOpen] = useState(null)
   const [isOpenComments, setOpenComments] = useState(null)
   const ref = useRef<HTMLDivElement>(null)
-  const { push, query: { lang, user_id, layout, albumId } } = useRouter()
   const main = useMainAnim(open, ref)
 
 
@@ -62,16 +60,6 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
     if (open === null) {
       return
     }
-    if (open) {
-      push({
-        query: { lang, layout, albumId, user_id, id }
-      })
-    } else {
-      push({
-        query: { lang, layout, albumId, user_id }
-      })
-    }
-
   }, [open])
 
   const toggleCard = useCallback(() => {

@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
-import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
@@ -35,7 +33,6 @@ export type MainCardType = {
 
 export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
   const { id, title, date, authorName, description, commentsCount, likeCount, photo, userId } = props
-  const { push, query: { lang, user_id, layout } } = useRouter()
   const [open, setOpen] = useState(false)
   /**
    * Открыть фотоальбом
@@ -43,19 +40,7 @@ export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
   const handleMore = useCallback(() => {
     if (!photo.length) return
     setOpen(prev => !prev)
-
-    if (open) {
-      push({
-        query: { lang, layout, user_id }
-      })
-    }
-
-    if (!open) {
-      push({
-        query: { lang, layout, user_id, albumId: id }
-      })
-    }
-  }, [lang, layout, user_id, open])
+  }, [open])
 
   return (
     <div className={cn({ active: open})}>
