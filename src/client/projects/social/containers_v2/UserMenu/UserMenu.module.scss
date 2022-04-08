@@ -17,6 +17,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
     z-index: 4;
     background: var(--SOCIAL--Background-Card);
     opacity: 1;
+    box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
   }
 
   &-Photo {
@@ -68,6 +69,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
 
   &-Any {
     background: var(--SOCIAL--Background-Card);
+    box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
     z-index: 4;
     padding: $componentPadding;
     display: flex;

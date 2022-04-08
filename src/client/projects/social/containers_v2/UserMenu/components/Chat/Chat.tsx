@@ -4,6 +4,10 @@ import { makeCn } from '@client_shared/utils'
 import { AnimatePresence, motion } from 'framer-motion'
 import styles from './Chat.module.scss'
 import { AreaInput } from '@client/projects/social/components'
+import {
+  ChatMassage,
+  MASSAGE_FROM
+} from '@client/projects/social/containers_v2/UserContent/components/ChatMassage/ChatMassage'
 
 const cn = makeCn('Chat', styles)
 
@@ -33,148 +37,16 @@ export const Chat: React.FC<ChatType> = React.memo(({ isOpenChat, handleCloseMas
               <div className={cn('Call')}>call</div>
             </div>
             <div className={cn('MainContainer')}>
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
-              container
+              <ChatMassage from={MASSAGE_FROM.OTHER} massage={'dddddddd dwed  dwed wdedwed we d we d  we d w e d  weeeeeeeeeeeee'} />
+              <ChatMassage from={MASSAGE_FROM.ME}  massage={'dwed'}/>
             </div>
             <div className={cn('Footer')}>
-              <div className={cn('FooterFile')}>file</div>
+              <div className={cn('FooterFileSmileRow')}>
+                <div className={cn('FooterFile')}>file</div>
+                <div className={cn('FooterSmile')}>smile</div>
+              </div>
               <div className={cn('FooterInput')}>
                 <AreaInput />
-              </div>
-              <div className={cn('FooterSmile')}>
-                smile
               </div>
             </div>
           </motion.div>

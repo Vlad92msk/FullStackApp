@@ -11,8 +11,7 @@
   padding-right: rem(10);
   top: 0;
   height: 100%;
-  border: rem(1) solid var(--SOCIAL--Color-Text-System);
-  border-bottom: transparent;
+  box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
 
   &-Header {
     @include flex($justify: space-between);

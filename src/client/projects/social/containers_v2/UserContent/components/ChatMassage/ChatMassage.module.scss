@@ -1,0 +1,40 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.ChatMassage {
+  @include flex($direction: column);
+  margin: rem(10);
+  width: fit-content;
+  max-width: 80%;
+
+  &--from {
+    &_me {
+      align-self: flex-end;
+      text-align: end;
+    }
+
+    &_other {
+      align-self: flex-start;
+    }
+  }
+
+
+  &-Text {
+    border: rem(1) solid var(--SOCIAL--Color-Text-System);
+    border-radius: $borderRadiusCard;
+    padding: $componentPadding;
+    background: var(--SOCIAL--Background-Chat-Message);
+    color: var(--SOCIAL--Color-Text-Main);
+  }
+
+  &-SystemInfo {
+    @include flex($justify: space-between);
+    margin-top: rem(10);
+
+    & > * {
+      color: var(--SOCIAL--Color-Text-System);
+      margin-left: rem(5);
+    }
+  }
+}
