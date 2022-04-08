@@ -1,11 +1,12 @@
 @use "../../../../../../public/styles/lib/functions" as *;
 @use "../../../../../../public/styles/lib/mixins" as *;
 @import "../../../App/App.module";
+
 $chatWidth: clamp(200px, 25vw, rem(500));
+
 .Chat {
   background: var(--SOCIAL--Background-Card);
   position: absolute;
-  padding: $componentPadding;
   top: 0;
   height: 100%;
   z-index: 2;
@@ -13,29 +14,52 @@ $chatWidth: clamp(200px, 25vw, rem(500));
   border-left: transparent;
   border-bottom: transparent;
   display: grid;
-  grid-template-rows: 5% auto 10%;
+  grid-template-rows: 5% auto 15%;
   color: var(--SOCIAL--Color-Text-Main);
+  box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
 
   &-Header {
     @include flex($justify: space-between, $align-items: center);
     width: $chatWidth;
+    padding: $componentPadding;
+    padding-top: clamp(2px, 3vh, rem(30));
+    padding-bottom: clamp(2px, 3vh, rem(30));
+    box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
+  }
+
+  &-Contact {
+    @include flex($direction: column);
+  }
+
+  &-ContactOnline {
+    text-align: center;
+    font-style: italic;
+    color: var(--SOCIAL--Color-Text-System);
   }
 
   &-MainContainer {
     @include flex($direction: column);
     overflow-y: auto;
     width: $chatWidth;
+    padding: $componentPadding;
+    margin-top: rem(20);
   }
 
   &-Footer {
     @include flex($direction: column);
     width: $chatWidth;
     align-self: center;
+    padding: $componentPadding;
+
   }
 
   &-FooterFileSmileRow {
     @include flex($justify: flex-end);
     width: 100%;
+  }
+
+  &-FooterFile, &-FooterSmile {
+    margin: rem(5);
   }
 
   &-FooterInput {

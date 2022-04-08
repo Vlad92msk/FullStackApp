@@ -41,7 +41,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
 
   &-Row {
     @include flex($justify: space-between);
-    margin: rem(2.5) 0;
+    margin: clamp(5px, 2vh, rem(15)) 0;
   }
 
   &-Hash {
@@ -64,7 +64,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
     width: 100%;
     height: rem(1);
     background-color: var(--SOCIAL--Color-Text-System);
-    margin: rem(10) 0;
+    margin-bottom: clamp(5px, 2vh, rem(15));
   }
 
   &-Any {

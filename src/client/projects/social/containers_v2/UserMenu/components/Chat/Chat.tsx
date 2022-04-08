@@ -8,6 +8,8 @@ import {
   ChatMassage,
   MASSAGE_FROM
 } from '@client/projects/social/containers_v2/UserContent/components/ChatMassage/ChatMassage'
+import { IconButton } from '@client/shared/components/IconButton'
+import { Text } from '@client/shared/components/Text'
 
 const cn = makeCn('Chat', styles)
 
@@ -29,21 +31,60 @@ export const Chat: React.FC<ChatType> = React.memo(({ isOpenChat, handleCloseMas
             transition={{ duration: 1, power: 20 }}
           >
             <div className={cn('Header')}>
-              <div className={cn('Back')} onClick={handleCloseMassage}>back</div>
+              <IconButton
+                className={cn('Back')}
+                icon={'arrow-left'}
+                fill={'oldAsphalt50'}
+                onClick={handleCloseMassage}
+              />
               <div className={cn('Contact')}>
-                <div className={cn('ContactUserName')}>userName</div>
-                <div className={cn('ContactOnline')}>online</div>
+                <Text className={cn('ContactUserName')}>Friend Name</Text>
+                <Text size={'1'} className={cn('ContactOnline')}>online</Text>
               </div>
-              <div className={cn('Call')}>call</div>
+              <IconButton icon={'headphones'} fill={'oldAsphalt50'} className={cn('Call')} />
             </div>
             <div className={cn('MainContainer')}>
-              <ChatMassage from={MASSAGE_FROM.OTHER} massage={'dddddddd dwed  dwed wdedwed we d we d  we d w e d  weeeeeeeeeeeee'} />
-              <ChatMassage from={MASSAGE_FROM.ME}  massage={'dwed'}/>
+              <ChatMassage
+                from={MASSAGE_FROM.OTHER}
+                massage={'dddddddd dwed  dwed wdedwed we d we d  we d w e d  weeeeeeeeeeeee'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.OTHER}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
+              <ChatMassage
+                from={MASSAGE_FROM.ME}
+                massage={'dwed'}
+              />
             </div>
             <div className={cn('Footer')}>
               <div className={cn('FooterFileSmileRow')}>
-                <div className={cn('FooterFile')}>file</div>
-                <div className={cn('FooterSmile')}>smile</div>
+                <IconButton size={'small'} fill={'oldAsphalt50'} icon={'file-outlined'} className={cn('FooterFile')} />
+                <IconButton size={'small'} fill={'oldAsphalt50'} icon={'smile'} className={cn('FooterSmile')} />
               </div>
               <div className={cn('FooterInput')}>
                 <AreaInput />

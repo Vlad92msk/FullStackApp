@@ -48,15 +48,6 @@ export const UserMenu: React.FC = React.memo(() => {
           <Text className={cn('UserName')} size={'8'} weight={'medium'} children={'Firsov'} />
           <Text className={cn('UserName')} size={'8'} weight={'medium'} children={'Vlad'} />
           <Text className={cn('Hash')} size={'2'} children={'#firsovv'} />
-          <Text className={cn('Description')} size={'2'}>
-            Любой текст который я хочу написать о себе, дать объявление и тд
-            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
-            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
-            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
-            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
-            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
-          </Text>
-          <span className={cn('Gap')} />
           <div className={cn('Row')}>
             <Text className={cn('ButtonText')} size={'2'} onClick={setOpenFriends}>
               <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'friends'} />
@@ -71,6 +62,15 @@ export const UserMenu: React.FC = React.memo(() => {
               3
             </Text>
           </div>
+          <span className={cn('Gap')} />
+          <Text className={cn('Description')} size={'2'}>
+            Любой текст который я хочу написать о себе, дать объявление и тд
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+            Очень длинный текст Очень длинный текст Очень длинный текст Очень длинный текст
+          </Text>
         </div>
       </div>
       <div className={cn('Any')}></div>
