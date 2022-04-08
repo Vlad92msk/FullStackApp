@@ -108,6 +108,7 @@ export type IconName =
   | 'play'
   | 'arrow-right-circled'
   | 'alert-triangle'
+  | 'eye'
   | 'eye-off'
   | 'more-vertical'
   | 'image'

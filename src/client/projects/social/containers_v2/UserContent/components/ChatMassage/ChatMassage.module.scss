@@ -7,6 +7,7 @@
   margin: rem(10);
   width: fit-content;
   max-width: 80%;
+  position: relative;
 
   &--from {
     &_me {
@@ -29,12 +30,44 @@
   }
 
   &-SystemInfo {
-    @include flex($justify: space-between);
+    @include flex();
     margin-top: rem(10);
+    position: relative;
 
     & > * {
       color: var(--SOCIAL--Color-Text-System);
       margin-left: rem(5);
+    }
+  }
+
+  &-See {
+    position: absolute;
+    top: 0;
+
+    &--from {
+      &_me {
+        left: rem(-20);
+      }
+
+      &_other {
+        right: rem(-20);
+      }
+    }
+  }
+
+  &-Smile {
+    position: absolute;
+
+    &--from {
+      &_me {
+        right: 104%;
+        top: -100%;
+      }
+
+      &_other {
+        left: 100%;
+        top: -100%;
+      }
     }
   }
 }

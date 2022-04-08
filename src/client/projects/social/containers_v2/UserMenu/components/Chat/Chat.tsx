@@ -6,7 +6,8 @@ import styles from './Chat.module.scss'
 import { AreaInput } from '@client/projects/social/components'
 import {
   ChatMassage,
-  MASSAGE_FROM
+  MASSAGE_FROM,
+  MassageSmileReaction
 } from '@client/projects/social/containers_v2/UserContent/components/ChatMassage/ChatMassage'
 import { IconButton } from '@client/shared/components/IconButton'
 import { Text } from '@client/shared/components/Text'
@@ -45,38 +46,65 @@ export const Chat: React.FC<ChatType> = React.memo(({ isOpenChat, handleCloseMas
             </div>
             <div className={cn('MainContainer')}>
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.OTHER}
                 massage={'dddddddd dwed  dwed wdedwed we d we d  we d w e d  weeeeeeeeeeeee'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.SMILE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.DISLIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={false}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.OTHER}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
               <ChatMassage
+                date={'01.01.2001 в 15:10'}
+                isWasSeen={true}
+                smile={MassageSmileReaction.LIKE}
                 from={MASSAGE_FROM.ME}
                 massage={'dwed'}
               />
