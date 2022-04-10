@@ -63,6 +63,7 @@ $chatWidth: clamp(200px, 25vw, rem(500));
   }
 
   &-FooterInput {
+    @include flex($direction: column);
     width: 100%;
   }
 }

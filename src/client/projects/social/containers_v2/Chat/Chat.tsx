@@ -1,15 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-
+import { uniqueId } from 'lodash'
 import { makeCn } from '@client/shared/utils'
 import { AreaInput } from '@client/projects/social/components'
 import { IconButton } from '@client/shared/components/IconButton'
 import { Text } from '@client/shared/components/Text'
-import { ChatMassage, MASSAGE_FROM } from './components/ChatMassage/ChatMassage'
-import { MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
+import { ChatMassage, MASSAGE_FROM, MassageSmileReaction } from './components/ChatMassage/ChatMassage'
+import { Message, MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
 import { USER } from '@client/projects/social/containers_v2/App/data/user'
 import { Friend } from '@client/projects/social/containers_v2/Friends/data/friends'
 import styles from './Chat.module.scss'
+import { randomUUID } from 'crypto'
+import { createId } from '@server/utils/createId'
+import { ButtonBox } from '@client/shared/components/ButtonBox'
 
 const cn = makeCn('Chat', styles)
 
@@ -26,12 +29,34 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
   /**
    * Локальные сообщения
    */
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<Message[]>([])
   useEffect(() => {
     if (Boolean(targetUser)) {
       setMessages(MESSAGES.filter(({ fromUserId }) => fromUserId === targetUser.friendId))
     }
   }, [MESSAGES, targetUser])
+
+  /**
+   * Текст сообщения
+   */
+  const [messageInput, setMessageInput] = useState<string>(null)
+
+  /**
+   * Отправить сообщение
+   * TODO: на бэке дополнить пустые свойства и сгеренровать ID
+   */
+  const onCreateMessage = useCallback(() => {
+    setMessages(prev => [...prev, {
+      fromUserId: user.id,
+      toUserId: targetUser.friendId,
+      dateSeen: null,
+      dateCreate: new Date(),
+      messageId: createId(50),
+      smile: null,
+      massage: messageInput
+    }])
+
+  }, [messageInput])
 
   /**
    * Автоскролл к последнему сообщению
@@ -85,7 +110,10 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
                 <IconButton size={'small'} fill={'oldAsphalt50'} icon={'smile'} className={cn('FooterSmile')} />
               </div>
               <div className={cn('FooterInput')}>
-                <AreaInput />
+                <AreaInput value={messageInput} onChange={setMessageInput} />
+                <ButtonBox onClick={onCreateMessage} style={{ alignSelf: 'end' }} disabled={!messageInput?.length}>
+                  <Text size={'1'}  children={'Отправить'} color={'title'} />
+                </ButtonBox>
               </div>
             </div>
           </motion.div>
