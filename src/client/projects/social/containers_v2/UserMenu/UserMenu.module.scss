@@ -13,7 +13,6 @@ $photoSize: clamp(100px, 18vw, rem(250));
 
   &-Main {
     @include flex($align-items: center, $direction: column);
-    padding: $componentPadding;
     z-index: 4;
     background: var(--SOCIAL--Background-Card);
     opacity: 1;
@@ -35,6 +34,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
 
   &-Column {
     @include flex($direction: column);
+    padding: $componentPadding;
     margin-left: rem(10);
     width: 100%;
   }

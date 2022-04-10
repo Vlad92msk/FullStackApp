@@ -1,6 +1,6 @@
 @use "../../../../../../public/styles/lib/functions" as *;
 @use "../../../../../../public/styles/lib/mixins" as *;
-@import "../../../App/App.module.scss";
+@import "../../../App/App.module";
 
 .ChatMassage {
   @include flex($direction: column);

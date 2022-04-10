@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
+import { format } from 'date-fns'
 
-import { makeCn } from '@client_shared/utils'
-import { Text } from '@client_shared/components/Text'
+import { makeCn } from '@client/shared/utils'
+import { Text } from '@client/shared/components/Text'
 import { Icon, IconFill } from '@client/shared/components/Icon'
-import styles from './ChatMassage.module.scss'
 import { IconName } from '@client/public/models/icon.model'
+import { Message } from '@client/projects/social/containers_v2/Chat/data/messages'
+import styles from './ChatMassage.module.scss'
 
 const cn = makeCn('ChatMassage', styles)
 
@@ -32,15 +34,16 @@ export const massageSmileReactionIconFill = {
 }
 
 export type ChatMassageType = {
+  message: Message
   from: MASSAGE_FROM
-  massage: string
   isWasSeen: boolean
-  smile?: MassageSmileReaction
-  date: string
+
 }
 
 export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
-  const { from, massage, smile, isWasSeen, date } = props
+  const { from, isWasSeen, message: { massage, smile, dateCreate } } = props
+  const messageWasCreated = format(dateCreate, 'dd.MM.yyyy в H:m')
+
 
   return (
     <div className={cn({ from })}>
@@ -51,7 +54,7 @@ export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
         size={'small'} fill={'oldAsphalt40'}
       />
       <div className={cn('SystemInfo')}>
-        <Text size={'1'} children={date} />
+        <Text size={'1'} children={messageWasCreated} />
         {smile && (
           <Icon
             className={cn('Smile', { from })}
