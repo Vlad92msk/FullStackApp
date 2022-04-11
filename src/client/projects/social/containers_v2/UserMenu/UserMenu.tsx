@@ -23,7 +23,7 @@ export const UserMenu: React.FC = React.memo(() => {
   /**
    * Флаг открытия Списка друзей
    */
-  const [openFriends, setOpenFriends, onCloseFriends] = useBooleanState(true)
+  const [openFriends, setOpenFriends, onCloseFriends] = useBooleanState(false)
   /**
    * Флаг открытия инф по хешу
    */
@@ -70,7 +70,7 @@ export const UserMenu: React.FC = React.memo(() => {
           <Image path={{ project: 'social', img }} />
         </div>
         <div className={cn('Column')}>
-          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          <div className={cn('UserFIO')}>
             <Text className={cn('UserName')} size={'8'} weight={'medium'} children={family} />
             <Text className={cn('UserName')} size={'8'} weight={'medium'} children={name} />
           </div>

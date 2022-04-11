@@ -37,34 +37,6 @@
     padding: 0 rem(10);
   }
 
-  &-FiltersRow {
-    //width: 100%;
-  }
-
-  &-FiltersSwitcher {
-    @include flex();
-  }
-
-  &-RadioInput {
-    display: none;
-
-    &:checked + label {
-      background: var(--SOCIAL--Color-Text-System);
-    }
-  }
-
-  &-RadioLabel {
-    padding: rem(3) rem(14);
-    color: white;
-
-    cursor: pointer;
-    transition: .5s;
-
-    &:not(:last-of-type) {
-      border-right: rem(1) solid transparent;
-    }
-  }
-
   &-Container {
     @include flex($direction: column);
     margin-top: clamp(1px, 1vh, rem(20));

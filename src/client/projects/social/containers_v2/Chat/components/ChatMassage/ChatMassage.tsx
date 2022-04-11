@@ -48,11 +48,13 @@ export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
   return (
     <div className={cn({ from })}>
       <Text className={cn('Text')} size={'2'} children={massage} />
-      <Icon
-        className={cn('See', { from })}
-        icon={isWasSeen ? 'eye' : 'eye-off'}
-        size={'small'} fill={'oldAsphalt40'}
-      />
+      {from === MASSAGE_FROM.ME && (
+        <Icon
+          className={cn('See', { from })}
+          icon={isWasSeen ? 'eye' : 'eye-off'}
+          size={'small'} fill={'oldAsphalt40'}
+        />
+      )}
       <div className={cn('SystemInfo')}>
         <Text size={'1'} children={messageWasCreated} />
         {smile && (

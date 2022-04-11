@@ -28,29 +28,33 @@ $photoSize: clamp(100px, 18vw, rem(250));
     z-index: 1;
   }
 
+  &-UserFIO {
+    @include flex(wrap);
+    padding: $componentPadding;
+  }
+
   &-UserName {
     color: var(--SOCIAL--Color-Text-Main);
   }
 
   &-Column {
     @include flex($direction: column);
-    padding: $componentPadding;
-    margin-left: rem(10);
     width: 100%;
   }
 
   &-Row {
     @include flex($justify: space-between);
-    margin: clamp(5px, 2vh, rem(15)) 0;
+    padding: $componentPadding;
   }
 
   &-Hash {
     color: var(--SOCIAL--Color-Text-System);
+    padding: $componentPadding;
   }
 
   &-Description {
     color: var(--SOCIAL--Color-Text-Main);
-    padding: rem(10) 0;
+    padding: $componentPadding;
     max-height: 20vh;
     overflow-y: auto;
   }
@@ -61,10 +65,8 @@ $photoSize: clamp(100px, 18vw, rem(250));
   }
 
   &-Gap {
-    width: 100%;
-    height: rem(1);
+    @include wh(100%, rem(1));
     background-color: var(--SOCIAL--Color-Text-System);
-    margin-bottom: clamp(5px, 2vh, rem(15));
   }
 
   &-Any {
