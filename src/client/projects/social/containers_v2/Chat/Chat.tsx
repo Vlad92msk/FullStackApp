@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { uniqueId } from 'lodash'
+
 import { makeCn } from '@client/shared/utils'
 import { AreaInput } from '@client/projects/social/components'
 import { IconButton } from '@client/shared/components/IconButton'
 import { Text } from '@client/shared/components/Text'
-import { ChatMassage, MASSAGE_FROM, MassageSmileReaction } from './components/ChatMassage/ChatMassage'
+import { ChatMassage, MASSAGE_FROM } from './components/ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
 import { USER } from '@client/projects/social/containers_v2/App/data/user'
 import { Friend } from '@client/projects/social/containers_v2/Friends/data/friends'
-import styles from './Chat.module.scss'
-import { randomUUID } from 'crypto'
 import { createId } from '@server/utils/createId'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
+import styles from './Chat.module.scss'
 
 const cn = makeCn('Chat', styles)
 
@@ -39,7 +38,7 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
   /**
    * Текст сообщения
    */
-  const [messageInput, setMessageInput] = useState<string>(null)
+  const [messageInput, setMessageInput] = useState<string>('')
 
   /**
    * Отправить сообщение
@@ -55,7 +54,7 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
       smile: null,
       massage: messageInput
     }])
-
+    setMessageInput('')
   }, [messageInput])
 
   /**
@@ -112,7 +111,11 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
               <div className={cn('FooterInput')}>
                 <AreaInput value={messageInput} onChange={setMessageInput} />
                 <ButtonBox onClick={onCreateMessage} style={{ alignSelf: 'end' }} disabled={!messageInput?.length}>
-                  <Text size={'1'}  children={'Отправить'} color={'title'} />
+                  <Text
+                    className={cn('Submit', { active: Boolean(messageInput?.length) })}
+                    size={'1'}
+                    children={'Отправить'}
+                  />
                 </ButtonBox>
               </div>
             </div>

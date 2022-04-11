@@ -21,36 +21,11 @@
     box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
   }
 
-  &-Filters {
-    @include flex();
-  }
-
   &-FriendsContainer {
     overflow-y: auto;
     padding-right: rem(10);
     padding: $componentPadding;
     margin-top: rem(20);
-  }
-
-  &-RadioInput {
-    display: none;
-
-    &:checked + label {
-      background: var(--SOCIAL--Color-Text-System);
-      display: flex;
-      transition: .5s;
-    }
-  }
-
-  &-RadioLabel {
-    padding: rem(3) rem(14);
-    cursor: pointer;
-    transition: .5s;
-    color: var(--SOCIAL--Color-Text-Main);
-
-    &:not(:last-of-type) {
-      border-right: rem(1) solid transparent;
-    }
   }
 
   &-Bck {

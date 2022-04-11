@@ -3,15 +3,34 @@ import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { AlbumCard, PhotoCard, ProfileCard } from './components'
+import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
+import { AlbumCardContainer } from './components/AlbumCardContainer/AlbumCardContainer'
+import { PhotoCard } from './components'
 import { PHOTO_ALBUMS } from './data/photoAlbums.data'
 import { PHOTO } from './data/photos.data'
+import { Switcher } from '../../components'
 import styles from './UserContent.module.scss'
-import { AlbumCardContainer } from '@client/projects/social/containers_v2/UserContent/components/AlbumCardContainer/AlbumCardContainer'
-import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
+
 
 const cn = makeCn('UserContent', styles)
 
+export enum GROUPS_SWITCH_VALUES {
+  ALBUMS = 'albums',
+  ALL = 'all',
+}
+
+const GROUPS_SWITCH = [
+  {
+    value: GROUPS_SWITCH_VALUES.ALBUMS,
+    name: 'groupsSwitch',
+    label: 'альбомы'
+  },
+  {
+    value: GROUPS_SWITCH_VALUES.ALL,
+    name: 'groupsSwitch',
+    label: 'все'
+  }
+]
 
 export const UserContent: React.FC = React.memo(() => {
   const { push, query: { lang, user_id, layout } } = useRouter()
@@ -48,10 +67,9 @@ export const UserContent: React.FC = React.memo(() => {
 
   }, [lang, user_id, dwed])
 
-  const [group, setGroup] = useState<string>('albums')
-  const changeLang = useCallback((lang: React.SyntheticEvent<HTMLInputElement>) => {
-      // @ts-ignore
-      return setGroup(lang.target.id)
+  const [group, setGroup] = useState<GROUPS_SWITCH_VALUES>(GROUPS_SWITCH_VALUES.ALBUMS)
+  const changeGroup = useCallback((v) => {
+      return setGroup(v)
     }
     , [])
 
@@ -62,46 +80,20 @@ export const UserContent: React.FC = React.memo(() => {
           <>
             <div className={cn('FiltersContainer')}>
               <div className={cn('FiltersRow')}>Filter</div>
-              <div className={cn('FiltersSwitcher')}>
-                <div style={{
-                  display: 'flex',
-                  overflow: 'hidden',
-                  borderRadius: '15px',
-                  width: 'fit-content',
-                  border: '1px solid #6c738b'
-                }}>
-                  <input
-                    className={cn('RadioInput')}
-                    onChange={changeLang}
-                    type={'radio'}
-                    value={'albums'}
-                    name={'groups'}
-                    id={'albums'}
-                    checked={group === 'albums'}
-                  />
-                  <label className={cn('RadioLabel')} htmlFor={'albums'}>альбомы</label>
-
-                  <input
-                    className={cn('RadioInput')}
-                    onChange={changeLang}
-                    type={'radio'}
-                    value={'free'}
-                    name={'groups'}
-                    id={'free'}
-                    checked={group === 'free'}
-                  />
-                  <label className={cn('RadioLabel')} htmlFor={'free'}>все фото</label>
-                </div>
-              </div>
+              <Switcher
+                currentValue={group}
+                onChange={changeGroup}
+                options={GROUPS_SWITCH}
+              />
             </div>
-            {group === 'albums' && (
+            {group === GROUPS_SWITCH_VALUES.ALBUMS && (
               <AlbumCardContainer
                 albums={PHOTO_ALBUMS}
                 photos={PHOTO}
                 userId={USER_ID}
               />
             )}
-            {group === 'free' && (
+            {group === GROUPS_SWITCH_VALUES.ALL && (
               <div className={cn('Photos')}>
                 {
                   PHOTO.map((photo) => (<PhotoCard userId={USER_ID} key={photo.id} id={photo.id} {...photo} />))

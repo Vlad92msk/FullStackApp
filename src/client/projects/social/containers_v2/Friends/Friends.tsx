@@ -2,13 +2,14 @@ import React, { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client/shared/utils'
-import { Text } from '@client/shared/components/Text'
 import { IconButton } from '@client/shared/components/IconButton'
-import { Friend, UserStatus } from '@client/projects/social/containers_v2/Friends/components/Friend/Friend'
-import { FRIENDS } from '@client/projects/social/containers_v2/Friends/data/friends'
+import { Friend } from './components/Friend/Friend'
+import { FRIENDS } from './data/friends'
+import { Switcher, SwitcherOption } from '../../components'
 import styles from './Friends.module.scss'
 
 const cn = makeCn('Friends', styles)
+
 
 export type FriendsType = {
   isOpenFriends: boolean
@@ -22,13 +23,35 @@ export enum FILTER_FRIENDS {
   SEARCH = 'search'
 }
 
-export const Friends: React.FC<FriendsType> = React.memo(({ isOpenFriends, handleCloseFriends, handleOpenChat }) => {
+const FRIENDS_SWITCH = [
+  {
+    value: FILTER_FRIENDS.MY_FRIENDS,
+    name: 'friendsSwitch',
+    label: 'мои'
+  },
+  {
+    value: FILTER_FRIENDS.POSSIBLE,
+    name: 'friendsSwitch',
+    label: 'возможные'
+  },
+  {
+    value: FILTER_FRIENDS.SEARCH,
+    name: 'friendsSwitch',
+    label: 'найти'
+  }
+]
+
+export const Friends: React.FC<FriendsType> = React.memo((props) => {
+  const { isOpenFriends, handleCloseFriends, handleOpenChat } = props
+  /**
+   * Переключатель
+   */
   const [filterFriends, setFilterFriends] = useState<FILTER_FRIENDS>(FILTER_FRIENDS.MY_FRIENDS)
-  const handleFriendsSwitch = useCallback((el: React.SyntheticEvent<HTMLInputElement>) => {
-      // @ts-ignore
-      setFilterFriends(el.target.id)
+  const handleFriendsSwitch = useCallback((v) => {
+      setFilterFriends(v)
     }
     , [])
+
   return (
     <AnimatePresence exitBeforeEnter>
       {
@@ -48,56 +71,11 @@ export const Friends: React.FC<FriendsType> = React.memo(({ isOpenFriends, handl
                   fill={'oldAsphalt50'}
                   onClick={handleCloseFriends}
                 />
-                <div className={cn('Filters')}>
-                  <div className={cn('FiltersSwitcher')}>
-                    <div style={{
-                      display: 'flex',
-                      overflow: 'hidden',
-                      borderRadius: '15px',
-                      width: 'fit-content',
-                      border: '1px solid #6c738b'
-                    }}>
-                      <input
-                        className={cn('RadioInput')}
-                        onChange={handleFriendsSwitch}
-                        type={'radio'}
-                        value={FILTER_FRIENDS.MY_FRIENDS}
-                        name={'friendsSwitch'}
-                        id={FILTER_FRIENDS.MY_FRIENDS}
-                        checked={filterFriends === FILTER_FRIENDS.MY_FRIENDS}
-                      />
-                      <label htmlFor={FILTER_FRIENDS.MY_FRIENDS}>
-                        <Text className={cn('RadioLabel')} size={'1'} children={'мои'} />
-                      </label>
-
-                      <input
-                        className={cn('RadioInput')}
-                        onChange={handleFriendsSwitch}
-                        type={'radio'}
-                        value={FILTER_FRIENDS.POSSIBLE}
-                        name={'friendsSwitch'}
-                        id={FILTER_FRIENDS.POSSIBLE}
-                        checked={filterFriends === FILTER_FRIENDS.POSSIBLE}
-                      />
-                      <label htmlFor={FILTER_FRIENDS.POSSIBLE}>
-                        <Text className={cn('RadioLabel')} size={'1'} children={'возможные'} />
-                      </label>
-
-                      <input
-                        className={cn('RadioInput')}
-                        onChange={handleFriendsSwitch}
-                        type={'radio'}
-                        value={FILTER_FRIENDS.SEARCH}
-                        name={'friendsSwitch'}
-                        id={FILTER_FRIENDS.SEARCH}
-                        checked={filterFriends === FILTER_FRIENDS.SEARCH}
-                      />
-                      <label htmlFor={FILTER_FRIENDS.SEARCH}>
-                        <Text className={cn('RadioLabel')} size={'1'} children={'найти'} />
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                <Switcher
+                  currentValue={filterFriends}
+                  onChange={handleFriendsSwitch}
+                  options={FRIENDS_SWITCH}
+                />
               </div>
               <div className={cn('FriendsContainer')}>
                 {FRIENDS.map((friend) => (

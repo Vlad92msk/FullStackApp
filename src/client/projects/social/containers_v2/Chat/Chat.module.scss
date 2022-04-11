@@ -66,4 +66,12 @@ $chatWidth: clamp(200px, 25vw, rem(500));
     @include flex($direction: column);
     width: 100%;
   }
+
+  &-Submit {
+    color: var(--SOCIAL--Color-Text-System);
+
+    &--active {
+      color: var(--SOCIAL--Color-Text-Main);
+    }
+  }
 }
