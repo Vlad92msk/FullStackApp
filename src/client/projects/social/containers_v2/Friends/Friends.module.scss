@@ -21,6 +21,11 @@
     box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
   }
 
+  &-Title{
+    color: var(--SOCIAL--Color-Text-System);
+    text-align: end;
+  }
+
   &-FriendsContainer {
     overflow-y: auto;
     padding-right: rem(10);

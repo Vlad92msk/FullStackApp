@@ -7,8 +7,7 @@ import { IconButton } from '@client/shared/components/IconButton'
 import { Text } from '@client/shared/components/Text'
 import { ChatMassage, MASSAGE_FROM } from './components/ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
-import { USER } from '@client/projects/social/containers_v2/App/data/user'
-import { Friend } from '@client/projects/social/containers_v2/Friends/data/friends'
+import { USER, UserType } from '@client/projects/social/containers_v2/App/data/user'
 import { createId } from '@server/utils/createId'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import styles from './Chat.module.scss'
@@ -17,7 +16,7 @@ const cn = makeCn('Chat', styles)
 
 export type ChatType = {
   openedUserIdChat: number
-  targetUser: Friend
+  targetUser: UserType
   handleCloseChat: () => void
 }
 export const Chat: React.FC<ChatType> = React.memo((props) => {
@@ -31,7 +30,7 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
   const [messages, setMessages] = useState<Message[]>([])
   useEffect(() => {
     if (Boolean(targetUser)) {
-      setMessages(MESSAGES.filter(({ fromUserId }) => fromUserId === targetUser.friendId))
+      setMessages(MESSAGES.filter(({ fromUserId }) => fromUserId === targetUser.id))
     }
   }, [MESSAGES, targetUser])
 
@@ -47,7 +46,7 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
   const onCreateMessage = useCallback(() => {
     setMessages(prev => [...prev, {
       fromUserId: user.id,
-      toUserId: targetUser.friendId,
+      toUserId: targetUser.id,
       dateSeen: null,
       dateCreate: new Date(),
       messageId: createId(50),
@@ -88,8 +87,8 @@ export const Chat: React.FC<ChatType> = React.memo((props) => {
                 onClick={handleCloseChat}
               />
               <div className={cn('Contact')}>
-                <Text className={cn('ContactUserName')} children={targetUser.friendName} />
-                <Text size={'1'} className={cn('ContactOnline')}>online</Text>
+                <Text className={cn('ContactUserName')} children={`${targetUser.name} ${targetUser.family}`} />
+                <Text size={'1'} className={cn('ContactOnline')} children={targetUser.status} />
               </div>
               <IconButton icon={'headphones'} fill={'oldAsphalt50'} className={cn('Call')} />
             </div>

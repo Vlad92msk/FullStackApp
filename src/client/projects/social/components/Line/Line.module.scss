@@ -1,0 +1,9 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+
+.Line {
+  height: rem(1);
+  background: var(--SOCIAL--Color-Text-System);
+  width: 100%;
+  margin: wSize(1, 0.5, 12) 0;
+}

@@ -4,8 +4,8 @@ import { UserSmall } from '@client/projects/social/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
-import { Friend as FriendType } from '../../data/friends'
 import styles from './Friend.module.scss'
+import { UserType } from '@client/projects/social/containers_v2/App/data/user'
 
 const cn = makeCn('Friend', styles)
 
@@ -15,33 +15,35 @@ export enum UserStatus {
 }
 
 export type FriendComponent = {
-  friend: FriendType
+  friend: UserType
+  friendMessageCount: number
   onOpenChat: (userId: number) => void
 }
 export const Friend: React.FC<FriendComponent> = React.memo((props) => {
   const {
     onOpenChat,
-    friend: { friendId, friendImg, friendMessageCount, friendName, friendStatus }
+    friendMessageCount,
+    friend: { status, name, id, img, family }
   } = props
 
   const handleOpenChat = useCallback(() => {
-    onOpenChat(friendId)
-  }, [friendId])
+    onOpenChat(id)
+  }, [id])
 
   return (
     <div className={cn()}>
       <UserSmall
-        img={friendImg}
+        img={img}
         className={cn('UserImgName')}
         textClassName={cn('UserName')}
-        userName={friendName}
+        userName={`${name} ${family}`}
       />
       <div className={cn('CountMessage')}>
         <Text className={cn('CountMessageButton')} size={'1'} onClick={handleOpenChat}>
           <Icon className={cn('CountMessageIcon')} size={'small'} icon={'message-square'} />
           {friendMessageCount || null}
         </Text>
-        <span className={cn('FriendStatus', { status: friendStatus })} />
+        <span className={cn('FriendStatus', { status })} />
       </div>
     </div>
   )

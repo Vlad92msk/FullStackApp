@@ -3,9 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client/shared/utils'
 import { IconButton } from '@client/shared/components/IconButton'
-import { Friend } from './components/Friend/Friend'
-import { FRIENDS } from './data/friends'
-import { Switcher, SwitcherOption } from '../../components'
+import { Switcher } from '../../components'
+import { Message } from '@client/projects/social/containers_v2/Chat/data/messages'
+import { UserType } from '@client/projects/social/containers_v2/App/data/user'
+import { Text } from '@client/shared/components/Text'
+import { Friend } from './components'
+import { Line } from '../../components/Line/Ddd'
 import styles from './Friends.module.scss'
 
 const cn = makeCn('Friends', styles)
@@ -15,6 +18,10 @@ export type FriendsType = {
   isOpenFriends: boolean
   handleCloseFriends: () => void
   handleOpenChat: (userId: number) => void
+  friends: UserType[]
+  friendsMessages: Message[]
+  anyUsersNotFriends: UserType[]
+  anyUsersMessages: Message[]
 }
 
 export enum FILTER_FRIENDS {
@@ -42,7 +49,16 @@ const FRIENDS_SWITCH = [
 ]
 
 export const Friends: React.FC<FriendsType> = React.memo((props) => {
-  const { isOpenFriends, handleCloseFriends, handleOpenChat } = props
+  const {
+    isOpenFriends,
+    handleCloseFriends,
+    handleOpenChat,
+    friends,
+    anyUsersMessages,
+    anyUsersNotFriends,
+    friendsMessages
+  } = props
+
   /**
    * Переключатель
    */
@@ -78,10 +94,32 @@ export const Friends: React.FC<FriendsType> = React.memo((props) => {
                 />
               </div>
               <div className={cn('FriendsContainer')}>
-                {FRIENDS.map((friend) => (
+                {anyUsersNotFriends?.length && (
+                  <>
+                    <Text className={cn('Title')} size={'1'} children={'Сообщения от иных пользователей'} />
+                    {anyUsersNotFriends
+                    .map((friend) => (
+                      <Friend
+                        key={friend.id}
+                        friend={friend}
+                        friendMessageCount={
+                          anyUsersMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                        }
+                        onOpenChat={handleOpenChat}
+                      />
+                    ))}
+                    <Line />
+                    <Text className={cn('Title')} size={'1'} children={'Друзья'} />
+                  </>
+                )}
+                {friends
+                .map((friend) => (
                   <Friend
-                    key={friend.friendId}
+                    key={friend.id}
                     friend={friend}
+                    friendMessageCount={
+                      friendsMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                    }
                     onOpenChat={handleOpenChat}
                   />
                 ))}
