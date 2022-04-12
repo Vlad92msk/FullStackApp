@@ -3,8 +3,8 @@ import React from 'react'
 import { Section } from '@client_shared/components/Section'
 import { makeCn } from '@client_shared/utils'
 import { NavBar } from '../NavBar'
+import { UserMenu } from '../UserMenu'
 import styles from './App.module.scss'
-import { UserMenu } from '@client/projects/social/containers_v2/UserMenu'
 
 const cn = makeCn('Application', styles)
 

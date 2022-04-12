@@ -8,7 +8,7 @@ import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image } from '@client/shared/components/Image'
 import { PhotoType } from '../../data/photos.data'
-import { PhotoCard } from '@client/projects/social/containers_v2/UserContent/components'
+import { PhotoCard } from '@client/projects/social/containers_v2/Profile/components'
 import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('AlbumCard', styles)

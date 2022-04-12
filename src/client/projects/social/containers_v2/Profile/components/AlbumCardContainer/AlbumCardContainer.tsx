@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { AlbumCard, PhotoCard } from '@client/projects/social/containers_v2/UserContent/components'
+import { AlbumCard, PhotoCard } from '@client/projects/social/containers_v2/Profile/components'
 import { PhotoType } from '../../data/photos.data'
 import { PhotoAlbumType } from '../../data/photoAlbums.data'
 import styles from './AlbumCardContainer.module.scss'
