@@ -16,7 +16,7 @@ $photoSize: clamp(100px, 18vw, rem(250));
     z-index: 4;
     background: var(--SOCIAL--Background-Card);
     opacity: 1;
-    box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
+    box-shadow: 0 rem(-4) rem(4) var(--SOCIAL--Color-Text-System);
   }
 
   &-Photo {
@@ -65,8 +65,8 @@ $photoSize: clamp(100px, 18vw, rem(250));
   }
 
   &-Gap {
-    @include wh(100%, rem(1));
-    background-color: var(--SOCIAL--Color-Text-System);
+    width: 100%;
+    background: var(--SOCIAL--Background-Card);
   }
 
   &-Button {

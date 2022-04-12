@@ -10,6 +10,7 @@ import { ALL_USERS } from './data/all_users'
 import { MESSAGES } from './data/messages'
 import { ChatContainer, FriendsContainer, UserInfo } from './components'
 import styles from './UserMenu.module.scss'
+import { Line } from '@client/projects/social/components/Line/Ddd'
 
 const cn = makeCn('UserMenu', styles)
 
@@ -129,9 +130,12 @@ export const UserMenu: React.FC = React.memo(() => {
               3
             </Text>
           </div>
-          <span className={cn('Gap')} />
+          <Line />
           <Text className={cn('Description')} size={'2'} children={description} />
         </div>
+      </div>
+      <div className={cn('Gap')}>
+        <Line />
       </div>
       <UserInfo
         baseInformation={baseInformation}
