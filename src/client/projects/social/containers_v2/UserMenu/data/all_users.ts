@@ -20,7 +20,7 @@ export const All_users: UserType[] = [
     status: UserStatus.ONLINE,
     description: 'ddddddd',
     hashName: 'dwed',
-    friends: []
+    friends: [1]
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ export const All_users: UserType[] = [
     status: UserStatus.ONLINE,
     description: 'ddddddd',
     hashName: 'dwed',
-    friends: []
+    friends: [1, 2]
   },
   {
     id: 5,
@@ -60,6 +60,6 @@ export const All_users: UserType[] = [
     status: UserStatus.ONLINE,
     description: 'ddddddd',
     hashName: 'dwed',
-    friends: [3]
+    friends: [1, 3, 6]
   },
 ]

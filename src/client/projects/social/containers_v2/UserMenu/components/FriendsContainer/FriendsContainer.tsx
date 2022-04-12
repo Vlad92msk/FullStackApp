@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client/shared/utils'
@@ -22,6 +22,7 @@ export type FriendsType = {
   friendsMessages: Message[]
   anyUsersNotFriends: UserType[]
   anyUsersMessages: Message[]
+  possibleFriends: UserType[]
 }
 
 export enum FILTER_FRIENDS {
@@ -56,7 +57,8 @@ export const FriendsContainer: React.FC<FriendsType> = React.memo((props) => {
     friends,
     anyUsersMessages,
     anyUsersNotFriends,
-    friendsMessages
+    friendsMessages,
+    possibleFriends
   } = props
 
   /**
@@ -67,6 +69,58 @@ export const FriendsContainer: React.FC<FriendsType> = React.memo((props) => {
       setFilterFriends(v)
     }
     , [])
+
+  const content = useMemo(() => {
+    switch (filterFriends) {
+      case FILTER_FRIENDS.MY_FRIENDS:
+        return (
+          <>
+            {friends?.length && (
+              <>
+                <Text className={cn('Title')} size={'1'} children={'Сообщения от иных пользователей'} />
+                {anyUsersNotFriends
+                .map((friend) => (
+                  <Friend
+                    key={friend.id}
+                    friend={friend}
+                    onOpenChat={handleOpenChat}
+                    friendMessageCount={
+                      anyUsersMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                    }
+                  />
+                ))}
+                <Line />
+                <Text className={cn('Title')} size={'1'} children={'Друзья'} />
+              </>
+            )}
+            {friends
+            .map((friend) => (
+              <Friend
+                key={friend.id}
+                friend={friend}
+                onOpenChat={handleOpenChat}
+                friendMessageCount={
+                  friendsMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                }
+              />
+            ))}
+          </>
+        )
+      case FILTER_FRIENDS.POSSIBLE:
+        return possibleFriends.map((friend) => (
+          <Friend
+            key={friend.id}
+            friend={friend}
+            onOpenChat={handleOpenChat}
+            friendMessageCount={0}
+          />
+        ))
+      case FILTER_FRIENDS.SEARCH:
+        return <div>SEARCH</div>
+      default:
+        return null
+    }
+  }, [filterFriends, anyUsersNotFriends, friendsMessages, friends, possibleFriends])
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -94,35 +148,7 @@ export const FriendsContainer: React.FC<FriendsType> = React.memo((props) => {
                 />
               </div>
               <div className={cn('FriendsContainer')}>
-                {anyUsersNotFriends?.length && (
-                  <>
-                    <Text className={cn('Title')} size={'1'} children={'Сообщения от иных пользователей'} />
-                    {anyUsersNotFriends
-                    .map((friend) => (
-                      <Friend
-                        key={friend.id}
-                        friend={friend}
-                        friendMessageCount={
-                          anyUsersMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-                        }
-                        onOpenChat={handleOpenChat}
-                      />
-                    ))}
-                    <Line />
-                    <Text className={cn('Title')} size={'1'} children={'Друзья'} />
-                  </>
-                )}
-                {friends
-                .map((friend) => (
-                  <Friend
-                    key={friend.id}
-                    friend={friend}
-                    friendMessageCount={
-                      friendsMessages.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-                    }
-                    onOpenChat={handleOpenChat}
-                  />
-                ))}
+                {content}
               </div>
             </motion.div>
             <span className={cn('Bck')} />

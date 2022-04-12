@@ -22,6 +22,14 @@ export const UserMenu: React.FC = React.memo(() => {
   const friends = All_users.filter(({ id }) => userFriends.includes(id))
 
   /**
+   * Возможеные друзья
+   */
+  const possibleFriendsIds = Array.from(
+    new Set(friends.reduce((acc, item) => [...acc, ...item.friends], []))
+  ).filter((id) => !userFriends.includes(id))
+  const possibleFriends = possibleFriendsIds.map((possibleUserId) => All_users.find(({ id }) => id === possibleUserId)).filter(Boolean)
+
+  /**
    * Все сообщения мне
    */
   const messages = MESSAGES
@@ -119,6 +127,8 @@ export const UserMenu: React.FC = React.memo(() => {
       <FriendsContainer
         friends={friends}
         friendsMessages={messagesFromFriends}
+
+        possibleFriends={possibleFriends}
 
         anyUsersNotFriends={usersNotFriends}
         anyUsersMessages={messagesNotFromFriends}
