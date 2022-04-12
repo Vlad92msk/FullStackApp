@@ -3,15 +3,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client/shared/utils'
 import { IconButton } from '@client/shared/components/IconButton'
-import { Switcher } from '../../components'
-import { Message } from '@client/projects/social/containers_v2/Chat/data/messages'
+import { Message } from '@client/projects/social/containers_v2/UserMenu/data/messages'
 import { UserType } from '@client/projects/social/containers_v2/App/data/user'
 import { Text } from '@client/shared/components/Text'
-import { Friend } from './components'
-import { Line } from '../../components/Line/Ddd'
-import styles from './Friends.module.scss'
+import { Switcher } from '../../../../components'
+import { Line } from '../../../../components/Line/Ddd'
+import { Friend } from '../index'
+import styles from './FriendsContainer.module.scss'
 
-const cn = makeCn('Friends', styles)
+const cn = makeCn('FriendsContainer', styles)
 
 
 export type FriendsType = {
@@ -48,7 +48,7 @@ const FRIENDS_SWITCH = [
   }
 ]
 
-export const Friends: React.FC<FriendsType> = React.memo((props) => {
+export const FriendsContainer: React.FC<FriendsType> = React.memo((props) => {
   const {
     isOpenFriends,
     handleCloseFriends,

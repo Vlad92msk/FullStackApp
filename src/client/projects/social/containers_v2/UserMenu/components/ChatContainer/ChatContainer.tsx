@@ -1,25 +1,25 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { makeCn } from '@client/shared/utils'
-import { AreaInput } from '@client/projects/social/components'
-import { IconButton } from '@client/shared/components/IconButton'
-import { Text } from '@client/shared/components/Text'
-import { ChatMassage, MASSAGE_FROM } from './components/ChatMassage/ChatMassage'
-import { Message, MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
-import { USER, UserType } from '@client/projects/social/containers_v2/App/data/user'
 import { createId } from '@server/utils/createId'
-import { ButtonBox } from '@client/shared/components/ButtonBox'
-import styles from './Chat.module.scss'
+import { makeCn } from '@client_shared/utils'
+import { IconButton } from '@client_shared/components/IconButton'
+import { Text } from '@client_shared/components/Text'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { AreaInput } from '@client/projects/social/components'
+import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
+import { Message, MESSAGES } from '../../data/messages'
+import { USER, UserType } from '../../../App/data/user'
+import styles from './ChatContainer.module.scss'
 
-const cn = makeCn('Chat', styles)
+const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {
   openedUserIdChat: number
   targetUser: UserType
   handleCloseChat: () => void
 }
-export const Chat: React.FC<ChatType> = React.memo((props) => {
+export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const { openedUserIdChat, handleCloseChat, targetUser } = props
   const user = USER
   const chatMassageContainer = useRef<HTMLDivElement>(null)

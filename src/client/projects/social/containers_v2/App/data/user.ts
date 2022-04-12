@@ -1,4 +1,4 @@
-import { UserStatus } from '@client/projects/social/containers_v2/Friends/components/Friend/Friend'
+import { UserStatus } from '@client/projects/social/containers_v2/UserMenu/components/Friend/Friend'
 
 export const USER = {
   id: 1,

@@ -1,4 +1,4 @@
-import { MassageSmileReaction } from '@client/projects/social/containers_v2/Chat/components'
+import { MassageSmileReaction } from '../components'
 
 export type Message = {
   messageId: string

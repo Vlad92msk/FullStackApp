@@ -1,8 +1,8 @@
-@use "../../../../public/styles/lib/functions" as *;
-@use "../../../../public/styles/lib/mixins" as *;
-@import "../App/App.module";
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
 
-.Friends {
+.FriendsContainer {
   width: 130%;
   z-index: 3;
   background: var(--SOCIAL--Background-Card);

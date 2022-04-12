@@ -5,7 +5,7 @@ import { makeCn } from '@client/shared/utils'
 import { Text } from '@client/shared/components/Text'
 import { Icon, IconFill } from '@client/shared/components/Icon'
 import { IconName } from '@client/public/models/icon.model'
-import { Message } from '@client/projects/social/containers_v2/Chat/data/messages'
+import { Message } from '../../data/messages'
 import styles from './ChatMassage.module.scss'
 
 const cn = makeCn('ChatMassage', styles)

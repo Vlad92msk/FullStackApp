@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { makeCn } from '@client_shared/utils'
-
 import { Text } from '@client_shared/components/Text'
 import { Image } from '@client_shared/components/Image'
 import { Icon } from '@client_shared/components/Icon'
 import { useBooleanState } from '@client_shared/hooks'
-import { Friends } from '@client/projects/social/containers_v2/Friends'
-import { Chat } from '@client/projects/social/containers_v2/Chat'
-import { USER } from '@client/projects/social/containers_v2/App/data/user'
-import { ALL_USERS } from '@client/projects/social/containers_v2/Friends/data/ALL_USERS'
-import { MESSAGES } from '@client/projects/social/containers_v2/Chat/data/messages'
+import { USER } from '../App/data/user'
+import { All_users } from './data/all_users'
+import { MESSAGES } from './data/messages'
+import { ChatContainer, FriendsContainer } from './components'
 import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
@@ -21,7 +19,7 @@ export const UserMenu: React.FC = React.memo(() => {
   /**
    * Только друзья
    */
-  const friends = ALL_USERS.filter(({ id }) => userFriends.includes(id))
+  const friends = All_users.filter(({ id }) => userFriends.includes(id))
 
   /**
    * Все сообщения мне
@@ -43,7 +41,7 @@ export const UserMenu: React.FC = React.memo(() => {
    * Пользователи, которые прислали мне сообщения НО не находятся в друзьях
    */
   const a = messagesNotFromFriends.map(({ fromUserId }) => fromUserId)
-  const usersNotFriends = ALL_USERS.filter(({ id }) => a.includes(id))
+  const usersNotFriends = All_users.filter(({ id }) => a.includes(id))
 
   /**
    * Флаг открытия Списка друзей
@@ -118,7 +116,7 @@ export const UserMenu: React.FC = React.memo(() => {
         </div>
       </div>
       <div className={cn('Any')}></div>
-      <Friends
+      <FriendsContainer
         friends={friends}
         friendsMessages={messagesFromFriends}
 
@@ -129,7 +127,7 @@ export const UserMenu: React.FC = React.memo(() => {
         handleOpenChat={handleOpenChat}
         handleCloseFriends={onCloseFriends}
       />
-      <Chat
+      <ChatContainer
         openedUserIdChat={openedUserIdChat}
         targetUser={[...friends, ...usersNotFriends].find(({ id }) => id === openedUserIdChat)}
         handleCloseChat={handleCloseChat}

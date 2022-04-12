@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 
 import { UserSmall } from '@client/projects/social/components'
-import { Text } from '@client_shared/components/Text'
-import { makeCn } from '@client_shared/utils'
-import { Icon } from '@client_shared/components/Icon'
+import { Text } from '@client/shared/components/Text'
+import { makeCn } from '@client/shared/utils'
+import { Icon } from '@client/shared/components/Icon'
 import styles from './Friend.module.scss'
 import { UserType } from '@client/projects/social/containers_v2/App/data/user'
 
@@ -40,8 +40,8 @@ export const Friend: React.FC<FriendComponent> = React.memo((props) => {
       />
       <div className={cn('CountMessage')}>
         <Text className={cn('CountMessageButton')} size={'1'} onClick={handleOpenChat}>
-          <Icon className={cn('CountMessageIcon')} size={'small'} icon={'message-square'} />
           {friendMessageCount || null}
+          <Icon className={cn('CountMessageIcon')} size={'small'} icon={'message-square'} />
         </Text>
         <span className={cn('FriendStatus', { status })} />
       </div>
