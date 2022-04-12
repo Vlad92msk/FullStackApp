@@ -6,20 +6,30 @@ import { Image } from '@client_shared/components/Image'
 import { Icon } from '@client_shared/components/Icon'
 import { useBooleanState } from '@client_shared/hooks'
 import { USER } from '../App/data/user'
-import { All_users } from './data/all_users'
+import { ALL_USERS } from './data/all_users'
 import { MESSAGES } from './data/messages'
-import { ChatContainer, FriendsContainer } from './components'
+import { ChatContainer, FriendsContainer, UserInfo } from './components'
 import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
 
 
 export const UserMenu: React.FC = React.memo(() => {
-  const { img, description, family, hashName, name, id, friends: userFriends } = USER
+  const {
+    img,
+    description,
+    family,
+    hashName,
+    name,
+    id,
+    friends: userFriends,
+    professionalInformation,
+    baseInformation
+  } = USER
   /**
    * Только друзья
    */
-  const friends = All_users.filter(({ id }) => userFriends.includes(id))
+  const friends = ALL_USERS.filter(({ id }) => userFriends.includes(id))
 
   /**
    * Возможеные друзья
@@ -27,7 +37,7 @@ export const UserMenu: React.FC = React.memo(() => {
   const possibleFriendsIds = Array.from(
     new Set(friends.reduce((acc, item) => [...acc, ...item.friends], []))
   ).filter((id) => !userFriends.includes(id))
-  const possibleFriends = possibleFriendsIds.map((possibleUserId) => All_users.find(({ id }) => id === possibleUserId)).filter(Boolean)
+  const possibleFriends = possibleFriendsIds.map((possibleUserId) => ALL_USERS.find(({ id }) => id === possibleUserId)).filter(Boolean)
 
   /**
    * Все сообщения мне
@@ -49,7 +59,7 @@ export const UserMenu: React.FC = React.memo(() => {
    * Пользователи, которые прислали мне сообщения НО не находятся в друзьях
    */
   const a = messagesNotFromFriends.map(({ fromUserId }) => fromUserId)
-  const usersNotFriends = All_users.filter(({ id }) => a.includes(id))
+  const usersNotFriends = ALL_USERS.filter(({ id }) => a.includes(id))
 
   /**
    * Флаг открытия Списка друзей
@@ -123,7 +133,10 @@ export const UserMenu: React.FC = React.memo(() => {
           <Text className={cn('Description')} size={'2'} children={description} />
         </div>
       </div>
-      <div className={cn('Any')}></div>
+      <UserInfo
+        baseInformation={baseInformation}
+        professionalInformation={professionalInformation}
+      />
       <FriendsContainer
         friends={friends}
         friendsMessages={messagesFromFriends}

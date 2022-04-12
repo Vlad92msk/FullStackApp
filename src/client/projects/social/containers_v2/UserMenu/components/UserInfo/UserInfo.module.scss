@@ -1,0 +1,48 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+$textPadding: rem(5);
+$sectionMarginTop: clamp(2px, 1vh, rem(10));
+
+.UserInfo {
+  @include flex($direction: column);
+  background: var(--SOCIAL--Background-Card);
+  box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
+  z-index: 4;
+  padding: $componentPadding;
+  height: 100%;
+  overflow-y: auto;
+
+  &-Row {
+    @include flex($justify: space-between, $align-items: center);
+    padding: clamp(2px, 1vh, rem(10));
+  }
+
+  &-BaseInfo {
+    @include flex($direction: column);
+    margin-top: $sectionMarginTop;
+  }
+
+  &-ProfessionalInfo {
+    @include flex($direction: column);
+    margin-top: $sectionMarginTop;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-System);
+    background: linear-gradient(45deg, var(--SOCIAL--Color-Text-Background), transparent);
+    padding: $textPadding;
+  }
+
+  &-TitleMain {
+    padding: clamp(2px, 1vh, rem(10));
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-Volume {
+    color: var(--SOCIAL--Color-Text-Main);
+    text-align: end;
+    padding: $textPadding;
+  }
+}

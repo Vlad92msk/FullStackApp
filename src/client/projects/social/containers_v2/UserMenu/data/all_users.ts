@@ -1,7 +1,7 @@
 import { UserStatus } from '@client/projects/social/containers_v2/UserMenu/components/Friend/Friend'
 import { UserType } from '@client/projects/social/containers_v2/App/data/user'
 
-export const All_users: UserType[] = [
+export const ALL_USERS: UserType[] = [
   {
     id: 2,
     name: 'name2',
