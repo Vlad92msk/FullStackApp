@@ -11,6 +11,9 @@ export enum SocialPages {
   SOCIAL = 'social',
   SOCIAL_PHOTO = 'photo',
   SOCIAL_VIDEO = 'video',
+  SOCIAL_PROFILE = 'profile',
+  SOCIAL_GROUPS = 'groups',
+  SOCIAL_MUSIC = 'music',
 }
 
 /**
@@ -42,7 +45,31 @@ export const PROJECT_ROUTES: ProjectStructureRoutes = {
     subRoutes: {
 
     }
-  }
+  },
+  [SocialPages.SOCIAL_PROFILE]: {
+    page: 'profile',
+    title: 'Профиль',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
+  [SocialPages.SOCIAL_GROUPS]: {
+    page: 'groups',
+    title: 'Группы',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
+  [SocialPages.SOCIAL_MUSIC]: {
+    page: 'music',
+    title: 'Музыка',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
 }
 
 export const routesArray = createProjectRoutesData<ProjectStructureRoutes>(PROJECT_ROUTES)

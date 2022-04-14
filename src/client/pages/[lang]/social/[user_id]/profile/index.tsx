@@ -1,13 +1,14 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { App } from '@client_projects/social/containers_v2/App'
 import { Page } from '@client_shared/components/page'
-import { getSSR, ssrResult } from '@client/shared/utils/getSsrFuncs'
+import { getSSR, ssrResult } from '@client_shared/utils/getSsrFuncs'
+import { Profile } from '@client/projects/social/containers_v2/Profile'
 
 
-const SocialPhoto: NextPage = () => (
-  <Page page={'SOCIAL_PHOTO'} subTitle={'Social'}>
+const ProfilePage: NextPage = () => (
+  <Page page={'SOCIAL_PROFILE'} subTitle={'Social'}>
     <App>
-      <div>Фото</div>
+      <Profile />
     </App>
   </Page>
 )
@@ -23,5 +24,5 @@ export const getServerSideProps: GetServerSideProps = (ctx) => getSSR(ctx, async
   return ssrResult(apolloClient, {})
 })
 
-export default SocialPhoto
+export default ProfilePage
 

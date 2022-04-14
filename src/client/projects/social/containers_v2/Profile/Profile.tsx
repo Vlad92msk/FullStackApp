@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useRouter } from 'next/router'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useRouter, withRouter } from 'next/router'
 
-import { makeCn } from '@client_shared/utils'
+import { useRouterPush } from '@client_shared/hooks/useRouterPush'
 import { Text } from '@client_shared/components/Text'
+import { makeCn } from '@client_shared/utils'
 import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
 import { AlbumCardContainer } from './components/AlbumCardContainer/AlbumCardContainer'
 import { PhotoCard } from './components'
@@ -13,6 +14,13 @@ import styles from './Profile.module.scss'
 
 
 const cn = makeCn('Profile', styles)
+
+export enum PROFILE_LAYOUTS {
+  WALL = 'wall',
+  PHOTO = 'photo',
+  VIDEO = 'video',
+  WORK = 'work'
+}
 
 export enum GROUPS_SWITCH_VALUES {
   ALBUMS = 'albums',
@@ -33,60 +41,30 @@ const GROUPS_SWITCH = [
 ]
 
 export const Profile: React.FC = React.memo(() => {
-  const { push, query: { lang, user_id, layout } } = useRouter()
+  const { query, pathname } = useRouter()
+  const checkWall = useRouterPush(pathname, { layout: PROFILE_LAYOUTS.WALL })
+  const checkVideo = useRouterPush(pathname, { layout: PROFILE_LAYOUTS.VIDEO })
+  const checkPhoto = useRouterPush(pathname, { layout: PROFILE_LAYOUTS.PHOTO })
+  const checkWork = useRouterPush(pathname, { layout: PROFILE_LAYOUTS.WORK })
 
   /**
    * По умолчанию открыта стена
    */
   useEffect(() => {
-    if (!layout) {
-      push({
-        query: { lang, user_id, layout: 'wall' }
-      })
+    if (!query.layout) {
+      checkWall()
     }
-  }, [layout,lang, user_id]);
-
-  const dwed = useMemo(() => {
-    let dwedsss = {
-      lang: null,
-      user_id: null,
-      layout: null
-    }
-
-    if (dwedsss.layout === null) {
-      dwedsss = {
-        lang: lang,
-        user_id: user_id,
-        layout: layout
-      }
-    } else {
-      return dwedsss
-    }
-
-    return dwedsss
-  }, [lang, user_id, layout])
+  }, [query])
 
   /**
-   * Открыть карточку
+   * Группировка (альбомная/все)
    */
-  const handleOpenCard = useCallback((layout) => {
-    if (dwed.layout !== layout) {
-      push({
-        query: { lang, user_id, layout }
-      })
-    }
-
-  }, [lang, user_id, dwed])
-
   const [group, setGroup] = useState<GROUPS_SWITCH_VALUES>(GROUPS_SWITCH_VALUES.ALBUMS)
-  const changeGroup = useCallback((v) => {
-      return setGroup(v)
-    }
-    , [])
+  const changeGroup = useCallback((v) => setGroup(v), [])
 
   const layoutTab = useMemo(() => {
-    switch (layout) {
-      case 'photo':
+    switch (query.layout as PROFILE_LAYOUTS) {
+      case PROFILE_LAYOUTS.PHOTO:
         return (
           <>
             <div className={cn('FiltersContainer')}>
@@ -113,23 +91,46 @@ export const Profile: React.FC = React.memo(() => {
             )}
           </>
         )
-      case 'video':
+      case PROFILE_LAYOUTS.VIDEO:
         return <div>video</div>
-      case 'wall':
+      case PROFILE_LAYOUTS.WALL:
         return <div>wall</div>
       default:
         return null
     }
-  }, [layout, group])
+  }, [query, group])
 
 
   return (
     <div className={cn()}>
       <div className={cn('TabButtons')}>
-        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'wall'} onClick={() => handleOpenCard('wall')} children={'Стена'} />
-        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'photo'} onClick={() => handleOpenCard('photo')} children={'Фото'} />
-        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'video'} onClick={() => handleOpenCard('video')} children={'Видео'} />
-        <Text size={'4'} textTransform={'uppercase'} data-active={layout === 'work'} onClick={() => handleOpenCard('work')} children={'Работа'} />
+        <Text
+          size={'4'}
+          textTransform={'uppercase'}
+          data-active={query.layout === PROFILE_LAYOUTS.WALL}
+          onClick={checkWall}
+          children={'Стена'}
+        />
+        <Text
+          size={'4'}
+          textTransform={'uppercase'}
+          data-active={query.layout === PROFILE_LAYOUTS.PHOTO}
+          onClick={checkPhoto}
+          children={'Фото'}
+        />
+        <Text
+          size={'4'} textTransform={'uppercase'}
+          data-active={query.layout === PROFILE_LAYOUTS.VIDEO}
+          onClick={checkVideo}
+          children={'Видео'}
+        />
+        <Text
+          size={'4'}
+          textTransform={'uppercase'}
+          data-active={query.layout === PROFILE_LAYOUTS.WORK}
+          onClick={checkWork}
+          children={'Работа'}
+        />
       </div>
       <div className={cn('Container')}>
         {layoutTab}

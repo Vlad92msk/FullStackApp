@@ -5,7 +5,7 @@ import { getSSR, ssrResult } from '@client/shared/utils/getSsrFuncs'
 
 
 const SocialPhoto: NextPage = () => (
-  <Page page={'SOCIAL'} subTitle={'Social'}>
+  <Page page={'SOCIAL_VIDEO'} subTitle={'Social'}>
     <App>
       <div>Видео</div>
     </App>

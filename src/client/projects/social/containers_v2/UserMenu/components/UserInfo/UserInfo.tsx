@@ -41,7 +41,7 @@ export const UserInfo: React.FC<UserInfoType> = (props) => {
       <div className={cn('BaseInfo')}>
         <Text className={cn('TitleMain')} textTransform={'uppercase'} size={'1'} children={'Общая инф.'} />
         {base.map((item) => (
-          <div className={cn('Row')}>
+          <div key={item[0]} className={cn('Row')}>
             <Text className={cn('Title')} size={'1'} children={baseInformationRU[item[0]]} />
             <Text className={cn('Volume')} size={'1'} children={item[1]} />
           </div>
@@ -50,7 +50,7 @@ export const UserInfo: React.FC<UserInfoType> = (props) => {
       <div className={cn('ProfessionalInfo')}>
         <Text className={cn('TitleMain')} textTransform={'uppercase'} size={'1'} children={'Профессиональная инф.'} />
         {prof.map((item) => (
-          <div className={cn('Row')}>
+          <div key={item[0]} className={cn('Row')}>
             <Text className={cn('Title')} size={'1'} children={item[0]} />
             <Text className={cn('Volume')} size={'1'} children={item[1]} />
           </div>

@@ -31,7 +31,8 @@ export const ssrLanguageValidate = (ctx: GetServerSidePropsContext) => {
 export const ssrCompose = (
   params: {
     validates: any[],
-    resolve: <P> (apolloClient: ApolloClient<NormalizedCacheObject>) => Promise<GetServerSidePropsResult<P>>, lang: string
+    resolve: <P> (apolloClient: ApolloClient<NormalizedCacheObject>) => Promise<GetServerSidePropsResult<P>>,
+    lang: string
   }) => {
   const { validates, resolve, lang } = params
 
