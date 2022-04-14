@@ -1,8 +1,9 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
+import { useReplaceRouterQuery } from '@client_shared/hooks/useRouterPush'
 import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
 import { AlbumCardContainer } from './components/AlbumCardContainer/AlbumCardContainer'
 import { PhotoCard } from './components'
@@ -40,11 +41,11 @@ const GROUPS_SWITCH = [
 ]
 
 export const Profile: React.FC = React.memo(() => {
-  const { query, replace } = useRouter()
-  const checkWall = useCallback(() => replace({ query: { ...query, layout: PROFILE_LAYOUTS.WALL } }), [query])
-  const checkVideo = useCallback(() => replace({ query: { ...query, layout: PROFILE_LAYOUTS.VIDEO } }), [query])
-  const checkPhoto = useCallback(() => replace({ query: { ...query, layout: PROFILE_LAYOUTS.PHOTO } }), [query])
-  const checkWork = useCallback(() => replace({ query: { ...query, layout: PROFILE_LAYOUTS.WORK } }), [query])
+  const { query } = useRouter()
+  const checkWall = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WALL })
+  const checkVideo = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.VIDEO })
+  const checkPhoto = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.PHOTO })
+  const checkWork = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WORK })
 
   /**
    * По умолчанию открыта стена

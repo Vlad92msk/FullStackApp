@@ -4,7 +4,7 @@ import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
-import { replaceUrl, useRouterPush } from '@client_shared/hooks/useRouterPush'
+import {  useReplaceRouterUrl } from '@client_shared/hooks/useRouterPush'
 import { SocialPages } from '@client/projects/social/router'
 import styles from './NavBar.module.scss'
 
@@ -17,11 +17,11 @@ type NavBarType = {
 }
 export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
   const layout = pathname.split('/')[4] as SocialPages
-  const handleGoProfile = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_PROFILE))
-  const handleGoPhoto = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_PHOTO))
-  const handleGoVideo = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_VIDEO))
-  const handleGoGroups = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_GROUPS))
-  const handleGoMusic = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_MUSIC))
+  const [handleGoProfile] = useReplaceRouterUrl(layout, SocialPages.SOCIAL_PROFILE)
+  const [handleGoPhoto] = useReplaceRouterUrl(layout, SocialPages.SOCIAL_PHOTO)
+  const [handleGoVideo] = useReplaceRouterUrl(layout, SocialPages.SOCIAL_VIDEO)
+  const [handleGoGroups] = useReplaceRouterUrl(layout, SocialPages.SOCIAL_GROUPS)
+  const [handleGoMusic] = useReplaceRouterUrl(layout, SocialPages.SOCIAL_MUSIC)
 
   return (
     <section className={cn()}>

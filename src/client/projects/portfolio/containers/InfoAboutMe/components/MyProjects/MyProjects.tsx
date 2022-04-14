@@ -4,16 +4,16 @@ import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { HoneycombMesh } from '@client_shared/components/HoneycombMesh'
-import { useRouterPush } from '@client_shared/hooks/useRouterPush'
-import { ROUTES_ALL } from '@client_projects/routesAll'
+import { useReplaceRouterUrl } from '@client_shared/hooks/useRouterPush'
 
-import styles from './MyProjects.module.scss'
+import { ROUTES_ALL } from '@client_projects/routesAll'
 const cn = makeCn('MyProjects', styles)
+import styles from './MyProjects.module.scss'
 
 
 export const MyProjects: FC = () => {
-  const handleGoCosmo = useRouterPush(ROUTES_ALL.COSMO)
-  const handleGoSocial = useRouterPush(ROUTES_ALL.SOCIAL)
+  const [handleGoCosmo] = useReplaceRouterUrl(ROUTES_ALL.PORTFOLIO, ROUTES_ALL.COSMO)
+  const [handleGoSocial] = useReplaceRouterUrl(ROUTES_ALL.PORTFOLIO, ROUTES_ALL.SOCIAL)
 
 
   return <div className={cn()}>
