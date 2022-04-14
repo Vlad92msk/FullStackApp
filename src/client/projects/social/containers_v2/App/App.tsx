@@ -7,8 +7,10 @@ import { UserMenu } from '../UserMenu'
 import styles from './App.module.scss'
 
 const cn = makeCn('Application', styles)
-
-export const App: React.FC = ({ children }) => {
+type AppType = {
+  pathname: string
+}
+export const App: React.FC<AppType> = React.memo(({ children, pathname }) => {
 
   return (
     <Section noPaddingRight className={cn()} bcgImg={{
@@ -19,7 +21,7 @@ export const App: React.FC = ({ children }) => {
     }}>
       <UserMenu />
       {children}
-      <NavBar />
+      <NavBar pathname={pathname} />
     </Section>
   )
-}
+})

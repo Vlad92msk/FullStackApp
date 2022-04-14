@@ -9,8 +9,8 @@ import { USER } from '../App/data/user'
 import { ALL_USERS } from './data/all_users'
 import { MESSAGES } from './data/messages'
 import { ChatContainer, FriendsContainer, UserInfo } from './components'
-import styles from './UserMenu.module.scss'
 import { Line } from '@client/projects/social/components/Line/Ddd'
+import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
 

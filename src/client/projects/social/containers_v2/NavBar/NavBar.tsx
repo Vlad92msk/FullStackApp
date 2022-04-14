@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
@@ -11,10 +10,12 @@ import styles from './NavBar.module.scss'
 
 const cn = makeCn('NavBar', styles)
 
-
 export const USER_ID = 1
-export const NavBar: React.FC = React.memo(() => {
-  const { pathname } = useRouter()
+
+type NavBarType = {
+  pathname: string
+}
+export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
   const layout = pathname.split('/')[4] as SocialPages
   const handleGoProfile = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_PROFILE))
   const handleGoPhoto = useRouterPush(...replaceUrl(pathname, layout, 'user_layout', SocialPages.SOCIAL_PHOTO))

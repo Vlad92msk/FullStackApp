@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react'
 import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
 import { ROUTES_ALL } from '@client/projects/routesAll'
 import { ProjectLanguage } from '@client/pages/_app'
-import { ParsedUrlQueryInput } from 'querystring'
 
 /**
  * Заменяет один параметр в URL на другой
@@ -11,19 +11,20 @@ import { ParsedUrlQueryInput } from 'querystring'
  * @param newParam
  * @param value
  */
-export const replaceUrl = (pathname: string, oldParam: string, newParam: string, value: string):[string, ParsedUrlQueryInput] => {
+export const replaceUrl = (pathname: string, oldParam: string, newParam: string, value: string): [string, ParsedUrlQueryInput] => {
   const path = pathname.replace('/' + oldParam, `/[${newParam}]`)
   return ([path, { [newParam]: value }])
 }
 
-export const useRouterPush = (path: string, query?: ParsedUrlQueryInput) => {
-  const router = useRouter()
-  const { language } = useContext(ProjectLanguage)
-  if (!ROUTES_ALL) return
-  /**
-   * TODO: добавить потом получения юзера из локалСтора
-   */
-  return useCallback(() => router.push({
+export const useRouterPush = (path: string, query?: ParsedUrlQueryInput) => useCallback(() => {
+    const router = useRouter()
+    const { language } = useContext(ProjectLanguage)
+    if (!ROUTES_ALL) return
+
+    /**
+     * TODO: добавить потом получения юзера из локалСтора
+     */
+    return router.push({
       pathname: path,
       query: {
         lang: language,
@@ -31,5 +32,6 @@ export const useRouterPush = (path: string, query?: ParsedUrlQueryInput) => {
         ...query
       }
     })
-    , [router, path, query, language])
-}
+  }
+  , [path, query])
+
