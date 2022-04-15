@@ -12,6 +12,6 @@ $borderRadiusCard: rem(5);
   gap: clamp(1px, 7vw, rem(200));
 
   @include media-768 {
-    gap: 0;
+    gap: clamp(1px, 1vw, rem(20));
   }
 }

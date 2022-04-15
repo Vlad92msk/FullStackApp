@@ -26,10 +26,10 @@
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(1px, 1vw, rem(20));
 
-    @include media-1024 {
+    @include media-1366 {
       grid-template-columns: repeat(2, 1fr);
     }
-    @include media-768 {
+    @include media-1024 {
       grid-template-columns: repeat(1, 1fr);
     }
   }
