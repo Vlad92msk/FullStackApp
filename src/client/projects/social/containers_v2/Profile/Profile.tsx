@@ -4,11 +4,13 @@ import { useRouter } from 'next/router'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { useReplaceRouterQuery } from '@client_shared/hooks/useRouterPush'
-import { ProfileLayoutsPhoto } from './components'
+import { ProfileLayoutDigital } from './components'
 import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
 import { PHOTO_ALBUMS } from '@client/projects/social/containers_v2/Profile/data/photoAlbums.data'
-import { PHOTO } from '@client/projects/social/containers_v2/Profile/data/photos.data'
+import { PHOTO_ITEMS } from '@client/projects/social/containers_v2/Profile/data/photoItems.data'
 import styles from './Profile.module.scss'
+import { VIDEO_ITEMS } from '@client/projects/social/containers_v2/Profile/data/videoItems.data'
+import { VIDEO_ALBUMS } from '@client/projects/social/containers_v2/Profile/data/videoAlbums.data'
 
 
 const cn = makeCn('Profile', styles)
@@ -73,14 +75,20 @@ export const Profile: React.FC = React.memo(() => {
           switch (query.layout as PROFILE_LAYOUTS) {
             case PROFILE_LAYOUTS.PHOTO:
               return (
-                <ProfileLayoutsPhoto
-                  photos={PHOTO}
+                <ProfileLayoutDigital
+                  allItems={PHOTO_ITEMS}
                   userId={USER_ID}
                   albums={PHOTO_ALBUMS}
                 />
               )
             case PROFILE_LAYOUTS.VIDEO:
-              return <div>video</div>
+              return (
+                <ProfileLayoutDigital
+                  allItems={VIDEO_ITEMS}
+                  userId={USER_ID}
+                  albums={VIDEO_ALBUMS}
+                />
+              )
             case PROFILE_LAYOUTS.WALL:
               return <div>wall</div>
             default:

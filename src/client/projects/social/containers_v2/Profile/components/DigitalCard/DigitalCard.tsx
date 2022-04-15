@@ -1,26 +1,29 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useAnimation } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
 import { Button } from '@client_shared/components/Button'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Icon } from '@client_shared/components/Icon'
-import { Image, MImage } from '@client_shared/components/Image'
+import { MImage } from '@client_shared/components/Image'
 import { Comments } from '@client/projects/social/containers_v2/Comments'
 import { UserSmall } from '@client/projects/social/components'
-import { PhotoType } from '../../data/photos.data'
+import { PhotoType } from '../../data/photoItems.data'
 import { initialEl, useMainAnim } from './functions/main.animate'
-import styles from './PhotoCard.module.scss'
+import styles from './DigitalCard.module.scss'
 
-const cn = makeCn('PhotoCard', styles)
+const cn = makeCn('DigitalCard', styles)
 
 
 export interface PhotoCardType extends PhotoType {
   userId: number
 }
 
-export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
+/**
+ * Карточка для ФОТО/ВИДЕО
+ */
+export const DigitalCard: React.FC<PhotoCardType> = React.memo((props) => {
   const {
     id,
     commentsCount,
@@ -155,24 +158,8 @@ export const PhotoCard: React.FC<PhotoCardType> = React.memo((props) => {
         )}
         {open && (
           <>
-            <Text className={cn('Title')} children={'Title'} />
-            <Text className={cn('Description')}>
-              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
-              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
-              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
-              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
-              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
-              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
-              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
-              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
-              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
-              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
-              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
-              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
-              fewf lkdowe dlwkefdjefpowe lffwjpfo fwrpfj wjefpwjefowef weofjpweojf fwoejfpojweojfopewjfew fwepfj
-              wefkwieof wefkwpeofj fwejfpoewjf wefjwepojf ewfweojfpowen fwefnwepojfpowen fwoejfpojwepofw fwejfopwe weofj
-              fwe fwe f ewfwefjfw fwfpi ikf foiwefnf
-            </Text>
+            <Text className={cn('Title')} children={title} />
+            <Text className={cn('Description')} children={description} />
           </>
         )}
       </div>

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { AlbumCard, PhotoCard } from '@client/projects/social/containers_v2/Profile/components'
-import { PhotoType } from '../../data/photos.data'
+import { AlbumCard, DigitalCard } from '@client/projects/social/containers_v2/Profile/components'
+import { PhotoType } from '../../data/photoItems.data'
 import { PhotoAlbumType } from '../../data/photoAlbums.data'
 import styles from './AlbumCardContainer.module.scss'
 
@@ -39,7 +39,7 @@ export const AlbumCardContainer: React.FC<AlbumCardContainerType> = React.memo((
         <Text className={cn('Title')} size={'2'} children={'Фото не в альбомах'} />
         <div className={cn('Content')}>
           {photos.filter(({ albumId }) => !Boolean(albumId)).map((photo) => (
-            <PhotoCard key={photo.id} id={photo.id} userId={userId} {...photo} />
+            <DigitalCard key={photo.id} id={photo.id} userId={userId} {...photo} />
           ))}
         </div>
       </div>

@@ -2,7 +2,7 @@
 @use "../../../../../../public/styles/lib/mixins" as *;
 @import "../../../App/App.module.scss";
 
-.PhotoProfileLayouts {
+.ProfileLayoutDigital {
   &-FiltersContainer {
     @include flex($justify: space-between);
     width: 100%;

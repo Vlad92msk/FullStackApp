@@ -7,8 +7,8 @@ import { Button } from '@client/shared/components/Button'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Icon } from '@client/shared/components/Icon'
 import { Image } from '@client/shared/components/Image'
-import { PhotoType } from '../../data/photos.data'
-import { PhotoCard } from '@client/projects/social/containers_v2/Profile/components'
+import { PhotoType } from '../../data/photoItems.data'
+import { DigitalCard } from '@client/projects/social/containers_v2/Profile/components'
 import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('AlbumCard', styles)
@@ -85,7 +85,7 @@ export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
             <IconButton icon={'arrow-left'} onClick={handleMore} />
           </div>
           <div className={cn('Photos')}>
-            {photo.map((photo) => (<PhotoCard key={photo.id} id={photo.id} userId={userId} {...photo} />))}
+            {photo.map((photo) => (<DigitalCard key={photo.id} id={photo.id} userId={userId} {...photo} />))}
           </div>
         </>)
       }

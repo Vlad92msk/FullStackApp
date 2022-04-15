@@ -2,7 +2,7 @@
 @use "../../../../../../public/styles/lib/mixins" as *;
 @import "../../../App/App.module.scss";
 
-.PhotoCard {
+.DigitalCard {
   @include flex();
   margin: rem(1);
   flex: 0 1 clamp(100px, 30%, 50%);

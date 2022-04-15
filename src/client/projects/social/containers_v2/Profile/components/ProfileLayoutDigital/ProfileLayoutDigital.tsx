@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react'
 import { Switcher } from '@client/projects/social/components'
 import { PhotoAlbumType } from '@client/projects/social/containers_v2/Profile/data/photoAlbums.data'
-import { PhotoType } from '@client/projects/social/containers_v2/Profile/data/photos.data'
-import { PhotoCard, AlbumCardContainer } from '@client/projects/social/containers_v2/Profile/components'
+import { PhotoType } from '@client/projects/social/containers_v2/Profile/data/photoItems.data'
+import { DigitalCard, AlbumCardContainer } from '@client/projects/social/containers_v2/Profile/components'
 import { makeCn } from '@client_shared/utils'
-import styles from './ProfileLayoutsPhoto.module.scss'
+import styles from './ProfileLayoutDigital.module.scss'
 
 
-const cn = makeCn('PhotoProfileLayouts', styles)
+const cn = makeCn('ProfileLayoutDigital', styles)
 
 export enum GROUPS_SWITCH_VALUES {
   ALBUMS = 'albums',
@@ -30,17 +30,21 @@ const GROUPS_SWITCH = [
 
 type ProfileLayoutsPhotoType = {
   userId: number
-  photos: PhotoType[]
+  allItems: PhotoType[]
   albums: PhotoAlbumType[]
 }
-export const ProfileLayoutsPhoto: React.FC<ProfileLayoutsPhotoType> = React.memo((props) => {
-  const { photos, albums, userId } = props
+
+/**
+ * Раздел Профиля - Контент-компонет для Видео или Фото
+ */
+export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.memo((props) => {
+  const { allItems, albums, userId } = props
 
   /**
    * Группировка (альбомная/все)
    */
   const [group, setGroup] = useState<GROUPS_SWITCH_VALUES>(GROUPS_SWITCH_VALUES.ALBUMS)
-  const changeGroup = useCallback((v) => setGroup(v), [])
+  const changeGroup = useCallback(setGroup, [])
 
   return (
     <>
@@ -58,18 +62,17 @@ export const ProfileLayoutsPhoto: React.FC<ProfileLayoutsPhotoType> = React.memo
             return (
               <AlbumCardContainer
                 albums={albums}
-                photos={photos}
+                photos={allItems}
                 userId={userId}
               />
             )
           case GROUPS_SWITCH_VALUES.ALL:
             return (
               <div className={cn('Photos')}>
-                {photos.map((photo) => (
-                  <PhotoCard
+                {allItems.map((photo) => (
+                  <DigitalCard
                     key={photo.id}
                     userId={userId}
-                    id={photo.id}
                     {...photo}
                   />
                 ))}

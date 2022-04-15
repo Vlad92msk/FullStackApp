@@ -1,4 +1,4 @@
-export const PHOTO = [
+export const PHOTO_ITEMS = [
   {
     id: 1,
     title: 'title',
@@ -81,4 +81,4 @@ export const PHOTO = [
   },
 ]
 
-export type PhotoType = typeof PHOTO[0]
+export type PhotoType = typeof PHOTO_ITEMS[0]
