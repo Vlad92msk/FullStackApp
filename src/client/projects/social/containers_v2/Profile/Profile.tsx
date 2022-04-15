@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { useReplaceRouterQuery } from '@client_shared/hooks/useRouterPush'
+import { ProfileLayoutsPhoto } from './components'
 import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
-import { AlbumCardContainer } from './components/AlbumCardContainer/AlbumCardContainer'
-import { PhotoCard } from './components'
-import { PHOTO_ALBUMS } from './data/photoAlbums.data'
-import { PHOTO } from './data/photos.data'
-import { Switcher } from '../../components'
+import { PHOTO_ALBUMS } from '@client/projects/social/containers_v2/Profile/data/photoAlbums.data'
+import { PHOTO } from '@client/projects/social/containers_v2/Profile/data/photos.data'
 import styles from './Profile.module.scss'
 
 
@@ -21,24 +19,6 @@ export enum PROFILE_LAYOUTS {
   VIDEO = 'video',
   WORK = 'work'
 }
-
-export enum GROUPS_SWITCH_VALUES {
-  ALBUMS = 'albums',
-  ALL = 'all',
-}
-
-const GROUPS_SWITCH = [
-  {
-    value: GROUPS_SWITCH_VALUES.ALBUMS,
-    name: 'groupsSwitch',
-    label: 'альбомы'
-  },
-  {
-    value: GROUPS_SWITCH_VALUES.ALL,
-    name: 'groupsSwitch',
-    label: 'все'
-  }
-]
 
 export const Profile: React.FC = React.memo(() => {
   const { query } = useRouter()
@@ -55,50 +35,6 @@ export const Profile: React.FC = React.memo(() => {
       checkWall()
     }
   }, [query])
-
-  /**
-   * Группировка (альбомная/все)
-   */
-  const [group, setGroup] = useState<GROUPS_SWITCH_VALUES>(GROUPS_SWITCH_VALUES.ALBUMS)
-  const changeGroup = useCallback((v) => setGroup(v), [])
-
-  const layoutTab = useMemo(() => {
-    switch (query.layout as PROFILE_LAYOUTS) {
-      case PROFILE_LAYOUTS.PHOTO:
-        return (
-          <>
-            <div className={cn('FiltersContainer')}>
-              <div className={cn('FiltersRow')}>Filter</div>
-              <Switcher
-                currentValue={group}
-                onChange={changeGroup}
-                options={GROUPS_SWITCH}
-              />
-            </div>
-            {group === GROUPS_SWITCH_VALUES.ALBUMS && (
-              <AlbumCardContainer
-                albums={PHOTO_ALBUMS}
-                photos={PHOTO}
-                userId={USER_ID}
-              />
-            )}
-            {group === GROUPS_SWITCH_VALUES.ALL && (
-              <div className={cn('Photos')}>
-                {
-                  PHOTO.map((photo) => (<PhotoCard userId={USER_ID} key={photo.id} id={photo.id} {...photo} />))
-                }
-              </div>
-            )}
-          </>
-        )
-      case PROFILE_LAYOUTS.VIDEO:
-        return <div>video</div>
-      case PROFILE_LAYOUTS.WALL:
-        return <div>wall</div>
-      default:
-        return null
-    }
-  }, [query, group])
 
 
   return (
@@ -133,7 +69,24 @@ export const Profile: React.FC = React.memo(() => {
         />
       </div>
       <div className={cn('Container')}>
-        {layoutTab}
+        {(() => {
+          switch (query.layout as PROFILE_LAYOUTS) {
+            case PROFILE_LAYOUTS.PHOTO:
+              return (
+                <ProfileLayoutsPhoto
+                  photos={PHOTO}
+                  userId={USER_ID}
+                  albums={PHOTO_ALBUMS}
+                />
+              )
+            case PROFILE_LAYOUTS.VIDEO:
+              return <div>video</div>
+            case PROFILE_LAYOUTS.WALL:
+              return <div>wall</div>
+            default:
+              return null
+          }
+        })()}
       </div>
     </div>
   )

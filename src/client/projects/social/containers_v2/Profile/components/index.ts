@@ -1,3 +1,5 @@
 export * from './ProfileCard/ProfileCard'
 export * from './AlbumCard/AlbumCard'
+export * from './AlbumCardContainer/AlbumCardContainer'
 export * from './PhotoCard/PhotoCard'
+export * from './ProfileLayoutsPhoto/ProfileLayoutsPhoto'
