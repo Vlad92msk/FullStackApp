@@ -7,7 +7,6 @@
   @include wh(50%, 100%);
   overflow: hidden;
   padding: rem(10);
-  margin-left: 2%;
 
   @include media-768 {
     overflow: initial;

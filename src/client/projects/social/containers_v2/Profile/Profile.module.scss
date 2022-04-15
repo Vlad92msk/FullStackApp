@@ -14,7 +14,7 @@
 
   &-TabButtons {
     @include flex();
-    padding: rem(30) 0;
+    padding: rem(15) 0;
     margin-bottom: rem(30);
     border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
 
@@ -32,8 +32,9 @@
 
   &-Container {
     @include flex($direction: column);
+    @include wh(80%, 80vh);
     margin-top: clamp(1px, 1vh, rem(20));
-    height: 80vh;
+    align-self: center;
   }
 
 }

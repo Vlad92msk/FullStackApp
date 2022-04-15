@@ -9,6 +9,8 @@
     margin-bottom: rem(20);
     position: relative;
     overflow: hidden;
+    padding-bottom: rem(20);
+    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
   }
 
   &-Filter {
@@ -30,6 +32,16 @@
 
   &-AuthorComment {
     @include flex($direction: column);
+  }
+
+  &-CommentsArray {
+    @include flex(wrap);
+    overflow-y: auto;
+  }
+
+  &-OpenComments {
+    flex: auto;
+    margin-top: rem(10);
   }
 
   &-Send {

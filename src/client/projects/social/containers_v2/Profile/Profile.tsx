@@ -4,13 +4,14 @@ import { useRouter } from 'next/router'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { useReplaceRouterQuery } from '@client_shared/hooks/useRouterPush'
-import { ProfileLayoutDigital } from './components'
+import { ProfileLayoutDigital, ProfileLayoutWall } from './components'
 import { USER_ID } from '@client/projects/social/containers_v2/NavBar'
 import { PHOTO_ALBUMS } from '@client/projects/social/containers_v2/Profile/data/photoAlbums.data'
 import { PHOTO_ITEMS } from '@client/projects/social/containers_v2/Profile/data/photoItems.data'
 import styles from './Profile.module.scss'
 import { VIDEO_ITEMS } from '@client/projects/social/containers_v2/Profile/data/videoItems.data'
 import { VIDEO_ALBUMS } from '@client/projects/social/containers_v2/Profile/data/videoAlbums.data'
+import { USER } from '@client/projects/social/containers_v2/App/data/user'
 
 
 const cn = makeCn('Profile', styles)
@@ -28,6 +29,19 @@ export const Profile: React.FC = React.memo(() => {
   const checkVideo = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.VIDEO })
   const checkPhoto = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.PHOTO })
   const checkWork = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WORK })
+
+
+  const {
+    img,
+    description,
+    family,
+    hashName,
+    name,
+    id,
+    friends: userFriends,
+    professionalInformation,
+    baseInformation
+  } = USER
 
   /**
    * По умолчанию открыта стена
@@ -90,7 +104,7 @@ export const Profile: React.FC = React.memo(() => {
                 />
               )
             case PROFILE_LAYOUTS.WALL:
-              return <div>wall</div>
+              return <ProfileLayoutWall userId={USER_ID} />
             default:
               return null
           }

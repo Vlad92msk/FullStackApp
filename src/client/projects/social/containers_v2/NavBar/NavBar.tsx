@@ -37,6 +37,8 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
               <Text
                 className={cn('Text')}
                 weight={layout === SocialPages.SOCIAL_PROFILE ? 'medium' : 'regular'}
+                textTransform={'uppercase'}
+                size={'4'}
                 children={'Профиль'}
               />
             </ButtonBox>
@@ -50,6 +52,8 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
               <Text
                 className={cn('Text')}
                 weight={layout === SocialPages.SOCIAL_PHOTO ? 'medium' : 'regular'}
+                textTransform={'uppercase'}
+                size={'4'}
                 children={'Фото'}
               />
             </ButtonBox>
@@ -63,6 +67,8 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
               <Text
                 className={cn('Text')}
                 weight={layout === SocialPages.SOCIAL_VIDEO ? 'medium' : 'regular'}
+                textTransform={'uppercase'}
+                size={'4'}
                 children={'Видео'}
               />
             </ButtonBox>
@@ -77,6 +83,8 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
               <Text
                 className={cn('Text')}
                 weight={layout === SocialPages.SOCIAL_GROUPS ? 'medium' : 'regular'}
+                textTransform={'uppercase'}
+                size={'4'}
                 children={'Группы'}
               />
             </ButtonBox>
@@ -90,6 +98,8 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
               <Text
                 className={cn('Text')}
                 weight={layout === SocialPages.SOCIAL_MUSIC ? 'medium' : 'regular'}
+                textTransform={'uppercase'}
+                size={'4'}
                 children={'Музыка'}
               />
             </ButtonBox>

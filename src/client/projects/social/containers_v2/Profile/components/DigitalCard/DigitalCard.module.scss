@@ -34,7 +34,7 @@
     @include flex($direction: column);
     position: absolute;
 
-    background: rgb(139 139 139 / 11%);
+    background: var(--SOCIAL--Background-Light-Grey);
     top: 0;
     right: 0;
     width: fit-content;

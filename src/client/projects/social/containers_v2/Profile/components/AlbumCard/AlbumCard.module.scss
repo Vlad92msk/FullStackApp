@@ -49,13 +49,7 @@
   }
 
   &-Date {
-    display: inline-flex;
-    flex: 0 1 auto;
-    background: linear-gradient(to right, #ff3865, #ff7978);
-    color: var(--SOCIAL--Color-Text-Main);
-    text-shadow: 0 0 rem(4) #ffffffb8;
-    padding: rem(5) rem(15);
-    width: fit-content;
+    @extend %date_color
   }
 
   &-Title {
