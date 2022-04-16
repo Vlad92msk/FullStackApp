@@ -5,6 +5,14 @@ $sectionPadding: 0 clamp(0px, 8vw, 15vw);
 $componentPadding: clamp(2px, 1vh, rem(15)) clamp(2px, 2vw, rem(15));
 $borderRadiusCard: rem(5);
 
+%card {
+  @include flex($direction: column);
+  border-radius: $borderRadiusCard;
+  padding: $componentPadding;
+  box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
+  background: var(--SOCIAL--Background-Card-Opacity-02);
+}
+
 %date_color {
   display: inline-flex;
   flex: 0 1 auto;

@@ -25,6 +25,7 @@
     grid-auto-columns: revert;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(1px, 1vw, rem(20));
+    padding: rem(5);
 
     @include media-1366 {
       grid-template-columns: repeat(2, 1fr);

@@ -32,12 +32,20 @@
   }
 
   &-Icon {
-    fill: var(--SOCIAL--Color-Text-Main);
+    fill: var(--SOCIAL--Color-Text-System);
+
+    &--active {
+      fill: var(--SOCIAL--Color-Text-Main);
+    }
   }
 
   &-Text {
     margin-left: rem(5);
-    color: var(--SOCIAL--Color-Text-Main);
+    color: var(--SOCIAL--Color-Text-System);
+
+    &--active {
+      color: var(--SOCIAL--Color-Text-Main);
+    }
   }
 
   &-Button {

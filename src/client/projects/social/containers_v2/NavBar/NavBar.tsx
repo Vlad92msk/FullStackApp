@@ -4,7 +4,7 @@ import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
-import {  useReplaceRouterUrl } from '@client_shared/hooks/useRouterPush'
+import { useReplaceRouterUrl } from '@client_shared/hooks/useRouterPush'
 import { SocialPages } from '@client/projects/social/router'
 import styles from './NavBar.module.scss'
 
@@ -30,13 +30,12 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
           <li>
             <ButtonBox onClick={handleGoProfile}>
               <Icon
-                className={cn('Icon')}
+                className={cn('Icon', { active: layout === SocialPages.SOCIAL_PROFILE })}
                 size={'ordinary'}
                 icon={'person'}
               />
               <Text
-                className={cn('Text')}
-                weight={layout === SocialPages.SOCIAL_PROFILE ? 'medium' : 'regular'}
+                className={cn('Text', { active: layout === SocialPages.SOCIAL_PROFILE })}
                 textTransform={'uppercase'}
                 size={'4'}
                 children={'Профиль'}
@@ -46,12 +45,11 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
           <li>
             <ButtonBox onClick={handleGoPhoto}>
               <Icon
-                className={cn('Icon')}
+                className={cn('Icon', { active: layout === SocialPages.SOCIAL_PHOTO })}
                 size={'ordinary'}
                 icon={'photo'} />
               <Text
-                className={cn('Text')}
-                weight={layout === SocialPages.SOCIAL_PHOTO ? 'medium' : 'regular'}
+                className={cn('Text', { active: layout === SocialPages.SOCIAL_PHOTO })}
                 textTransform={'uppercase'}
                 size={'4'}
                 children={'Фото'}
@@ -61,12 +59,12 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
           <li>
             <ButtonBox onClick={handleGoVideo}>
               <Icon
-                className={cn('Icon')}
-                size={'ordinary'} icon={'video'}
+                className={cn('Icon', { active: layout === SocialPages.SOCIAL_VIDEO })}
+                size={'ordinary'}
+                icon={'video'}
               />
               <Text
-                className={cn('Text')}
-                weight={layout === SocialPages.SOCIAL_VIDEO ? 'medium' : 'regular'}
+                className={cn('Text', { active: layout === SocialPages.SOCIAL_VIDEO })}
                 textTransform={'uppercase'}
                 size={'4'}
                 children={'Видео'}
@@ -76,13 +74,12 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
           <li>
             <ButtonBox onClick={handleGoGroups}>
               <Icon
-                className={cn('Icon')}
+                className={cn('Icon', { active: layout === SocialPages.SOCIAL_GROUPS })}
                 size={'ordinary'}
                 icon={'groups'}
               />
               <Text
-                className={cn('Text')}
-                weight={layout === SocialPages.SOCIAL_GROUPS ? 'medium' : 'regular'}
+                className={cn('Text', { active: layout === SocialPages.SOCIAL_GROUPS })}
                 textTransform={'uppercase'}
                 size={'4'}
                 children={'Группы'}
@@ -92,12 +89,12 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
           <li>
             <ButtonBox onClick={handleGoMusic}>
               <Icon
-                className={cn('Icon')}
-                size={'ordinary'} icon={'music'}
+                className={cn('Icon', { active: layout === SocialPages.SOCIAL_MUSIC })}
+                size={'ordinary'}
+                icon={'music'}
               />
               <Text
-                className={cn('Text')}
-                weight={layout === SocialPages.SOCIAL_MUSIC ? 'medium' : 'regular'}
+                className={cn('Text', { active: layout === SocialPages.SOCIAL_MUSIC })}
                 textTransform={'uppercase'}
                 size={'4'}
                 children={'Музыка'}

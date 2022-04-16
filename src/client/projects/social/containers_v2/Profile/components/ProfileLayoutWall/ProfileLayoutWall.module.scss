@@ -4,85 +4,39 @@
 
 .ProfileLayoutWall {
   @include flex($direction: column);
-  @include wh(80%, 100%);
-  align-self: center;
-  overflow-y: auto;
+  @include wh(clamp(200px, 80%, rem(700)), 100%);
   padding-right: clamp(5px, 5vw, rem(20));
+  align-self: center;
 
-  &-Record {
+  &-CreateRecord {
+    @include flex();
+    flex: 0 1 auto;
+    border: rem(1) solid var(--SOCIAL--Color-Text-System);
+    border-radius: rem(15);
+  }
+
+  &-Attach {
+    @include flex($align-items: center, $justify: center);
+    flex: 1 1 auto;
+    padding: rem(10);
+  }
+
+  &-Input {
+    flex: 1 1 100%;
+    padding: rem(10);
+  }
+
+  &-Smile {
+    @include flex($align-items: center, $justify: center);
+    flex: 1 1 auto;
+    padding: rem(10);
+  }
+
+  &-Records {
     @include flex($direction: column);
     width: 100%;
-    background: var(--SOCIAL--Background-Card-Opacity);
-    margin: rem(20) 0;
-    padding: $componentPadding;
-  }
-
-  &-Header {
-    @include flex($justify: space-between, $align-items: center);
-  }
-
-  &-User {
-    margin: 0;
-  }
-
-  &-UserAva {
-    @include wh(rem(40), rem(40));
-  }
-
-  &-UserName {
-    background: linear-gradient(to right, #ff3865, #ff7978);
-    color: var(--SOCIAL--Color-Text-Main);
-  }
-
-  &-Date {
-    @extend %date_color;
-    background: transparent;
-    color: var(--SOCIAL--Color-Text-System);
-    text-shadow: 0 0 transparent;;
-  }
-
-  &-Body {
-    @include flex($direction: column);
-    width: 95%;
-    align-self: flex-end;
-    padding: $componentPadding;
-  }
-
-  &-Content {
-    @include flex($direction: column);
-    flex: 1 1 auto
-  }
-
-  &-RecordAttach {
-    @include wh(100%, 50vh);
-    position: relative;
-    max-height: rem(300);
-  }
-
-  &-RecordAttachItem {
-    background: var(--SOCIAL--Background-Chat-Message);
-  }
-
-  &-RecordText {
-    @include flex();
-    background: var(--SOCIAL--Background-Chat-Message);
-    color: var(--SOCIAL--Color-Text-Main);
-    padding: rem(10);
-    flex: 1 1 auto;
-  }
-
-  &-ButtonsGroup {
-    @include flex($justify: space-between);
-  }
-
-  &-Button {
-    @include flex();
-    margin: rem(5);
-    cursor: pointer;
-  }
-
-  &-ButtonText {
-    color: var(--SOCIAL--Color-Text-System);
-    margin-left: rem(5);
+    overflow-y: auto;
+    padding: rem(5);
+    padding-right: rem(15);
   }
 }
