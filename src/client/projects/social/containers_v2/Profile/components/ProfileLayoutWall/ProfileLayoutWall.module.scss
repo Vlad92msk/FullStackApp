@@ -12,6 +12,9 @@
   &-Record {
     @include flex($direction: column);
     width: 100%;
+    background: var(--SOCIAL--Background-Card-Opacity);
+    margin: rem(20) 0;
+    padding: $componentPadding;
   }
 
   &-Header {
@@ -39,9 +42,25 @@
   }
 
   &-Body {
+    @include flex($direction: column);
     width: 95%;
     align-self: flex-end;
     padding: $componentPadding;
+  }
+
+  &-Content {
+    @include flex($direction: column);
+    flex: 1 1 auto
+  }
+
+  &-RecordAttach {
+    @include wh(100%, 50vh);
+    position: relative;
+    max-height: rem(300);
+  }
+
+  &-RecordAttachItem {
+    background: var(--SOCIAL--Background-Chat-Message);
   }
 
   &-RecordText {
@@ -50,5 +69,20 @@
     color: var(--SOCIAL--Color-Text-Main);
     padding: rem(10);
     flex: 1 1 auto;
+  }
+
+  &-ButtonsGroup {
+    @include flex($justify: space-between);
+  }
+
+  &-Button {
+    @include flex();
+    margin: rem(5);
+    cursor: pointer;
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
   }
 }

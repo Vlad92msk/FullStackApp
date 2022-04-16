@@ -35,12 +35,11 @@
   }
 
   &-CommentsArray {
-    @include flex(wrap);
     overflow-y: auto;
   }
 
   &-OpenComments {
-    flex: auto;
+    float: right;
     margin-top: rem(10);
   }
 
