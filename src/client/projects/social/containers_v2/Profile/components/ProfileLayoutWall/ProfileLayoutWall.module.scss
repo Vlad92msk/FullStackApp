@@ -12,6 +12,8 @@
     @include flex();
     flex: 0 1 auto;
     border: rem(1) solid var(--SOCIAL--Color-Text-System);
+    box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
+    background: var(--SOCIAL--Background-Card-Opacity-02);
     border-radius: rem(15);
   }
 
@@ -30,6 +32,35 @@
     @include flex($align-items: center, $justify: center);
     flex: 1 1 auto;
     padding: rem(10);
+  }
+
+  &-Send {
+    @extend %send_message;
+    margin: rem(7) 0;
+
+    &--disabled {
+      @extend %send_message--disable;
+    }
+  }
+
+  &-TextInput {
+    width: 100%;
+    max-height: rem(130);
+    border: none;
+    resize: none;
+    overflow: auto;
+    padding: 0;
+    background: transparent;
+    color: var(--SOCIAL--Color-Text-System);
+
+    &::placeholder {
+      color: var(--SOCIAL--Color-Text-System);
+    }
+
+    &:focus {
+      outline: none;
+      color: var(--SOCIAL--Color-Text-Main);
+    }
   }
 
   &-Records {

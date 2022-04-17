@@ -51,15 +51,17 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
       </div>
       <div className={cn('Body')}>
         <div className={cn('Content')}>
-          <div className={cn('RecordAttach')}>
-            {recordImg && (
-              <Image
-                className={cn('RecordAttachItem')}
-                path={{ img: recordImg, project: 'social' }}
-                sizePriority={'contain'}
-              />
-            )}
-          </div>
+          {recordImg && (
+            <div className={cn('RecordAttach')}>
+              {recordImg && (
+                <Image
+                  className={cn('RecordAttachItem')}
+                  path={{ img: recordImg, project: 'social' }}
+                  sizePriority={'contain'}
+                />
+              )}
+            </div>
+          )}
           <Text className={cn('RecordText')} children={recordText} />
           <div className={cn('ButtonsGroup')}>
             <div className={cn('Button')} onClick={() => setOpenComments(prev => !prev)}>

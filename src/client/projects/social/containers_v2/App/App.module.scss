@@ -13,6 +13,18 @@ $borderRadiusCard: rem(5);
   background: var(--SOCIAL--Background-Card-Opacity-02);
 }
 
+%send_message {
+  $this: &;
+  color: var(--SOCIAL--Color-Text-Main);
+  align-self: end;
+  cursor: pointer;
+}
+
+%send_message--disable {
+  cursor: auto;
+  color: var(--SOCIAL--Color-Text-System);
+}
+
 %date_color {
   display: inline-flex;
   flex: 0 1 auto;

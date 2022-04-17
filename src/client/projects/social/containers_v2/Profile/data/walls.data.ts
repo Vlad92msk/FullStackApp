@@ -4,7 +4,7 @@ export const WALLS_DATA = [
   { userId: 3, wallId: 3 }
 ]
 
-export const WALL_RECORDS = [
+export const WALL_RECORDS:WallRecordItemType[] = [
   {
     id: 1,
     userId: 1,
@@ -49,4 +49,27 @@ export const WALL_RECORDS = [
   },
 ]
 
-export type WallRecordItemType = typeof WALL_RECORDS[0]
+export type WallRecordItemType = {
+  id: number,
+  userId: number,
+  userName: string,
+  userAva: string,
+  dateCreated: Date,
+  recordText: string,
+  recordImg: string,
+  recordVideo: null,
+  commentsCount: number,
+  comments: [],
+  likesCount: number,
+  dislikeCounts: number,
+}
+
+export type WallNewRecordItemType = {
+  userId?: number,
+  userName?: string,
+  userAva?: string,
+  dateCreated?: Date,
+  recordText?: string,
+  recordImg?: string,
+  recordVideo?: null,
+}

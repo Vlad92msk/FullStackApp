@@ -59,6 +59,7 @@
   &-RecordText {
     @include flex();
     color: var(--SOCIAL--Color-Text-Main);
+    word-break: break-word;
     padding: rem(10);
     flex: 1 1 auto;
   }

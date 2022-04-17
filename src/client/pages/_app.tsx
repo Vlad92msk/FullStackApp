@@ -9,6 +9,8 @@ import { storageGet, storageSet } from '@client_shared/utils'
 import { useApollo } from '../apolloSettings/apolloClient'
 
 import '@client_public/styles/base.scss'
+import 'emoji-mart/css/emoji-mart.css'
+
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/scrollbar/scrollbar.min.css'

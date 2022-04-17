@@ -45,13 +45,10 @@
   }
 
   &-Send {
-    color: var(--SOCIAL--Color-Text-Main);
-    align-self: end;
-    cursor: pointer;
+    @extend %send_message;
 
     &--disabled {
-      cursor: auto;
-      color: var(--SOCIAL--Color-Text-System);
+      @extend %send_message--disable;
     }
   }
 
