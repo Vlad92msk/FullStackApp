@@ -1,16 +1,20 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import lodash from 'lodash'
 import { Picker } from 'emoji-mart'
 
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client/shared/components/IconButton'
-import { WALL_RECORDS } from '../../data/walls.data'
-import { WallRecord } from '../../components'
 import { Text } from '@client/shared/components/Text'
 import { USER } from '@client/projects/social/containers_v2/App/data/user'
-import styles from './ProfileLayoutWall.module.scss'
 import { Popup } from '@client/shared/components/Popup'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
+import { WallRecord } from '../../components'
+import { WALL_RECORDS } from '../../data/walls.data'
+import { Icon } from '@client/shared/components/Icon'
+import {
+  AVAILABLE_FILE_TYPES, useMaterialsAttach
+} from '@client/shared/hooks/useMaterialsAttach'
+import styles from './ProfileLayoutWall.module.scss'
 
 
 const cn = makeCn('ProfileLayoutWall', styles)
@@ -30,6 +34,7 @@ const NEW_RECORD_BASE = {
   dislikeCounts: null
 }
 
+
 /**
  * Раздел Профиля - Контент-компонет для Видео или Фото
  */
@@ -38,10 +43,12 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
   const user = USER
   const [isOpenEmojiPicker, setOpenEmojiPicker] = useState(false)
 
-  const ref = useRef<HTMLDivElement>(null)
+  const addEmojiButtonRef = useRef<HTMLDivElement>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const [records, setRecords] = useState(WALL_RECORDS)
   const [newRecord, setNewRecord] = useState<string>(null)
+
 
   const handleAddRecord = useCallback(() => {
     setRecords(prev => [{
@@ -51,31 +58,64 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
       userAva: user.img,
       recordText: newRecord
     }, ...prev])
+
     setNewRecord('')
   }, [newRecord])
 
-  const handleAddEmoji = useCallback((emoji) => {
-    console.log('emoji', emoji)
-    setNewRecord(prev => prev + emoji.native)
-  }, [])
 
+  const [addedFiles, handleAttach] = useMaterialsAttach()
+
+  const attachments = useMemo(() => {
+    return addedFiles.map(({ name, src }) => (<img key={name} src={src} alt={name} />))
+  }, [addedFiles])
+
+
+  /**
+   * Добавить смайлик в текст
+   */
+  const handleAddEmoji = useCallback((emoji) => {
+    setNewRecord(prev => {
+      /**
+       * Позиция курсора в инпуте
+       */
+      const cursorPosition = textAreaRef?.current?.selectionStart
+
+      const start = prev.substring(0, cursorPosition)
+      const end = prev.substring(cursorPosition, prev.length)
+      return start + emoji.native + end
+    })
+  }, [textAreaRef])
   return (
     <>
       <div className={cn()}>
         <div className={cn('CreateRecord')}>
           <div className={cn('Attach')}>
-            <IconButton icon={'attachment'} size={'small'} fill={'oldAsphalt50'} />
+            <label className={cn('AddFile', { disabled: false })} htmlFor='fileInput'>
+              <Icon
+                icon={'attachment'}
+                size={'small'}
+                fill={'oldAsphalt50'}
+              />
+              <input
+                className={cn('FileInput')}
+                id='fileInput'
+                onChange={handleAttach}
+                multiple={true}
+                accept={AVAILABLE_FILE_TYPES.join(',')}
+                type='file'
+              />
+            </label>
           </div>
           <div className={cn('Input')}>
             <Text
               as={'textarea'}
+              anchorEl={textAreaRef}
               className={cn('TextInput')}
               onChange={(e) => setNewRecord(e.target.value)}
               value={newRecord}
-
             />
           </div>
-          <div className={cn('Smile')} ref={ref}>
+          <div className={cn('Smile')} ref={addEmojiButtonRef}>
             <IconButton
               icon={'smile'}
               size={'small'}
@@ -90,6 +130,13 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           disabled={!newRecord?.length}
           children={'Отправить'}
         />
+        <div style={{
+          display: 'flex',
+          width: '40vw',
+          flexDirection: 'column'
+        }}>
+          {attachments}
+        </div>
         <div className={cn('Records')}>
           {
             lodash.orderBy(records, 'dateCreated', 'desc').map((record) => (
@@ -99,7 +146,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
         </div>
       </div>
       <Popup
-        anchorEl={ref.current}
+        anchorEl={addEmojiButtonRef.current}
         open={isOpenEmojiPicker}
         onClose={() => setOpenEmojiPicker(false)}
       >

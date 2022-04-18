@@ -43,6 +43,10 @@
     }
   }
 
+  &-FileInput{
+    display: none;
+  }
+
   &-TextInput {
     width: 100%;
     max-height: rem(130);
