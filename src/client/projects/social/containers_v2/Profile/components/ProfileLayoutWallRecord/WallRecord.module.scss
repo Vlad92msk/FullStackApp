@@ -42,18 +42,21 @@
 
   &-Content {
     @include flex($direction: column);
-    flex: 1 1 auto
-  }
-
-  &-RecordAttach {
-    @include wh(100%, 50vh);
-    position: relative;
-    max-height: rem(300);
-    z-index: 1;
+    flex: 1 1 auto;
+    width: 100%;
   }
 
   &-RecordAttachItem {
     //background: var(--SOCIAL--Background-Chat-Message);
+  }
+
+  &-Slider {
+    @include wh(100%, 50vh);
+    max-height: rem(300);
+  }
+
+  &-Slide {
+    height: 80%;
   }
 
   &-RecordText {

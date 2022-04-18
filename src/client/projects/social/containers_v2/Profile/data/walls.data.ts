@@ -1,3 +1,5 @@
+import { AddedFile } from '@client/shared/hooks/useMaterialsAttach'
+
 export const WALLS_DATA = [
   { userId: 1, wallId: 1 },
   { userId: 2, wallId: 2 },
@@ -18,6 +20,7 @@ export const WALL_RECORDS:WallRecordItemType[] = [
     comments: [],
     likesCount: 321,
     dislikeCounts: 69,
+    attachments: null
   },
   {
     id: 2,
@@ -32,6 +35,7 @@ export const WALL_RECORDS:WallRecordItemType[] = [
     comments: [],
     likesCount: 321,
     dislikeCounts: 69,
+    attachments: null
   },
   {
     id: 3,
@@ -46,6 +50,7 @@ export const WALL_RECORDS:WallRecordItemType[] = [
     comments: [],
     likesCount: 321,
     dislikeCounts: 69,
+    attachments: null
   },
 ]
 
@@ -62,6 +67,7 @@ export type WallRecordItemType = {
   comments: [],
   likesCount: number,
   dislikeCounts: number,
+  attachments?: AddedFile[]
 }
 
 export type WallNewRecordItemType = {
@@ -72,4 +78,5 @@ export type WallNewRecordItemType = {
   recordText?: string,
   recordImg?: string,
   recordVideo?: null,
+  attachments: AddedFile[]
 }

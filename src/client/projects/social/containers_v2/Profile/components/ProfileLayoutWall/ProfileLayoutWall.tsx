@@ -16,9 +16,10 @@ import { Icon } from '@client/shared/components/Icon'
 import {
   AVAILABLE_FILE_TYPES, useMaterialsAttach
 } from '@client/shared/hooks/useMaterialsAttach'
-import styles from './ProfileLayoutWall.module.scss'
 import { Modal } from '@client/shared/components/Modal'
 import { useBooleanState } from '@client/shared/hooks'
+import { Button } from '@client/shared/components/Button'
+import styles from './ProfileLayoutWall.module.scss'
 
 SwiperCore.use([Pagination])
 
@@ -54,6 +55,8 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
   const [records, setRecords] = useState(WALL_RECORDS)
   const [newRecord, setNewRecord] = useState<string>(null)
 
+  const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach()
+
 
   const handleAddRecord = useCallback(() => {
     setRecords(prev => [{
@@ -61,14 +64,15 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
       userId: user.id,
       userName: `${user.name} ${user.family}`,
       userAva: user.img,
-      recordText: newRecord
+      recordText: newRecord,
+      attachments: addedFiles
     }, ...prev])
 
     setNewRecord('')
+    setAddedFiles([])
   }, [newRecord])
 
 
-  const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach()
 
   const attachments = useMemo(() => {
     return addedFiles.map(({ name, src }) => (
@@ -136,6 +140,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
       return start + emoji.native + end
     })
   }, [textAreaRef])
+
   return (
     <>
       <div className={cn()}>
@@ -207,7 +212,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           onClick={handleAddEmoji}
         />
       </Popup>
-      <Modal open={isOpenPevFiles} onClose={closePrevFiles} >
+      <Modal className={cn('CreateRecord')} open={isOpenPevFiles} onClose={closePrevFiles} >
         <Swiper
           className={cn('Slider')}
           pagination={{
@@ -216,6 +221,46 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
         >
           {attachments}
         </Swiper>
+
+        <div className={cn('CreateRecord')}>
+          <div className={cn('Attach')}>
+            <label className={cn('AddFile', { disabled: false })} htmlFor='fileInput'>
+              <Icon
+                icon={'attachment'}
+                size={'small'}
+                fill={'oldAsphalt50'}
+              />
+              <input
+                className={cn('FileInput')}
+                id='fileInput'
+                onChange={handleAttach}
+                multiple={true}
+                accept={AVAILABLE_FILE_TYPES.join(',')}
+                type='file'
+              />
+            </label>
+          </div>
+          <div className={cn('Input')}>
+            <Text
+              as={'textarea'}
+              anchorEl={textAreaRef}
+              className={cn('TextInput')}
+              onChange={(e) => setNewRecord(e.target.value)}
+              value={newRecord}
+            />
+          </div>
+          <div className={cn('Smile')} ref={addEmojiButtonRef}>
+            <IconButton
+              icon={'smile'}
+              size={'small'}
+              fill={'oldAsphalt50'}
+              onClick={() => setOpenEmojiPicker(prev => !prev)}
+            />
+          </div>
+        </div>
+        <Button onClick={handleAddRecord} styleType={'filled'} color={'blue'}>
+          ADD
+        </Button>
       </Modal>
     </>
   )
