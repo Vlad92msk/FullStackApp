@@ -15,6 +15,8 @@ import {
   AVAILABLE_FILE_TYPES, useMaterialsAttach
 } from '@client/shared/hooks/useMaterialsAttach'
 import styles from './ProfileLayoutWall.module.scss'
+import { Modal } from '@client/shared/components/Modal'
+import { useBooleanState } from '@client/shared/hooks'
 
 
 const cn = makeCn('ProfileLayoutWall', styles)
@@ -63,12 +65,44 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
   }, [newRecord])
 
 
-  const [addedFiles, handleAttach] = useMaterialsAttach()
+  const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach()
 
   const attachments = useMemo(() => {
-    return addedFiles.map(({ name, src }) => (<img key={name} src={src} alt={name} />))
+    return addedFiles.map(({ name, src }) => (
+      <div style={{
+        position: 'relative'
+      }}>
+        <img key={name} src={src} alt={name} />
+        <IconButton
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0
+          }}
+          icon={'close'}
+          onClick={() => setAddedFiles(addedFiles.filter(({ name: attachName }) => attachName !== name))}
+        />
+      </div>
+    ))
   }, [addedFiles])
 
+  /**
+   * Модалка предпросмотра материалов
+   */
+  const [isOpenPevFiles, openPrevFiles, closePrevFiles] = useBooleanState(false)
+  useEffect(() => {
+    if (addedFiles.length) {
+      /**
+       * Открывает модалку если добавлен материал
+       */
+      openPrevFiles()
+    } else {
+      /**
+       * Закрывает модалку если не осталось материалов
+       */
+      closePrevFiles()
+    }
+  }, [addedFiles])
 
   /**
    * Добавить смайлик в текст
@@ -135,7 +169,6 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           width: '40vw',
           flexDirection: 'column'
         }}>
-          {attachments}
         </div>
         <div className={cn('Records')}>
           {
@@ -157,6 +190,9 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           onClick={handleAddEmoji}
         />
       </Popup>
+      <Modal open={isOpenPevFiles} onClose={closePrevFiles}>
+        {attachments}
+      </Modal>
     </>
   )
 }

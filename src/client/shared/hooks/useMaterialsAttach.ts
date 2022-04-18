@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState, ChangeEvent } from 'react'
 import lodash from 'lodash'
 
 export interface AddedFile extends File {
@@ -44,11 +44,25 @@ export const AVAILABLE_FILE_TYPES: string[] = [
   'audio/wav'
 ]
 
+type MaterialAttachProps = {
+  maxFileSize?: number
+  availableTypes: string[]
+}
 
-export const useMaterialsAttach = (): [AddedFile[], (fileInputRef: React.ChangeEvent<HTMLInputElement>) => void] => {
+type MaterialAttach = [
+  AddedFile[],
+  (fileInputRef: ChangeEvent<HTMLInputElement>) => void,
+  React.Dispatch<React.SetStateAction<AddedFile[]>>
+]
+
+export const useMaterialsAttach = (props: MaterialAttachProps = {
+  availableTypes: AVAILABLE_FILE_TYPES,
+  maxFileSize: 20971520
+}): MaterialAttach => {
   const [addedFiles, setAddedFiles] = useState<AddedFile[]>([])
 
   const handleAddFiles = useCallback((fileInputRef: React.ChangeEvent<HTMLInputElement>) => {
+    setAddedFiles([])
     if (!fileInputRef) return
     const currentFiles = fileInputRef.target?.files
     if (!currentFiles) return
@@ -59,7 +73,7 @@ export const useMaterialsAttach = (): [AddedFile[], (fileInputRef: React.ChangeE
       const { type, name, size } = file
       const fileType = type.length ? type : name.slice(name.lastIndexOf('.') + 1)
 
-      if (!AVAILABLE_FILE_TYPES.includes(fileType) || size > 20971520) return null
+      if (!props.availableTypes.includes(fileType) || size > props.maxFileSize) return null
 
       return file
     })
@@ -83,7 +97,7 @@ export const useMaterialsAttach = (): [AddedFile[], (fileInputRef: React.ChangeE
 
       reader.readAsDataURL(file)
     })
-  }, [])
+  }, [props])
 
-  return [addedFiles, handleAddFiles]
+  return [addedFiles, handleAddFiles, setAddedFiles]
 }
