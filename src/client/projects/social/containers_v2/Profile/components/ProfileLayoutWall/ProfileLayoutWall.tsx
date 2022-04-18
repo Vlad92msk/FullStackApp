@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import lodash from 'lodash'
 import { Picker } from 'emoji-mart'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Pagination } from 'swiper/core'
 
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client/shared/components/IconButton'
@@ -18,6 +20,7 @@ import styles from './ProfileLayoutWall.module.scss'
 import { Modal } from '@client/shared/components/Modal'
 import { useBooleanState } from '@client/shared/hooks'
 
+SwiperCore.use([Pagination])
 
 const cn = makeCn('ProfileLayoutWall', styles)
 
@@ -69,20 +72,34 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
 
   const attachments = useMemo(() => {
     return addedFiles.map(({ name, src }) => (
-      <div style={{
-        position: 'relative'
-      }}>
-        <img key={name} src={src} alt={name} />
-        <IconButton
-          style={{
+      <SwiperSlide
+        className={cn('Slide')}
+        key={name}
+        id={name}
+      >
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+        }}>
+          <img style={{
             position: 'absolute',
-            right: 0,
-            top: 0
-          }}
-          icon={'close'}
-          onClick={() => setAddedFiles(addedFiles.filter(({ name: attachName }) => attachName !== name))}
-        />
-      </div>
+            objectFit: 'contain',
+            width: '100%',
+            height: '100%',
+          }} src={src} alt={name} />
+          <IconButton
+            style={{
+              position: 'absolute',
+              right: '20px',
+              top: 0
+            }}
+            icon={'close'}
+            onClick={() => setAddedFiles(addedFiles.filter(({ name: attachName }) => attachName !== name))}
+          />
+        </div>
+      </SwiperSlide>
+
     ))
   }, [addedFiles])
 
@@ -190,8 +207,15 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           onClick={handleAddEmoji}
         />
       </Popup>
-      <Modal open={isOpenPevFiles} onClose={closePrevFiles}>
-        {attachments}
+      <Modal open={isOpenPevFiles} onClose={closePrevFiles} >
+        <Swiper
+          className={cn('Slider')}
+          pagination={{
+            dynamicBullets: true,
+          }}
+        >
+          {attachments}
+        </Swiper>
       </Modal>
     </>
   )

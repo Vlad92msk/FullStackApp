@@ -43,8 +43,18 @@
     }
   }
 
-  &-FileInput{
+  &-FileInput {
     display: none;
+  }
+
+  &-Slider {
+    @include wh(80vw, 60vh);
+  }
+
+  &-Slide {
+    display: flex;
+    height: 80%;
+    align-self: center;
   }
 
   &-TextInput {
