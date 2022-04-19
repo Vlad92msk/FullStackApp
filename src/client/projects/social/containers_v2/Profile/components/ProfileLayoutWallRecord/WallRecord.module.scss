@@ -50,15 +50,6 @@
     //background: var(--SOCIAL--Background-Chat-Message);
   }
 
-  &-Slider {
-    @include wh(100%, 50vh);
-    max-height: rem(300);
-  }
-
-  &-Slide {
-    height: 80%;
-  }
-
   &-RecordText {
     @include flex();
     color: var(--SOCIAL--Color-Text-Main);

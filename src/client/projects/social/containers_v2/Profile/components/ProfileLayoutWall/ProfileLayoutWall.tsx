@@ -1,27 +1,24 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import lodash from 'lodash'
 import { Picker } from 'emoji-mart'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Pagination } from 'swiper/core'
 
 import { makeCn } from '@client_shared/utils'
-import { IconButton } from '@client/shared/components/IconButton'
-import { Text } from '@client/shared/components/Text'
-import { USER } from '@client/projects/social/containers_v2/App/data/user'
-import { Popup } from '@client/shared/components/Popup'
-import { ButtonBox } from '@client/shared/components/ButtonBox'
+import { IconButton } from '@client_shared/components/IconButton'
+import { Text } from '@client_shared/components/Text'
+import { Popup } from '@client_shared/components/Popup'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { Icon } from '@client_shared/components/Icon'
+import { AVAILABLE_FILE_TYPES, useMaterialsAttach } from '@client_shared/hooks/useMaterialsAttach'
+import { Modal } from '@client_shared/components/Modal'
+import { useBooleanState } from '@client_shared/hooks'
+import { Button } from '@client_shared/components/Button'
+
+import { SliderMedia } from '@client/projects/social/components'
+import { USER } from '../../../App/data/user'
 import { WallRecord } from '../../components'
 import { WALL_RECORDS } from '../../data/walls.data'
-import { Icon } from '@client/shared/components/Icon'
-import {
-  AVAILABLE_FILE_TYPES, useMaterialsAttach
-} from '@client/shared/hooks/useMaterialsAttach'
-import { Modal } from '@client/shared/components/Modal'
-import { useBooleanState } from '@client/shared/hooks'
-import { Button } from '@client/shared/components/Button'
 import styles from './ProfileLayoutWall.module.scss'
 
-SwiperCore.use([Pagination])
 
 const cn = makeCn('ProfileLayoutWall', styles)
 
@@ -57,7 +54,6 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
 
   const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach()
 
-
   const handleAddRecord = useCallback(() => {
     setRecords(prev => [{
       ...NEW_RECORD_BASE,
@@ -70,42 +66,8 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
 
     setNewRecord('')
     setAddedFiles([])
-  }, [newRecord])
+  }, [newRecord, addedFiles, user])
 
-
-
-  const attachments = useMemo(() => {
-    return addedFiles.map(({ name, src }) => (
-      <SwiperSlide
-        className={cn('Slide')}
-        key={name}
-        id={name}
-      >
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-        }}>
-          <img style={{
-            position: 'absolute',
-            objectFit: 'contain',
-            width: '100%',
-            height: '100%',
-          }} src={src} alt={name} />
-          <IconButton
-            style={{
-              position: 'absolute',
-              right: '20px',
-              top: 0
-            }}
-            icon={'close'}
-            onClick={() => setAddedFiles(addedFiles.filter(({ name: attachName }) => attachName !== name))}
-          />
-        </div>
-      </SwiperSlide>
-
-    ))
-  }, [addedFiles])
 
   /**
    * Модалка предпросмотра материалов
@@ -212,15 +174,8 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           onClick={handleAddEmoji}
         />
       </Popup>
-      <Modal className={cn('CreateRecord')} open={isOpenPevFiles} onClose={closePrevFiles} >
-        <Swiper
-          className={cn('Slider')}
-          pagination={{
-            dynamicBullets: true,
-          }}
-        >
-          {attachments}
-        </Swiper>
+      <Modal className={cn('Modal')} open={isOpenPevFiles} onClose={closePrevFiles}>
+        <SliderMedia height={'50vh'} sliders={addedFiles} />
 
         <div className={cn('CreateRecord')}>
           <div className={cn('Attach')}>

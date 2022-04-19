@@ -1,0 +1,28 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+
+.SliderMedia {
+  @include wh(100%, 50vh);
+  display: grid;
+  position: relative;
+  flex: 1 1 auto;
+
+  &-Slider {
+    @include wh(100%, 100%);
+  }
+
+  &-Slide {
+    height: 90%;
+  }
+
+  &-ImgWrapper {
+    @include wh(100%, 100%);
+    position: relative;
+  }
+
+  &-Img {
+    @include wh(100%, 100%);
+    position: absolute;
+    object-fit: contain;
+  }
+}

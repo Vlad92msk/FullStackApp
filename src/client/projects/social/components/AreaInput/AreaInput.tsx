@@ -22,7 +22,7 @@ export interface AreaInputProps {
 }
 
 
-export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((props) => {
+export const AreaInput: React.FC<AreaInputProps> = React.memo((props) => {
   const {
     className,
     style,

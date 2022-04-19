@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Pagination } from 'swiper/core'
 
-import { UserSmall } from '@client_projects/social/components'
+import { SliderMedia, UserSmall } from '@client_projects/social/components'
 import { Text } from '@client_shared/components/Text'
-import { Image } from '@client_shared/components/Image'
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Comments } from '@client/projects/social/containers_v2/Comments'
 import { WallRecordItemType } from '@client/projects/social/containers_v2/Profile/data/walls.data'
 import styles from './WallRecord.module.scss'
 
-SwiperCore.use([Pagination])
 
 const cn = makeCn('WallRecord', styles)
 
@@ -39,7 +35,6 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
 
   const [isOpenComments, setOpenComments] = useState(null)
 
-
   return (
     <div className={cn()}>
       <div className={cn('Header')}>
@@ -55,38 +50,8 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
       </div>
       <div className={cn('Body')}>
         <div className={cn('Content')}>
-          <div style={{
-            display: 'grid'
-          }}>
-            {attachments?.length && (
-              <Swiper
-                className={cn('Slider')}
-                pagination={{ dynamicBullets: true }}
-              >
-                {attachments.map(({ name, src }) => (
-                  <SwiperSlide
-                    className={cn('Slide')}
-                    key={name}
-                    id={name}
-                  >
-                    <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      height: '100%'
-                    }}>
-                      <img style={{
-                        position: 'absolute',
-                        objectFit: 'contain',
-                        width: '100%',
-                        height: '100%'
-                      }} src={src} alt={name} />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
-          </div>
-          <Text className={cn('RecordText')} children={recordText} />
+          <SliderMedia sliders={attachments} height={'35vh'} />
+          {recordText && (<Text className={cn('RecordText')} children={recordText} />)}
           <div className={cn('ButtonsGroup')}>
             <div className={cn('Button')} onClick={() => setOpenComments(prev => !prev)}>
               <Icon
