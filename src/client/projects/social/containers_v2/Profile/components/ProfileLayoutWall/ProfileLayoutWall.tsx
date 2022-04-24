@@ -62,7 +62,12 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
         <div className={cn('CreateRecord')}>
           <div className={cn('RecordAdd')}>
             <FileUpLoad onApply={setNewRecordFiles} />
-            <AreaInput withSmiles={true} value={newRecordText} onChange={setNewRecordText} isCompleted={Boolean(!newRecordText.length)} />
+            <AreaInput
+              withSmiles={true}
+              value={newRecordText}
+              onChange={setNewRecordText}
+              isCompleted={Boolean(!newRecordText.length)}
+            />
           </div>
           <div className={cn('SendRecord')}>
             {Boolean(newRecordFiles.length) && (
