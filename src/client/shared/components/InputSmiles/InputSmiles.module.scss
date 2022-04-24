@@ -1,0 +1,8 @@
+@import '../../../public/styles/lib/functions';
+@import '../../../public/styles/lib/mixins';
+
+.InputSmiles {
+  @include flex($align-items: center, $justify: center);
+  flex: 1 1 auto;
+  padding: rem(10);
+}

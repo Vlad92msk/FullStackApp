@@ -1,11 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback } from 'react'
 import { classnames } from '@bem-react/classnames'
-import { Picker } from 'emoji-mart'
 
 import { makeCn } from '@client_shared/utils'
 import { Text, TextSize } from '@client_shared/components/Text'
-import { IconButton } from '@client_shared/components/IconButton'
-import { Popup } from '@client_shared/components/Popup'
 import styles from './AreaInput.module.scss'
 
 
@@ -23,8 +20,7 @@ export interface AreaInputProps {
   error?: any
   disabled?: boolean
   onChange?: (value: string, name?: string) => void
-  withSmiles?: boolean
-  isCompleted: boolean
+  anchorEl?: React.Ref<any>
 }
 
 
@@ -40,87 +36,32 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
     disabled,
     onChange,
     maxWidth,
-    withSmiles,
-    isCompleted
+    anchorEl
   } = props
-
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
-  const smilesRef = useRef<HTMLDivElement>(null)
-
-  const [isOpenSmiles, setOpenSmiles] = useState(false)
-  const [newRecord, setNewRecord] = useState<string>(value)
 
 
   const handleChange = useCallback(({ target: { value: newValue } }) => {
-    setNewRecord(newValue)
-  }, [])
-
-  useEffect(() => {
-    onChange(newRecord, name)
-  }, [name, onChange, newRecord])
-
-  /**
-   * Добавить смайлик в текст
-   */
-  const handleAddEmoji = useCallback((emoji) => {
-    setNewRecord(prev => {
-      /**
-       * Позиция курсора в инпуте
-       */
-      const cursorPosition = textAreaRef?.current?.selectionStart
-
-      const start = prev.substring(0, cursorPosition)
-      const end = prev.substring(cursorPosition, prev.length)
-      return start + emoji.native + end
-    })
-  }, [textAreaRef])
-
-  useEffect(() => {
-    if (isCompleted) setNewRecord('')
-  }, [isCompleted])
+    onChange(newValue, name)
+  }, [name])
 
   return (
-    <>
-      <div className={classnames(cn(), className)} style={style}>
-        <Text
-          as='textarea'
-          anchorEl={textAreaRef}
-          size={size}
-          className={cn('Input')}
-          style={{
-            maxWidth
-          }}
-          value={newRecord}
-          placeholder={placeholder}
-          onChange={handleChange}
-          disabled={disabled}
-        />
-      </div>
-      {withSmiles && (
-        <div className={cn('Smile')} ref={smilesRef}>
-          <IconButton
-            icon={'smile'}
-            size={'small'}
-            fill={'oldAsphalt50'}
-            onClick={() => setOpenSmiles(prev => !prev)}
-          />
-        </div>
-      )}
-      <Popup
-        anchorEl={smilesRef.current}
-        open={isOpenSmiles}
-        onClose={() => setOpenSmiles(false)}
-      >
-        <Picker
-          set='apple'
-          showPreview={false}
-          showSkinTones={false}
-          onClick={handleAddEmoji}
-        />
-      </Popup>
-    </>
+    <div className={classnames(cn(), className)} style={style}>
+      <Text
+        as='textarea'
+        anchorEl={anchorEl}
+        size={size}
+        className={cn('Input')}
+        style={{
+          maxWidth
+        }}
+        value={value}
+        placeholder={placeholder}
+        onChange={handleChange}
+        disabled={disabled}
+      />
+    </div>
   )
-}, (a, b) => a.isCompleted === b.isCompleted)
+})
 
 
 AreaInput.defaultProps = {

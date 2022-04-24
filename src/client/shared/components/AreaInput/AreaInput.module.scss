@@ -35,10 +35,4 @@
       background: var(--Color-OldAsphalt--10);
     }
   }
-
-  &-Smile {
-    @include flex($align-items: center, $justify: center);
-    flex: 1 1 auto;
-    padding: rem(10);
-  }
 }

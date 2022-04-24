@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import lodash from 'lodash'
 
 import { makeCn } from '@client_shared/utils'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
-
+import { AreaInput } from '@client_shared/components/AreaInput'
+import { FileUpLoad } from '@client_shared/components/FileUpLoad'
+import { Text } from '@client_shared/components/Text'
+import { InputSmiles } from '@client_shared/components/InputSmiles'
 import { USER } from '../../../App/data/user'
 import { WallRecord } from '../../components'
 import { WALL_RECORDS } from '../../data/walls.data'
-import { AreaInput } from '@client/shared/components/AreaInput'
-import { FileUpLoad } from '@client/shared/components/FileUpLoad'
-import { Text } from '@client/shared/components/Text'
 import styles from './ProfileLayoutWall.module.scss'
 
 
@@ -37,6 +37,7 @@ const NEW_RECORD_BASE = {
 export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
   const { userId } = props
   const user = USER
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const [records, setRecords] = useState(WALL_RECORDS)
   const [newRecordText, setNewRecordText] = useState<string>('')
@@ -63,11 +64,11 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
           <div className={cn('RecordAdd')}>
             <FileUpLoad onApply={setNewRecordFiles} />
             <AreaInput
-              withSmiles={true}
+              anchorEl={textAreaRef}
               value={newRecordText}
               onChange={setNewRecordText}
-              isCompleted={Boolean(!newRecordText.length)}
             />
+            <InputSmiles setText={setNewRecordText} textAreaRef={textAreaRef} />
           </div>
           <div className={cn('SendRecord')}>
             {Boolean(newRecordFiles.length) && (
