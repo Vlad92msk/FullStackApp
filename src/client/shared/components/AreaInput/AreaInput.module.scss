@@ -4,44 +4,41 @@
 
 .AreaInput {
   height: fit-content;
+  flex: 1 1 100%;
+  padding: rem(10);
 
   &-Input {
-    @include placeholderColor(var(--Color-Text--disabled));
+    //@include placeholderColor(var(--Color-Text--disabled));
 
-    width: inherit;
+    width: 100%;
+    max-height: rem(130);
+    border: none;
+    resize: none;
+    overflow: auto;
+    padding: 0;
+    background: transparent;
+    color: var(--SOCIAL--Color-Text-System);
+
     height: fit-content;
-    padding: rem(12) rem(16);
 
-    border-width: rem(1);
-    border-style: solid;
-    border-color: var(--Color-OldAsphalt--50);
-    border-radius: rem(8);
-
-    &--error {
-      border-color: var(--Color-RedRose--50);
+    &::placeholder {
+      color: var(--SOCIAL--Color-Text-System);
     }
-
-    &--size {
-
-      &_small {
-        font-size: rem(14);
-        line-height: rem(20);
-      }
-    }
-
-    &:empty {
-      border-color: var(--Color-OldAsphalt--30);
-    }
-
 
     &:focus {
-      border-color: var(--Color-BluePrimrose--50);
       outline: none;
+      color: var(--SOCIAL--Color-Text-Main);
     }
 
     &:disabled {
       border-color: var(--Color-OldAsphalt--30);
       background: var(--Color-OldAsphalt--10);
     }
+  }
+
+  &-Smile {
+    @include flex($align-items: center, $justify: center);
+    flex: 1 1 auto;
+    padding: rem(10);
   }
 }

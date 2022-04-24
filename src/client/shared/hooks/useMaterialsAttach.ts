@@ -44,7 +44,7 @@ export const AVAILABLE_FILE_TYPES: string[] = [
   'audio/wav'
 ]
 
-type MaterialAttachProps = {
+export type MaterialAttachProps = {
   maxFileSize?: number
   availableTypes: string[]
 }
@@ -55,10 +55,7 @@ type MaterialAttach = [
   React.Dispatch<React.SetStateAction<AddedFile[]>>
 ]
 
-export const useMaterialsAttach = (props: MaterialAttachProps = {
-  availableTypes: AVAILABLE_FILE_TYPES,
-  maxFileSize: 20971520
-}): MaterialAttach => {
+export const useMaterialsAttach = (props: MaterialAttachProps): MaterialAttach => {
   const [addedFiles, setAddedFiles] = useState<AddedFile[]>([])
 
   const handleAddFiles = useCallback((fileInputRef: React.ChangeEvent<HTMLInputElement>) => {

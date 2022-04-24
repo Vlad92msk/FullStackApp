@@ -18,6 +18,8 @@ $borderRadiusCard: rem(5);
   color: var(--SOCIAL--Color-Text-Main);
   align-self: end;
   cursor: pointer;
+  flex: auto;
+  justify-content: flex-end;
 }
 
 %send_message--disable {
