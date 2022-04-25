@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect } from 'react'
+import { classnames } from '@bem-react/classnames'
+
+import { createId } from '@server/utils/createId'
 import { Icon } from '@client_shared/components/Icon'
 import {
   AddedFile,
-  AVAILABLE_FILE_TYPES,
+  availableFormats,
   MaterialAttachProps,
   useMaterialsAttach
 } from '@client_shared/hooks/useMaterialsAttach'
@@ -11,21 +14,23 @@ import { useBooleanState } from '@client_shared/hooks'
 import { Modal } from '@client_shared/components/Modal'
 import { Button } from '@client_shared/components/Button'
 import { IconButton } from '@client_shared/components/IconButton'
+import { IconName } from '@client/public/models/icon.model'
 import styles from './FileUpLoad.module.scss'
 
 
 const cn = makeCn('FileUpLoad', styles)
 
 type FileUpLoadProps = {
+  className?: string
+  icon?: IconName
   onApply: (files: AddedFile[]) => void
   disabled?: boolean
   availableTypes?: MaterialAttachProps
 }
 
 export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
-  const { onApply, availableTypes, disabled } = props
-
-
+  const { className, icon, onApply, availableTypes, disabled } = props
+  const inputId = createId()
   const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach(availableTypes)
 
   const removeAttach = useCallback((e: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -59,16 +64,16 @@ export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
 
   return (
     <>
-      <div className={cn()}>
-        <label className={cn('AddFile', { disabled })} htmlFor='fileInput'>
+      <div className={classnames(cn(), className)}>
+        <label className={cn('AddFile', { disabled })} htmlFor={inputId}>
           <Icon
-            icon={'attachment'}
+            icon={icon}
             size={'small'}
             fill={'oldAsphalt50'}
           />
           <input
             className={cn('FileInput')}
-            id='fileInput'
+            id={inputId}
             onChange={handleAttach}
             multiple={true}
             accept={availableTypes.availableTypes.join(',')}
@@ -78,7 +83,7 @@ export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
       </div>
       <Modal className={cn('Modal')} open={isOpenPevFiles} onClose={closePrevFiles}>
         <div className={cn('ApplyAttachments')}>
-          {addedFiles.map(({ name, src }) => (
+          {addedFiles.map(({ name, src, type }) => (
             <div key={name} className={cn('ApplyImg')}>
               <div className={cn('ImgWrapper')}>
                 <img className={cn('Img')} src={src} alt={name} />
@@ -96,8 +101,9 @@ export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
 }
 
 FileUpLoad.defaultProps = {
+  icon: 'attachment',
   availableTypes: {
-    availableTypes: AVAILABLE_FILE_TYPES,
+    availableTypes: availableFormats,
     maxFileSize: 20971520
   }
 }

@@ -20,6 +20,10 @@
     }
   }
 
+  &-Content {
+    @include flex($direction: column);
+    @include wh(100%, 100%);
+  }
 
   &-Text {
     border: rem(1) solid var(--SOCIAL--Color-Text-System);
@@ -27,6 +31,7 @@
     padding: $componentPadding;
     background: var(--SOCIAL--Background-Chat-Message);
     color: var(--SOCIAL--Color-Text-Main);
+    word-break: break-word;
   }
 
   &-SystemInfo {

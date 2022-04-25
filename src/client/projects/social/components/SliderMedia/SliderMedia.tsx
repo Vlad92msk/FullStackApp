@@ -16,14 +16,15 @@ type SliderMediaProps = {
   sliders: { name: string, src: string }[]
   className?: string
   height?: string
+  width?: string
 }
 export const SliderMedia: React.FC<SliderMediaProps> = React.memo((props) => {
-  const { sliders, className, height } = props
+  const { sliders, className, height, width } = props
   if (!sliders || !sliders.length) return null
 
 
   return (
-    <div className={classnames(cn(), className)} style={{ height }}>
+    <div className={classnames(cn(), className)} style={{ height, width }}>
       {sliders.length > 1 ? (
         <Swiper
           className={cn('Slider')}
@@ -43,10 +44,9 @@ export const SliderMedia: React.FC<SliderMediaProps> = React.memo((props) => {
         </Swiper>
       ) : (
         <div className={cn('ImgWrapper')}>
-          <img style={{ height: '90%' }} className={cn('Img')} src={sliders[0].src} alt={sliders[0].name} />
+          <img style={{ height: '100%' }} className={cn('Img')} src={sliders[0].src} alt={sliders[0].name} />
         </div>
       )}
-
     </div>
   )
 })

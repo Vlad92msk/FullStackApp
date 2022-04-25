@@ -1,23 +1,27 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { Picker } from 'emoji-mart'
 import { PickerProps } from 'emoji-mart/dist-es'
+import { classnames } from '@bem-react/classnames'
 
 import { IconButton } from '@client_shared/components/IconButton'
 import { Popup } from '@client_shared/components/Popup'
 import { makeCn } from '@client_shared/utils'
+import { IconName } from '@client/public/models/icon.model'
 import styles from './InputSmiles.module.scss'
 
 
 const cn = makeCn('InputSmiles', styles)
 
 type InputSmilesProps = {
+  className?: string
+  icon?: IconName
   textAreaRef?: React.MutableRefObject<HTMLTextAreaElement>
   setText: React.Dispatch<React.SetStateAction<string>>
   smilePickerProps?: PickerProps
 }
 
 export const InputSmiles: React.FC<InputSmilesProps> = React.memo((props) => {
-  const { textAreaRef, setText, smilePickerProps } = props
+  const { className, icon, textAreaRef, setText, smilePickerProps } = props
 
   const smilesRef = useRef<HTMLDivElement>(null)
 
@@ -41,9 +45,9 @@ export const InputSmiles: React.FC<InputSmilesProps> = React.memo((props) => {
 
   return (
     <>
-      <div className={cn()} ref={smilesRef}>
+      <div className={classnames(cn(), className)} ref={smilesRef}>
         <IconButton
-          icon={'smile'}
+          icon={icon}
           size={'small'}
           fill={'oldAsphalt50'}
           onClick={() => setOpenSmiles(prev => !prev)}
@@ -54,7 +58,7 @@ export const InputSmiles: React.FC<InputSmilesProps> = React.memo((props) => {
         open={isOpenSmiles}
         onClose={() => setOpenSmiles(false)}
       >
-        <Picker {...smilePickerProps} onClick={handleAddEmoji}/>
+        <Picker {...smilePickerProps} onClick={handleAddEmoji} />
       </Popup>
 
     </>
@@ -62,6 +66,7 @@ export const InputSmiles: React.FC<InputSmilesProps> = React.memo((props) => {
 })
 
 InputSmiles.defaultProps = {
+  icon: 'smile',
   smilePickerProps: {
     set: 'apple',
     showPreview: false,

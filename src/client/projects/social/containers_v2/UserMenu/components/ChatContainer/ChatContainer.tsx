@@ -6,11 +6,13 @@ import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
-import { AreaInput } from '@client/projects/social/components'
 import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '../../data/messages'
 import { USER, UserType } from '../../../App/data/user'
 import styles from './ChatContainer.module.scss'
+import { AreaInput } from '@client/shared/components/AreaInput'
+import { InputSmiles } from '@client/shared/components/InputSmiles'
+import { FileUpLoad } from '@client/shared/components/FileUpLoad'
 
 const cn = makeCn('ChatContainer', styles)
 
@@ -23,7 +25,9 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const { openedUserIdChat, handleCloseChat, targetUser } = props
   const user = USER
   const chatMassageContainer = useRef<HTMLDivElement>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
+  const [newRecordFiles, setNewRecordFiles] = useState([])
   /**
    * Локальные сообщения
    */
@@ -51,10 +55,12 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
       dateCreate: new Date(),
       messageId: createId(50),
       smile: null,
-      massage: messageInput
+      massage: messageInput,
+      attachments: newRecordFiles
     }])
     setMessageInput('')
-  }, [messageInput])
+    setNewRecordFiles([])
+  }, [messageInput, newRecordFiles])
 
   /**
    * Автоскролл к последнему сообщению
@@ -104,18 +110,36 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
             </div>
             <div className={cn('Footer')}>
               <div className={cn('FooterFileSmileRow')}>
-                <IconButton size={'small'} fill={'oldAsphalt50'} icon={'file-outlined'} className={cn('FooterFile')} />
-                <IconButton size={'small'} fill={'oldAsphalt50'} icon={'smile'} className={cn('FooterSmile')} />
+                <FileUpLoad className={cn('FooterFile')} icon={'file-outlined'} onApply={setNewRecordFiles} />
+                <InputSmiles className={cn('FooterSmile')} setText={setMessageInput} textAreaRef={textAreaRef} />
               </div>
               <div className={cn('FooterInput')}>
-                <AreaInput value={messageInput} onChange={setMessageInput} />
-                <ButtonBox onClick={onCreateMessage} style={{ alignSelf: 'end' }} disabled={!messageInput?.length}>
-                  <Text
-                    className={cn('Submit', { active: Boolean(messageInput?.length) })}
-                    size={'1'}
-                    children={'Отправить'}
-                  />
-                </ButtonBox>
+                <AreaInput
+                  anchorEl={textAreaRef}
+                  className={cn('FooterInputText')}
+                  value={messageInput}
+                  onChange={setMessageInput}
+                />
+                <div className={cn('FooterInputSubmitRow')}>
+                  {Boolean(newRecordFiles.length) && (
+                    <Text
+                      className={cn('AddedFilesCount')}
+                      size={'1'}
+                      children={`${newRecordFiles.length} файлов`}
+                    />
+                  )}
+                  <ButtonBox
+                    style={{ justifyContent: 'flex-end', width: '100%' }}
+                    onClick={onCreateMessage}
+                    disabled={!messageInput?.length}
+                  >
+                    <Text
+                      className={cn('Submit', { active: Boolean(messageInput?.length) })}
+                      size={'1'}
+                      children={'Отправить'}
+                    />
+                  </ButtonBox>
+                </div>
               </div>
             </div>
           </motion.div>

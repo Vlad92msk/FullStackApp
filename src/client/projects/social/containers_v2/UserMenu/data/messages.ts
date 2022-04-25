@@ -1,4 +1,5 @@
 import { MassageSmileReaction } from '../components'
+import { AddedFile } from '@client/shared/hooks/useMaterialsAttach'
 
 export type Message = {
   messageId: string
@@ -8,6 +9,7 @@ export type Message = {
   smile: MassageSmileReaction
   dateCreate: Date
   dateSeen: Date
+  attachments?: AddedFile[]
 }
 
 export const MESSAGES: Message[] = [
@@ -18,7 +20,8 @@ export const MESSAGES: Message[] = [
     fromUserId: 2,
     toUserId: 1,
     massage: 'text',
-    smile: null
+    smile: null,
+    attachments: []
   },
   {
     messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
@@ -27,7 +30,8 @@ export const MESSAGES: Message[] = [
     fromUserId: 2,
     toUserId: 1,
     massage: 'text',
-    smile: null
+    smile: null,
+    attachments: []
   },
   {
     messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
@@ -36,6 +40,7 @@ export const MESSAGES: Message[] = [
     fromUserId: 1,
     toUserId: 2,
     massage: 'text',
-    smile: null
+    smile: null,
+    attachments: []
   }
 ]
