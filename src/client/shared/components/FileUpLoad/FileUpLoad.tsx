@@ -26,10 +26,11 @@ type FileUpLoadProps = {
   onApply: (files: AddedFile[]) => void
   disabled?: boolean
   availableTypes?: MaterialAttachProps
+  isConfirm?: boolean
 }
 
 export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
-  const { className, icon, onApply, availableTypes, disabled } = props
+  const { className, icon, onApply, availableTypes, disabled, isConfirm } = props
   const inputId = createId()
   const [addedFiles, handleAttach, setAddedFiles] = useMaterialsAttach(availableTypes)
 
@@ -62,6 +63,15 @@ export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
     setAddedFiles([])
   }, [addedFiles])
 
+  /**
+   * Если не нужно вызывать модалку с подтверждением - просто добавляет файлы
+   */
+  useEffect(() => {
+    if (!isConfirm && addedFiles.length) {
+       setTimeout(() => applyAttachments(), 500)
+     }
+  }, [isConfirm, addedFiles]);
+
   return (
     <>
       <div className={classnames(cn(), className)}>
@@ -81,9 +91,9 @@ export const FileUpLoad: React.FC<FileUpLoadProps> = (props) => {
           />
         </label>
       </div>
-      <Modal className={cn('Modal')} open={isOpenPevFiles} onClose={closePrevFiles}>
+      <Modal className={cn('Modal')} open={isOpenPevFiles && isConfirm} onClose={closePrevFiles}>
         <div className={cn('ApplyAttachments')}>
-          {addedFiles.map(({ name, src, type }) => (
+          {addedFiles.map(({ name, src }) => (
             <div key={name} className={cn('ApplyImg')}>
               <div className={cn('ImgWrapper')}>
                 <img className={cn('Img')} src={src} alt={name} />

@@ -5,7 +5,8 @@ import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
 import { Icon, IconFill } from '@client_shared/components/Icon'
 import { IconName } from '@client/public/models/icon.model'
-import { SliderMedia } from '@client/projects/social/components'
+import { Attachment, ATTACHMENT_ACTION, SliderMedia } from '@client/projects/social/components'
+import { useAttachmentsPurpose } from '@client/projects/social/components/Attachment/hooks'
 import { Message } from '../../data/messages'
 import styles from './ChatMassage.module.scss'
 
@@ -45,16 +46,34 @@ export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
   const { from, isWasSeen, message: { massage, smile, dateCreate, attachments } } = props
   const messageWasCreated = format(dateCreate, 'dd.MM.yyyy в HH:mm')
 
+  const { toSave, toPlay, toSlider } = useAttachmentsPurpose(attachments)
+
+
   return (
     <div className={cn({ from })} style={{ width: attachments.length ? '80%' : 'auto' }}>
       <div className={cn('Content')}>
-        <SliderMedia sliders={attachments} height={'25vh'} />
+        <SliderMedia sliders={toSlider} height={'25vh'} />
+        {toPlay.map((attach) => (
+          <Attachment
+            key={attach.name}
+            attach={attach}
+            action={ATTACHMENT_ACTION.PLAY}
+          />
+        ))}
+        {toSave.map((attach) => (
+          <Attachment
+            key={attach.name}
+            attach={attach}
+            action={ATTACHMENT_ACTION.SAVE}
+          />
+        ))}
         <Text className={cn('Text')} size={'2'} children={massage} />
         {from === MASSAGE_FROM.ME && (
           <Icon
             className={cn('See', { from })}
             icon={isWasSeen ? 'eye' : 'eye-off'}
-            size={'small'} fill={'oldAsphalt40'}
+            size={'small'}
+            fill={'oldAsphalt40'}
           />
         )}
       </div>

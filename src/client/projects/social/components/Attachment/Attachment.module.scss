@@ -1,0 +1,17 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../../containers_v2/App/App.module";
+
+.Attachment {
+  margin-bottom: rem(5);
+
+  &-Icon {
+    fill: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-Name {
+    @include textEllipsis;
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+}

@@ -6,13 +6,13 @@ import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { AreaInput } from '@client/shared/components/AreaInput'
+import { InputSmiles } from '@client/shared/components/InputSmiles'
+import { FileUpLoad } from '@client/shared/components/FileUpLoad'
 import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '../../data/messages'
 import { USER, UserType } from '../../../App/data/user'
 import styles from './ChatContainer.module.scss'
-import { AreaInput } from '@client/shared/components/AreaInput'
-import { InputSmiles } from '@client/shared/components/InputSmiles'
-import { FileUpLoad } from '@client/shared/components/FileUpLoad'
 
 const cn = makeCn('ChatContainer', styles)
 
@@ -28,6 +28,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const [newRecordFiles, setNewRecordFiles] = useState([])
+
   /**
    * Локальные сообщения
    */

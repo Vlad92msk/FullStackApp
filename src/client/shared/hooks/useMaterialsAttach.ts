@@ -92,6 +92,7 @@ export const availableFormats: string[] = Object.values(
   )
 )
 
+
 export interface AddedFile extends File {
   src: string
 }
@@ -113,14 +114,24 @@ export const useMaterialsAttach = (props: MaterialAttachProps): MaterialAttach =
 
   const handleAddFiles = useCallback((fileInputRef: React.ChangeEvent<HTMLInputElement>) => {
     setAddedFiles([])
+    /**
+     * Нет ссылки -выходим
+     */
     if (!fileInputRef) return
     const currentFiles = fileInputRef.target?.files
+
+    /**
+     * Нет файла - выходим
+     */
     if (!currentFiles) return
 
     lodash
     .toArray(currentFiles)
     .map((file) => {
       const { type, size } = file
+      /**
+       * Проверка на тип и размер
+       */
       if (!props.availableTypes.includes(type) || size > props.maxFileSize) return null
 
       return file

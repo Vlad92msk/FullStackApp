@@ -31,7 +31,7 @@ $sectionMarginTop: clamp(2px, 1vh, rem(10));
 
   &-Title {
     color: var(--SOCIAL--Color-Text-System);
-    background: linear-gradient(45deg, var(--SOCIAL--Color-Text-Background), transparent);
+    background: var(--SOCIAL--Background-Gradient--To-right);
     padding: $textPadding;
   }
 

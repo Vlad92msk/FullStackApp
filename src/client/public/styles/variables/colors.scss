@@ -128,6 +128,8 @@
   --SOCIAL--Background-Button: #263238;
   --SOCIAL--Background-Chat-Message: rgb(68 75 98);
   --SOCIAL--Background-Light-Grey: rgb(139 139 139 / 11%);
+  --SOCIAL--Background-Gradient--To-right: linear-gradient(45deg, var(--SOCIAL--Color-Text-Background), transparent);;
+  --SOCIAL--Background-Gradient--To-left: linear-gradient(-45deg, var(--SOCIAL--Color-Text-Background), transparent);;
 
   --SOCIAL--Color-Status-Online: var(--Color-AmethystStarling--25);
   --SOCIAL--Color-Status-Offline: var(--Color-RedRose--30);
