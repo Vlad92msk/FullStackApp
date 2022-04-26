@@ -62,7 +62,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
       <div className={cn()}>
         <div className={cn('CreateRecord')}>
           <div className={cn('RecordAdd')}>
-            <FileUpLoad onApply={setNewRecordFiles} />
+            <FileUpLoad onApply={setNewRecordFiles} isConfirm />
             <AreaInput
               anchorEl={textAreaRef}
               value={newRecordText}

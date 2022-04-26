@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 
-import { SliderMedia, UserSmall } from '@client_projects/social/components'
+import { Attachment, ATTACHMENT_ACTION, SliderMedia, UserSmall } from '@client_projects/social/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Comments } from '@client/projects/social/containers_v2/Comments'
 import { WallRecordItemType } from '@client/projects/social/containers_v2/Profile/data/walls.data'
+import { useAttachmentsPurpose } from '@client/projects/social/components/Attachment/hooks'
 import styles from './WallRecord.module.scss'
 
 
@@ -34,6 +35,7 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
   } = props
 
   const [isOpenComments, setOpenComments] = useState(null)
+  const { toSave, toPlay, toSlider } = useAttachmentsPurpose(attachments || [])
 
   return (
     <div className={cn()}>
@@ -50,7 +52,21 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
       </div>
       <div className={cn('Body')}>
         <div className={cn('Content')}>
-          <SliderMedia sliders={attachments} height={'35vh'} />
+          <SliderMedia sliders={toSlider} height={'35vh'} />
+          {toPlay.map((attach) => (
+            <Attachment
+              key={attach.name}
+              attach={attach}
+              action={ATTACHMENT_ACTION.PLAY}
+            />
+          ))}
+          {toSave.map((attach) => (
+            <Attachment
+              key={attach.name}
+              attach={attach}
+              action={ATTACHMENT_ACTION.SAVE}
+            />
+          ))}
           {recordText && (<Text className={cn('RecordText')} children={recordText} />)}
           <div className={cn('ButtonsGroup')}>
             <div className={cn('Button')} onClick={() => setOpenComments(prev => !prev)}>
