@@ -19,7 +19,7 @@ type AttachmentProps = {
   action: ATTACHMENT_ACTION
 }
 
-export const Attachment: React.FC<AttachmentProps> = (props) => {
+export const Attachment: React.FC<AttachmentProps> = React.memo((props) => {
   const { attach: { name, src }, action } = props
 
   return (
@@ -34,4 +34,4 @@ export const Attachment: React.FC<AttachmentProps> = (props) => {
       <Text className={cn('Name')} children={name} size={'2'} />
     </ButtonBox>
   )
-}
+})

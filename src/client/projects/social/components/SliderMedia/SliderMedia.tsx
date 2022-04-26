@@ -4,6 +4,7 @@ import SwiperCore, { Pagination } from 'swiper/core'
 import { classnames } from '@bem-react/classnames'
 
 import { makeCn } from '@client_shared/utils'
+import { Image } from '@client/shared/components/Image'
 import styles from './SliderMedia.module.scss'
 
 
@@ -37,14 +38,14 @@ export const SliderMedia: React.FC<SliderMediaProps> = React.memo((props) => {
               id={name}
             >
               <div className={cn('ImgWrapper')}>
-                <img className={cn('Img')} src={src} alt={name} />
+                <Image className={cn('Img')} withOptimized={false} isOpenFullScreen path={{ img: src }} />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <div className={cn('ImgWrapper')}>
-          <img style={{ height: '100%' }} className={cn('Img')} src={sliders[0].src} alt={sliders[0].name} />
+          <Image withOptimized={false} isOpenFullScreen className={cn('Img')} path={{ img: sliders[0].src }} />
         </div>
       )}
     </div>

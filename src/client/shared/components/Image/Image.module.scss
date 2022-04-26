@@ -9,6 +9,19 @@
   right: 0;
   z-index: -1;
 
+  &-Modal {
+    background: transparent;
+  }
+
+  &-ModalImgContainer {
+    @include wh(100vw, 100vh);
+    position: relative;
+    max-width: inherit;
+    max-height: inherit;
+    justify-self: center;
+    align-self: center;
+  }
+
   &-Img {
     &--sizePriority {
       &_width {
