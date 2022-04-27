@@ -27,6 +27,10 @@
     gap: clamp(1px, 1vw, rem(20));
     padding: rem(5);
 
+    &--dndActive {
+      @extend %d_n_d__Active
+    }
+
     @include media-1366 {
       grid-template-columns: repeat(2, 1fr);
     }

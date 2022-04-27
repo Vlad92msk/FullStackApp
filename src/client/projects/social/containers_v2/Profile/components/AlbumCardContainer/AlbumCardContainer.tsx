@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import React from 'react'
+import { Droppable } from 'react-beautiful-dnd'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
@@ -9,11 +9,6 @@ import { PhotoAlbumType } from '../../data/photoAlbums.data'
 import styles from './AlbumCardContainer.module.scss'
 
 const cn = makeCn('AlbumCardContainer', styles)
-
-
-const initial = { opacity: 0, height: 0 }
-const animate = { opacity: 1, height: 'auto' }
-const transition = { duration: .5, ease: 'easeIn', delay: 1.5 }
 
 
 export type AlbumCardContainerType = {
@@ -30,18 +25,37 @@ export const AlbumCardContainer: React.FC<AlbumCardContainerType> = React.memo((
       <div className={cn('Container')}>
         <Text className={cn('Title')} size={'2'} children={'Альбомы'} />
         <div className={cn('Content')}>
-          {albums.map((album) => (
-            <AlbumCard key={album.id} {...album} userId={userId} photo={photos.filter(({ albumId }) => albumId === album.id)} />
+          {albums.map((album, i) => (
+            <AlbumCard
+              key={album.id}
+              {...album}
+              index={i}
+              userId={userId}
+              photo={photos.filter(({ albumId }) => albumId === album.id)}
+            />
           ))}
         </div>
       </div>
       <div className={cn('Container')}>
         <Text className={cn('Title')} size={'2'} children={'Фото не в альбомах'} />
-        <div className={cn('Content')}>
-          {photos.filter(({ albumId }) => !Boolean(albumId)).map((photo) => (
-            <DigitalCard key={photo.id} id={photo.id} userId={userId} {...photo} />
-          ))}
-        </div>
+        <Droppable droppableId={'allItems'} key={'allItems'}>
+          {({ innerRef, droppableProps }, snapshot) => (
+            <div
+              {...droppableProps}
+              ref={innerRef}
+              className={cn('Content', { dndActive: snapshot.isDraggingOver })}
+            >
+              {photos.filter(({ albumId }) => !Boolean(albumId)).map((photo, i) => (
+                <DigitalCard
+                  key={photo.id}
+                  index={i}
+                  userId={userId}
+                  item={photo}
+                />
+              ))}
+            </div>
+          )}
+        </Droppable>
       </div>
     </div>
   )

@@ -7,6 +7,10 @@
   padding: rem(25);
   flex: 0 1 clamp(100px, 30%, 50%);
 
+  &--dndActive {
+    @extend %d_n_d__Active
+  }
+
   &--active {
     //display: grid;
     //grid-auto-columns: revert;

@@ -33,12 +33,12 @@ export const PHOTO_ALBUMS = [
     description: null,
   },
   {
-    id: 5,
-    title: 'title',
-    likeCount: 13,
-    commentsCount: 423,
-    date: 'июль 02, 2022',
-    description: null,
+    id: 60,
+    title: 'titleй',
+    likeCount: 5,
+    commentsCount: 4,
+    date: 'май 02, 2022',
+    description: 'wd',
   },
 ]
 

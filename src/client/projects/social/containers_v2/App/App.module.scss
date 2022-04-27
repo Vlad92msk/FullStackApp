@@ -5,6 +5,13 @@ $sectionPadding: 0 clamp(0px, 8vw, 15vw);
 $componentPadding: clamp(2px, 1vh, rem(15)) clamp(2px, 2vw, rem(15));
 $borderRadiusCard: rem(5);
 
+
+%d_n_d__Active {
+  border: rem(1) solid #6484c5!important;
+  box-shadow: 0 0 0.4375rem 0.125rem rgb(63 77 105)!important;
+  background: #3675b71f!important;
+}
+
 %card {
   @include flex($direction: column);
   border-radius: $borderRadiusCard;
