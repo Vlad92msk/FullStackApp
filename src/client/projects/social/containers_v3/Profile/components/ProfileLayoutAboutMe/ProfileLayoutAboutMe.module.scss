@@ -6,32 +6,11 @@
   @include flex($direction: column);
   @include wh(100%, 100%);
 
-  &-UserRow{
-    @include flex($direction: column);
-  }
-
-  &-UserFIO {
-    @include flex(wrap);
-    padding: rem(15) 0;
-  }
-
-  &-UserName {
-    background: var(--SOCIAL--Background--Red-Gradient);
-    color: var(--SOCIAL--Color-Text-Main);
-    padding: 0 rem(15);
-  }
-
-  &-Hash {
-    color: var(--SOCIAL--Color-Text-System);
-    padding: rem(15) 0;
-  }
-
-  &-Information{
+  &-Information {
     @include flex($direction: column);
     overflow-y: auto;
     height: 100%;
   }
-
 
   &-Description {
     color: var(--SOCIAL--Color-Text-Main);

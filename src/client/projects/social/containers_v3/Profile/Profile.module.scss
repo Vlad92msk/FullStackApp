@@ -6,6 +6,9 @@
   display: grid;
   grid-template: [start] "tabButtons" auto [row2]
                  [row2] "tabContent" 90% [row-end];
+  margin: rem(30);
+  box-shadow: rem(1) rem(1) rem(30) rgb(46 51 72);
+  padding: rem(20);
 
   &-Title {
     width: 100%;
@@ -33,7 +36,6 @@
   &-Container {
     grid-area: tabContent;
     @include flex($direction: column);
-    padding-right: clamp(1px, 5vw, rem(40));
     padding-bottom: rem(5);
   }
 

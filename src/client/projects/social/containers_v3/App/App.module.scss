@@ -14,9 +14,9 @@ $borderRadiusCard: rem(5);
 
 %card {
   @include flex($direction: column);
-  border-radius: $borderRadiusCard;
+  //border-radius: $borderRadiusCard;
   padding: $componentPadding;
-  box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
+  //box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
   background: var(--SOCIAL--Background-Card-Opacity-02);
 }
 

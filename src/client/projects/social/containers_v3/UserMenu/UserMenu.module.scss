@@ -2,42 +2,23 @@
 @use "../../../../public/styles/lib/mixins" as *;
 @import "../App/App.module";
 
-$photoSize: clamp(100px, 18vw, rem(250));
-$zIndexSection: 4;
-
 .UserMenu {
   grid-area: userMenu;
   @include flex($direction: row-reverse, $align-items: center);
 
   &-Photo {
     @include flex($justify: center, $align-items: center);
-    @include wh(70%, 80%);
+    @include wh(100%, 100%);
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
     z-index: 1;
   }
 
-  &-UserFIO {
-    @include flex(wrap);
-    padding: $componentPadding;
-  }
-
-  &-UserName {
-    color: var(--SOCIAL--Color-Text-Main);
-  }
-
   &-Column {
-    @include flex($direction: column);
+    @include flex($direction: column, $align-items: center, $justify: center);
     flex: 1 1 auto;
     height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &-Hash {
-    color: var(--SOCIAL--Color-Text-System);
-    padding: $componentPadding;
   }
 
   &-Description {
@@ -52,15 +33,43 @@ $zIndexSection: 4;
     margin-left: rem(5);
   }
 
-  &-Gap {
-    width: 100%;
-    background: var(--SOCIAL--Background-Card);
-    z-index: $zIndexSection;
-  }
-
   &-ButtonIcon {
     fill: var(--SOCIAL--Color-Text-System);
     margin-right: rem(10);
+  }
+
+  &-UserRow {
+    @include flex($direction: column);
+  }
+
+  &-UserFIO {
+    @include flex(wrap);
+  }
+
+  &-UserName {
+    background: var(--SOCIAL--Background--Red-Gradient);
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: 0 rem(15);
+  }
+
+  &-Hash {
+    color: var(--SOCIAL--Color-Text-System);
+    padding: rem(15) 0;
+  }
+
+  &-User {
+    @include wh(70%, 80%);
+    display: grid;
+    grid-template-rows: 1fr 9fr 1fr;
+  }
+
+  &-Actions {
+    @include flex($justify: space-around);
+    margin-top: wSize(5, 5, 10);
+
+    & > * {
+      margin: 0 rem(5);
+    }
   }
 
   &-ButtonTextBox {

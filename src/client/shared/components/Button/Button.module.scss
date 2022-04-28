@@ -14,25 +14,15 @@
 
 .Button {
   $this: &;
-
   position: relative;
-
   display: flex;
-
-  padding-right: rem(24);
-  padding-left: rem(24);
-
+  padding-right: wSize(5, 5, 20);
+  padding-left: wSize(5, 5, 20);
   cursor: pointer;
-
   border-radius: rem(8);
   background: none;
-
   white-space: nowrap;
-
   text-decoration: none;
-
-  font-size: rem(16);
-  line-height: rem(24);
 
 
   &:focus {
@@ -63,8 +53,7 @@
       height: rem(36);
 
       #{$this}-Icon {
-        width: rem(16);
-        height: rem(16);
+        @include wh(rem(16), rem(16));
       }
     }
 
@@ -295,17 +284,12 @@
   }
 
   &-Inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
+    @include flex($justify: center, $align-items: center);
+    @include wh(100%, 100%);
   }
 
   &-Icon {
-    width: rem(20);
-    height: rem(20);
+    @include wh(rem(20), rem(20));
     margin-right: rem(6);
 
     &--iconPosition {

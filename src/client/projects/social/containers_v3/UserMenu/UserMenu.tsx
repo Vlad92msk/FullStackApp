@@ -12,6 +12,7 @@ import { ChatContainer, FriendsContainer, UserInfo } from './components'
 import { Line } from '@client/projects/social/components'
 import styles from './UserMenu.module.scss'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
+import { Button } from '@client/shared/components/Button'
 
 const cn = makeCn('UserMenu', styles)
 
@@ -108,8 +109,24 @@ export const UserMenu: React.FC = React.memo(() => {
 
   return (
     <section className={cn()}>
-      <div className={cn('Photo')}>
-        <Image sizePriority={'contain'} path={{ project: 'social', img }} />
+      <div className={cn('User')}>
+        <div className={cn('UserRow')}>
+          <div className={cn('UserFIO')}>
+            <Text className={cn('UserName')} size={'8'} weight={'medium'} children={`${family} ${name}`} />
+          </div>
+          <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
+        </div>
+        <div className={cn('Photo')}>
+          <Image sizePriority={'contain'} path={{ project: 'social', img }} />
+        </div>
+        <div className={cn('Actions')}>
+          <Button styleType={'rounded'} color={'blue'} icon={'message-square'} iconPosition={'left'}>
+            <Text children={'Написать'} size={'2'} />
+          </Button>
+          <Button styleType={'rounded'} color={'red'} icon={'plus'} iconPosition={'left'}>
+            <Text children={'Добавить'} size={'2'} />
+          </Button>
+        </div>
       </div>
       <div className={cn('Column')}>
         <ButtonBox className={cn('ButtonTextBox')} onClick={setOpenFriends}>

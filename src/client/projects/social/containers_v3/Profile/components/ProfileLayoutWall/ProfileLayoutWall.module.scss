@@ -16,10 +16,7 @@
   &-RecordAdd {
     @include flex();
     width: 100%;
-    border: rem(1) solid var(--SOCIAL--Color-Text-System);
-    box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
-    background: var(--SOCIAL--Background-Card-Opacity-02);
-    border-radius: rem(15);
+    box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card-Opacity-02);
   }
 
   &-SendRecord {

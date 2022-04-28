@@ -31,7 +31,7 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
             <ButtonBox onClick={handleGoProfile}>
               <Icon
                 className={cn('Icon', { active: layout === SocialPages.SOCIAL_PROFILE })}
-                size={'ordinary'}
+                size={'medium'}
                 icon={'person'}
               />
               <Text
@@ -46,7 +46,7 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
             <ButtonBox onClick={handleGoPhoto}>
               <Icon
                 className={cn('Icon', { active: layout === SocialPages.SOCIAL_PHOTO })}
-                size={'ordinary'}
+                size={'medium'}
                 icon={'photo'} />
               <Text
                 className={cn('Text', { active: layout === SocialPages.SOCIAL_PHOTO })}
@@ -60,7 +60,7 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
             <ButtonBox onClick={handleGoVideo}>
               <Icon
                 className={cn('Icon', { active: layout === SocialPages.SOCIAL_VIDEO })}
-                size={'ordinary'}
+                size={'medium'}
                 icon={'video'}
               />
               <Text
@@ -75,7 +75,7 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
             <ButtonBox onClick={handleGoGroups}>
               <Icon
                 className={cn('Icon', { active: layout === SocialPages.SOCIAL_GROUPS })}
-                size={'ordinary'}
+                size={'medium'}
                 icon={'groups'}
               />
               <Text
@@ -90,7 +90,7 @@ export const NavBar: React.FC<NavBarType> = React.memo(({ pathname }) => {
             <ButtonBox onClick={handleGoMusic}>
               <Icon
                 className={cn('Icon', { active: layout === SocialPages.SOCIAL_MUSIC })}
-                size={'ordinary'}
+                size={'medium'}
                 icon={'music'}
               />
               <Text
