@@ -6,6 +6,20 @@ $componentPadding: clamp(2px, 1vh, rem(15)) clamp(2px, 2vw, rem(15));
 $borderRadiusCard: rem(5);
 
 
+%user_status--dot {
+  @include wh(rem(7), rem(7));
+  border-radius: 50%;
+  margin-left: rem(10);
+}
+
+%user_status--online {
+  background: var(--SOCIAL--Color-Status-Online);
+}
+
+%user_status--offline {
+  background: var(--SOCIAL--Color-Status-Offline);
+}
+
 %d_n_d__Active {
   border: rem(1) solid #6484c5 !important;
   box-shadow: 0 0 0.4375rem 0.125rem rgb(63 77 105) !important;
@@ -48,9 +62,10 @@ $borderRadiusCard: rem(5);
   @include wh(100vw, 100vh);
   align-content: end;
   display: grid;
+  column-gap: 5vw;
   grid-template: [start] "gap gap" 5vh [row2]
                  [row2] "userMenu children" 80vh [row3]            // 80vh - высота строки
-                 [row2] "navBar navBar" 15vh [row-end] / 40vw 60vw; //40vw - ширина первой строки 60vw - ширина второй строки
+                 [row2] "navBar navBar" 15vh [row-end] / 40vw auto; //40vw - ширина первой строки auto - ширина второй строки
 
   &-Gap {
     grid-area: gap;

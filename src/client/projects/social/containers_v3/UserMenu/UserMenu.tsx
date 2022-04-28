@@ -13,6 +13,7 @@ import { Line } from '@client/projects/social/components'
 import styles from './UserMenu.module.scss'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
 import { Button } from '@client/shared/components/Button'
+import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('UserMenu', styles)
 
@@ -113,8 +114,15 @@ export const UserMenu: React.FC = React.memo(() => {
         <div className={cn('UserRow')}>
           <div className={cn('UserFIO')}>
             <Text className={cn('UserName')} size={'8'} weight={'medium'} children={`${family} ${name}`} />
+            <IconButton fill={'oldAsphalt50'} size={'medium'} icon={'settings-2'} />
           </div>
-          <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
+          <div className={cn('Row')}>
+            <ButtonBox className={cn('UserStatus')}>
+              <span className={cn('UserStatusDot', { status: 'online' })} />
+              <Text className={cn('UserStatusText')} children={'Online'} size={'2'} />
+            </ButtonBox>
+            <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
+          </div>
         </div>
         <div className={cn('Photo')}>
           <Image sizePriority={'contain'} path={{ project: 'social', img }} />

@@ -25,13 +25,18 @@
     }
 
     &_medium {
-      width: wSize(24, 5, 60);
-      height: wSize(24, 5, 60);
+      width: wSize(24, 5, 40);
+      height: wSize(24, 5, 40);
     }
 
     &_large {
-      width: wSize(40, 15, 100);
-      height: wSize(40, 15, 100);
+      width: wSize(40, 15, 60);
+      height: wSize(40, 15, 60);
+    }
+
+    &_extra {
+      width: wSize(40, 15, 80);
+      height: wSize(40, 15, 80);
     }
   }
 

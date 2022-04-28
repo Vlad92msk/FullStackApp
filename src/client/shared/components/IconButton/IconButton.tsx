@@ -15,7 +15,7 @@ export interface ButtonOwnProps {
   classNameIcon?: string
   classNameIconContainer?: string
   icon: IconName
-  size?: 'small' | 'ordinary' | 'medium' | 'large'
+  size?: 'small' | 'ordinary' | 'medium' | 'large' | 'extra'
   fill?: IconFill
   text?: string
 }
