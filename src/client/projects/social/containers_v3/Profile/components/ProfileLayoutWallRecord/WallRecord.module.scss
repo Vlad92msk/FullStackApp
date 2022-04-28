@@ -1,0 +1,75 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.WallRecord {
+  @extend %card;
+  margin: rem(20) 0;
+  width: 100%;
+
+  &-Header {
+    @include flex($justify: space-between, $align-items: center);
+  }
+
+  &-User {
+    margin: 0;
+  }
+
+  &-UserAva {
+    @include wh(rem(40), rem(40));
+    z-index: 1;
+  }
+
+  &-UserName {
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    color: var(--SOCIAL--Color-Text-Main);
+    border-radius: rem(5);
+  }
+
+  &-Date {
+    @extend %date_color;
+    background: transparent;
+    color: var(--SOCIAL--Color-Text-System);
+    text-shadow: 0 0 transparent;;
+  }
+
+  &-Body {
+    @include flex($direction: column);
+    width: 95%;
+    align-self: flex-end;
+    padding: $componentPadding;
+  }
+
+  &-Content {
+    @include flex($direction: column);
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  &-RecordAttachItem {
+    //background: var(--SOCIAL--Background-Chat-Message);
+  }
+
+  &-RecordText {
+    @include flex();
+    color: var(--SOCIAL--Color-Text-Main);
+    word-break: break-word;
+    padding: rem(10);
+    flex: 1 1 auto;
+  }
+
+  &-ButtonsGroup {
+    @include flex($justify: space-between);
+  }
+
+  &-Button {
+    @include flex();
+    margin: rem(5);
+    cursor: pointer;
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+}

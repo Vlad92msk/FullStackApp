@@ -1,0 +1,46 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.Friend {
+  @include flex($justify: space-between, $align-items: center);
+
+  &-UserName {
+    @include textEllipsis;
+    width: clamp(100px, 12vw, rem(200)) !important;
+  }
+
+  &-CountMessage {
+    @include flex($align-items: center)
+  }
+
+  &-CountMessageButton {
+    @include flex($align-items: center);
+    margin-left: rem(5);
+    color: var(--SOCIAL--Color-Text-System);
+    cursor: pointer;
+    flex: 1 1;
+  }
+
+  &-CountMessageIcon {
+    fill: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+  &-FriendStatus {
+    @include wh(rem(5), rem(5));
+    border-radius: 50%;
+    margin-left: rem(10);
+
+    &--status {
+      &_online {
+        background: var(--SOCIAL--Color-Status-Online);
+      }
+
+      &_offline {
+        background: var(--SOCIAL--Color-Status-Offline);
+      }
+    }
+  }
+
+}

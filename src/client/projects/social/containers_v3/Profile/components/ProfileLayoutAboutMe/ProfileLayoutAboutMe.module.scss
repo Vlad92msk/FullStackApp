@@ -1,0 +1,41 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.ProfileLayoutAboutMe {
+  @include flex($direction: column);
+  @include wh(100%, 100%);
+
+  &-UserRow{
+    @include flex($direction: column);
+  }
+
+  &-UserFIO {
+    @include flex(wrap);
+    padding: rem(15) 0;
+  }
+
+  &-UserName {
+    background: var(--SOCIAL--Background--Red-Gradient);
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: 0 rem(15);
+  }
+
+  &-Hash {
+    color: var(--SOCIAL--Color-Text-System);
+    padding: rem(15) 0;
+  }
+
+  &-Information{
+    @include flex($direction: column);
+    overflow-y: auto;
+    height: 100%;
+  }
+
+
+  &-Description {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(15) 0;
+    margin: rem(10) 0;
+  }
+}

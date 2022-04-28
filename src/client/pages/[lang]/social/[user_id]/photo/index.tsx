@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { App } from '@client_projects/social/containers_v2/App'
+import { App } from '@client_projects/social/containers_v3/App'
 import { Page } from '@client_shared/components/page'
 import { useRouter } from 'next/router'
 import { getSSR, ssrResult } from '@client/shared/utils/getSsrFuncs'

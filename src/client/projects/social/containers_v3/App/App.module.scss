@@ -1,0 +1,59 @@
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins' as * ;
+
+$sectionPadding: 0 clamp(0px, 8vw, 15vw);
+$componentPadding: clamp(2px, 1vh, rem(15)) clamp(2px, 2vw, rem(15));
+$borderRadiusCard: rem(5);
+
+
+%d_n_d__Active {
+  border: rem(1) solid #6484c5 !important;
+  box-shadow: 0 0 0.4375rem 0.125rem rgb(63 77 105) !important;
+  background: #3675b71f !important;
+}
+
+%card {
+  @include flex($direction: column);
+  border-radius: $borderRadiusCard;
+  padding: $componentPadding;
+  box-shadow: 0 0 rem(7) rem(2) var(--SOCIAL--Background-Card);
+  background: var(--SOCIAL--Background-Card-Opacity-02);
+}
+
+%send_message {
+  $this: &;
+  color: var(--SOCIAL--Color-Text-Main);
+  align-self: end;
+  cursor: pointer;
+  flex: auto;
+  justify-content: flex-end;
+}
+
+%send_message--disable {
+  cursor: auto;
+  color: var(--SOCIAL--Color-Text-System);
+}
+
+%date_color {
+  display: inline-flex;
+  flex: 0 1 auto;
+  background: linear-gradient(to right, #ff3865, #ff7978);
+  color: var(--SOCIAL--Color-Text-Main);
+  text-shadow: 0 0 rem(4) #ffffffb8;
+  padding: rem(5) rem(15);
+  width: fit-content;
+}
+
+.Application {
+  @include wh(100vw, 100vh);
+  align-content: end;
+  display: grid;
+  grid-template: [start] "gap gap" 5vh [row2]
+                 [row2] "userMenu children" 80vh [row3]            // 80vh - высота строки
+                 [row2] "navBar navBar" 15vh [row-end] / 40vw 60vw; //40vw - ширина первой строки 60vw - ширина второй строки
+
+  &-Gap {
+    grid-area: gap;
+    background: var(--SOCIAL--Background-Card-Opacity);
+  }
+}

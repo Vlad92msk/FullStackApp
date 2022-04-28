@@ -1,0 +1,45 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.FriendsContainer {
+  width: 130%;
+  z-index: 3;
+  background: var(--SOCIAL--Background-Card);
+  position: absolute;
+  display: grid;
+  grid-template-rows: 5% auto;
+  top: 0;
+  height: 100%;
+  box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
+
+  &-Header {
+    @include flex($justify: space-between, $align-items: center);
+    padding: $componentPadding;
+    padding-top: clamp(2px, 3vh, rem(30));
+    padding-bottom: clamp(2px, 3vh, rem(30));
+    box-shadow: 0 0 rem(4) var(--SOCIAL--Color-Text-System);
+  }
+
+  &-Title{
+    color: var(--SOCIAL--Color-Text-System);
+    text-align: end;
+  }
+
+  &-FriendsContainer {
+    overflow-y: auto;
+    padding-right: rem(10);
+    padding: $componentPadding;
+    margin-top: rem(20);
+  }
+
+  &-Bck {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--Color-Background--darkest);
+    z-index: 2;
+  }
+}

@@ -42,6 +42,11 @@
     }
 
     &_medium {
+      width: wSize(15, 5, 40);
+      height: wSize(15, 5, 40);
+    }
+
+    &_large {
       width: wSize(24, 5, 70);
       height: wSize(24, 5, 70);
     }

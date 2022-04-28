@@ -58,16 +58,15 @@
     text-transform: uppercase;
     color: var(--SOCIAL--Color-Text-Main);
     margin: rem(14) 0 rem(7) 0;
-    height: 100%;
   }
 
   &-Description {
     color: var(--SOCIAL--Color-Text-System);
+    @include textEllipsis;
     margin: rem(7) 0;
-    overflow: hidden;
     font-style: italic;
-    text-overflow: ellipsis;
     display: -webkit-box;
+    height: 100%;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
   }

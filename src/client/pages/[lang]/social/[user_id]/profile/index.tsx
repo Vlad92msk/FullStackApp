@@ -1,9 +1,9 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { App } from '@client_projects/social/containers_v2/App'
+import { App } from '@client_projects/social/containers_v3/App'
 import { Page } from '@client_shared/components/page'
 import { getSSR, ssrResult } from '@client_shared/utils/getSsrFuncs'
-import { Profile } from '@client/projects/social/containers_v2/Profile'
+import { Profile } from '@client/projects/social/containers_v3/Profile'
 
 
 const ProfilePage: NextPage = () => {

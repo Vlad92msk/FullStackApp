@@ -1,0 +1,40 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+.Profile {
+  display: grid;
+  grid-template: [start] "tabButtons" auto [row2]
+                 [row2] "tabContent" 90% [row-end];
+
+  &-Title {
+    width: 100%;
+    text-align: right;
+    color: var(--SOCIAL--Color-Text-Main);
+  }
+
+  &-TabButtons {
+    grid-area: tabButtons;
+    @include flex($align-items: center);
+    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
+
+    & > * {
+      flex: 1 1 auto;
+      text-align: center;
+      color: var(--SOCIAL--Color-Text-System);
+      cursor: pointer;
+
+      &[data-active="true"] {
+        color: var(--SOCIAL--Color-Text-Main);
+      }
+    }
+  }
+
+  &-Container {
+    grid-area: tabContent;
+    @include flex($direction: column);
+    padding-right: clamp(1px, 5vw, rem(40));
+    padding-bottom: rem(5);
+  }
+
+}
