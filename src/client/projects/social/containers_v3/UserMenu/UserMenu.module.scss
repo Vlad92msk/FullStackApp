@@ -5,9 +5,11 @@
 .UserMenu {
   grid-area: userMenu;
   @include flex($direction: row-reverse, $align-items: center);
+  @extend %section;
+  box-shadow: none;
 
   &-User {
-    @include wh(70%, 80%);
+    @include wh(70%, 100%);
     display: grid;
     grid-template-rows: 1fr 9fr 1fr;
   }

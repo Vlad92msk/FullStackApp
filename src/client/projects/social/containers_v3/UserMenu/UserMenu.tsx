@@ -114,7 +114,7 @@ export const UserMenu: React.FC = React.memo(() => {
         <div className={cn('UserRow')}>
           <div className={cn('UserFIO')}>
             <Text className={cn('UserName')} size={'8'} weight={'medium'} children={`${family} ${name}`} />
-            <IconButton fill={'oldAsphalt50'} size={'medium'} icon={'settings-2'} />
+            <IconButton fill={'oldAsphalt50'} size={'ordinary'} icon={'settings-2'} />
           </div>
           <div className={cn('Row')}>
             <ButtonBox className={cn('UserStatus')}>

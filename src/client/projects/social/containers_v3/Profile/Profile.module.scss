@@ -4,11 +4,11 @@
 
 .Profile {
   display: grid;
-  grid-template: [start] "tabButtons" auto [row2]
-                 [row2] "tabContent" 90% [row-end];
-  margin: rem(30);
-  box-shadow: rem(1) rem(1) rem(30) rgb(46 51 72);
-  padding: rem(20);
+  grid-template: [header-left] "prev tabButtons next" auto [header-right]
+                 [main-left] "prev tabContent next" 90% [main-right] / 8% auto 8%;
+  @extend %section;
+  padding-right: 0;
+  padding-left: 0;
 
   &-Title {
     width: 100%;
@@ -37,6 +37,21 @@
     grid-area: tabContent;
     @include flex($direction: column);
     padding-bottom: rem(5);
+    position: relative;
   }
 
+  &-ChangeLayoutButtonsLeft {
+    grid-area: prev;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: var(--SOCIAL--Color-Text-System);
+  }
+  &-ChangeLayoutButtonsRight {
+    grid-area: next;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: var(--SOCIAL--Color-Text-System);
+  }
 }

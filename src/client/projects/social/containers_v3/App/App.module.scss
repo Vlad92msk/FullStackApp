@@ -58,11 +58,17 @@ $borderRadiusCard: rem(5);
   width: fit-content;
 }
 
+%section {
+  margin: rem(30);
+  box-shadow: rem(1) rem(1) rem(30) rgb(46 51 72);
+  padding: rem(20);
+}
+
 .Application {
   @include wh(100vw, 100vh);
   align-content: end;
   display: grid;
-  column-gap: 5vw;
+  column-gap: 1vw;
   grid-template: [start] "gap gap" 5vh [row2]
                  [row2] "userMenu children" 80vh [row3]            // 80vh - высота строки
                  [row2] "navBar navBar" 15vh [row-end] / 40vw auto; //40vw - ширина первой строки auto - ширина второй строки

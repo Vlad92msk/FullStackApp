@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { motion } from "framer-motion";
 
 import { Switcher } from '@client/projects/social/components'
 import { makeCn } from '@client_shared/utils'
@@ -35,13 +36,14 @@ type ProfileLayoutsPhotoType = {
   userId: number
   allItems: PhotoType[]
   albums: PhotoAlbumType[]
+  animation?: any
 }
 
 /**
  * Раздел Профиля - Контент-компонет для Видео или Фото
  */
 export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.memo((props) => {
-  const { allItems, albums, userId } = props
+  const { allItems, albums, userId, animation } = props
 
   const [photos, setPhotos] = useState<PhotoType[]>(allItems)
   const [photoAlbums, setPhotoAlbums] = useState(albums)
@@ -63,14 +65,14 @@ export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.mem
 
   return (
     <>
-      <div className={cn('FiltersContainer')}>
+      <motion.div className={cn('FiltersContainer')} {...animation}>
         <div className={cn('FiltersRow')}>Filter</div>
         <Switcher
           currentValue={group}
           onChange={setGroup}
           options={GROUPS_SWITCH}
         />
-      </div>
+      </motion.div>
       <DragDropContext onDragEnd={onDragEnd}>
         {(() => {
           switch (group) {
