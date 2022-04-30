@@ -1,6 +1,6 @@
 @use "../../../../public/styles/lib/functions" as *;
 @use "../../../../public/styles/lib/mixins" as *;
-@import "../../containers_v3/App/App.module";
+@import "../../containers/App/App.module";
 
 .Attachment {
   margin-bottom: rem(5);

@@ -1,0 +1,79 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.ChatContainer {
+  display: grid;
+  grid-template-rows: rem(50) auto rem(125);
+  color: var(--SOCIAL--Color-Text-Main);
+  height: 100%;
+
+  &-Header {
+    @include flex($justify: space-between, $align-items: center);
+    padding: rem(5);
+    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
+  }
+
+  &-Contact {
+    @include flex($direction: column);
+  }
+
+  &-ContactOnline {
+    text-align: center;
+    font-style: italic;
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-MainContainer {
+    @include flex($direction: column);
+    background: var(--SOCIAL--Background-Card-Opacity-02);
+    border-radius: $borderRadiusCard;
+    overflow-y: auto;
+    margin-top: rem(20);
+  }
+
+  &-Footer {
+    @include flex($direction: column);
+    align-self: center;
+
+  }
+
+  &-FooterFileSmileRow {
+    @include flex($justify: flex-end);
+    width: 100%;
+  }
+
+  &-FooterFile, &-FooterSmile {
+    margin: rem(5);
+    flex: 0 1 auto !important;
+    padding: 0 !important;
+  }
+
+  &-FooterInput {
+    @include flex($direction: column);
+    width: 100%;
+  }
+
+  &-FooterInputText {
+    border: rem(1) solid var(--SOCIAL--Color-Text-System);
+  }
+
+  &-FooterInputSubmitRow {
+    @include flex($justify: space-between);
+    width: 100%;
+    margin-top: rem(5);
+  }
+
+  &-AddedFilesCount {
+    color: var(--SOCIAL--Color-Text-System);
+    width: 100%;
+  }
+
+  &-Submit {
+    color: var(--SOCIAL--Color-Text-System);
+
+    &--active {
+      color: var(--SOCIAL--Color-Text-Main);
+    }
+  }
+}
