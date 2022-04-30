@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client/shared/utils'
 import { IconButton } from '@client/shared/components/IconButton'
@@ -123,38 +122,24 @@ export const FriendsContainer: React.FC<FriendsType> = React.memo((props) => {
   }, [filterFriends, anyUsersNotFriends, friendsMessages, friends, possibleFriends])
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      {
-        isOpenFriends && (
-          <>
-            <motion.div
-              className={cn()}
-              initial={{ left: '-50%' }}
-              animate={{ left: '100%' }}
-              exit={{ left: '-50%' }}
-              transition={{ duration: 1 }}
-            >
-              <div className={cn('Header')}>
-                <IconButton
-                  className={cn('Back')}
-                  icon={'arrow-left'}
-                  fill={'oldAsphalt50'}
-                  onClick={handleCloseFriends}
-                />
-                <Switcher
-                  currentValue={filterFriends}
-                  onChange={handleFriendsSwitch}
-                  options={FRIENDS_SWITCH}
-                />
-              </div>
-              <div className={cn('FriendsContainer')}>
-                {content}
-              </div>
-            </motion.div>
-            <span className={cn('Bck')} />
-          </>
-        )
-      }
-    </AnimatePresence>
+
+    <div className={cn()}>
+      <div className={cn('Header')}>
+        <IconButton
+          className={cn('Back')}
+          icon={'arrow-left'}
+          fill={'oldAsphalt50'}
+          onClick={handleCloseFriends}
+        />
+        <Switcher
+          currentValue={filterFriends}
+          onChange={handleFriendsSwitch}
+          options={FRIENDS_SWITCH}
+        />
+      </div>
+      <div className={cn('FriendsContainer')}>
+        {content}
+      </div>
+    </div>
   )
 })

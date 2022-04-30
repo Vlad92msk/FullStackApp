@@ -1,0 +1,59 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module";
+
+.Messages {
+  @include wh(80vw, 80vh);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: rem(80) 35% auto;
+
+  &-LeftMenu {
+    padding: $componentPadding;
+    height: inherit;
+  }
+
+  &-PrevChats {
+    padding: $componentPadding;
+    height: inherit;
+    border-left: rem(1) solid var(--SOCIAL--Color-Text-System);
+    border-right: rem(1) solid var(--SOCIAL--Color-Text-System);
+  }
+
+  &-CurrentChat {
+    padding: $componentPadding;
+    height: inherit;
+  }
+
+  &-SearchInput {
+    padding: rem(5);
+    background: var(--SOCIAL--Background-Chat-Message);
+    border-radius: rem(5);
+  }
+
+  &-PrevChatsTitle {
+    @include flex($justify: flex-end);
+    color: var(--SOCIAL--Color-Text-System);
+    text-transform: uppercase;
+  }
+
+  &-Chat {
+    @include flex($justify: center, $align-items: center);
+    position: absolute;
+    bottom: 15vh;
+    right: 0;
+    padding: rem(16);
+    border: rem(1) solid var(--Color-BluePrimrose--30);
+    z-index: 1;
+    background: var(--SOCIAL--Background-Card-Opacity);
+  }
+
+  &-ChatIcon {
+    fill: var(--Color-BluePrimrose--30);
+  }
+
+  &-ChatCount {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(10);
+  }
+}

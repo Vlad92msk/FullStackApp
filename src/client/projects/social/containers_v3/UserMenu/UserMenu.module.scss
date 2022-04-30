@@ -62,11 +62,6 @@
     z-index: 1;
   }
 
-  &-Column {
-    @include flex($direction: column, $align-items: center, $justify: center);
-    flex: 1 1 auto;
-    height: 100%;
-  }
 
   &-Description {
     color: var(--SOCIAL--Color-Text-Main);
@@ -80,11 +75,6 @@
     margin-left: rem(5);
   }
 
-  &-ButtonIcon {
-    fill: var(--SOCIAL--Color-Text-System);
-    margin-right: rem(10);
-  }
-
   &-Actions {
     @include flex($justify: space-around);
     margin-top: wSize(5, 5, 10);
@@ -94,12 +84,6 @@
     }
   }
 
-  &-ButtonTextBox {
-    @include flex($direction: column, $align-items: center);
-    color: var(--SOCIAL--Color-Text-System);
-    cursor: pointer;
-    margin: rem(15) 0;
-  }
 
   &-UserFIO {
     @include flex($justify: space-between, $align-items: center);

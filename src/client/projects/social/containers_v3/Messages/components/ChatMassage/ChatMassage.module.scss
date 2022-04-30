@@ -1,0 +1,78 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.ChatMassage {
+  @include flex($direction: column);
+  margin: rem(10);
+  width: fit-content;
+  max-width: 80%;
+  position: relative;
+
+  &--from {
+    &_me {
+      align-self: flex-end;
+      text-align: end;
+    }
+
+    &_other {
+      align-self: flex-start;
+    }
+  }
+
+  &-Content {
+    @include flex($direction: column);
+    @include wh(100%, 100%);
+  }
+
+  &-Text {
+    border: rem(1) solid var(--SOCIAL--Color-Text-System);
+    border-radius: $borderRadiusCard;
+    padding: $componentPadding;
+    background: var(--SOCIAL--Background-Chat-Message);
+    color: var(--SOCIAL--Color-Text-Main);
+    word-break: break-word;
+  }
+
+  &-SystemInfo {
+    @include flex();
+    margin-top: rem(10);
+    position: relative;
+
+    & > * {
+      color: var(--SOCIAL--Color-Text-System);
+      margin-left: rem(5);
+    }
+  }
+
+  &-See {
+    position: absolute;
+    top: 0;
+
+    &--from {
+      &_me {
+        left: rem(-20);
+      }
+
+      &_other {
+        right: rem(-20);
+      }
+    }
+  }
+
+  &-Smile {
+    position: absolute;
+
+    &--from {
+      &_me {
+        right: 104%;
+        top: -100%;
+      }
+
+      &_other {
+        left: 100%;
+        top: -100%;
+      }
+    }
+  }
+}

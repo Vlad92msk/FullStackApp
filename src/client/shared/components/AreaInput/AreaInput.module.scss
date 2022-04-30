@@ -3,6 +3,7 @@
 
 
 .AreaInput {
+  @include flex();
   height: fit-content;
   flex: 1 1 100%;
   padding: rem(10);

@@ -1,19 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
 import { Image } from '@client_shared/components/Image'
-import { Icon } from '@client_shared/components/Icon'
-import { useBooleanState } from '@client_shared/hooks'
+import { ButtonBox } from '@client_shared/components/ButtonBox'
+import { Button } from '@client_shared/components/Button'
+import { IconButton } from '@client_shared/components/IconButton'
+import { StatisticButtons } from '../UserMenu/components'
 import { USER } from '../App/data/user'
 import { ALL_USERS } from './data/all_users'
 import { MESSAGES } from './data/messages'
-import { ChatContainer, FriendsContainer, UserInfo } from './components'
-import { Line } from '@client/projects/social/components'
 import styles from './UserMenu.module.scss'
-import { ButtonBox } from '@client/shared/components/ButtonBox'
-import { Button } from '@client/shared/components/Button'
-import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('UserMenu', styles)
 
@@ -30,6 +27,8 @@ export const UserMenu: React.FC = React.memo(() => {
     professionalInformation,
     baseInformation
   } = USER
+
+
   /**
    * Только друзья
    */
@@ -65,54 +64,6 @@ export const UserMenu: React.FC = React.memo(() => {
   const a = messagesNotFromFriends.map(({ fromUserId }) => fromUserId)
   const usersNotFriends = ALL_USERS.filter(({ id }) => a.includes(id))
 
-  /**
-   * Флаг открытия Списка друзей
-   */
-  const [openFriends, setOpenFriends, onCloseFriends] = useBooleanState(false)
-  /**
-   * Флаг открытия инф по хешу
-   */
-  const [openHash, setOpenHash, onCloseHash] = useBooleanState(false)
-  /**
-   * ID пользователя, чат с которым открыт
-   */
-  const [openedUserIdChat, setOpenedUserIdChat] = useState<number>(null)
-
-  /**
-   * Открыть чат с выбранным пользователем
-   */
-  const handleOpenChat = useCallback((userId: number) => {
-    setOpenedUserIdChat(userId)
-  }, [])
-
-  /**
-   * Закрыть чат с выбранным пользователем
-   */
-  const handleCloseChat = useCallback(() => {
-    setOpenedUserIdChat(null)
-  }, [])
-
-  const handleOpenNotifications = useCallback(() => {
-    console.log('notification')
-  }, [])
-
-  /**
-   * Закрываем диалоги, если закрыли список друзей
-   */
-  useEffect(() => {
-    if (!openFriends) {
-      handleCloseChat()
-    }
-  }, [openFriends])
-
-  /**
-   * Закрываем друзей, если закрыли диалоги
-   */
-  useEffect(() => {
-    if (openedUserIdChat) {
-      setOpenFriends()
-    }
-  }, [openedUserIdChat])
 
   return (
     <section className={cn()}>
@@ -142,48 +93,7 @@ export const UserMenu: React.FC = React.memo(() => {
           </Button>
         </div>)}
       </div>
-      <div className={cn('Column')}>
-        <ButtonBox className={cn('ButtonTextBox')} onClick={setOpenFriends}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'friends'} />
-            <Text children={friends?.length || 0} size={'8'} />
-          </div>
-          <Text children={'Контактов'} />
-        </ButtonBox>
-        <ButtonBox className={cn('ButtonTextBox')} onClick={setOpenHash}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'hash'} />
-            <Text children={300} size={'8'} />
-          </div>
-          <Text children={'Отметок'} />
-        </ButtonBox>
-        <ButtonBox className={cn('ButtonTextBox')} onClick={handleOpenNotifications}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'notification'} />
-            <Text children={10} size={'8'} />
-          </div>
-          <Text children={'Уведомлений'} />
-        </ButtonBox>
-      </div>
-
-      <FriendsContainer
-        friends={friends}
-        friendsMessages={messagesFromFriends}
-
-        possibleFriends={possibleFriends}
-
-        anyUsersNotFriends={usersNotFriends}
-        anyUsersMessages={messagesNotFromFriends}
-
-        isOpenFriends={openFriends}
-        handleOpenChat={handleOpenChat}
-        handleCloseFriends={onCloseFriends}
-      />
-      <ChatContainer
-        openedUserIdChat={openedUserIdChat}
-        targetUser={[...friends, ...usersNotFriends].find(({ id }) => id === openedUserIdChat)}
-        handleCloseChat={handleCloseChat}
-      />
+      <StatisticButtons friends={friends} />
     </section>
   )
 })

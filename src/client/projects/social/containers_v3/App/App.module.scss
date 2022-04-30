@@ -10,6 +10,9 @@ $borderRadiusCard: rem(5);
   @include wh(rem(7), rem(7));
   border-radius: 50%;
   margin-left: rem(10);
+  position: absolute;
+  bottom: rem(-3);
+  right: rem(-3);
 }
 
 %user_status--online {
@@ -77,25 +80,5 @@ $borderRadiusCard: rem(5);
   &-Gap {
     grid-area: gap;
     background: var(--SOCIAL--Background-Card-Opacity);
-  }
-
-  &-Chat {
-    @include flex($justify: center, $align-items: center);
-    position: absolute;
-    bottom: 15vh;
-    right: 0;
-    padding: rem(16);
-    border: rem(1) solid var(--Color-BluePrimrose--30);
-    z-index: 1;
-    background: var(--SOCIAL--Background-Card-Opacity);
-  }
-
-  &-ChatIcon {
-    fill: var(--Color-BluePrimrose--30);
-  }
-
-  &-ChatCount {
-    color: var(--SOCIAL--Color-Text-System);
-    margin-left: rem(10);
   }
 }
