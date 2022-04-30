@@ -6,6 +6,7 @@
   @include flex($direction: column);
   flex: 1 1 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: clamp(1px, 1vw, rem(15));
 
   &-Container {

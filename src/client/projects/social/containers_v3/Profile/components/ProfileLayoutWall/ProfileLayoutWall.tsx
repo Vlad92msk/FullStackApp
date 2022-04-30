@@ -11,12 +11,16 @@ import { USER } from '../../../App/data/user'
 import { WallRecord } from '../../components'
 import { WALL_RECORDS } from '../../data/walls.data'
 import styles from './ProfileLayoutWall.module.scss'
+import { useRouter } from 'next/router'
+import { Modal } from '@client/shared/components/Modal'
 
 
 const cn = makeCn('ProfileLayoutWall', styles)
 
 type ProfileLayoutWallType = {
   userId: number
+  isWallEdit: unknown
+  onCloseWallEditing: () => Promise<boolean>
 }
 
 const NEW_RECORD_BASE = {
@@ -34,8 +38,8 @@ const NEW_RECORD_BASE = {
 /**
  * Раздел Профиля - Контент-компонет для Видео или Фото
  */
-export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
-  const { userId } = props
+export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = React.memo((props) => {
+  const { userId, isWallEdit, onCloseWallEditing } = props
   const user = USER
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -55,11 +59,21 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
 
     setNewRecordText('')
     setNewRecordFiles([])
-  }, [newRecordText, newRecordFiles, user])
+    onCloseWallEditing()
+  }, [newRecordText, newRecordFiles, user, onCloseWallEditing])
 
   return (
     <>
       <div className={cn()}>
+        <div className={cn('Records')}>
+          {
+            lodash.orderBy(records, 'dateCreated', 'desc').map((record) => (
+              <WallRecord key={record.id} record={record} />
+            ))
+          }
+        </div>
+      </div>
+      <Modal className={cn('Modal')} open={Boolean(isWallEdit)} isBckOnClose onClose={onCloseWallEditing}>
         <div className={cn('CreateRecord')}>
           <div className={cn('RecordAdd')}>
             <FileUpLoad onApply={setNewRecordFiles} isConfirm />
@@ -82,14 +96,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = (props) => {
             />
           </div>
         </div>
-        <div className={cn('Records')}>
-          {
-            lodash.orderBy(records, 'dateCreated', 'desc').map((record) => (
-              <WallRecord key={record.id} record={record} />
-            ))
-          }
-        </div>
-      </div>
+      </Modal>
     </>
   )
-}
+})

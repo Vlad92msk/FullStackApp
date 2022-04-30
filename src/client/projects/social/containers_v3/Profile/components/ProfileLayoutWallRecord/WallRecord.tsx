@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 
-import { Attachment, ATTACHMENT_ACTION, SliderMedia, UserSmall } from '@client_projects/social/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
-import { Comments } from '@client/projects/social/containers_v2/Comments'
-import { WallRecordItemType } from '@client/projects/social/containers_v2/Profile/data/walls.data'
-import { useAttachmentsPurpose } from '@client/projects/social/components/Attachment/hooks'
+import { Attachment, ATTACHMENT_ACTION, SliderMedia, UserSmall } from '../../../../components'
+import { useAttachmentsPurpose } from '../../../../components/Attachment/hooks'
+import { WallRecordItemType } from '../../../Profile/data/walls.data'
+import { Comments } from '../../../Comments'
 import styles from './WallRecord.module.scss'
 
 
@@ -109,6 +109,7 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
           commentsHeight={'40vh'}
           isOpenComments={isOpenComments}
           openType={'vertical'}
+          isOverflow={false}
         />
       </div>
     </div>

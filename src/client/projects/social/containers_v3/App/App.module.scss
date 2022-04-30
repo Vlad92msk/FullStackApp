@@ -69,6 +69,7 @@ $borderRadiusCard: rem(5);
   align-content: end;
   display: grid;
   column-gap: 1vw;
+  position: relative;
   grid-template: [start] "gap gap" 5vh [row2]
                  [row2] "userMenu children" 80vh [row3]            // 80vh - высота строки
                  [row2] "navBar navBar" 15vh [row-end] / 40vw auto; //40vw - ширина первой строки auto - ширина второй строки
@@ -76,5 +77,25 @@ $borderRadiusCard: rem(5);
   &-Gap {
     grid-area: gap;
     background: var(--SOCIAL--Background-Card-Opacity);
+  }
+
+  &-Chat {
+    @include flex($justify: center, $align-items: center);
+    position: absolute;
+    bottom: 15vh;
+    right: 0;
+    padding: rem(16);
+    border: rem(1) solid var(--Color-BluePrimrose--30);
+    z-index: 1;
+    background: var(--SOCIAL--Background-Card-Opacity);
+  }
+
+  &-ChatIcon {
+    fill: var(--Color-BluePrimrose--30);
+  }
+
+  &-ChatCount {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(10);
   }
 }

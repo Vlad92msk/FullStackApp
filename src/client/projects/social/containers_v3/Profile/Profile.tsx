@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
-import { motion, AnimatePresence, useAnimation } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
@@ -83,11 +83,14 @@ export const Profile: React.FC = React.memo(() => {
   } = USER
   const { query } = useRouter()
 
-  const checkWall = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WALL })
-  const checkVideo = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.VIDEO })
-  const checkPhoto = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.PHOTO })
-  const checkWork = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WORK })
-  const checkAboutMe = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.ABOUT_ME })
+  const openWallEdit = useReplaceRouterQuery({ isEditing: 'true' })
+  const closeWallEdit = useReplaceRouterQuery({}, ['isEditing'])
+  const checkWall = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WALL }, ['isEditing'])
+  const checkVideo = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.VIDEO }, ['isEditing'])
+  const checkPhoto = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.PHOTO }, ['isEditing'])
+  const checkWork = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.WORK }, ['isEditing'])
+  const checkAboutMe = useReplaceRouterQuery({ layout: PROFILE_LAYOUTS.ABOUT_ME }, ['isEditing'])
+
 
   const [direction, setDirection] = useState<'left' | 'right'>(null)
   const [currentI, setCurrentI] = useState<number>(null)
@@ -122,7 +125,7 @@ export const Profile: React.FC = React.memo(() => {
   }), [variants, query, direction])
 
 
-  const actions = useMemo(() => ({
+  const tabsChangeLayout = useMemo(() => ({
     wall: checkWall,
     video: checkVideo,
     photo: checkPhoto,
@@ -132,7 +135,7 @@ export const Profile: React.FC = React.memo(() => {
 
   const tabs = useMemo(() => ({
     wall: (
-      <ProfileLayoutWall userId={USER_ID} />
+      <ProfileLayoutWall userId={USER_ID} isWallEdit={query.isEditing} onCloseWallEditing={closeWallEdit} />
     ),
     video: (
       <ProfileLayoutDigital
@@ -156,7 +159,31 @@ export const Profile: React.FC = React.memo(() => {
       />
     ),
     work: <div>work</div>
-  }), [USER_ID, VIDEO_ITEMS, VIDEO_ALBUMS, PHOTO_ITEMS, PHOTO_ALBUMS, USER, animation])
+  }), [USER_ID, VIDEO_ITEMS, VIDEO_ALBUMS, PHOTO_ITEMS, PHOTO_ALBUMS, USER, animation, query])
+
+  const tabActions = useMemo(() => ({
+    wall: (
+      <>
+        <IconButton icon={'wright'} size={'ordinary'} fill={'redRose40'} onClick={openWallEdit} />
+      </>
+    ),
+    video: (
+      <>
+      </>
+    ),
+    photo: (
+      <>
+      </>
+    ),
+    work: (
+      <>
+      </>
+    ),
+    about_me: (
+      <>
+      </>
+    )
+  }), [])
 
   /**
    * По умолчанию открыта стена
@@ -171,14 +198,14 @@ export const Profile: React.FC = React.memo(() => {
   const handleChangeLeft = useCallback(() => {
     if (!currentI) return
     if (currentI >= TABS.length) return
-    return actions[TABS.find(({ id }) => id === currentI + 1).activeLayout]()
-  }, [currentI, TABS, actions])
+    return tabsChangeLayout[TABS.find(({ id }) => id === currentI + 1).activeLayout]()
+  }, [currentI, TABS, tabsChangeLayout])
 
   const handleChangeRight = useCallback(() => {
     if (!currentI) return
     if (currentI <= 1) return
-    return actions[TABS.find(({ id }) => id === currentI - 1).activeLayout]()
-  }, [currentI, TABS, actions])
+    return tabsChangeLayout[TABS.find(({ id }) => id === currentI - 1).activeLayout]()
+  }, [currentI, TABS, tabsChangeLayout])
 
   return (
     <div className={cn()}>
@@ -189,7 +216,6 @@ export const Profile: React.FC = React.memo(() => {
           size={'medium'}
         />
       </div>
-
       <div className={cn('TabButtons')}>
         {TABS.map(({ activeLayout, title, id }) => (
           <Text
@@ -197,7 +223,7 @@ export const Profile: React.FC = React.memo(() => {
             size={'4'}
             textTransform={'uppercase'}
             data-active={query.layout === activeLayout}
-            onClick={actions[activeLayout]}
+            onClick={tabsChangeLayout[activeLayout]}
             children={title}
           />
         ))}
@@ -213,6 +239,9 @@ export const Profile: React.FC = React.memo(() => {
           onClick={handleChangeLeft}
           size={'medium'}
         />
+        <div className={cn('Actions')}>
+          {tabActions[query.layout as PROFILE_LAYOUTS]}
+        </div>
       </div>
     </div>
   )

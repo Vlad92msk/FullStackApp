@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import { DefaultObject } from '@client/public/models/defaultObject.model'
 
 
 export const useReplaceRouterUrl = (oldParam: string, newParam: string): [() => void, string] => {
@@ -10,8 +11,12 @@ export const useReplaceRouterUrl = (oldParam: string, newParam: string): [() => 
   return [push1, path]
 }
 
-export const useReplaceRouterQuery = (newQuery) => {
+export const useReplaceRouterQuery = (newQuery: DefaultObject, remove?: string[]) => {
   const { query, replace } = useRouter()
+  const refQuery = { ...query }
 
-  return useCallback(() => replace({ query: { ...query, ...newQuery } }), [query, newQuery])
+  if (remove) {
+    remove.forEach((item) => delete refQuery[item])
+  }
+  return useCallback(() => replace({ query: { ...refQuery, ...newQuery } }), [query, newQuery, remove])
 }

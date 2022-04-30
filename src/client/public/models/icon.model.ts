@@ -168,3 +168,6 @@ export type IconName =
   | 'heart'
   | 'heart-fill'
   | 'dislike'
+  | 'notification'
+  | 'wright'
+  | 'message'

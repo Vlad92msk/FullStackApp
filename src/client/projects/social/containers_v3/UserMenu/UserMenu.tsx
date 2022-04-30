@@ -84,12 +84,18 @@ export const UserMenu: React.FC = React.memo(() => {
   const handleOpenChat = useCallback((userId: number) => {
     setOpenedUserIdChat(userId)
   }, [])
+
   /**
    * Закрыть чат с выбранным пользователем
    */
   const handleCloseChat = useCallback(() => {
     setOpenedUserIdChat(null)
   }, [])
+
+  const handleOpenNotifications = useCallback(() => {
+    console.log('notification')
+  }, [])
+
   /**
    * Закрываем диалоги, если закрыли список друзей
    */
@@ -127,14 +133,14 @@ export const UserMenu: React.FC = React.memo(() => {
         <div className={cn('Photo')}>
           <Image sizePriority={'contain'} path={{ project: 'social', img }} />
         </div>
-        <div className={cn('Actions')}>
+        {id !== 1 && (<div className={cn('Actions')}>
           <Button styleType={'rounded'} color={'blue'} icon={'message-square'} iconPosition={'left'}>
             <Text children={'Написать'} size={'2'} />
           </Button>
           <Button styleType={'rounded'} color={'red'} icon={'plus'} iconPosition={'left'}>
             <Text children={'Добавить'} size={'2'} />
           </Button>
-        </div>
+        </div>)}
       </div>
       <div className={cn('Column')}>
         <ButtonBox className={cn('ButtonTextBox')} onClick={setOpenFriends}>
@@ -144,19 +150,19 @@ export const UserMenu: React.FC = React.memo(() => {
           </div>
           <Text children={'Контактов'} />
         </ButtonBox>
-        <ButtonBox className={cn('ButtonTextBox')} onClick={() => handleOpenChat(messages[0].fromUserId)}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'message-square'} />
-            <Text children={messages?.length || 0} size={'8'} />
-          </div>
-          <Text children={'Сообщений'} />
-        </ButtonBox>
         <ButtonBox className={cn('ButtonTextBox')} onClick={setOpenHash}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'hash'} />
             <Text children={300} size={'8'} />
           </div>
           <Text children={'Отметок'} />
+        </ButtonBox>
+        <ButtonBox className={cn('ButtonTextBox')} onClick={handleOpenNotifications}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Icon className={cn('ButtonIcon')} size={'ordinary'} icon={'notification'} />
+            <Text children={10} size={'8'} />
+          </div>
+          <Text children={'Уведомлений'} />
         </ButtonBox>
       </div>
 

@@ -22,6 +22,7 @@ export type CommentsType = {
   width?: string
   commentsHeight?: string
   openType?: CommentsOpenType
+  isOverflow?: boolean
 }
 
 export const Comments: React.FC<CommentsType> = React.memo(
@@ -29,7 +30,8 @@ export const Comments: React.FC<CommentsType> = React.memo(
      isOpenComments,
      width,
      commentsHeight,
-     openType
+     openType,
+     isOverflow
    }) => {
     const [comment, setComment] = useState<string>(null)
     const [openCommentId, setOpenCommentId] = useState<number>(null)
@@ -53,7 +55,8 @@ export const Comments: React.FC<CommentsType> = React.memo(
             <AreaInput onChange={setComment} value={comment} />
             <Text className={cn('Send', { disabled: !comment?.length })} children={'Отправить'} size={'1'} />
           </div>
-          <div className={cn('CommentsArray')} style={{ maxHeight: commentsHeight }}>
+          <div className={cn('CommentsArray')}
+               style={{ maxHeight: commentsHeight, overflowY: isOverflow ? 'auto' : null }}>
             {comments.map(
               ({
                  commentAuthor,
@@ -129,5 +132,6 @@ export const Comments: React.FC<CommentsType> = React.memo(
   })
 
 Comments.defaultProps = {
-  openType: 'horizontal'
+  openType: 'horizontal',
+  isOverflow: true
 }

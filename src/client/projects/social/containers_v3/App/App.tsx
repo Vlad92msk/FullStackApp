@@ -5,6 +5,10 @@ import { makeCn } from '@client_shared/utils'
 import { NavBar } from '../NavBar'
 import { UserMenu } from '../UserMenu'
 import styles from './App.module.scss'
+import { IconButton } from '@client/shared/components/IconButton'
+import { Text } from '@client/shared/components/Text'
+import { ButtonBox } from '@client/shared/components/ButtonBox'
+import { Icon } from '@client/shared/components/Icon'
 
 const cn = makeCn('Application', styles)
 type AppType = {
@@ -23,6 +27,10 @@ export const App: React.FC<AppType> = React.memo(({ children, pathname }) => {
       <UserMenu />
       {children}
       <NavBar pathname={pathname} />
+      <ButtonBox className={cn('Chat')}>
+        <Icon className={cn('ChatIcon')} icon={'message-square'} size={'ordinary'} />
+        <Text className={cn('ChatCount')} children={null} size={'7'}/>
+      </ButtonBox>
     </Section>
   )
 })
