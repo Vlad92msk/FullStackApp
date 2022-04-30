@@ -9,13 +9,15 @@
   height: 100%;
 
   &-Header {
-    @include flex($justify: space-between, $align-items: center);
-    padding: rem(5);
+    @include flex($justify: flex-end, $align-items: center);
     border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
+    position: relative;
   }
 
   &-Contact {
-    @include flex($direction: column);
+    @include flex($direction: column, $align-items: center);
+    width: 100%;
+    position: absolute;
   }
 
   &-ContactOnline {

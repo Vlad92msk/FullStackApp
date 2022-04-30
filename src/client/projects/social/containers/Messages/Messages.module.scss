@@ -40,7 +40,7 @@
   &-Chat {
     @include flex($justify: center, $align-items: center);
     position: absolute;
-    bottom: 15vh;
+    bottom: 10vh;
     right: 0;
     padding: rem(16);
     border: rem(1) solid var(--Color-BluePrimrose--30);

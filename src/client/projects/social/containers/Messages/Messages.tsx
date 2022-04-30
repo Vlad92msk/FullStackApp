@@ -18,15 +18,8 @@ import styles from './Messages.module.scss'
 
 export const Messages: React.FC = React.memo(() => {
   const {
-    img,
-    description,
-    family,
-    hashName,
-    name,
     id,
     friends: userFriends,
-    professionalInformation,
-    baseInformation
   } = USER
 
   const [isOpen, handleOpen, handleClose] = useBooleanState(true)

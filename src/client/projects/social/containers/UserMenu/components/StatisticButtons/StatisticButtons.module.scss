@@ -30,18 +30,4 @@
   &-UserStatus {
     @include flex($align-items: center);
   }
-
-  &-UserStatusDot {
-    @extend %user_status--dot;
-
-    &--status {
-      &_online {
-        @extend %user_status--online
-      }
-
-      &_offline {
-        @extend %user_status--offline
-      }
-    }
-  }
 }
