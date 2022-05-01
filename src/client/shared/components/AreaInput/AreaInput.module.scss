@@ -7,6 +7,7 @@
   height: fit-content;
   flex: 1 1 100%;
   padding: rem(10);
+  position: relative;
 
   &-Input {
     //@include placeholderColor(var(--Color-Text--disabled));
@@ -35,5 +36,11 @@
       border-color: var(--Color-OldAsphalt--30);
       background: var(--Color-OldAsphalt--10);
     }
+  }
+
+  &-IconClear {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
   }
 }

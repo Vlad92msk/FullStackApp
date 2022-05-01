@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
+import { scrollToCurrent } from '@client_shared/utils/scrollToParent'
 import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '../../data/messages'
 import { UserType } from '../../../App/data/user'
@@ -12,12 +13,11 @@ import styles from './ChatContainer.module.scss'
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {
-  openedUserIdChat: number
   targetUser: UserType
   user: UserType
 }
 export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
-  const { openedUserIdChat, targetUser, user } = props
+  const { targetUser, user } = props
   const chatMassageContainer = useRef<HTMLDivElement>(null)
 
   /**
@@ -26,6 +26,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const [messages, setMessages] = useState<Message[]>([])
   useEffect(() => {
     if (Boolean(targetUser)) {
+      scrollToCurrent(chatMassageContainer)
       setMessages(MESSAGES.filter(({ fromUserId }) => fromUserId === targetUser.id))
     }
   }, [MESSAGES, targetUser])
@@ -37,17 +38,8 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
    */
   const onCreateMessage = useCallback((newMessage:Message) => {
     setMessages(prev => [...prev, newMessage])
-  }, [])
-
-  /**
-   * Автоскролл к последнему сообщению
-   */
-  useEffect(() => {
-      chatMassageContainer?.current.scrollBy({
-        top: chatMassageContainer.current.scrollHeight,
-        behavior: 'smooth'
-      })
-  }, [chatMassageContainer, openedUserIdChat, messages])
+    setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
+  }, [chatMassageContainer])
 
   return (
     <div className={cn()}>

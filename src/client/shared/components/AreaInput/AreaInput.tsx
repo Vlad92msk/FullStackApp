@@ -1,11 +1,10 @@
-import React, { ElementType, useCallback } from 'react'
+import React, { ElementType, useCallback, useEffect, useState } from 'react'
 import { classnames } from '@bem-react/classnames'
 
 import { makeCn } from '@client_shared/utils'
 import { Text, TextSize } from '@client_shared/components/Text'
-import styles from './AreaInput.module.scss'
-import { IconName } from '@client/public/models/icon.model'
 import { Icon, IconProps } from '@client/shared/components/Icon'
+import styles from './AreaInput.module.scss'
 
 
 const cn = makeCn('AreaInput', styles)
@@ -24,8 +23,10 @@ export interface AreaInputProps {
   onChange?: (value: string, name?: string) => void
   anchorEl?: React.Ref<any>
   icon?: IconProps
+  iconClear?: IconProps
   as?: ElementType
   inputClassName?: string
+  onIconClear?: () => void
 }
 
 export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((props) => {
@@ -43,16 +44,19 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
     anchorEl,
     icon,
     as,
-    inputClassName
+    inputClassName,
+    iconClear,
+    onIconClear,
   } = props
 
   const handleChange = useCallback(({ target: { value: newValue } }) => {
-    onChange(newValue, name)
-  }, [name])
+      onChange(newValue, name)
+  }, [name, onChange])
 
   return (
     <div className={classnames(cn(), className)} style={{ ...style, alignItems: icon && 'center' }}>
       {icon && (<Icon {...icon} />)}
+      {(iconClear && value?.length) ? (<Icon className={cn('IconClear')} {...iconClear} onClick={onIconClear} />) : null}
       <Text
         as={as}
         anchorEl={anchorEl}

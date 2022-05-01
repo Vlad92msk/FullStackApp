@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
@@ -24,7 +24,7 @@ export const Messages: React.FC = React.memo(() => {
   } = USER
 
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
-  const [comment, setComment] = useState<string>(null)
+  const [comment, setComment] = useState<string>('')
 
   /**
    * Только друзья
@@ -84,6 +84,12 @@ export const Messages: React.FC = React.memo(() => {
               icon: 'search',
               fill: 'oldAsphalt40'
             }}
+            iconClear={{
+              icon: 'close',
+              size: 'ordinary',
+              fill: 'oldAsphalt40'
+            }}
+            onIconClear={() => setComment('')}
             onChange={setComment}
             value={comment}
           />
@@ -98,7 +104,6 @@ export const Messages: React.FC = React.memo(() => {
         <div className={cn('CurrentChat')}>
           <ChatContainer
             user={USER}
-            openedUserIdChat={openedUserIdChat}
             targetUser={[...friends, ...usersNotFriends].find(({ id }) => id === openedUserIdChat)}
           />
         </div>

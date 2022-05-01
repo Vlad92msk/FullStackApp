@@ -3,7 +3,7 @@ import { makeCn } from '@client_shared/utils'
 import { classnames } from '@bem-react/classnames'
 
 import { Text } from '@client_shared/components/Text'
-import { scrollTo } from '@client_shared/utils/scrollTo'
+import { scrollToParent } from '@client/shared/utils/scrollToParent'
 import { SectionContext } from './Context'
 import { SectionType } from './types/sectionType'
 
@@ -16,7 +16,7 @@ export const SectionChange: React.FC<SectionType> = React.memo(({ className, sec
   return (
     <div className={classnames(cn({ type }), className)}>
       <div className={classnames(buttonsClassName)}>
-        {sections.map(({ name, ref }) => name && <Text key={name} onClick={() => scrollTo(ref)} children={name} />)}
+        {sections.map(({ name, ref }) => name && <Text key={name} onClick={() => scrollToParent(ref)} children={name} />)}
       </div>
 
       {sections.map(({ section, ref }) => (

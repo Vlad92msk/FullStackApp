@@ -21,8 +21,7 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
   return (
     <>
       <Text className={cn('Title')} children={'Чаты с друзьями'} size={'1'} />
-      {friends
-      .map((friend) => (
+      {friends.map((friend) => (
         <Friend
           key={friend.id}
           friend={friend}
@@ -33,8 +32,7 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
         />
       ))}
       <Text className={cn('Title')} children={'Чаты не с друзьями'} size={'1'} />
-      {anyUsers
-      .map((friend) => (
+      {anyUsers.map((friend) => (
         <Friend
           key={friend.id}
           friend={friend}
