@@ -5,7 +5,7 @@ import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
 import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '../../data/messages'
-import { USER, UserType } from '../../../App/data/user'
+import { UserType } from '../../../App/data/user'
 import { CreateChatMessage } from '../../components'
 import styles from './ChatContainer.module.scss'
 
@@ -14,10 +14,10 @@ const cn = makeCn('ChatContainer', styles)
 export type ChatType = {
   openedUserIdChat: number
   targetUser: UserType
+  user: UserType
 }
 export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
-  const { openedUserIdChat, targetUser } = props
-  const user = USER
+  const { openedUserIdChat, targetUser, user } = props
   const chatMassageContainer = useRef<HTMLDivElement>(null)
 
   /**

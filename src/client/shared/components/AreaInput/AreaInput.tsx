@@ -46,7 +46,6 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
     inputClassName
   } = props
 
-
   const handleChange = useCallback(({ target: { value: newValue } }) => {
     onChange(newValue, name)
   }, [name])
@@ -70,7 +69,7 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
       />
     </div>
   )
-})
+}, (a, b) => a.value === b.value)
 
 
 AreaInput.defaultProps = {

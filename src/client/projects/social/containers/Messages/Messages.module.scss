@@ -31,12 +31,6 @@
     border-radius: rem(5);
   }
 
-  &-PrevChatsTitle {
-    @include flex($justify: flex-end);
-    color: var(--SOCIAL--Color-Text-System);
-    text-transform: uppercase;
-  }
-
   &-Chat {
     @include flex($justify: center, $align-items: center);
     position: absolute;

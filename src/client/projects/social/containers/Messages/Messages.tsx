@@ -10,19 +10,20 @@ import { ChatContainer } from './components'
 import { USER } from '../App/data/user'
 
 import { MESSAGES } from './data/messages'
-import { Friend } from './components'
 import { AreaInput } from '@client_shared/components/AreaInput'
-import { Image } from '@client/shared/components/Image'
 import { ALL_USERS } from '../UserMenu/data/all_users'
+import { UsersChats } from './components'
 import styles from './Messages.module.scss'
+const cn = makeCn('Messages', styles)
+
 
 export const Messages: React.FC = React.memo(() => {
   const {
     id,
-    friends: userFriends,
+    friends: userFriends
   } = USER
 
-  const [isOpen, handleOpen, handleClose] = useBooleanState(true)
+  const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const [comment, setComment] = useState<string>(null)
 
   /**
@@ -61,21 +62,9 @@ export const Messages: React.FC = React.memo(() => {
   const usersNotFriends = ALL_USERS.filter(({ id }) => a.includes(id))
 
   /**
-   * Флаг открытия Списка друзей
-   */
-  const [openFriends, setOpenFriends, onCloseFriends] = useBooleanState(false)
-
-  /**
    * ID пользователя, чат с которым открыт
    */
   const [openedUserIdChat, setOpenedUserIdChat] = useState<number>(2)
-
-  /**
-   * Открыть чат с выбранным пользователем
-   */
-  const handleOpenChat = useCallback((userId: number) => {
-    setOpenedUserIdChat(userId)
-  }, [])
 
 
   return (
@@ -84,13 +73,7 @@ export const Messages: React.FC = React.memo(() => {
         <Icon className={cn('ChatIcon')} icon={'message-square'} size={'ordinary'} />
         <Text className={cn('ChatCount')} children={12} size={'7'} />
       </ButtonBox>
-      <Modal className={cn()} open={isOpen} onClose={handleClose}>
-        <Image
-          path={{
-            img: 'bkg',
-            project: 'social'
-          }}
-        />
+      <Modal className={cn()} backgroundImg={'bkg'} open={isOpen} onClose={handleClose}>
         <div className={cn('LeftMenu')}>left</div>
         <div className={cn('PrevChats')}>
           <AreaInput
@@ -104,34 +87,17 @@ export const Messages: React.FC = React.memo(() => {
             onChange={setComment}
             value={comment}
           />
-          {usersNotFriends.length && (
-            <Text className={cn('PrevChatsTitle')} children={'Чаты с друзьями'} size={'1'} />)}
-          {friends
-          .map((friend) => (
-            <Friend
-              key={friend.id}
-              friend={friend}
-              onOpenChat={handleOpenChat}
-              friendMessageCount={
-                messagesFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-              }
-            />
-          ))}
-          <Text className={cn('PrevChatsTitle')} children={'Чаты не с друзьями'} size={'1'} />
-          {usersNotFriends
-          .map((friend) => (
-            <Friend
-              key={friend.id}
-              friend={friend}
-              onOpenChat={handleOpenChat}
-              friendMessageCount={
-                messagesNotFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-              }
-            />
-          ))}
+          <UsersChats
+            friends={friends}
+            anyUsers={usersNotFriends}
+            messagesFromFriends={messagesFromFriends}
+            messagesNotFromFriends={messagesNotFromFriends}
+            onChatOpen={setOpenedUserIdChat}
+          />
         </div>
         <div className={cn('CurrentChat')}>
           <ChatContainer
+            user={USER}
             openedUserIdChat={openedUserIdChat}
             targetUser={[...friends, ...usersNotFriends].find(({ id }) => id === openedUserIdChat)}
           />
@@ -140,6 +106,3 @@ export const Messages: React.FC = React.memo(() => {
     </>
   )
 })
-
-
-const cn = makeCn('Messages', styles)
