@@ -1,16 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { createId } from '@server/utils/createId'
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
-import { ButtonBox } from '@client_shared/components/ButtonBox'
-import { AreaInput } from '@client/shared/components/AreaInput'
-import { InputSmiles } from '@client/shared/components/InputSmiles'
-import { FileUpLoad } from '@client/shared/components/FileUpLoad'
 import { ChatMassage, MASSAGE_FROM } from '../ChatMassage/ChatMassage'
 import { Message, MESSAGES } from '../../data/messages'
 import { USER, UserType } from '../../../App/data/user'
+import { CreateChatMessage } from '../../components'
 import styles from './ChatContainer.module.scss'
 
 const cn = makeCn('ChatContainer', styles)
@@ -23,9 +19,6 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const { openedUserIdChat, targetUser } = props
   const user = USER
   const chatMassageContainer = useRef<HTMLDivElement>(null)
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
-
-  const [newRecordFiles, setNewRecordFiles] = useState([])
 
   /**
    * Локальные сообщения
@@ -37,41 +30,24 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
     }
   }, [MESSAGES, targetUser])
 
-  /**
-   * Текст сообщения
-   */
-  const [messageInput, setMessageInput] = useState<string>('')
 
   /**
    * Отправить сообщение
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
-  const onCreateMessage = useCallback(() => {
-    setMessages(prev => [...prev, {
-      fromUserId: user.id,
-      toUserId: targetUser.id,
-      dateSeen: null,
-      dateCreate: new Date(),
-      messageId: createId(50),
-      smile: null,
-      massage: messageInput,
-      attachments: newRecordFiles
-    }])
-    setMessageInput('')
-    setNewRecordFiles([])
-  }, [messageInput, newRecordFiles])
+  const onCreateMessage = useCallback((newMessage:Message) => {
+    setMessages(prev => [...prev, newMessage])
+  }, [])
 
   /**
    * Автоскролл к последнему сообщению
    */
   useEffect(() => {
-    if (openedUserIdChat) {
       chatMassageContainer?.current.scrollBy({
         top: chatMassageContainer.current.scrollHeight,
         behavior: 'smooth'
       })
-    }
-  }, [chatMassageContainer, openedUserIdChat])
+  }, [chatMassageContainer, openedUserIdChat, messages])
 
   return (
     <div className={cn()}>
@@ -92,40 +68,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
           />
         ))}
       </div>
-      <div className={cn('Footer')}>
-        <div className={cn('FooterFileSmileRow')}>
-          <FileUpLoad className={cn('FooterFile')} icon={'file-outlined'} onApply={setNewRecordFiles} />
-          <InputSmiles className={cn('FooterSmile')} setText={setMessageInput} textAreaRef={textAreaRef} />
-        </div>
-        <div className={cn('FooterInput')}>
-          <AreaInput
-            anchorEl={textAreaRef}
-            className={cn('FooterInputText')}
-            value={messageInput}
-            onChange={setMessageInput}
-          />
-          <div className={cn('FooterInputSubmitRow')}>
-            {Boolean(newRecordFiles.length) && (
-              <Text
-                className={cn('AddedFilesCount')}
-                size={'1'}
-                children={`${newRecordFiles.length} файлов`}
-              />
-            )}
-            <ButtonBox
-              style={{ justifyContent: 'flex-end', width: '100%' }}
-              onClick={onCreateMessage}
-              disabled={!messageInput?.length}
-            >
-              <Text
-                className={cn('Submit', { active: Boolean(messageInput?.length) })}
-                size={'1'}
-                children={'Отправить'}
-              />
-            </ButtonBox>
-          </div>
-        </div>
-      </div>
+      <CreateChatMessage onSendMessage={onCreateMessage} currentUserId={user.id} targetUserId={targetUser.id}/>
     </div>
   )
 })
