@@ -1,19 +1,17 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { makeCn } from '@client_shared/utils'
-import { Text } from '@client_shared/components/Text'
-import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Modal } from '@client_shared/components/Modal'
-import { Icon } from '@client_shared/components/Icon'
 import { useBooleanState } from '@client_shared/hooks'
-import { ChatContainer } from './components'
-import { USER } from '../App/data/user'
-
-import { MESSAGES } from './data/messages'
 import { AreaInput } from '@client_shared/components/AreaInput'
+
+import { USER } from '../App/data/user'
+import { MESSAGES } from './data/messages'
 import { ALL_USERS } from '../UserMenu/data/all_users'
-import { UsersChats } from './components'
+import { FOLDERS_CHATS } from './data/foldersChats'
+import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
 import styles from './Messages.module.scss'
+
 const cn = makeCn('Messages', styles)
 
 
@@ -22,6 +20,9 @@ export const Messages: React.FC = React.memo(() => {
     id,
     friends: userFriends
   } = USER
+
+  const [folders, setFolders] = useState(FOLDERS_CHATS)
+
 
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const [comment, setComment] = useState<string>('')
@@ -65,16 +66,27 @@ export const Messages: React.FC = React.memo(() => {
    * ID пользователя, чат с которым открыт
    */
   const [openedUserIdChat, setOpenedUserIdChat] = useState<number>(2)
+  const [openFolderId, setOpenFolderId] = useState<number>(null)
+  const handleOpenFolderId = useCallback((id: number) => {
+    setOpenFolderId(id)
+  }, [])
 
+  const [openUsersChats, setOpenUsersChats] = useState<number[]>(null)
+  useEffect(() => {
+    if (openFolderId) {
+      setOpenUsersChats(folders?.find(({ id }) => id === openFolderId)?.users)
+    } else {
+      setOpenUsersChats(null)
+    }
+  }, [openFolderId, folders])
 
   return (
     <>
-      <ButtonBox className={cn('Chat')} onClick={handleOpen}>
-        <Icon className={cn('ChatIcon')} icon={'message-square'} size={'ordinary'} />
-        <Text className={cn('ChatCount')} children={12} size={'7'} />
-      </ButtonBox>
+      <OpenChatButton onOpen={handleOpen} messageCount={messagesFromFriends.length + messagesNotFromFriends.length} />
       <Modal className={cn()} backgroundImg={'bkg'} open={isOpen} onClose={handleClose}>
-        <div className={cn('LeftMenu')}>left</div>
+        <div className={cn('LeftMenu')}>
+          <ChatFolders folders={folders} onChoiceFolder={handleOpenFolderId} />
+        </div>
         <div className={cn('PrevChats')}>
           <AreaInput
             as={'input'}
@@ -94,11 +106,12 @@ export const Messages: React.FC = React.memo(() => {
             value={comment}
           />
           <UsersChats
-            friends={friends}
+            friends={openFolderId ? friends.filter(({ id }) => openUsersChats?.includes(id)) : friends}
             anyUsers={usersNotFriends}
             messagesFromFriends={messagesFromFriends}
             messagesNotFromFriends={messagesNotFromFriends}
             onChatOpen={setOpenedUserIdChat}
+            openedUserIdChat={openedUserIdChat}
           />
         </div>
         <div className={cn('CurrentChat')}>

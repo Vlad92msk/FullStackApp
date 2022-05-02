@@ -14,34 +14,45 @@ type UsersChatsProps = {
   messagesFromFriends: Message[]
   messagesNotFromFriends: Message[]
   onChatOpen: (userId: number) => void
+  openedUserIdChat: number
 }
 export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
-  const { anyUsers, friends, messagesFromFriends, messagesNotFromFriends, onChatOpen } = props
+  const { anyUsers, friends, messagesFromFriends, messagesNotFromFriends, onChatOpen, openedUserIdChat } = props
 
   return (
-    <>
-      <Text className={cn('Title')} children={'Чаты с друзьями'} size={'1'} />
-      {friends.map((friend) => (
-        <Friend
-          key={friend.id}
-          friend={friend}
-          onOpenChat={onChatOpen}
-          friendMessageCount={
-            messagesFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-          }
-        />
-      ))}
-      <Text className={cn('Title')} children={'Чаты не с друзьями'} size={'1'} />
-      {anyUsers.map((friend) => (
-        <Friend
-          key={friend.id}
-          friend={friend}
-          onOpenChat={onChatOpen}
-          friendMessageCount={
-            messagesNotFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
-          }
-        />
-      ))}
-    </>
+    <div className={cn()}>
+      {Boolean(friends.length) && (
+        <>
+          <Text className={cn('Title')} children={'Чаты с друзьями'} size={'1'} />
+          {friends.map((friend) => (
+            <Friend
+              key={friend.id}
+              friend={friend}
+              isActive={friend.id === openedUserIdChat}
+              onOpenChat={onChatOpen}
+              friendMessageCount={
+                messagesFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+              }
+            />
+          ))}
+        </>
+      )}
+      {Boolean(anyUsers.length) && (
+        <>
+          <Text className={cn('Title')} children={'Чаты не с друзьями'} size={'1'} />
+          {anyUsers.map((friend) => (
+            <Friend
+              key={friend.id}
+              friend={friend}
+              onOpenChat={onChatOpen}
+              isActive={friend.id === openedUserIdChat}
+              friendMessageCount={
+                messagesNotFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+              }
+            />
+          ))}
+        </>
+      )}
+    </div>
   )
 })

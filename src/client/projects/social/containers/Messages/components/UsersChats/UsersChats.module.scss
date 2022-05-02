@@ -3,6 +3,10 @@
 @import "../../../App/App.module";
 
 .UsersChats {
+  @include flex($direction: column);
+  overflow-y: auto;
+  max-height: 90%;
+
   &-Title {
     @include flex($justify: flex-end);
     color: var(--SOCIAL--Color-Text-System);

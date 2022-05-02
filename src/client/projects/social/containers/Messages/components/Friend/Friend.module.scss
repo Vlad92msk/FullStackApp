@@ -4,10 +4,17 @@
 
 .Friend {
   @include flex($justify: space-between, $align-items: center);
+  padding: $componentPadding;
+
+  &--active {
+    background: var(--SOCIAL--Color-Text-System);
+    border-radius: $borderRadiusCard;
+  }
 
   &-UserName {
     @include textEllipsis;
     width: clamp(100px, 12vw, rem(200)) !important;
+    text-align: left;
   }
 
   &-CountMessage {
@@ -20,6 +27,10 @@
     color: var(--SOCIAL--Color-Text-System);
     cursor: pointer;
     flex: 1 1;
+
+    &--active {
+      color: var(--SOCIAL--Color-Text-Main);
+    }
   }
 
   &-CountMessageIcon {

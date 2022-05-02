@@ -1,0 +1,23 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.OpenChatButton {
+  @include flex($justify: center, $align-items: center);
+  position: absolute;
+  bottom: 10vh;
+  right: 0;
+  padding: rem(16);
+  border: rem(1) solid var(--Color-BluePrimrose--30);
+  z-index: 1;
+  background: var(--SOCIAL--Background-Card-Opacity);
+
+  &-Icon {
+    fill: var(--Color-BluePrimrose--30);
+  }
+
+  &-Count {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(10);
+  }
+}

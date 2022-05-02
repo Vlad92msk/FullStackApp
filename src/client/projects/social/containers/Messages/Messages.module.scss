@@ -6,9 +6,10 @@
   @include wh(80vw, 80vh);
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: rem(80) 35% auto;
+  grid-auto-columns: rem(120) 35% auto;
 
   &-LeftMenu {
+    @include flex($direction: column, $align-items: center);
     padding: $componentPadding;
     height: inherit;
   }
@@ -29,25 +30,5 @@
     padding: rem(5);
     background: var(--SOCIAL--Background-Chat-Message);
     border-radius: rem(5);
-  }
-
-  &-Chat {
-    @include flex($justify: center, $align-items: center);
-    position: absolute;
-    bottom: 10vh;
-    right: 0;
-    padding: rem(16);
-    border: rem(1) solid var(--Color-BluePrimrose--30);
-    z-index: 1;
-    background: var(--SOCIAL--Background-Card-Opacity);
-  }
-
-  &-ChatIcon {
-    fill: var(--Color-BluePrimrose--30);
-  }
-
-  &-ChatCount {
-    color: var(--SOCIAL--Color-Text-System);
-    margin-left: rem(10);
   }
 }

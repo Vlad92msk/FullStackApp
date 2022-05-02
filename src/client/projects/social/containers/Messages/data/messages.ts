@@ -42,5 +42,85 @@ export const MESSAGES: Message[] = [
     massage: 'text',
     smile: null,
     attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
+  },
+  {
+    messageId: 'djtyj-ytj-jjjjyu-jhger-jtdv',
+    dateCreate: new Date(),
+    dateSeen: null,
+    fromUserId: 2,
+    toUserId: 1,
+    massage: 'text',
+    smile: null,
+    attachments: []
   }
 ]

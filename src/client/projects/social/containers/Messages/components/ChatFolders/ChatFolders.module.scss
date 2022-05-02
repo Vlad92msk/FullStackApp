@@ -1,0 +1,24 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.ChatFolders {
+  @include flex($direction: column, $align-items: center, $justify: center);
+  border-radius: $borderRadiusCard;
+  margin: rem(5) 0;
+  padding: rem(5);
+  transition: background .5s;
+
+  &--active {
+    background: var(--SOCIAL--Color-Text-System);
+    transition: background .5s;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-System);
+
+    &--active {
+      color: var(--SOCIAL--Color-Text-Main);
+    }
+  }
+}
