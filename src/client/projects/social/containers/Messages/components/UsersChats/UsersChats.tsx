@@ -8,7 +8,9 @@ import {
   useMessageStateValue,
   useUseMessageStateChange
 } from '@client/projects/social/containers/Messages/useMessageState'
-import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
+import {
+  useUserMenuState,
+} from '@client/projects/social/containers/UserMenu/useUserMenuState'
 import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
 import { FoldersChat } from '@client/projects/social/containers/Messages/data/foldersChats'
 import { Message } from '@client/projects/social/containers/UserMenu/data/messages'
@@ -26,10 +28,7 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
   const messageNotFromFriends = useMessageStateValue<Message[]>('messageNotFromFriends')
   const messageFromFriends = useMessageStateValue<Message[]>('messageFromFriends')
 
-  const friends = useUserMenuStateValue<UserType[]>('friends')
-  const currenUser = useUserMenuStateValue<UserType>('currenUser')
-
-console.log('11111111111', 11111111111)
+  const { friends, currenUser } = useUserMenuState()
   const [currentFriends, setCurrentFriends] = useState<UserType[]>([])
   const [currentNotFriends, setCurrentNotFriends] = useState<UserType[]>([])
 

@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react'
-import { BehaviorSubject, scan, shareReplay, startWith } from 'rxjs'
-import lodash from 'lodash'
+import { BehaviorSubject, Observable, scan, shareReplay, startWith } from 'rxjs'
+import { useObservableState } from 'observable-hooks'
 
 
 /**
  * Создание наблюдаемого потока
  * @param initial
  */
-export const createObservableStore = <T>(initial: T) => {
+export const createObservableStore = <T>(initial: T):Observable<T> => {
   const stream$ = new BehaviorSubject<T>(initial)
-  stream$.pipe(
+  return stream$.pipe(
     startWith({ ...initial }),
     scan((state, payload) => ({ ...state, ...payload }), undefined),
     shareReplay(1)
   )
-  return stream$
 }
 
 /**
@@ -22,21 +20,6 @@ export const createObservableStore = <T>(initial: T) => {
  * @param stream$
  * @param initial
  */
-export const useCreateObservableStore = <T>(stream$: BehaviorSubject<T>, initial?: any): T => {
-  const [store, setStore] = useState<T>(initial)
-  const [prev, setPrev] = useState<T>(initial)
-
-  useEffect(() => {
-    const a = stream$.subscribe(v => {
-      /**
-       * FIXME: мб это не надо
-       */
-      if (lodash.isEqual(prev, v)) return
-      setStore(prev => ({ ...prev, ...v }))
-      setPrev(v)
-    })
-    return () => a.unsubscribe()
-  }, [initial, stream$, prev])
-
-  return store
+export const useCreateObservableStore = <T>(stream$: Observable<T>, initial?: T): T => {
+  return useObservableState(stream$, initial)
 }

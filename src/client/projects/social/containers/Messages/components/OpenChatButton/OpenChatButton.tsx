@@ -19,4 +19,4 @@ export const OpenChatButton: React.FC<OpenChatButtonProps> = React.memo((props) 
       <Text className={cn('Count')} children={messageCount} size={'7'} />
     </ButtonBox>
   )
-})
+}, (a, b) => a.messageCount === b.messageCount)

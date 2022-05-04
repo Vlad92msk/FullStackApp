@@ -17,10 +17,11 @@ const cn = makeCn('ChatFolders', styles)
 type ChatFoldersProps = {}
 export const ChatFolders: React.FC<ChatFoldersProps> = React.memo((props) => {
   const setMessageState = useUseMessageStateChange(message$)
+  // const { folders, openFolderId } = useContextMessageState()
   const openFolderId = useMessageStateValue<number>('openFolderId')
   const folders = useMessageStateValue<FoldersChat[]>('folders')
 
-console.log('2222', openFolderId, folders)
+  console.log('2222', openFolderId, folders)
   const handleChangeFolder = useCallback((folderId: number) => {
     setMessageState({
       openFolderId: openFolderId === folderId ? null : folderId

@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { createContext, useContextSelector } from "use-context-selector";
+import { createContext, useContextSelector } from 'use-context-selector'
 
 import { FoldersChat } from '@client/projects/social/containers/Messages/data/foldersChats'
 import { Message } from '@client/projects/social/containers/UserMenu/data/messages'
@@ -40,7 +40,6 @@ export const message$ = createObservableStore<UseMessageState>(initial)
  * Состояние в целом
  */
 export const useMessageState = () => useCreateObservableStore(message$, initial)
-
 /**
  * Вызов изменения
  * @param stream$
