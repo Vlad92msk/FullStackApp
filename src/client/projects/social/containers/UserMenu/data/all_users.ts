@@ -84,7 +84,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 10,
-    name: 'name5',
+    name: 'name10',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -94,7 +94,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 11,
-    name: 'name6',
+    name: 'name11',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -104,7 +104,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 12,
-    name: 'name7',
+    name: 'name12',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -114,7 +114,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 13,
-    name: 'name8',
+    name: 'name13',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -124,7 +124,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 14,
-    name: 'name9',
+    name: 'name14',
     family: 'falily',
     img: 'ava',
     status: UserStatus.OFFLINE,
@@ -134,7 +134,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 15,
-    name: 'name10',
+    name: 'name15',
     family: 'falily',
     img: 'ava',
     status: UserStatus.OFFLINE,
@@ -142,12 +142,9 @@ export const ALL_USERS: UserType[] = [
     hashName: 'dwed',
     friends: [1, 3, 6]
   },
-
-
-
   {
     id: 16,
-    name: 'name5',
+    name: 'name16',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -157,7 +154,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 17,
-    name: 'name6',
+    name: 'name17',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -167,7 +164,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 18,
-    name: 'name7',
+    name: 'name18',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -177,7 +174,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 19,
-    name: 'name8',
+    name: 'name19',
     family: 'falily',
     img: 'ava',
     status: UserStatus.ONLINE,
@@ -187,7 +184,7 @@ export const ALL_USERS: UserType[] = [
   },
   {
     id: 20,
-    name: 'name9',
+    name: 'name20',
     family: 'falily',
     img: 'ava',
     status: UserStatus.OFFLINE,
@@ -196,8 +193,8 @@ export const ALL_USERS: UserType[] = [
     friends: [1, 3, 6]
   },
   {
-    id: 15,
-    name: 'name10',
+    id: 21,
+    name: 'name21',
     family: 'falily',
     img: 'ava',
     status: UserStatus.OFFLINE,

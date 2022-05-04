@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
@@ -7,9 +7,13 @@ import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Button } from '@client_shared/components/Button'
 import { IconButton } from '@client_shared/components/IconButton'
 import { StatisticButtons } from '../UserMenu/components'
-import { USER } from '../App/data/user'
+import { USER, UserType } from '../App/data/user'
 import { ALL_USERS } from './data/all_users'
-import { MESSAGES } from './data/messages'
+import {
+  userMenuContainer$,
+  useUserMenuStateChange,
+  useUserMenuStateValue
+} from '@client/projects/social/containers/UserMenu/useUserMenuState'
 import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
@@ -18,51 +22,26 @@ const cn = makeCn('UserMenu', styles)
 export const UserMenu: React.FC = React.memo(() => {
   const {
     img,
-    description,
     family,
     hashName,
     name,
     id,
     friends: userFriends,
-    professionalInformation,
-    baseInformation
+    status
   } = USER
 
+  const friends = useUserMenuStateValue<UserType[]>('friends')
+  const setUserMenuState = useUserMenuStateChange(userMenuContainer$)
 
-  /**
-   * Только друзья
-   */
-  const friends = ALL_USERS.filter(({ id }) => userFriends.includes(id))
-
-  /**
-   * Возможеные друзья
-   */
-  const possibleFriendsIds = Array.from(
-    new Set(friends.reduce((acc, item) => [...acc, ...item.friends], []))
-  ).filter((id: number) => !userFriends.includes(id))
-  const possibleFriends = possibleFriendsIds.map((possibleUserId) => ALL_USERS.find(({ id }) => id === possibleUserId)).filter(Boolean)
-
-  /**
-   * Все сообщения мне
-   */
-  const messages = MESSAGES
-  .filter(({ toUserId }) => toUserId === id)
-  .filter(({ dateSeen }) => !Boolean(dateSeen))
-
-  /**
-   * Сообщения не от друзей
-   */
-  const messagesNotFromFriends = messages.filter(({ fromUserId }) => !userFriends.includes(fromUserId))
-  /**
-   * Сообщения от друзей
-   */
-  const messagesFromFriends = messages.filter(({ fromUserId }) => userFriends.includes(fromUserId))
-
-  /**
-   * Пользователи, которые прислали мне сообщения НО не находятся в друзьях
-   */
-  const a = messagesNotFromFriends.map(({ fromUserId }) => fromUserId)
-  const usersNotFriends = ALL_USERS.filter(({ id }) => a.includes(id))
+  useEffect(() => {
+    setUserMenuState({
+      friends: ALL_USERS.filter(({ id }) => userFriends.includes(id)),
+      possibleFriends: Array.from(
+        new Set(friends.reduce((acc, item) => [...acc, ...item.friends], []))
+      ).map((possibleUserId) => ALL_USERS.find(({ id }) => id === possibleUserId)).filter(Boolean),
+      currenUser: USER
+    })
+  }, [userFriends])
 
 
   return (
@@ -75,8 +54,8 @@ export const UserMenu: React.FC = React.memo(() => {
           </div>
           <div className={cn('Row')}>
             <ButtonBox className={cn('UserStatus')}>
-              <span className={cn('UserStatusDot', { status: 'online' })} />
-              <Text className={cn('UserStatusText')} children={'Online'} size={'2'} />
+              <span className={cn('UserStatusDot', { status })} />
+              <Text className={cn('UserStatusText')} children={status} size={'2'} />
             </ButtonBox>
             <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
           </div>
@@ -93,7 +72,7 @@ export const UserMenu: React.FC = React.memo(() => {
           </Button>
         </div>)}
       </div>
-      <StatisticButtons friends={friends} />
+      <StatisticButtons />
     </section>
   )
 })

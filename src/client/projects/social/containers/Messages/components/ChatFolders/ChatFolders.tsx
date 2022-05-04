@@ -1,37 +1,40 @@
-import React, { useCallback, useState } from 'react'
-import lodash from 'lodash'
+import React, { useCallback } from 'react'
 
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
-import { FoldersChat } from '../../data/foldersChats'
+import {
+  message$,
+  useMessageStateValue,
+  useUseMessageStateChange
+} from '@client/projects/social/containers/Messages/useMessageState'
 import styles from './ChatFolders.module.scss'
+import { FoldersChat } from '@client/projects/social/containers/Messages/data/foldersChats'
 
 const cn = makeCn('ChatFolders', styles)
 
-type ChatFoldersProps = {
-  folders: FoldersChat[]
-  onChoiceFolder: (folderId: number) => void
-}
+type ChatFoldersProps = {}
 export const ChatFolders: React.FC<ChatFoldersProps> = React.memo((props) => {
-  const { folders, onChoiceFolder } = props
-  if (!folders) return
+  const setMessageState = useUseMessageStateChange(message$)
+  const openFolderId = useMessageStateValue<number>('openFolderId')
+  const folders = useMessageStateValue<FoldersChat[]>('folders')
 
-  const [choiceFolder, setChoiceFolder] = useState(null)
+console.log('2222', openFolderId, folders)
   const handleChangeFolder = useCallback((folderId: number) => {
-    setChoiceFolder(choiceFolder === folderId ? null : folderId)
-    onChoiceFolder(choiceFolder === folderId ? null : folderId)
-  }, [choiceFolder])
+    setMessageState({
+      openFolderId: openFolderId === folderId ? null : folderId
+    })
+  }, [openFolderId])
 
   return (
     <>
       {folders?.map(({ id, name }) => (
-        <ButtonBox key={id} className={cn({ active: choiceFolder === id })} onClick={() => handleChangeFolder(id)}>
+        <ButtonBox key={id} className={cn({ active: openFolderId === id })} onClick={() => handleChangeFolder(id)}>
           <Icon icon={'folder'} size={'small'} fill={'oldAsphalt40'} />
-          <Text className={cn('Title', { active: choiceFolder === id })} size={'2'} color={'note'} children={name} />
+          <Text className={cn('Title', { active: openFolderId === id })} size={'2'} color={'note'} children={name} />
         </ButtonBox>
       ))}
     </>
   )
-}, (a, b) => !Boolean(lodash.xor(a.folders, b.folders).length))
+})

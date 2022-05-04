@@ -6,8 +6,13 @@ import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 
 import { UserType } from '../../../App/data/user'
-import styles from './Friend.module.scss'
 import { ButtonBox } from '@client/shared/components/ButtonBox'
+import {
+  message$,
+  useMessageStateValue,
+  useUseMessageStateChange
+} from '@client/projects/social/containers/Messages/useMessageState'
+import styles from './Friend.module.scss'
 
 const cn = makeCn('Friend', styles)
 
@@ -15,23 +20,21 @@ const cn = makeCn('Friend', styles)
 export type FriendComponent = {
   friend: UserType
   friendMessageCount: number
-  onOpenChat: (userId: number) => void
-  isActive: boolean
 }
 export const Friend: React.FC<FriendComponent> = React.memo((props) => {
   const {
-    onOpenChat,
     friendMessageCount,
     friend: { status, name, id, img, family },
-    isActive
   } = props
+  const setMessageState = useUseMessageStateChange(message$)
+  const openUserIcChat = useMessageStateValue<number>('openUserIcChat')
 
   const handleOpenChat = useCallback(() => {
-    onOpenChat(id)
+    setMessageState({openUserIcChat: id})
   }, [id])
 
   return (
-    <ButtonBox className={cn({ active: isActive })} onClick={handleOpenChat}>
+    <ButtonBox className={cn({ active: openUserIcChat === id })} onClick={handleOpenChat}>
       <UserSmall
         img={img}
         className={cn('UserImgName')}
@@ -40,7 +43,7 @@ export const Friend: React.FC<FriendComponent> = React.memo((props) => {
         status={status}
       />
       <div className={cn('CountMessage')}>
-        <Text className={cn('CountMessageButton', { active: isActive })} size={'1'}>
+        <Text className={cn('CountMessageButton', { active: openUserIcChat === id })} size={'1'}>
           {friendMessageCount || null}
           <Icon className={cn('CountMessageIcon')} size={'small'} icon={'message-square'} />
         </Text>

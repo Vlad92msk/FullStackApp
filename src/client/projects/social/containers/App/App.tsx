@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Section } from '@client_shared/components/Section'
 import { makeCn } from '@client_shared/utils'
+import { MessageContextProvider } from '../Messages/context/MessageContextProvider'
+import { UserMenuContextProvider } from '../UserMenu/context/UserMenuContextProvider'
 import { NavBar } from '../NavBar'
 import { UserMenu } from '../UserMenu'
 import { Messages } from '../Messages'
@@ -25,11 +27,15 @@ export const App: React.FC<AppType> = React.memo(({ children, pathname }) => {
           }
         }}>
         <div className={cn('Gap')} />
-        <UserMenu />
+        <UserMenuContextProvider>
+          <UserMenu />
+        </UserMenuContextProvider>
         {children}
         <NavBar pathname={pathname} />
       </Section>
-      <Messages />
+      <MessageContextProvider>
+        <Messages />
+      </MessageContextProvider>
     </>
   )
 }, (a, b) => a.pathname === b.pathname)

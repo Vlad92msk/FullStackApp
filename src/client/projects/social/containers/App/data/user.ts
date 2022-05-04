@@ -21,7 +21,7 @@ export const USER: UserType = {
   professionalInformation: {
     profession: 'frontend-developer',
     experience: '2 года'
-  }
+  },
 }
 
 

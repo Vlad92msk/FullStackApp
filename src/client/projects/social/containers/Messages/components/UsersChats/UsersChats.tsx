@@ -1,53 +1,112 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Friend } from '@client/projects/social/containers/Messages/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { UserType } from '../../../App/data/user'
-import { Message } from '../../data/messages'
+import {
+  message$,
+  useMessageStateValue,
+  useUseMessageStateChange
+} from '@client/projects/social/containers/Messages/useMessageState'
+import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
+import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
+import { FoldersChat } from '@client/projects/social/containers/Messages/data/foldersChats'
+import { Message } from '@client/projects/social/containers/UserMenu/data/messages'
 import styles from './UsersChats.module.scss'
 
 const cn = makeCn('UsersChats', styles)
 
-type UsersChatsProps = {
-  friends: UserType[]
-  anyUsers: UserType[]
-  messagesFromFriends: Message[]
-  messagesNotFromFriends: Message[]
-  onChatOpen: (userId: number) => void
-  openedUserIdChat: number
-}
+type UsersChatsProps = {}
 export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
-  const { anyUsers, friends, messagesFromFriends, messagesNotFromFriends, onChatOpen, openedUserIdChat } = props
+  const setMessageState = useUseMessageStateChange(message$)
+
+  const openFolderId = useMessageStateValue<number>('openFolderId')
+  const folders = useMessageStateValue<FoldersChat[]>('folders')
+  const newMessages = useMessageStateValue<Message[]>('newMessages')
+  const messageNotFromFriends = useMessageStateValue<Message[]>('messageNotFromFriends')
+  const messageFromFriends = useMessageStateValue<Message[]>('messageFromFriends')
+
+  const friends = useUserMenuStateValue<UserType[]>('friends')
+  const currenUser = useUserMenuStateValue<UserType>('currenUser')
+
+console.log('11111111111', 11111111111)
+  const [currentFriends, setCurrentFriends] = useState<UserType[]>([])
+  const [currentNotFriends, setCurrentNotFriends] = useState<UserType[]>([])
+
+  /**
+   * Раскидываем сообщения - От друзей/нет от друзей
+   */
+  useEffect(() => {
+    setMessageState({
+      messageFromFriends: newMessages?.filter(({ fromUserId }) => currenUser?.friends.includes(fromUserId)) || []
+    })
+  }, [newMessages, currenUser?.friends])
+  useEffect(() => {
+    setMessageState({
+      messageNotFromFriends: newMessages?.filter(({ fromUserId }) => !currenUser?.friends.includes(fromUserId)) || []
+    })
+  }, [newMessages, currenUser?.friends])
+
+  /**
+   * Формируем массив друзей отфильтрованных по выбранной папке
+   */
+  useEffect(() => {
+    if (openFolderId) {
+      /**
+       * Достаем ID пользователей в папках
+       */
+      const usersInFolders = folders?.find(({ id }) => id === openFolderId)?.users
+      /**
+       * Создаем список пользователей данной папки
+       */
+      setCurrentFriends(friends.filter(({ id }) => usersInFolders?.includes(id)))
+    } else {
+      /**
+       * Если ID папки нет - показываем всех пользователей
+       */
+      setCurrentFriends(friends)
+    }
+  }, [openFolderId, folders, friends])
+
+  /**
+   * Формируем массив пользователей приславших сообщения, но не в друзьях
+   */
+  useEffect(() => {
+    const aaa = messageNotFromFriends.map(({ fromUserId }) => fromUserId)
+    setCurrentNotFriends(ALL_USERS.filter(({ id }) => aaa.includes(id)))
+  }, [messageNotFromFriends, ALL_USERS])
+
+  useEffect(() => {
+    setMessageState({
+      currentUsersChats: [...currentFriends, ...currentNotFriends]
+    })
+  }, [currentFriends, currentNotFriends])
 
   return (
     <div className={cn()}>
-      {Boolean(friends.length) && (
+      {Boolean(currentFriends.length) && (
         <>
           <Text className={cn('Title')} children={'Чаты с друзьями'} size={'1'} />
-          {friends.map((friend) => (
+          {currentFriends.map((friend) => (
             <Friend
               key={friend.id}
               friend={friend}
-              isActive={friend.id === openedUserIdChat}
-              onOpenChat={onChatOpen}
               friendMessageCount={
-                messagesFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                messageFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
               }
             />
           ))}
         </>
       )}
-      {Boolean(anyUsers.length) && (
+      {Boolean(currentNotFriends.length) && (
         <>
           <Text className={cn('Title')} children={'Чаты не с друзьями'} size={'1'} />
-          {anyUsers.map((friend) => (
+          {currentNotFriends.map((friend) => (
             <Friend
               key={friend.id}
               friend={friend}
-              onOpenChat={onChatOpen}
-              isActive={friend.id === openedUserIdChat}
               friendMessageCount={
-                messagesNotFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+                messageNotFromFriends.filter(({ dateSeen }) => !Boolean(dateSeen)).length
               }
             />
           ))}

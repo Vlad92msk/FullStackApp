@@ -7,16 +7,16 @@ import { makeCn } from '@client_shared/utils'
 import { Popup } from '@client_shared/components/Popup'
 import { useAnchorElState, useBooleanState } from '@client_shared/hooks'
 import { UserSmall } from '@client/projects/social/components'
-import { UserType } from '../../../App/data/user'
+import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
+import { UserType } from '@client/projects/social/containers/App/data/user'
 import styles from './StatisticButtons.module.scss'
 
 const cn = makeCn('StatisticButtons', styles)
 
-type StatisticButtonsProps = {
-  friends: UserType[]
-}
+type StatisticButtonsProps = {}
 export const StatisticButtons: React.FC<StatisticButtonsProps> = React.memo((props) => {
-  const { friends } = props
+  const friends = useUserMenuStateValue<UserType[]>('friends')
+
   const [friendsRef, openAnchorFriends, closeAnchorFriends] = useAnchorElState(null)
 
   /**
@@ -62,7 +62,7 @@ export const StatisticButtons: React.FC<StatisticButtonsProps> = React.memo((pro
         onClose={closeAnchorFriends}
         placement={'right'}
       >
-        {friends.map(({ id, name, family, img, status }) => (
+        {friends?.map(({ id, name, family, img, status }) => (
           <div className={cn('UserStatus')}>
             <UserSmall key={id} img={img} userName={name + family} status={status} />
           </div>
