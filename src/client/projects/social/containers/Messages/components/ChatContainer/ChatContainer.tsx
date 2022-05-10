@@ -45,7 +45,6 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
   const onCreateMessage = useCallback((newMessage: Message) => {
-    console.log('newMessage', newMessage)
     sendNewMessage({message: newMessage, prev: allMessages, userId: 1})
     setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
   }, [chatMassageContainer, allMessages])

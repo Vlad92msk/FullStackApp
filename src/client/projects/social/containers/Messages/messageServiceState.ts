@@ -6,11 +6,7 @@ import lodash from 'lodash'
 
 import { FoldersChat } from '@client/projects/social/containers/Messages/data/foldersChats'
 import { Message } from '@client/projects/social/containers/UserMenu/data/messages'
-import { UserType } from '@client/projects/social/containers/App/data/user'
-import { createObservableStore } from '@client/shared/hooks/useCreateObservableStore'
 import { DefaultObject } from '@client/public/models/defaultObject.model'
-import { verifyAndLint } from 'next/dist/lib/verifyAndLint'
-import { useObservable } from 'rxjs-hooks'
 
 interface FoldersUI extends FoldersChat {
   friends: number[]
@@ -46,9 +42,6 @@ const initial: MessageServiceState = {
   search: ''
 }
 
-
-export const MessageContext = createContext<MessageServiceState>(initial)
-export const message$ = createObservableStore<MessageServiceState>(initial)
 
 type Payload = {
   value?: string, name?: string
@@ -186,22 +179,5 @@ export const useMessageServiceActions = <T extends keyof MessageServiceActions>(
   useContextSelector<MessageService, MessageServiceActions[T]>(MessageContext1, (store) => store.messageActions[action])
 )
 
-
-/**
- * Вызов изменения
- * @param stream$
- */
-export const useUseMessageStateChange = (stream$): (newVal: MessageServiceState) => void => (
-  useCallback((newVal: MessageServiceState) => stream$.next(newVal), [stream$])
-)
-
-/**
- * Получение значения из контекста
- * @param where
- */
-// @ts-ignore
-export const useMessageStateValue = <T>(where?: keyof MessageServiceState): T => (
-  useContextSelector<MessageServiceState, MessageServiceState[keyof MessageServiceState]>(MessageContext, s => s[where])
-)
 
 
