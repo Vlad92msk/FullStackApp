@@ -8,36 +8,36 @@ import { scrollToCurrent } from '@client_shared/utils/scrollToParent'
 import { ChatMassage, MASSAGE_FROM, CreateChatMessage } from '../'
 import { Message } from '../../data/messages'
 import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
-import { useMessageStateValue } from '@client/projects/social/containers/Messages/useMessageState'
+import {
+  useMessageServiceActions,
+  useMessageServiceStore,
+} from '@client/projects/social/containers/Messages/messageServiceState'
 import { UserType } from '@client/projects/social/containers/App/data/user'
 import styles from './ChatContainer.module.scss'
+import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
 
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
 export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const currenUser = useUserMenuStateValue<UserType>('currenUser')
-
-  const openUserIcChat = useMessageStateValue<number>('openUserIcChat')
-  const currentUsersChats = useMessageStateValue<UserType[]>('currentUsersChats')
-  const messageFromFriends = useMessageStateValue<Message[]>('messageFromFriends')
-  const messageNotFromFriends = useMessageStateValue<Message[]>('messageNotFromFriends')
-
-  if (!openUserIcChat) return <></>
+  const openUserIdChat = useMessageServiceStore('openUserIdChat')
+  const allMessages = useMessageServiceStore('allMessages')
+  const sendNewMessage = useMessageServiceActions('sendNewMessage')
+  if (!openUserIdChat) return <></>
 
   const chatMassageContainer = useRef<HTMLDivElement>(null)
-
 
   /**
    * Локальные сообщения
    */
-  const [messages, setMessages] = useState<Message[]>([])
   useEffect(() => {
     setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
-    setMessages([...messageFromFriends, ...messageNotFromFriends].filter(({ fromUserId }) => fromUserId === openUserIcChat))
-  }, [openUserIcChat, chatMassageContainer, messageFromFriends, messageNotFromFriends])
+  }, [openUserIdChat, chatMassageContainer])
 
-  const targetUser = useMemo(() => currentUsersChats.find(({ id }) => id === openUserIcChat), [openUserIcChat])
+  const targetUser = useMemo(
+    () => ALL_USERS.find(({ id }) => id === openUserIdChat),
+    [openUserIdChat])
 
 
   /**
@@ -45,9 +45,9 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
   const onCreateMessage = useCallback((newMessage: Message) => {
-    setMessages(prev => [...prev, newMessage])
+    sendNewMessage({message: newMessage, prev: allMessages, userId: 1})
     setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
-  }, [chatMassageContainer])
+  }, [chatMassageContainer, allMessages])
 
   return (
     <div className={cn()}>
@@ -59,7 +59,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
         <IconButton icon={'headphones'} fill={'oldAsphalt50'} className={cn('Call')} />
       </div>
       <div ref={chatMassageContainer} className={cn('MainContainer')}>
-        {messages.map((message) => (
+        {(allMessages[openUserIdChat] || []).map((message) => (
           <ChatMassage
             key={message.messageId}
             isWasSeen={Boolean(message.dateSeen)}
@@ -68,7 +68,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
           />
         ))}
       </div>
-      <CreateChatMessage onSendMessage={onCreateMessage} currentUserId={currenUser?.id} targetUserId={targetUser?.id} />
+      <CreateChatMessage onSendMessage={onCreateMessage} currentUserId={1} targetUserId={targetUser?.id} />
     </div>
   )
 })

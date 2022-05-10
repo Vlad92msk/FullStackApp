@@ -29,6 +29,7 @@
   &-MainContainer {
     @include flex($direction: column);
     background: var(--SOCIAL--Background-Card-Opacity-02);
+    box-shadow: inset 0 0 rem(7) rem(2) #282b3299;
     border-radius: $borderRadiusCard;
     overflow-y: auto;
     margin-top: rem(20);

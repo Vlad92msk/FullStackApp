@@ -20,7 +20,7 @@ export interface AreaInputProps {
   placeholder?: string
   error?: any
   disabled?: boolean
-  onChange?: (value: string, name?: string) => void
+  onChange?: (payload: {value?: any, name?: string}) => void
   anchorEl?: React.Ref<any>
   icon?: IconProps
   iconClear?: IconProps
@@ -50,7 +50,10 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
   } = props
 
   const handleChange = useCallback(({ target: { value: newValue } }) => {
-      onChange(newValue, name)
+      onChange({
+        value: newValue,
+        name
+      })
   }, [name, onChange])
 
   return (

@@ -11,7 +11,6 @@ import { USER } from '../../../App/data/user'
 import { WallRecord } from '../../components'
 import { WALL_RECORDS } from '../../data/walls.data'
 import styles from './ProfileLayoutWall.module.scss'
-import { useRouter } from 'next/router'
 import { Modal } from '@client/shared/components/Modal'
 
 
@@ -44,8 +43,12 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = React.memo((pr
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const [records, setRecords] = useState(WALL_RECORDS)
-  const [newRecordText, setNewRecordText] = useState<string>('')
+  const [newRecordText, setNewRecordText1] = useState<string>('')
   const [newRecordFiles, setNewRecordFiles] = useState([])
+
+  const setNewRecordText = useCallback(({value}) => {
+    setNewRecordText1(value)
+  }, []);
 
   const handleAddRecord = useCallback(() => {
     setRecords(prev => [{

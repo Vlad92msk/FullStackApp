@@ -40,8 +40,10 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   /**
    * Текст сообщения
    */
-  const [messageInput, setMessageInput] = useState<string>('')
-
+  const [messageInput, setMessageInput1] = useState<string>('')
+  const setMessageInput = useCallback(({ value }) => {
+    setMessageInput1(value)
+  }, [])
   /**
    * Отправить сообщение
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID

@@ -6,9 +6,9 @@ import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { AreaInput } from '@client/shared/components/AreaInput'
 import { Message } from '../../data/messages'
-import styles from './CreateChatMessage.module.scss'
 import { FileUpLoad } from '@client/shared/components/FileUpLoad'
 import { InputSmiles } from '@client/shared/components/InputSmiles'
+import styles from './CreateChatMessage.module.scss'
 
 const cn = makeCn('CreateChatMessage', styles)
 
@@ -22,8 +22,11 @@ export const CreateChatMessage: React.FC<CreateChatMessageProps> = React.memo((p
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const [newRecordFiles, setNewRecordFiles] = useState([])
-  const [messageInput, setMessageInput] = useState<string>('')
+  const [messageInput, setMessageInput1] = useState<string>('')
 
+  const setMessageInput = useCallback(({ value }) => {
+    setMessageInput1(value)
+  }, [])
   /**
    * Отправить сообщение
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
@@ -39,7 +42,7 @@ export const CreateChatMessage: React.FC<CreateChatMessageProps> = React.memo((p
       massage: messageInput,
       attachments: newRecordFiles
     })
-    setMessageInput('')
+    setMessageInput({ value: '' })
     setNewRecordFiles([])
   }, [messageInput, newRecordFiles, currentUserId, targetUserId])
 
@@ -47,7 +50,7 @@ export const CreateChatMessage: React.FC<CreateChatMessageProps> = React.memo((p
     <div className={cn()}>
       <div className={cn('FileSmileRow')}>
         <FileUpLoad className={cn('File')} icon={'file-outlined'} onApply={setNewRecordFiles} />
-        <InputSmiles className={cn('Smile')} setText={setMessageInput} textAreaRef={textAreaRef} />
+        <InputSmiles className={cn('Smile')} setText={setMessageInput1} textAreaRef={textAreaRef} />
       </div>
       <AreaInput
         anchorEl={textAreaRef}
