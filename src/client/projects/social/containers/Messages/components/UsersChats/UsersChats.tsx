@@ -18,6 +18,9 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
   const allFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ friends }) => friends).flat()), [folders])
   const allNoFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ noFriends }) => noFriends).flat()), [folders])
 
+  /**
+   * Если папка выбрана - показываем чаты из нее, если нет - все чаты
+   */
   const friends = useMemo(() => folders && lodash(openFolderId ? folders[openFolderId].friends : allFriends)
     .map((id) => ALL_USERS.find(({ id: userId }) => userId === id))
     .value(),
@@ -35,11 +38,7 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
           <>
             <Text className={cn('Title')} children={openFolderId ? 'Чаты с друзьями' : 'Все чаты'} size={'1'} />
             {friends.map((friend) => (
-              <Friend
-                key={friend.id}
-                friend={friend}
-                friendMessageCount={1}
-              />
+              <Friend key={friend.id} friend={friend} />
             ))}
           </>
         )}
@@ -47,11 +46,7 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
         <>
           <Text className={cn('Title')} children={'Чаты не с друзьями'} size={'1'} />
           {noFriends.map((friend) => (
-            <Friend
-              key={friend.id}
-              friend={friend}
-              friendMessageCount={1}
-            />
+            <Friend key={friend.id} friend={friend} />
           ))}
         </>
       )}

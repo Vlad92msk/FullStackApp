@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 import { UserSmall } from '@client/projects/social/components'
 import { Text } from '@client_shared/components/Text'
@@ -18,19 +18,22 @@ const cn = makeCn('Friend', styles)
 
 export type FriendComponent = {
   friend: UserType
-  friendMessageCount: number
 }
 export const Friend: React.FC<FriendComponent> = React.memo((props) => {
   const {
-    friendMessageCount,
     friend: { status, name, id, img, family }
   } = props
+  const allMessages = useMessageServiceStore('allMessages')
   const openUserIdChat = useMessageServiceStore('openUserIdChat')
   const setOpenUserIdChat = useMessageServiceActions('openUserIdChat')
 
   const handleOpenChat = useCallback(() => {
     setOpenUserIdChat({ userId: id })
   }, [id])
+
+  const newMessageCount = useMemo(() => {
+    return allMessages[id]?.filter(({ dateSeen }) => !Boolean(dateSeen)).length
+  }, [allMessages, id])
 
   return (
     <ButtonBox className={cn({ active: openUserIdChat === id })} onClick={handleOpenChat}>
@@ -43,7 +46,7 @@ export const Friend: React.FC<FriendComponent> = React.memo((props) => {
       />
       <div className={cn('CountMessage')}>
         <Text className={cn('CountMessageButton', { active: openUserIdChat === id })} size={'1'}>
-          {friendMessageCount || null}
+          {newMessageCount}
           <Icon className={cn('CountMessageIcon')} size={'small'} icon={'message-square'} />
         </Text>
       </div>

@@ -43,7 +43,7 @@ const initial: MessageServiceState = {
   newMessages: {},
   openFolderId: null,
   openUserIdChat: 3,
-  search: '',
+  search: ''
 }
 
 
@@ -144,11 +144,18 @@ export const useMessageService = (): MessageService => {
 
   const sendNewMessage: [{ message: Message, userId: number }, MessageServiceActions['sendNewMessage']] = useObservableState((input$) => input$.pipe(
     map(({ message, prev }) => {
+      const isFirst = prev[message.toUserId]
+      const newMessage = !isFirst ? (lodash.defaults(prev, {
+        [message.toUserId]: [message]
+      })) : ({
+        [message.toUserId]: [...prev[message.toUserId], message]
+      })
+
       return complete({
         res: {
           allMessages: {
             ...prev,
-            [message.toUserId]: [...prev[message.toUserId], message]
+            ...newMessage
           }
         }
       })
