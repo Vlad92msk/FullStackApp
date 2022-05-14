@@ -1,29 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
 import { scrollToCurrent } from '@client_shared/utils/scrollToParent'
 
+
 import { ChatMassage, MASSAGE_FROM, CreateChatMessage } from '../'
+import { ALL_USERS } from '../../../UserMenu/data/all_users'
+import { useUserMenuStateValue } from '../../../UserMenu/useUserMenuState'
 import { Message } from '../../data/messages'
-import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
-import {
-  useMessageServiceActions,
-  useMessageServiceStore,
-} from '@client/projects/social/containers/Messages/messageServiceState'
 import { UserType } from '@client/projects/social/containers/App/data/user'
+import { useMessageServiceAction, useMessageServiceValue } from '../../service/MessageService'
+import { sendNewMessageS } from '../../service'
 import styles from './ChatContainer.module.scss'
-import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
+
 
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
 export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
   const currenUser = useUserMenuStateValue<UserType>('currenUser')
-  const openUserIdChat = useMessageServiceStore('openUserIdChat')
-  const allMessages = useMessageServiceStore('allMessages')
-  const sendNewMessage = useMessageServiceActions('sendNewMessage')
+
+  const openUserIdChat = useMessageServiceValue('openUserIdChat')
+  const allMessages = useMessageServiceValue('allMessages')
+  const [_, sendNewMessage] = useMessageServiceAction<'allMessages'>(sendNewMessageS)
+
   if (!openUserIdChat) return <></>
 
   const chatMassageContainer = useRef<HTMLDivElement>(null)
@@ -45,7 +47,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
   const onCreateMessage = useCallback((newMessage: Message) => {
-    sendNewMessage({message: newMessage, prev: allMessages, userId: 1})
+    sendNewMessage({ message: newMessage, prev: allMessages, userId: 1 })
     setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
   }, [chatMassageContainer, allMessages])
 

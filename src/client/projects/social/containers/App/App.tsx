@@ -2,14 +2,10 @@ import React from 'react'
 
 import { Section } from '@client_shared/components/Section'
 import { makeCn } from '@client_shared/utils'
-import {
-  // MessageContextProvider,
-  MessageContextProvider1
-} from '../Messages/context/MessageContextProvider'
+import { MessageService } from '../Messages/service/MessageService'
 import { UserMenuContextProvider } from '../UserMenu/context/UserMenuContextProvider'
 import { NavBar } from '../NavBar'
 import { UserMenu } from '../UserMenu'
-import { Messages } from '../Messages'
 import styles from './App.module.scss'
 
 const cn = makeCn('Application', styles)
@@ -36,9 +32,7 @@ export const App: React.FC<AppType> = React.memo(({ children, pathname }) => {
         {children}
         <NavBar pathname={pathname} />
       </Section>
-        <MessageContextProvider1>
-          <Messages />
-      </MessageContextProvider1>
+      <MessageService />
     </>
   )
 }, (a, b) => a.pathname === b.pathname)

@@ -4,16 +4,17 @@ import lodash from 'lodash'
 import { Friend } from '@client/projects/social/containers/Messages/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
-import { useMessageServiceStore } from '@client/projects/social/containers/Messages/messageServiceState'
 import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
+import { useMessageServiceValue } from '../../service/MessageService'
 import styles from './UsersChats.module.scss'
+
 
 const cn = makeCn('UsersChats', styles)
 
 type UsersChatsProps = {}
 export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
-  const folders = useMessageServiceStore('folders')
-  const openFolderId = useMessageServiceStore('openFolderId')
+  const openFolderId = useMessageServiceValue('openFolderId')
+  const folders = useMessageServiceValue('folders')
 
   const allFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ friends }) => friends).flat()), [folders])
   const allNoFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ noFriends }) => noFriends).flat()), [folders])

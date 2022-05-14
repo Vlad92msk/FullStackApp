@@ -1,37 +1,34 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 
 import { makeCn } from '@client_shared/utils'
 import { Modal } from '@client_shared/components/Modal'
 import { useBooleanState } from '@client_shared/hooks'
 import { AreaInput } from '@client_shared/components/AreaInput'
+
+import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
+import { useUserMenuState } from '../UserMenu/useUserMenuState'
+import { useMessageServiceAction } from './service/MessageService'
+import { allMessagesApi, foldersApi, searchUsersInFolders } from './service'
 import { MESSAGES } from './data/messages'
 import { FOLDERS_CHATS } from './data/foldersChats'
-import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
-import {
-  useMessageServiceActions, useMessageServiceStore
-} from '@client/projects/social/containers/Messages/messageServiceState'
-import { USER_ID } from '@client/projects/social/containers/NavBar'
+import { USER_ID } from '../NavBar'
 import styles from './Messages.module.scss'
-import { useUserMenuState } from '@client/projects/social/containers/UserMenu/useUserMenuState'
 
 const cn = makeCn('Messages', styles)
 
 
 export const Messages: React.FC = React.memo(() => {
-  const searchInput = useMessageServiceStore('search')
 
-  const setSearch = useMessageServiceActions('searchInput')
-  const setMessage = useMessageServiceActions('allMessagesApi')
-  const setFolders = useMessageServiceActions('foldersApi')
+  const [searchInput, setSearch] = useMessageServiceAction<'search'>(searchUsersInFolders)
+  const [folders, setFolders] = useMessageServiceAction<'folders'>(foldersApi)
+  const [allMessages, setMessage] = useMessageServiceAction<'allMessages'>(allMessagesApi)
 
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const { friends, currenUser } = useUserMenuState()
 
   useEffect(() => {
-    setTimeout(() => {
-      setMessage({ allMessages: MESSAGES, userId: USER_ID })
-    }, 200)
-  }, [])
+    setMessage({ allMessages: MESSAGES, userId: USER_ID })
+  }, [MESSAGES, USER_ID])
 
   useEffect(() => {
     if (currenUser?.friends.length) {
@@ -62,7 +59,7 @@ export const Messages: React.FC = React.memo(() => {
             }}
             onIconClear={() => setSearch({ value: '' })}
             onChange={setSearch}
-            value={searchInput}
+            value={searchInput.search}
           />
           <UsersChats />
         </div>
