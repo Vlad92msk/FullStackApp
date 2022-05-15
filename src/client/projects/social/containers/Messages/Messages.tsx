@@ -8,10 +8,14 @@ import { AreaInput } from '@client_shared/components/AreaInput'
 import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
 import { useUserMenuState } from '../UserMenu/useUserMenuState'
 import { useMessageServiceAction } from './service/MessageService'
-import { allMessagesApi, foldersApi, searchUsersInFolders } from './service'
 import { MESSAGES } from './data/messages'
 import { FOLDERS_CHATS } from './data/foldersChats'
 import { USER_ID } from '../NavBar'
+import {
+  INJECT__FOLDERS_API__PAYLOAD,
+  INJECT__MESSAGE_API__PAYLOAD,
+  SEARCH__CHAT__PAYLOAD
+} from './service'
 import styles from './Messages.module.scss'
 
 const cn = makeCn('Messages', styles)
@@ -19,10 +23,9 @@ const cn = makeCn('Messages', styles)
 
 export const Messages: React.FC = React.memo(() => {
 
-  const [searchInput, setSearch] = useMessageServiceAction<'search'>(searchUsersInFolders)
-  const [folders, setFolders] = useMessageServiceAction<'folders'>(foldersApi)
-  const [allMessages, setMessage] = useMessageServiceAction<'allMessages'>(allMessagesApi)
-
+  const [searchInput, setSearch] = useMessageServiceAction<'search', SEARCH__CHAT__PAYLOAD>('SEARCH__CHAT')
+  const [folders, setFolders] = useMessageServiceAction<'folders', INJECT__FOLDERS_API__PAYLOAD>('INJECT__FOLDERS_API')
+  const [allMessages, setMessage] = useMessageServiceAction<'allMessages', INJECT__MESSAGE_API__PAYLOAD>('INJECT__MESSAGE_API')
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const { friends, currenUser } = useUserMenuState()
 

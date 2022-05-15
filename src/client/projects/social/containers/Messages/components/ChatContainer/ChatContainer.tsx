@@ -12,19 +12,19 @@ import { useUserMenuStateValue } from '../../../UserMenu/useUserMenuState'
 import { Message } from '../../data/messages'
 import { UserType } from '@client/projects/social/containers/App/data/user'
 import { useMessageServiceAction, useMessageServiceValue } from '../../service/MessageService'
-import { sendNewMessageS } from '../../service'
+import { messageService, SET__NEW_MESSAGE_PUSH__PAYLOAD } from '../../service'
 import styles from './ChatContainer.module.scss'
 
 
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
-export const ChatContainer: React.FC<ChatType> = React.memo((props) => {
+export const ChatContainer: React.FC<ChatType> = React.memo(() => {
   const currenUser = useUserMenuStateValue<UserType>('currenUser')
 
   const openUserIdChat = useMessageServiceValue('openUserIdChat')
   const allMessages = useMessageServiceValue('allMessages')
-  const [_, sendNewMessage] = useMessageServiceAction<'allMessages'>(sendNewMessageS)
+  const [_, sendNewMessage] = useMessageServiceAction<'allMessages', SET__NEW_MESSAGE_PUSH__PAYLOAD>('SET__NEW_MESSAGE_PUSH')
 
   if (!openUserIdChat) return <></>
 

@@ -4,6 +4,7 @@ import { classnames } from '@bem-react/classnames'
 import { makeCn } from '@client_shared/utils'
 import { Text, TextSize } from '@client_shared/components/Text'
 import { Icon, IconProps } from '@client/shared/components/Icon'
+import { InputPayload } from '@client/public/models/inputPayload.model'
 import styles from './AreaInput.module.scss'
 
 
@@ -20,7 +21,7 @@ export interface AreaInputProps {
   placeholder?: string
   error?: any
   disabled?: boolean
-  onChange?: (payload: {value?: any, name?: string}) => void
+  onChange?: (payload: InputPayload) => void
   anchorEl?: React.Ref<any>
   icon?: IconProps
   iconClear?: IconProps
@@ -46,20 +47,21 @@ export const AreaInput: React.FunctionComponent<AreaInputProps> = React.memo((pr
     as,
     inputClassName,
     iconClear,
-    onIconClear,
+    onIconClear
   } = props
 
   const handleChange = useCallback(({ target: { value: newValue } }) => {
-      onChange({
-        value: newValue,
-        name
-      })
+    onChange({
+      value: newValue,
+      name
+    })
   }, [name, onChange])
 
   return (
     <div className={classnames(cn(), className)} style={{ ...style, alignItems: icon && 'center' }}>
       {icon && (<Icon {...icon} />)}
-      {(iconClear && value?.length) ? (<Icon className={cn('IconClear')} {...iconClear} onClick={onIconClear} />) : null}
+      {(iconClear && value?.length) ? (
+        <Icon className={cn('IconClear')} {...iconClear} onClick={onIconClear} />) : null}
       <Text
         as={as}
         anchorEl={anchorEl}

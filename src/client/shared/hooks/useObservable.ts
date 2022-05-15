@@ -6,22 +6,23 @@ import {
   isObservable, map,
   Observable, of, pairwise, pipe,
   Subject, switchMap,
-  tap,
+  tap
 } from 'rxjs'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 /**
  * TODO: Типизировать нормально
  */
-export type Callback = (s$: Observable<any>, state?: Observable<any>) => Observable<any>
+export type Callback<P, R> = (s$: Observable<P>, state?: Observable<any>) => Observable<R>
 
-type UseObservable = <R, P> (
-  callback: Callback,
-  options?: {
-    initial?: any
-    subscribers$?: BehaviorSubject<any>[]
-    inject?: any
-  }
+export type UseObservableOptions<I = any, S = any, N = any> = {
+  initial?: I
+  subscribers$?: BehaviorSubject<S>[]
+  inject?: N
+}
+type UseObservable = <P, R> (
+  callback: Callback<P, R>,
+  options?: UseObservableOptions
 ) => [R, (v: P) => void]
 export const useObservable: UseObservable = (callback, { subscribers$, initial, inject }) => {
   const [state, state$] = useCreateState(initial)
@@ -96,7 +97,7 @@ export const useCreateActionStore = (): [Subject<any>, (...args: any[]) => void]
   return [actions$, dispatch]
 }
 
-export const useCreateNewState = (callback: Callback, actions$, inject: BehaviorSubject<any>): Observable<any> => {
+export const useCreateNewState = <P, R>(callback: Callback<P, R>, actions$, inject: Observable<any>): Observable<any> => {
   const epicRef = useRef<(s$: Observable<any>, props) => Observable<any>>(callback)
   // новое наблюдаемое состояние (поток - по сути Колбэк который мы передаем)
   return useMemo(() => {

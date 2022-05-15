@@ -8,7 +8,7 @@ import { ButtonBox } from '@client_shared/components/ButtonBox'
 
 import { UserType } from '../../../App/data/user'
 import { useMessageServiceAction, useMessageServiceValue } from '../../service/MessageService'
-import { openUserIdChatS } from '../../service'
+import { messageService, SET__OPEN_CHAT_ID__PAYLOAD } from '../../service'
 import styles from './Friend.module.scss'
 
 
@@ -22,9 +22,10 @@ export const Friend: React.FC<FriendComponent> = React.memo((props) => {
   const {
     friend: { status, name, id, img, family }
   } = props
+
   const allMessages = useMessageServiceValue('allMessages')
   const openUserIdChat = useMessageServiceValue('openUserIdChat')
-  const [_, setOpenUserIdChat] = useMessageServiceAction<'openUserIdChat'>(openUserIdChatS)
+  const [_, setOpenUserIdChat] = useMessageServiceAction<'openUserIdChat', SET__OPEN_CHAT_ID__PAYLOAD>('SET__OPEN_CHAT_ID')
 
   const handleOpenChat = useCallback(() => {
     setOpenUserIdChat({ userId: id })
