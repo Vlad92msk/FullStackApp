@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, tap } from 'rxjs'
 import { createContext, useContextSelector } from 'use-context-selector'
 
 import { useObservable } from '@client_shared/hooks/useObservable'

@@ -15,6 +15,7 @@ type UsersChatsProps = {}
 export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
   const openFolderId = useMessageServiceValue('openFolderId')
   const folders = useMessageServiceValue('folders')
+  const search = useMessageServiceValue('search')
 
   const allFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ friends }) => friends).flat()), [folders])
   const allNoFriends = useMemo(() => lodash.uniq(Object.values(folders).map(({ noFriends }) => noFriends).flat()), [folders])
@@ -24,8 +25,9 @@ export const UsersChats: React.FC<UsersChatsProps> = React.memo((props) => {
    */
   const friends = useMemo(() => folders && lodash(openFolderId ? folders[openFolderId].friends : allFriends)
     .map((id) => ALL_USERS.find(({ id: userId }) => userId === id))
+    .filter(({ name, family }) => `${name + family}`.includes(search))
     .value(),
-    [folders, openFolderId, allFriends])
+    [folders, openFolderId, allFriends, search])
 
   const noFriends = useMemo(() => lodash(ALL_USERS)
     .filter(({ id }) => allNoFriends.includes(id))
