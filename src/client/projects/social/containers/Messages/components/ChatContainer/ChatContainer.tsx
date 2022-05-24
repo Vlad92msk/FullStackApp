@@ -11,8 +11,7 @@ import { ALL_USERS } from '../../../UserMenu/data/all_users'
 import { useUserMenuStateValue } from '../../../UserMenu/useUserMenuState'
 import { Message } from '../../data/messages'
 import { UserType } from '@client/projects/social/containers/App/data/user'
-import { useMessageServiceAction, useMessageServiceValue } from '../../service/MessageService'
-import { messageService, SET__NEW_MESSAGE_PUSH__PAYLOAD } from '../../service'
+import { messageActions, useMessageServiceAction, useMessageServiceValue } from '../../service'
 import styles from './ChatContainer.module.scss'
 
 
@@ -24,7 +23,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo(() => {
 
   const openUserIdChat = useMessageServiceValue('openUserIdChat')
   const allMessages = useMessageServiceValue('allMessages')
-  const [_, sendNewMessage] = useMessageServiceAction<'allMessages', SET__NEW_MESSAGE_PUSH__PAYLOAD>('SET__NEW_MESSAGE_PUSH')
+  const sendNewMessage = useMessageServiceAction()
 
   if (!openUserIdChat) return <></>
 
@@ -47,7 +46,11 @@ export const ChatContainer: React.FC<ChatType> = React.memo(() => {
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
   const onCreateMessage = useCallback((newMessage: Message) => {
-    sendNewMessage({ message: newMessage, prev: allMessages, userId: 1 })
+    sendNewMessage(messageActions.SET__NEW_MESSAGE_PUSH({
+      message: newMessage,
+      prev: allMessages,
+      userId: 1
+    }))
     setTimeout(() => scrollToCurrent(chatMassageContainer), 200)
   }, [chatMassageContainer, allMessages])
 

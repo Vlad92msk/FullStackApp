@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Section } from '@client_shared/components/Section'
 import { makeCn } from '@client_shared/utils'
-import { MessageService } from '../Messages/service/MessageService'
+import { MessageService } from '../Messages/service'
 import { UserMenuContextProvider } from '../UserMenu/context/UserMenuContextProvider'
 import { NavBar } from '../NavBar'
 import { UserMenu } from '../UserMenu'

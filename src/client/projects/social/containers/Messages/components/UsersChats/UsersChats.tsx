@@ -5,7 +5,7 @@ import { Friend } from '@client/projects/social/containers/Messages/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { ALL_USERS } from '@client/projects/social/containers/UserMenu/data/all_users'
-import { useMessageServiceValue } from '../../service/MessageService'
+import { useMessageServiceValue } from '../../service/'
 import styles from './UsersChats.module.scss'
 
 

@@ -4,8 +4,7 @@ import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
-import { useMessageServiceAction, useMessageServiceValue } from '../../service/MessageService'
-import { SET__OPEN_FOLDER_ID__PAYLOAD } from '../../service'
+import { messageActions, useMessageServiceAction, useMessageServiceValue } from '../../service'
 import styles from './ChatFolders.module.scss'
 
 
@@ -14,11 +13,12 @@ const cn = makeCn('ChatFolders', styles)
 type ChatFoldersProps = {}
 export const ChatFolders: React.FC<ChatFoldersProps> = React.memo((props) => {
   const folders = useMessageServiceValue('folders')
+  const openFolderId = useMessageServiceValue('openFolderId')
 
-  const [{ openFolderId }, setOpenFolderId] = useMessageServiceAction<'openFolderId', SET__OPEN_FOLDER_ID__PAYLOAD>('SET__OPEN_FOLDER_ID')
+  const setOpenFolderId = useMessageServiceAction()
 
   const handleChangeFolder = useCallback((folderId: number) => {
-    setOpenFolderId(openFolderId === folderId ? null : folderId)
+    setOpenFolderId(messageActions.SET__OPEN_FOLDER_ID(openFolderId === folderId ? null : folderId))
   }, [openFolderId])
 
   return (
