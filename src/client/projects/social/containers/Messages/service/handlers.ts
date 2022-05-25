@@ -39,10 +39,13 @@ export type MessageActionsKeys = keyof MessageActions
 
 type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
 export const handlers: HandlersType = {
-  SEARCH__CHAT: (state, { value }) => ({
-    ...state,
-    search: value
-  }),
+  SEARCH__CHAT: (state, { value }) => {
+    console.log('state', state)
+    return ({
+      ...state,
+      search: value
+    })
+  },
   INJECT__FOLDERS_API: (state, { folders, friends, userId }) => ({
     ...state,
     folders: lodash(folders.filter(({ ownerId }) => ownerId === userId))

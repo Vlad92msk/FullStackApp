@@ -1,5 +1,5 @@
-import React from 'react'
-import { shareReplay } from 'rxjs'
+import React, { useCallback, useState } from 'react'
+import { distinct, distinctUntilChanged, filter, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs'
 import { useObservableState } from 'observable-hooks'
 
 import { distinctUntilPropertyChanged, createReducer } from '@client_shared/hooks/useObservable'
@@ -10,6 +10,7 @@ import { FoldersChat } from '../../Messages/data/foldersChats'
 import { Messages } from '../Messages'
 import { handlers } from './handlers'
 import { MessageContext } from './context'
+import { useEventCallback } from 'rxjs-hooks'
 
 
 export interface FoldersUI extends FoldersChat {
@@ -39,14 +40,16 @@ const initial: MessageServiceState = {
 
 
 export const MessageService: React.FC = () => {
-  const [store, dispatch] = useObservableState(
-    (action$, initialState) => action$.pipe(
-      distinctUntilPropertyChanged(),
-      createReducer(reducer(handlers), initialState),
-      shareReplay()
-    ),
+  const [dispatch, store] = useEventCallback(
+    (event$, state$) =>
+      event$.pipe(
+        withLatestFrom(state$),
+        switchMap(([action, state]) => of(action).pipe(
+          createReducer(reducer(handlers), state),
+        ))
+      ),
     initial
-  )
+  );
 
   return (
     <MessageContext.Provider value={{ store, dispatch }}>
