@@ -63,8 +63,8 @@ export const StatisticButtons: React.FC<StatisticButtonsProps> = React.memo((pro
         placement={'right'}
       >
         {friends?.map(({ id, name, family, img, status }) => (
-          <div className={cn('UserStatus')}>
-            <UserSmall key={id} img={img} userName={name + family} status={status} />
+          <div key={id} className={cn('UserStatus')}>
+            <UserSmall img={img} userName={name + family} status={status} />
           </div>
         ))}
       </Popup>
