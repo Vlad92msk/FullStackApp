@@ -2,7 +2,12 @@ import React from 'react'
 import { catchError, from, map, of, pipe, switchMap, tap, withLatestFrom } from 'rxjs'
 import { useEventCallback } from 'rxjs-hooks'
 
-import { applyEffects, applyReactions, applyReducer } from '@client_shared/hooks/useObservable'
+import {
+  applyEffects,
+  applyReactions,
+  applyReducer,
+  distinctUntilPropertyChanged
+} from '@client_shared/hooks/useObservable'
 import { reducer } from '@client_shared/utils/reducer'
 import { DefaultObject } from '@client/public/models/defaultObject.model'
 import { Message } from '../../UserMenu/data/messages'
@@ -46,6 +51,7 @@ export const MessageService: React.FC = () => {
     (event$, state$) =>
       event$.pipe(
         withLatestFrom(state$),
+        distinctUntilPropertyChanged(),
         switchMap(([action, state]) => of(action).pipe(
           applyReducer(reducer(handlers), state),
           applyEffects(action),

@@ -137,17 +137,9 @@ export const useCreateProps = (props = {}) => {
 
 export const distinctUntilPropertyChanged = () =>
   pipe(
-    switchMap((v, i) => (i === 0 ? of({}, v) : of(v))),
-    pairwise(), // эмитит предыдущее и текущее значения как массив.
-    filter(([prev, obj]) =>
-      typeof obj === 'object'
-        ? !(
-          Object.keys(prev).every((k) => prev[k] === obj[k]) &&
-          Object.keys(obj).every((k) => prev[k] === obj[k])
-        )
-        : prev !== obj
-    ),
-    map(([, v]) => v)
+    distinctUntilChanged(([prev], [next]) =>
+      (prev.type === next.type) && (JSON.stringify(prev.payload) === JSON.stringify(next.payload))
+    )
   )
 
 const Log = {
