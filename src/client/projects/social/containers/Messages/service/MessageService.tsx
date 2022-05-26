@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react'
-import { distinct, distinctUntilChanged, filter, of, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs'
-import { useObservableState } from 'observable-hooks'
+import React from 'react'
+import { catchError, from, map, of, pipe, switchMap, tap, withLatestFrom } from 'rxjs'
+import { useEventCallback } from 'rxjs-hooks'
 
-import { distinctUntilPropertyChanged, createReducer } from '@client_shared/hooks/useObservable'
+import { applyEffects, applyReactions, applyReducer } from '@client_shared/hooks/useObservable'
 import { reducer } from '@client_shared/utils/reducer'
 import { DefaultObject } from '@client/public/models/defaultObject.model'
 import { Message } from '../../UserMenu/data/messages'
@@ -10,7 +10,7 @@ import { FoldersChat } from '../../Messages/data/foldersChats'
 import { Messages } from '../Messages'
 import { handlers } from './handlers'
 import { MessageContext } from './context'
-import { useEventCallback } from 'rxjs-hooks'
+import { reactions } from './reactions'
 
 
 export interface FoldersUI extends FoldersChat {
@@ -26,6 +26,7 @@ export type MessageServiceState = {
   openFolderId?: number
   openUserIdChat?: number
   search?: string
+  pokemons?: any
 }
 
 
@@ -35,21 +36,24 @@ const initial: MessageServiceState = {
   newMessages: {},
   openFolderId: null,
   openUserIdChat: 3,
-  search: ''
+  search: '',
+  pokemons: null
 }
 
 
 export const MessageService: React.FC = () => {
-  const [dispatch, store] = useEventCallback(
+  const [dispatch, store] = useEventCallback<any, MessageServiceState>(
     (event$, state$) =>
       event$.pipe(
         withLatestFrom(state$),
         switchMap(([action, state]) => of(action).pipe(
-          createReducer(reducer(handlers), state),
+          applyReducer(reducer(handlers), state),
+          applyEffects(action),
+          applyReactions(action, reactions)
         ))
       ),
     initial
-  );
+  )
 
   return (
     <MessageContext.Provider value={{ store, dispatch }}>

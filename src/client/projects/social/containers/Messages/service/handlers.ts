@@ -39,13 +39,10 @@ export type MessageActionsKeys = keyof MessageActions
 
 type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
 export const handlers: HandlersType = {
-  SEARCH__CHAT: (state, { value }) => {
-    console.log('state', state)
-    return ({
-      ...state,
-      search: value
-    })
-  },
+  SEARCH__CHAT: (state, { value }) => ({
+    ...state,
+    search: value
+  }),
   INJECT__FOLDERS_API: (state, { folders, friends, userId }) => ({
     ...state,
     folders: lodash(folders.filter(({ ownerId }) => ownerId === userId))
@@ -64,11 +61,6 @@ export const handlers: HandlersType = {
       allMessages: lodash(res.allMessages)
       .groupBy(({ fromUserId }) => fromUserId)
       .value(),
-
-      newMessages: lodash(res.allMessages)
-      .filter(({ dateSeen }) => !Boolean(dateSeen))
-      .groupBy(({ fromUserId }) => fromUserId)
-      .value()
     })
   },
   SET__OPEN_FOLDER_ID: (state, payload) => ({

@@ -187,15 +187,53 @@ const Log = {
 const log = (color, text) => {
   console.log(`${color}%s${Log.reset}`, ...text)
 }
-export const createReducer = (reducer, initial) => pipe(
+export const applyReducer = (reducer, initial) => pipe(
   tap(({ type, payload }) => {
     console.group(`MessageService [type - ${type}]`)
     log(Log.fg.blue, ['payload', payload])
     log(Log.fg.magenta, ['prev state', initial])
   }),
   scan(reducer, initial),
-  tap((result) => {
-    log(Log.fg.green, ['next state', result])
-    console.groupEnd()
-  })
+  tap((result) => log(Log.fg.green, ['next state', result]))
 )
+
+
+export const applyEffects = ({ type, payload }) => pipe(
+  switchMap((result: any) =>
+    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+    .then(response => response.json())
+    .then(response => {
+      log(Log.fg.yellow, ['effect', {
+        description: 'Получаем покемонов',
+        endpoint: 'https://pokeapi.co/api/v2/pokemon/ditto',
+        response: response
+      }])
+
+      return ({
+        ...result,
+        pokemons: response
+      })
+    })
+  )
+)
+
+
+export const applyReactions = ({ type, payload }, reactionsMap) =>
+  pipe(
+    map((result) =>
+      [...reactionsMap].reduce((acc, [key, { description, fn }]) => {
+        if (key.includes(type)) {
+          log(Log.fg.cyan, ['apply reactions', {
+            description,
+            result: fn(acc)
+          }])
+          return fn(acc)
+        } else {
+          return acc
+        }
+      }, result)
+    ),
+    tap((result) => {
+      log(Log.fg.red, ['final', result])
+      console.groupEnd()
+    }))
