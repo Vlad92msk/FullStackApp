@@ -125,7 +125,7 @@ export const useCreateProps = (props = {}) => {
   if (!props$ref.current) {
     // @ts-ignore
     props$ref.current = new BehaviorSubject(props).pipe(
-      distinctUntilPropertyChanged()
+      // distinctUntilPropertyChanged()
     )
   }
   const props$ = props$ref.current
@@ -133,99 +133,3 @@ export const useCreateProps = (props = {}) => {
 
   return useMemo(() => props$, [props$])
 }
-
-
-export const distinctUntilPropertyChanged = () =>
-  pipe(
-    distinctUntilChanged(([prev], [next]) =>
-      (prev.type === next.type) && (JSON.stringify(prev.payload) === JSON.stringify(next.payload))
-    )
-  )
-
-const Log = {
-  reset: '\x1b[0m',
-  bright: '\x1b[1m',
-  dim: '\x1b[2m',
-  underscore: '\x1b[4m',
-  blink: '\x1b[5m',
-  reverse: '\x1b[7m',
-  hidden: '\x1b[8m',
-  // Foreground (text) colors
-  fg: {
-    black: '\x1b[30m',
-    red: '\x1b[1;31m',
-    green: '\x1b[1;32m',
-    yellow: '\x1b[1;33m',
-    blue: '\x1b[1;34m',
-    magenta: '\x1b[1;35m',
-    cyan: '\x1b[36m',
-    white: '\x1b[37m',
-    crimson: '\x1b[38m'
-  },
-  // Background colors
-  bg: {
-    black: '\x1b[40m',
-    red: '\x1b[41m',
-    green: '\x1b[42m',
-    yellow: '\x1b[43m',
-    blue: '\x1b[44m',
-    magenta: '\x1b[45m',
-    cyan: '\x1b[46m',
-    white: '\x1b[47m',
-    crimson: '\x1b[48m'
-  }
-}
-// https://simplernerd.com/js-console-colors/
-const log = (color, text) => {
-  console.log(`${color}%s${Log.reset}`, ...text)
-}
-export const applyReducer = (reducer, initial) => pipe(
-  tap(({ type, payload }) => {
-    console.group(`MessageService [type - ${type}]`)
-    log(Log.fg.blue, ['payload', payload])
-    log(Log.fg.magenta, ['prev state', initial])
-  }),
-  scan(reducer, initial),
-  tap((result) => log(Log.fg.green, ['next state', result]))
-)
-
-
-export const applyEffects = ({ type, payload }) => pipe(
-  switchMap((result: any) =>
-    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-    .then(response => response.json())
-    .then(response => {
-      log(Log.fg.yellow, ['effect', {
-        description: 'Получаем покемонов',
-        endpoint: 'https://pokeapi.co/api/v2/pokemon/ditto',
-        response: response
-      }])
-
-      return ({
-        ...result,
-        pokemons: response
-      })
-    })
-  )
-)
-
-
-export const applyReactions = ({ type, payload }, reactionsMap) =>
-  pipe(
-    map((result) =>
-      [...reactionsMap].reduce((acc, [key, { description, fn }]) => {
-        if (key.includes(type)) {
-          log(Log.fg.cyan, ['apply reactions', {
-            description,
-            result: fn(acc)
-          }])
-          return fn(acc)
-        } else {
-          return acc
-        }
-      }, result)
-    ),
-    tap((result) => {
-      log(Log.fg.red, ['final', result])
-      console.groupEnd()
-    }))

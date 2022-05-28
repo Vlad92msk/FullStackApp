@@ -19,3 +19,5 @@ export const reactions = new Map([
     }
   ]
 ])
+
+export type Reactions = typeof reactions

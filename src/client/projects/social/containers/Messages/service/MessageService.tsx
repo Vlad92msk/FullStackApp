@@ -1,21 +1,12 @@
-import React from 'react'
-import { catchError, from, map, of, pipe, switchMap, tap, withLatestFrom } from 'rxjs'
-import { useEventCallback } from 'rxjs-hooks'
-
-import {
-  applyEffects,
-  applyReactions,
-  applyReducer,
-  distinctUntilPropertyChanged
-} from '@client_shared/hooks/useObservable'
-import { reducer } from '@client_shared/utils/reducer'
+import React, { useEffect } from 'react'
 import { DefaultObject } from '@client/public/models/defaultObject.model'
 import { Message } from '../../UserMenu/data/messages'
 import { FoldersChat } from '../../Messages/data/foldersChats'
 import { Messages } from '../Messages'
-import { handlers } from './handlers'
+import { handlers, HandlersType } from './handlers'
 import { MessageContext } from './context'
-import { reactions } from './reactions'
+import { Reactions, reactions } from './reactions'
+import { useCreateService } from '@client/shared/hooks/useCreateService'
 
 
 export interface FoldersUI extends FoldersChat {
@@ -47,19 +38,11 @@ const initial: MessageServiceState = {
 
 
 export const MessageService: React.FC = () => {
-  const [dispatch, store] = useEventCallback<any, MessageServiceState>(
-    (event$, state$) =>
-      event$.pipe(
-        withLatestFrom(state$),
-        distinctUntilPropertyChanged(),
-        switchMap(([action, state]) => of(action).pipe(
-          applyReducer(reducer(handlers), state),
-          applyEffects(action),
-          applyReactions(action, reactions)
-        ))
-      ),
+  const [dispatch, store] = useCreateService<MessageServiceState, HandlersType, Reactions>({
+    handlers,
+    reactions,
     initial
-  )
+  })
 
   return (
     <MessageContext.Provider value={{ store, dispatch }}>

@@ -37,7 +37,7 @@ export type MessageActions = typeof messageActions
 export type MessageActionsKeys = keyof MessageActions
 
 
-type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
+export type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
 export const handlers: HandlersType = {
   SEARCH__CHAT: (state, { value }) => ({
     ...state,

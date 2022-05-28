@@ -1,48 +1,98 @@
-import { distinctUntilChanged, map, Observable, of, scan, share, switchMap, tap } from 'rxjs'
-import React, { useEffect } from 'react'
-import { distinctUntilPropertyChanged, UseObservableOptions } from '@client_shared/hooks/useObservable'
+import { useEventCallback } from 'rxjs-hooks'
+import { distinctUntilChanged, map, of, pipe, scan, switchMap, tap, withLatestFrom } from 'rxjs'
+import { reducer } from '../utils/reducer'
+import { LogColors, log } from '../utils/logColors'
 
-export const useCreateService = <S>(
-  store$: Observable<S>,
-  store: S,
-  setStore: React.Dispatch<React.SetStateAction<S>>
-) => {
-  useEffect(() => {
-    const result = store$.pipe(
-      distinctUntilChanged(),
-      distinctUntilPropertyChanged(),
-      /**
-       * Обновляем данные в сторе
-       */
-      tap((v: S) => setStore(prev => ({ ...prev, ...v }))),
-      /**
-       * Возвращаем те данные, что вернул эффект
-       * для того, чтобы в кортеже возвращать [результат, сетРезультат]
-       * а не весь Стор
-       */
-      switchMap((payload) => of(payload).pipe(
-        scan((acc, item) => ({ ...acc, ...item }), store)
-      )),
-      /**
-       * Хз - надо это или нет
-       */
-      share()
-    ).subscribe(v => v)
+/**
+ * TODO типизировать
+ */
+type CreateService<S, A, R> = {
+  initial: S
+  handlers: A
+  reactions: R
+}
+export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
+  const { initial, reactions, handlers } = props
 
-    return () => result.unsubscribe()
-  }, [store$])
+  return useEventCallback<any, S>(
+    (event$, state$) =>
+      event$.pipe(
+        withLatestFrom(state$),
+        distinctUntilPropertyChanged(),
+        switchMap(([action, state]) => of(action).pipe(
+          applyReducer(reducer(handlers), state),
+          // applyEffects(action),
+          applyReactions(action, reactions)
+        ))
+      ),
+    initial
+  )
 }
 
-export type ServicePick<S, T extends keyof S> = Pick<S, T>
+/**
+ * Не пускает поток дальше если предыдущий и текущий Type и Payload равны
+ */
+export const distinctUntilPropertyChanged = () =>
+  pipe(
+    distinctUntilChanged(([prev], [next]) =>
+      (prev.type === next.type) && (JSON.stringify(prev.payload) === JSON.stringify(next.payload))
+    )
+  )
 
 /**
- * S - Стор
- * P - Payload
- * R - Response
+ * Меняет Стейт по Payload
  */
-export type ServiceAction<S, P, R extends keyof S> = (payload: Observable<P>, options?: UseObservableOptions) => Observable<ServicePick<S, R>>
+export const applyReducer = (reducer, initial) => pipe(
+  tap(({ type, payload }) => {
+    console.group(`MessageService [type - ${type}]`)
+    log(LogColors.fg.blue, ['payload', payload])
+    log(LogColors.fg.magenta, ['prev state', initial])
+  }),
+  scan(reducer, initial),
+  tap((result) => log(LogColors.fg.green, ['next state', result]))
+)
 
 /**
- * Получение типов из аргументов функции
+ * Вызывает методы
  */
-type ArgumentTypes<F extends Function> = F extends ({ ...args }: infer A) => any ? A : never;
+export const applyEffects = ({ type, payload }) => pipe(
+  switchMap((result: any) =>
+    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+    .then(response => response.json())
+    .then(response => {
+      log(LogColors.fg.yellow, ['effect', {
+        description: 'Получаем покемонов',
+        endpoint: 'https://pokeapi.co/api/v2/pokemon/ditto',
+        response: response
+      }])
+
+      return ({
+        ...result,
+        pokemons: response
+      })
+    })
+  )
+)
+
+/**
+ * Реакции на те или иные события связанные с изменение Стора
+ */
+export const applyReactions = ({ type, payload }, reactionsMap) =>
+  pipe(
+    map((result) =>
+      [...reactionsMap].reduce((acc, [key, { description, fn }]) => {
+        if (key.includes(type)) {
+          log(LogColors.fg.cyan, ['apply reactions', {
+            description,
+            result: fn(acc)
+          }])
+          return fn(acc)
+        } else {
+          return acc
+        }
+      }, result)
+    ),
+    tap((result) => {
+      log(LogColors.fg.red, ['final', result])
+      console.groupEnd()
+    }))
