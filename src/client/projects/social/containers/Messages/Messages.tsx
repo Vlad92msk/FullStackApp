@@ -11,18 +11,18 @@ import { useUserMenuState } from '../UserMenu/useUserMenuState'
 import { MESSAGES } from './data/messages'
 import { FOLDERS_CHATS } from './data/foldersChats'
 import { USER_ID } from '../NavBar'
-import { messageActions, useMessageServiceAction, useMessageServiceValue } from './service'
+import { messageActions, useServiceMessageAction, useServiceMessageSelector } from './service'
 import styles from './Messages.module.scss'
 
 const cn = makeCn('Messages', styles)
 
 
 export const Messages: React.FC = React.memo(() => {
-  const newMessages = useMessageServiceValue('newMessages')
-  const searchInput = useMessageServiceValue('search')
-  const setSearch = useMessageServiceAction()
-  const setFolders = useMessageServiceAction()
-  const setMessage = useMessageServiceAction()
+  const newMessages = useServiceMessageSelector('newMessages')
+  const searchInput = useServiceMessageSelector('search')
+  const setSearch = useServiceMessageAction()
+  const setFolders = useServiceMessageAction()
+  const setMessage = useServiceMessageAction()
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const { friends, currenUser } = useUserMenuState()
   /**

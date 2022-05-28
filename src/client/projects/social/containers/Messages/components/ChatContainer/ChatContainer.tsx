@@ -11,7 +11,7 @@ import { ALL_USERS } from '../../../UserMenu/data/all_users'
 import { useUserMenuStateValue } from '../../../UserMenu/useUserMenuState'
 import { Message } from '../../data/messages'
 import { UserType } from '@client/projects/social/containers/App/data/user'
-import { messageActions, useMessageServiceAction, useMessageServiceValue } from '../../service'
+import { messageActions, useServiceMessageAction, useServiceMessageSelector } from '../../service'
 import styles from './ChatContainer.module.scss'
 
 
@@ -21,9 +21,9 @@ export type ChatType = {}
 export const ChatContainer: React.FC<ChatType> = React.memo(() => {
   const currenUser = useUserMenuStateValue<UserType>('currenUser')
 
-  const openUserIdChat = useMessageServiceValue('openUserIdChat')
-  const allMessages = useMessageServiceValue('allMessages')
-  const sendNewMessage = useMessageServiceAction()
+  const openUserIdChat = useServiceMessageSelector('openUserIdChat')
+  const allMessages = useServiceMessageSelector('allMessages')
+  const sendNewMessage = useServiceMessageAction()
 
   if (!openUserIdChat) return <></>
 

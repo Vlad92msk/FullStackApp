@@ -1,5 +1,4 @@
-import { forIn } from 'lodash'
-import { MessageServiceState } from './ServiceMessage'
+import { UseUserMenuState } from './ServiceUserMenu'
 
 export const reactions = new Map([
   [
@@ -12,9 +11,8 @@ export const reactions = new Map([
      */
     {
       description: 'После получения/отправки сообщения определяет прочитано оно/нет',
-      fn: (result: MessageServiceState): MessageServiceState => ({
+      fn: (result: UseUserMenuState): UseUserMenuState => ({
         ...result,
-        newMessages: forIn(result.allMessages, (item) => item.filter(({ dateSeen }) => !Boolean(dateSeen)))
       })
     }
   ]

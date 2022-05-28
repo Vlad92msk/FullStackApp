@@ -1,20 +1,20 @@
 import { createContext, useContextSelector } from 'use-context-selector'
-import { MessageServiceState } from './MessageService'
+import { MessageServiceState } from './ServiceMessage'
 import { MessageActions, MessageActionsKeys } from './handlers'
 
 type MessageServiceContext = {
   store: MessageServiceState
   dispatch: MessageActions[keyof MessageActions]
 }
-export const MessageContext = createContext<MessageServiceContext>({ store: {}, dispatch: null })
+export const ContextServiceMessage = createContext<MessageServiceContext>({ store: {}, dispatch: null })
 
 
-export const useMessageServiceValue = <T extends keyof MessageServiceState>(where: T): MessageServiceState[T] => (
-  useContextSelector<MessageServiceContext, MessageServiceState[T]>(MessageContext, (store) => store.store[where])
+export const useServiceMessageSelector = <T extends keyof MessageServiceState>(where: T): MessageServiceState[T] => (
+  useContextSelector<MessageServiceContext, MessageServiceState[T]>(ContextServiceMessage, (store) => store.store[where])
 )
 /**
  * TODO: типизировать
  */
-export const useMessageServiceAction = <T extends MessageActionsKeys>() => (
-  useContextSelector<MessageServiceContext, MessageActions[MessageActionsKeys]>(MessageContext, (store) => store.dispatch)
+export const useServiceMessageAction = <T extends MessageActionsKeys>() => (
+  useContextSelector<MessageServiceContext, MessageActions[MessageActionsKeys]>(ContextServiceMessage, (store) => store.dispatch)
 )

@@ -1,7 +1,7 @@
 import lodash from 'lodash'
 import { DefaultObject } from '@client/public/models/defaultObject.model'
 import { CreateHandlers } from '@client/public/models/serviceHandler.model'
-import { MessageServiceState } from '../service/MessageService'
+import { MessageServiceState } from './ServiceMessage'
 import { FoldersChat } from '../data/foldersChats'
 import { Message } from '../data/messages'
 

@@ -4,7 +4,7 @@ import { Message } from '../../UserMenu/data/messages'
 import { FoldersChat } from '../../Messages/data/foldersChats'
 import { Messages } from '../Messages'
 import { handlers, HandlersType } from './handlers'
-import { MessageContext } from './context'
+import { ContextServiceMessage } from './context'
 import { Reactions, reactions } from './reactions'
 import { useCreateService } from '@client/shared/hooks/useCreateService'
 
@@ -37,7 +37,7 @@ const initial: MessageServiceState = {
 }
 
 
-export const MessageService: React.FC = () => {
+export const ServiceMessage: React.FC = () => {
   const [dispatch, store] = useCreateService<MessageServiceState, HandlersType, Reactions>({
     handlers,
     reactions,
@@ -45,8 +45,8 @@ export const MessageService: React.FC = () => {
   })
 
   return (
-    <MessageContext.Provider value={{ store, dispatch }}>
+    <ContextServiceMessage.Provider value={{ store, dispatch }}>
       <Messages />
-    </MessageContext.Provider>
+    </ContextServiceMessage.Provider>
   )
 }
