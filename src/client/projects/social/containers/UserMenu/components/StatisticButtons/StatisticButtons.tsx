@@ -7,15 +7,14 @@ import { makeCn } from '@client_shared/utils'
 import { Popup } from '@client_shared/components/Popup'
 import { useAnchorElState, useBooleanState } from '@client_shared/hooks'
 import { UserSmall } from '@client/projects/social/components'
-import { useUserMenuStateValue } from '@client/projects/social/containers/UserMenu/useUserMenuState'
-import { UserType } from '@client/projects/social/containers/App/data/user'
+import { useServiceUserMenuSelector } from '../../service'
 import styles from './StatisticButtons.module.scss'
 
 const cn = makeCn('StatisticButtons', styles)
 
 type StatisticButtonsProps = {}
 export const StatisticButtons: React.FC<StatisticButtonsProps> = React.memo((props) => {
-  const friends = useUserMenuStateValue<UserType[]>('friends')
+  const friends = useServiceUserMenuSelector('friends')
 
   const [friendsRef, openAnchorFriends, closeAnchorFriends] = useAnchorElState(null)
 
