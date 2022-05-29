@@ -4,29 +4,52 @@ import { CreateHandlers } from '@client/public/models/serviceHandler.model'
 import { FoldersChat } from '../data/foldersChats'
 import { Message } from '../data/messages'
 import { MessageServiceState } from './'
+import { storageGet } from '@client/shared/utils'
+import { LocalStorageEnum } from '@client/public/models/localStorage'
+import { UseUserMenuState } from '@client/projects/social/containers/UserMenu/service'
 
-
+/**
+ * Экшены
+ */
 export const messageActions = {
-  INJECT__FOLDERS_API: (payload: { folders: FoldersChat[], friends: number[], userId: number }) => ({
+  /**
+   * Добавить папки в сервис
+   */
+  INJECT__FOLDERS_API: (payload: { folders: FoldersChat[] }) => ({
     type: 'INJECT__FOLDERS_API',
     payload
   }),
+  /**
+   * Найти чат с пользователем по его имени фамилии
+   */
   SEARCH__CHAT: (payload: { value: string }) => ({
     type: 'SEARCH__CHAT',
     payload
   }),
-  INJECT__MESSAGE_API: (payload: { allMessages: Message[], userId: number }) => ({
+  /**
+   * Добавить сообщения в сервис
+   */
+  INJECT__MESSAGE_API: (payload: { allMessages: Message[] }) => ({
     type: 'INJECT__MESSAGE_API',
     payload
   }),
+  /**
+   * Открыть папку
+   */
   SET__OPEN_FOLDER_ID: (payload: number) => ({
     type: 'SET__OPEN_FOLDER_ID',
     payload
   }),
+  /**
+   * Открыть чат с пользователем
+   */
   SET__OPEN_CHAT_ID: (payload: { userId: number }) => ({
     type: 'SET__OPEN_CHAT_ID',
     payload
   }),
+  /**
+   * Отправка сообщения
+   */
   SET__NEW_MESSAGE_PUSH: (payload: { message: Message, prev: DefaultObject<Message[]>, userId: number }) => ({
     type: 'SET__NEW_MESSAGE_PUSH',
     payload
@@ -37,54 +60,66 @@ export type MessageActions = typeof messageActions
 export type MessageActionsKeys = keyof MessageActions
 
 
+
+/**
+ * Хендлеры
+ */
 export type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
-export const handlers: HandlersType = {
-  SEARCH__CHAT: (state, { value }) => ({
-    ...state,
-    search: value
-  }),
-  INJECT__FOLDERS_API: (state, { folders, friends, userId }) => ({
-    ...state,
-    folders: lodash(folders.filter(({ ownerId }) => ownerId === userId))
-    .map((folder) => ({
-      ...folder,
-      friends: lodash.intersection(friends, folder.users), // оставлет повторяющиеся значени
-      noFriends: lodash.reject(folder.users, (id) => friends.includes(id)) // возвращает массив не удовлетворяющий условию
-    }))
-    .keyBy('id')
-    .value()
-  }),
-  INJECT__MESSAGE_API: (state, { allMessages, userId }) => {
-    const res = ({ allMessages: allMessages.filter(({ toUserId }) => toUserId === userId) })
-    return ({
+export const handlers = (): HandlersType => {
+  const userInfo = storageGet(LocalStorageEnum.USER_INFO) as UseUserMenuState
+  const { currenUser } = userInfo
+
+  return ({
+    SEARCH__CHAT: (state, { value }) => ({
       ...state,
-      allMessages: lodash(res.allMessages)
-      .groupBy(({ fromUserId }) => fromUserId)
-      .value(),
-    })
-  },
-  SET__OPEN_FOLDER_ID: (state, payload) => ({
-    ...state,
-    openFolderId: payload
-  }),
-  SET__OPEN_CHAT_ID: (state, payload) => ({
-    ...state,
-    openUserIdChat: payload.userId
-  }),
-  SET__NEW_MESSAGE_PUSH: (state, { message, prev }) => {
-    const isFirst = prev[message.toUserId]
-    const newMessage = !isFirst ? (lodash.defaults(prev, {
-      [message.toUserId]: [message]
-    })) : ({
-      [message.toUserId]: [...prev[message.toUserId], message]
-    })
-    return {
+      search: value
+    }),
+    INJECT__FOLDERS_API: (state, { folders }) => ({
       ...state,
-      allMessages: {
-        ...prev,
-        ...newMessage
+      folders: lodash(folders.filter(({ ownerId }) => ownerId === currenUser.id))
+      .map((folder) => ({
+        ...folder,
+        friends: lodash.intersection(currenUser.friends, folder.users), // оставлет повторяющиеся значени
+        noFriends: lodash.reject(folder.users, (id) => currenUser.friends.includes(id)) // возвращает массив не удовлетворяющий условию
+      }))
+      .keyBy('id')
+      .value()
+    }),
+    INJECT__MESSAGE_API: (state, { allMessages }) => {
+
+      const res = ({ allMessages: allMessages.filter(({ toUserId }) => toUserId === currenUser.id) })
+      return ({
+        ...state,
+        allMessages: lodash(res.allMessages)
+        .groupBy(({ fromUserId }) => fromUserId)
+        .value()
+      })
+    },
+    SET__OPEN_FOLDER_ID: (state, payload) => ({
+      ...state,
+      openFolderId: payload
+    }),
+    SET__OPEN_CHAT_ID: (state, payload) => ({
+      ...state,
+      openUserIdChat: payload.userId
+    }),
+    SET__NEW_MESSAGE_PUSH: (state, { message, prev }) => {
+      const isFirst = prev[message.toUserId]
+      const newMessage = !isFirst ? (lodash.defaults(prev, {
+        [message.toUserId]: [message]
+      })) : ({
+        [message.toUserId]: [...prev[message.toUserId], message]
+      })
+      return {
+        ...state,
+        allMessages: {
+          ...prev,
+          ...newMessage
+        }
       }
-    }
-  },
-  DEFAULT: s => s
+    },
+    DEFAULT: s => s
+  })
 }
+
+export type HandlersTypeFunc = typeof handlers

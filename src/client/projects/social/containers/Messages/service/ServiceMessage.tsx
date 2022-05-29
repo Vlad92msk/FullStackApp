@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useCreateService } from '@client_shared/hooks/useCreateService'
 import { Message } from '../../UserMenu/data/messages'
 import { Messages } from '../Messages'
-import { handlers, HandlersType } from './handlers'
+import { handlers, HandlersTypeFunc } from './handlers'
 import { ContextServiceMessage } from './context'
 import { Reactions, reactions } from './reactions'
 import { MessageServiceState, initial } from './'
 
 
-export const ServiceMessageProvider: React.FC = () => {
-  const [dispatch, store] = useCreateService<MessageServiceState, HandlersType, Reactions>({
+export const ServiceMessage: React.FC = React.memo(() => {
+  const [dispatch, store] = useCreateService<MessageServiceState, HandlersTypeFunc, Reactions>({
     handlers,
     reactions,
     initial,
@@ -21,4 +21,4 @@ export const ServiceMessageProvider: React.FC = () => {
       <Messages />
     </ContextServiceMessage.Provider>
   )
-}
+})

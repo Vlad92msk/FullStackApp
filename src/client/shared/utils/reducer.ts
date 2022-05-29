@@ -8,7 +8,7 @@ export type Action = {
  * TODO: как нибудь типизировать
  * @param handlers
  */
-export const reducer = <H extends DefaultObject<any>>(handlers: H) => (state, { type, payload }: Action) => {
-  const handler = handlers[type] || handlers.DEFAULT
+export const reducer = <H extends () => DefaultObject<any>>(handlers: H) => (state, { type, payload }: Action) => {
+  const handler = handlers()[type] || handlers().DEFAULT
   return handler(state, payload)
 }

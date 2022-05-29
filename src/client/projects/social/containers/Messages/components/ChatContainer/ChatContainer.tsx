@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { makeCn } from '@client_shared/utils'
+import { makeCn, storageGet } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { Text } from '@client_shared/components/Text'
 import { scrollToCurrent } from '@client_shared/utils/scrollToParent'
@@ -8,18 +8,18 @@ import { scrollToCurrent } from '@client_shared/utils/scrollToParent'
 
 import { ChatMassage, MASSAGE_FROM, CreateChatMessage } from '../'
 import { ALL_USERS } from '../../../UserMenu/data/all_users'
-import { useUserMenuStateValue } from '../../../UserMenu/useUserMenuState'
 import { Message } from '../../data/messages'
-import { UserType } from '@client/projects/social/containers/App/data/user'
 import { messageActions, useServiceMessageAction, useServiceMessageSelector } from '../../service'
 import styles from './ChatContainer.module.scss'
+import { LocalStorageEnum } from '@client/public/models/localStorage'
+import { UseUserMenuState } from '@client/projects/social/containers/UserMenu/service'
 
 
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
 export const ChatContainer: React.FC<ChatType> = React.memo(() => {
-  const currenUser = useUserMenuStateValue<UserType>('currenUser')
+  const { currenUser } = storageGet(LocalStorageEnum.USER_INFO) as UseUserMenuState
 
   const openUserIdChat = useServiceMessageSelector('openUserIdChat')
   const allMessages = useServiceMessageSelector('allMessages')

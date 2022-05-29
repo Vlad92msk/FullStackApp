@@ -1,4 +1,6 @@
 import { UseUserMenuState } from './'
+import { storageSet } from '@client/shared/utils'
+import { LocalStorageEnum } from '@client/public/models/localStorage'
 
 export const reactions = new Map([
   [
@@ -10,10 +12,11 @@ export const reactions = new Map([
      * Что сделать
      */
     {
-      description: 'После получения/отправки сообщения определяет прочитано оно/нет',
-      fn: (result: UseUserMenuState): UseUserMenuState => ({
-        ...result,
-      })
+      description: 'После получения инф о пользователе - записывает ее в Локал Стор',
+      fn: (result: UseUserMenuState): UseUserMenuState => {
+        storageSet(LocalStorageEnum.USER_INFO, result)
+        return result
+      }
     }
   ]
 ])

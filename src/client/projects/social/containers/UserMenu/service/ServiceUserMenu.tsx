@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useCreateService } from '@client_shared/hooks/useCreateService'
-import { handlers, HandlersType } from './handlers'
+import { handlers, HandlersTypeFunc } from './handlers'
 import { ContextServiceUserMenu } from './context'
 import { Reactions, reactions } from './reactions'
 import { UserMenu } from '../UserMenu'
@@ -8,8 +8,8 @@ import { UseUserMenuState, initial } from './'
 
 
 
-export const ServiceUserMenuProvider: React.FC = () => {
-  const [dispatch, store] = useCreateService<UseUserMenuState, HandlersType, Reactions>({
+export const ServiceUserMenu: React.FC = () => {
+  const [dispatch, store] = useCreateService<UseUserMenuState, HandlersTypeFunc, Reactions>({
     handlers,
     reactions,
     initial,

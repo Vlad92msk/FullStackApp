@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Section } from '@client_shared/components/Section'
 import { makeCn } from '@client_shared/utils'
-import { ServiceMessageProvider } from '../Messages/service'
-import { ServiceUserMenuProvider } from '../UserMenu/service'
+import { ServiceMessage } from '../Messages/service'
+import { ServiceUserMenu } from '../UserMenu/service'
 import { NavBar } from '../NavBar'
 import styles from './App.module.scss'
 
@@ -25,11 +25,11 @@ export const App: React.FC<AppType> = React.memo(({ children, pathname }) => {
           }
         }}>
         <div className={cn('Gap')} />
-        <ServiceUserMenuProvider />
+        <ServiceUserMenu />
         {children}
         <NavBar pathname={pathname} />
       </Section>
-      <ServiceMessageProvider />
+      <ServiceMessage />
     </>
   )
 }, (a, b) => a.pathname === b.pathname)

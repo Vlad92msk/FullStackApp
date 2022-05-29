@@ -12,7 +12,7 @@ type CreateService<S, A, R> = {
   reactions: R
   serviceName: string
 }
-export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
+export const useCreateService = <S, A extends () => any, R>(props: CreateService<S, A, R>) => {
   const { initial, reactions, handlers, serviceName } = props
 
   return useEventCallback<any, S>(

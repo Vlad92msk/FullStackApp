@@ -35,19 +35,16 @@ export const Messages: React.FC = React.memo(() => {
   useEffect(() => {
     setTimeout(() => dispatch(messageActions.INJECT__MESSAGE_API({
       allMessages: MESSAGES,
-      userId: USER_ID
     })), 200)
-  }, [MESSAGES, USER_ID])
+  }, [MESSAGES])
 
   useEffect(() => {
     if (USER?.friends.length) {
       setTimeout(() => dispatch(messageActions.INJECT__FOLDERS_API({
         folders: FOLDERS_CHATS,
-        userId: USER_ID,
-        friends: USER?.friends
       })), 200)
     }
-  }, [currenUser, USER_ID, FOLDERS_CHATS])
+  }, [FOLDERS_CHATS])
 
   return (
     <>
