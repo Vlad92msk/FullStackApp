@@ -10,38 +10,33 @@ import { StatisticButtons } from '../UserMenu/components'
 import { USER, UserType } from '../App/data/user'
 import { ALL_USERS } from './data/all_users'
 import {
-  userMenuContainer$,
-  useUserMenuStateChange,
-  useUserMenuStateValue
-} from '@client/projects/social/containers/UserMenu/useUserMenuState'
+  userMenuActions,
+  useServiceUserMenuAction,
+  useServiceUserMenuSelector
+} from './service'
 import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
 
 
 export const UserMenu: React.FC = React.memo(() => {
+  const dispatch = useServiceUserMenuAction()
+
   const {
     img,
     family,
     hashName,
     name,
     id,
-    friends: userFriends,
     status
-  } = USER
-
-  const friends = useUserMenuStateValue<UserType[]>('friends')
-  const setUserMenuState = useUserMenuStateChange(userMenuContainer$)
+  } = useServiceUserMenuSelector('currenUser')
 
   useEffect(() => {
-    setUserMenuState({
-      friends: ALL_USERS.filter(({ id }) => userFriends.includes(id)),
-      possibleFriends: Array.from(
-        new Set(friends.reduce((acc, item) => [...acc, ...item.friends], []))
-      ).map((possibleUserId) => ALL_USERS.find(({ id }) => id === possibleUserId)).filter(Boolean),
-      currenUser: USER
-    })
-  }, [userFriends])
+    setTimeout(() => dispatch(userMenuActions.INJECT__USER_INFO({
+      currentUser: USER,
+      allUsers: ALL_USERS
+    })), 200)
+  }, [])
 
 
   return (

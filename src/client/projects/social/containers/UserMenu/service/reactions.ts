@@ -1,11 +1,11 @@
-import { UseUserMenuState } from './ServiceUserMenu'
+import { UseUserMenuState } from './'
 
 export const reactions = new Map([
   [
     /**
      * На какие экшены реагирует
      */
-    ['INJECT__MESSAGE_API', 'SET__NEW_MESSAGE_PUSH'],
+    ['INJECT__USER_INFO'],
     /**
      * Что сделать
      */

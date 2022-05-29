@@ -15,10 +15,10 @@ export const ChatFolders: React.FC<ChatFoldersProps> = React.memo((props) => {
   const folders = useServiceMessageSelector('folders')
   const openFolderId = useServiceMessageSelector('openFolderId')
 
-  const setOpenFolderId = useServiceMessageAction()
+  const dispatch = useServiceMessageAction()
 
   const handleChangeFolder = useCallback((folderId: number) => {
-    setOpenFolderId(messageActions.SET__OPEN_FOLDER_ID(openFolderId === folderId ? null : folderId))
+    dispatch(messageActions.SET__OPEN_FOLDER_ID(openFolderId === folderId ? null : folderId))
   }, [openFolderId])
 
   return (

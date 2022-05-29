@@ -1,30 +1,14 @@
 import React, { useEffect } from 'react'
-import { useCreateService } from '@client/shared/hooks/useCreateService'
+import { useCreateService } from '@client_shared/hooks/useCreateService'
 import { handlers, HandlersType } from './handlers'
 import { ContextServiceUserMenu } from './context'
 import { Reactions, reactions } from './reactions'
-import { UserType } from '../../App/data/user'
 import { UserMenu } from '../UserMenu'
+import { UseUserMenuState, initial } from './'
 
 
-export type UseUserMenuState = {
-  friends?: UserType[]
-  possibleFriends?: UserType[]
-  currenUser?: UserType
-  notification?: any
-  hashes?: any
-}
 
-const initial: UseUserMenuState = {
-  friends: [],
-  possibleFriends: [],
-  currenUser: null,
-  notification: null,
-  hashes: null
-}
-
-
-export const ServiceUserMenu: React.FC = () => {
+export const ServiceUserMenuProvider: React.FC = () => {
   const [dispatch, store] = useCreateService<UseUserMenuState, HandlersType, Reactions>({
     handlers,
     reactions,

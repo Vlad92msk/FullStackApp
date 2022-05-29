@@ -12,6 +12,7 @@ import { MESSAGES } from './data/messages'
 import { FOLDERS_CHATS } from './data/foldersChats'
 import { USER_ID } from '../NavBar'
 import { messageActions, useServiceMessageAction, useServiceMessageSelector } from './service'
+import { USER } from '@client/projects/social/containers/App/data/user'
 import styles from './Messages.module.scss'
 
 const cn = makeCn('Messages', styles)
@@ -20,9 +21,7 @@ const cn = makeCn('Messages', styles)
 export const Messages: React.FC = React.memo(() => {
   const newMessages = useServiceMessageSelector('newMessages')
   const searchInput = useServiceMessageSelector('search')
-  const setSearch = useServiceMessageAction()
-  const setFolders = useServiceMessageAction()
-  const setMessage = useServiceMessageAction()
+  const dispatch = useServiceMessageAction()
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
   const { friends, currenUser } = useUserMenuState()
   /**
@@ -34,21 +33,21 @@ export const Messages: React.FC = React.memo(() => {
   ), [newMessages])
 
   useEffect(() => {
-    setTimeout(() => setMessage(messageActions.INJECT__MESSAGE_API({
+    setTimeout(() => dispatch(messageActions.INJECT__MESSAGE_API({
       allMessages: MESSAGES,
       userId: USER_ID
     })), 200)
   }, [MESSAGES, USER_ID])
 
   useEffect(() => {
-    if (currenUser?.friends.length) {
-      setFolders(messageActions.INJECT__FOLDERS_API({
+    if (USER?.friends.length) {
+      setTimeout(() => dispatch(messageActions.INJECT__FOLDERS_API({
         folders: FOLDERS_CHATS,
         userId: USER_ID,
-        friends: currenUser?.friends
-      }))
+        friends: USER?.friends
+      })), 200)
     }
-  }, [currenUser])
+  }, [currenUser, USER_ID, FOLDERS_CHATS])
 
   return (
     <>
@@ -71,8 +70,8 @@ export const Messages: React.FC = React.memo(() => {
               size: 'ordinary',
               fill: 'oldAsphalt40'
             }}
-            onIconClear={() => setSearch(messageActions.SEARCH__CHAT({ value: '' }))}
-            onChange={({ value }) => setSearch(messageActions.SEARCH__CHAT({ value }))}
+            onIconClear={() => dispatch(messageActions.SEARCH__CHAT({ value: '' }))}
+            onChange={({ value }) => dispatch(messageActions.SEARCH__CHAT({ value }))}
             value={searchInput}
           />
           <UsersChats />

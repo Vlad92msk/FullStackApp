@@ -23,7 +23,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo(() => {
 
   const openUserIdChat = useServiceMessageSelector('openUserIdChat')
   const allMessages = useServiceMessageSelector('allMessages')
-  const sendNewMessage = useServiceMessageAction()
+  const dispatch = useServiceMessageAction()
 
   if (!openUserIdChat) return <></>
 
@@ -46,7 +46,7 @@ export const ChatContainer: React.FC<ChatType> = React.memo(() => {
    * TODO: на бэке дополнить пустые свойства и сгеренровать ID
    */
   const onCreateMessage = useCallback((newMessage: Message) => {
-    sendNewMessage(messageActions.SET__NEW_MESSAGE_PUSH({
+    dispatch(messageActions.SET__NEW_MESSAGE_PUSH({
       message: newMessage,
       prev: allMessages,
       userId: 1

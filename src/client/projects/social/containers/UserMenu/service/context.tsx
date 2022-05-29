@@ -1,20 +1,22 @@
 import { createContext, useContextSelector } from 'use-context-selector'
-import { UserMenuActions, UserMEnuActionsKeys } from './handlers'
-import { UseUserMenuState } from './ServiceUserMenu'
+import { Action } from '@client_shared/utils/reducer'
+import { userMenuActions } from './handlers'
+import { initial, UseUserMenuState } from './'
 
 type ContextMessageService = {
   store: UseUserMenuState
-  dispatch: UserMenuActions[keyof UserMenuActions]
+  dispatch: (action: Action) => void
 }
-export const ContextServiceUserMenu = createContext<ContextMessageService>({ store: {}, dispatch: null })
+export const ContextServiceUserMenu = createContext<ContextMessageService>({
+  store: initial,
+  dispatch: userMenuActions.DEFAULT
+})
 
 
 export const useServiceUserMenuSelector = <T extends keyof UseUserMenuState>(where: T): UseUserMenuState[T] => (
-  useContextSelector<ContextMessageService, UseUserMenuState[T]>(ContextServiceUserMenu, (store) => store.store[where])
+  useContextSelector<ContextMessageService, UseUserMenuState[T]>(ContextServiceUserMenu, ({ store }) => store[where])
 )
-/**
- * TODO: типизировать
- */
-export const useServiceUserMenuAction = <T extends UserMEnuActionsKeys>() => (
-  useContextSelector<ContextMessageService, UserMenuActions[UserMEnuActionsKeys]>(ContextServiceUserMenu, (store) => store.dispatch)
+
+export const useServiceUserMenuAction = () => (
+  useContextSelector(ContextServiceUserMenu, ({ dispatch }) => dispatch)
 )

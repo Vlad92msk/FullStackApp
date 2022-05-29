@@ -1,5 +1,5 @@
 import { forIn } from 'lodash'
-import { MessageServiceState } from './ServiceMessage'
+import { MessageServiceState } from './'
 
 export const reactions = new Map([
   [

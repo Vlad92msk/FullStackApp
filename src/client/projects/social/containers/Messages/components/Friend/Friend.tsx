@@ -24,10 +24,10 @@ export const Friend: React.FC<FriendComponent> = React.memo((props) => {
 
   const allMessages = useServiceMessageSelector('allMessages')
   const openUserIdChat = useServiceMessageSelector('openUserIdChat')
-  const setOpenUserIdChat = useServiceMessageAction()
+  const dispatch = useServiceMessageAction()
 
   const handleOpenChat = useCallback(() => {
-    setOpenUserIdChat(messageActions.SET__OPEN_CHAT_ID({ userId: id }))
+    dispatch(messageActions.SET__OPEN_CHAT_ID({ userId: id }))
   }, [id])
 
   const newMessageCount = useMemo(() => {
