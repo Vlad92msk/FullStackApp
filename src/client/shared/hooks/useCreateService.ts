@@ -10,9 +10,10 @@ type CreateService<S, A, R> = {
   initial: S
   handlers: A
   reactions: R
+  serviceName: string
 }
 export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
-  const { initial, reactions, handlers } = props
+  const { initial, reactions, handlers, serviceName } = props
 
   return useEventCallback<any, S>(
     (event$, state$) =>
@@ -20,7 +21,7 @@ export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
         withLatestFrom(state$),
         distinctUntilPropertyChanged(),
         switchMap(([action, state]) => of(action).pipe(
-          applyReducer(reducer(handlers), state),
+          applyReducer(reducer(handlers), state, serviceName),
           // applyEffects(action),
           applyReactions(action, reactions)
         ))
@@ -42,9 +43,9 @@ export const distinctUntilPropertyChanged = () =>
 /**
  * Меняет Стейт по Payload
  */
-export const applyReducer = (reducer, initial) => pipe(
+export const applyReducer = (reducer, initial, serviceName) => pipe(
   tap(({ type, payload }) => {
-    console.group(`MessageService [type - ${type}]`)
+    console.group(`${serviceName} [type - ${type}]`)
     log(LogColors.fg.blue, ['payload', payload])
     log(LogColors.fg.magenta, ['prev state', initial])
   }),

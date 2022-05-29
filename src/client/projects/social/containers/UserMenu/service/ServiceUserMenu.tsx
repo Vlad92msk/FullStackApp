@@ -28,7 +28,8 @@ export const ServiceUserMenu: React.FC = () => {
   const [dispatch, store] = useCreateService<UseUserMenuState, HandlersType, Reactions>({
     handlers,
     reactions,
-    initial
+    initial,
+    serviceName: 'UserMenu'
   })
 
   return (

@@ -41,7 +41,8 @@ export const ServiceMessage: React.FC = () => {
   const [dispatch, store] = useCreateService<MessageServiceState, HandlersType, Reactions>({
     handlers,
     reactions,
-    initial
+    initial,
+    serviceName: 'Message'
   })
 
   return (
