@@ -4,8 +4,8 @@
 
 .Profile {
   display: grid;
-  grid-template: [header-left] "prev tabButtons next" 10% [header-right]
-                 [main-left] "prev tabContent next" auto [main-right] / 7% 86% 7%;
+  grid-template: [header-left] "tabButtons" 10% [header-right]
+                 [body-left] "tabContent" auto [body-right] / 100% 100%;
   @extend %section;
   padding-right: 0;
   padding-left: 0;
@@ -36,7 +36,8 @@
 
   &-Container {
     grid-area: tabContent;
-    @include flex($direction: column);
+    display: grid;
+    grid-template: [content-left] "prev tabButtons next" [content-right] / 7% auto 7%;
     padding-bottom: rem(5);
     position: relative;
     overflow: hidden;
@@ -62,7 +63,7 @@
   &-Actions {
     @include flex($align-items: center, $direction: column);
     position: absolute;
-    bottom: 0;
+    top: 5%;
 
     & > * {
       margin: rem(5);

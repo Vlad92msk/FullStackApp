@@ -209,13 +209,6 @@ export const Profile: React.FC = React.memo(() => {
 
   return (
     <div className={cn()}>
-      <div className={cn('ChangeLayoutButtonsLeft')}>
-        <IconButton
-          icon={'chevron-left'}
-          onClick={handleChangeRight}
-          size={'medium'}
-        />
-      </div>
       <div className={cn('TabButtons')}>
         {TABS.map(({ activeLayout, title, id }) => (
           <Text
@@ -229,18 +222,25 @@ export const Profile: React.FC = React.memo(() => {
         ))}
       </div>
       <div className={cn('Container')}>
+        <div className={cn('ChangeLayoutButtonsLeft')}>
+          <IconButton
+            icon={'chevron-left'}
+            onClick={handleChangeRight}
+            size={'medium'}
+          />
+        </div>
         <AnimatePresence initial={false}>
           {tabs[query.layout as PROFILE_LAYOUTS]}
         </AnimatePresence>
-      </div>
-      <div className={cn('ChangeLayoutButtonsRight')}>
-        <IconButton
-          icon={'chevron-right'}
-          onClick={handleChangeLeft}
-          size={'medium'}
-        />
-        <div className={cn('Actions')}>
-          {tabActions[query.layout as PROFILE_LAYOUTS]}
+        <div className={cn('ChangeLayoutButtonsRight')}>
+          <IconButton
+            icon={'chevron-right'}
+            onClick={handleChangeLeft}
+            size={'medium'}
+          />
+          <div className={cn('Actions')}>
+            {tabActions[query.layout as PROFILE_LAYOUTS]}
+          </div>
         </div>
       </div>
     </div>

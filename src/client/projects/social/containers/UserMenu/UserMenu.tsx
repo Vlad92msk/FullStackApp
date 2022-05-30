@@ -7,21 +7,13 @@ import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Button } from '@client_shared/components/Button'
 import { IconButton } from '@client_shared/components/IconButton'
 import { StatisticBox } from '../UserMenu/components'
-import { USER, UserType } from '../App/data/user'
-import { ALL_USERS } from './data/all_users'
-import {
-  userMenuActions,
-  useServiceUserMenuAction,
-  useServiceUserMenuSelector
-} from './service'
+import { useServiceUserMenuSelector } from './service'
 import styles from './UserMenu.module.scss'
 
 const cn = makeCn('UserMenu', styles)
 
 
 export const UserMenu: React.FC = () => {
-  const dispatch = useServiceUserMenuAction()
-
   const {
     img,
     family,
@@ -30,13 +22,6 @@ export const UserMenu: React.FC = () => {
     id,
     status
   } = useServiceUserMenuSelector('currenUser')
-
-  useEffect(() => {
-    setTimeout(() => dispatch(userMenuActions.INJECT__USER_INFO({
-      currentUser: USER,
-      allUsers: ALL_USERS
-    })), 200)
-  }, [])
 
 
   return (
