@@ -41,20 +41,21 @@ export const UserMenu: React.FC = React.memo(() => {
 
   return (
     <section className={cn()}>
-      <div className={cn('User')}>
-        <div className={cn('UserRow')}>
-          <div className={cn('UserFIO')}>
-            <Text className={cn('UserName')} size={'8'} weight={'medium'} children={`${family} ${name}`} />
-            <IconButton fill={'oldAsphalt50'} size={'ordinary'} icon={'settings-2'} />
-          </div>
-          <div className={cn('Row')}>
-            <ButtonBox className={cn('UserStatus')}>
-              <span className={cn('UserStatusDot', { status })} />
-              <Text className={cn('UserStatusText')} children={status} size={'2'} />
-            </ButtonBox>
-            <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
-          </div>
+      <div className={cn('UserRow')}>
+        <div className={cn('UserFIO')}>
+          <Text className={cn('UserName')} size={'8'} weight={'medium'} children={`${family} ${name}`} />
+          <IconButton fill={'oldAsphalt50'} size={'ordinary'} icon={'settings-2'} />
         </div>
+        <div className={cn('Row')}>
+          <ButtonBox className={cn('UserStatus')}>
+            <span className={cn('UserStatusDot', { status })} />
+            <Text className={cn('UserStatusText')} children={status} size={'2'} />
+          </ButtonBox>
+          <Text className={cn('Hash')} size={'2'} children={`#${hashName}`} />
+        </div>
+      </div>
+      <div className={cn('User')}>
+        <StatisticBox />
         <div className={cn('Photo')}>
           <Image sizePriority={'contain'} path={{ project: 'social', img }} />
         </div>
@@ -67,7 +68,6 @@ export const UserMenu: React.FC = React.memo(() => {
           </Button>
         </div>)}
       </div>
-      <StatisticBox />
     </section>
   )
 })
