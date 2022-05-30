@@ -1,0 +1,30 @@
+@import '../../../public/styles/lib/functions';
+
+.NavigationDrawer {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+
+  &--status {
+    &_open {
+      transform: translateX(0);
+      transition: .5s;
+    }
+
+    &_close {
+      transform: translateX(-100%);
+      transition: .5s;
+    }
+  }
+
+  &-Close {
+    width: 100%;
+  }
+
+  &-Content {
+    width: 100%;
+    height: 100%;
+  }
+}

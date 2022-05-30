@@ -6,7 +6,7 @@ import { Image } from '@client_shared/components/Image'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { Button } from '@client_shared/components/Button'
 import { IconButton } from '@client_shared/components/IconButton'
-import { StatisticButtons } from '../UserMenu/components'
+import { StatisticBox } from '../UserMenu/components'
 import { USER, UserType } from '../App/data/user'
 import { ALL_USERS } from './data/all_users'
 import {
@@ -67,7 +67,7 @@ export const UserMenu: React.FC = React.memo(() => {
           </Button>
         </div>)}
       </div>
-      <StatisticButtons />
+      <StatisticBox />
     </section>
   )
 })

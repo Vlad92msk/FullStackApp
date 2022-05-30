@@ -1,6 +1,8 @@
-export * from './Friend/Friend'
-export * from './FriendsContainer/FriendsContainer'
-export * from './ChatContainer/ChatContainer'
-export * from './ChatMassage/ChatMassage'
 export * from './UserInfo/UserInfo'
-export * from './StatisticButtons/StatisticButtons'
+export * from './StatisticBox/StatisticBox'
+export * from './StatisticButton/StatisticButton'
+
+
+export * from './ButtonContacts/ButtonContacts'
+export * from './ButtonHashes/ButtonHashes'
+export * from './ButtonNotifications/ButtonNotifications'

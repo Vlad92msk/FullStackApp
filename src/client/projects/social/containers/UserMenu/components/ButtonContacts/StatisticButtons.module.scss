@@ -1,0 +1,14 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module";
+
+.ButtonContacts {
+  &-UserStatus {
+    @include flex($align-items: center);
+  }
+
+  &-Friends {
+    padding: $componentPadding;
+    background: var(--SOCIAL--Background-Card);
+  }
+}

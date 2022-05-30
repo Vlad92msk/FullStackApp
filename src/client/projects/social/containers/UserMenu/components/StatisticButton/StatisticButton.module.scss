@@ -2,7 +2,7 @@
 @use "../../../../../../public/styles/lib/mixins" as *;
 @import "../../../App/App.module";
 
-.StatisticButtons {
+.StatisticButton {
   @include flex($direction: column, $align-items: center, $justify: center);
   flex: 1 1 auto;
   height: 100%;
@@ -17,17 +17,5 @@
   &-ButtonIcon {
     fill: var(--SOCIAL--Color-Text-System);
     margin-right: rem(10);
-  }
-
-  &-FriendsPopup {
-    background: var(--SOCIAL--Background-Card-Opacity);
-    padding: $componentPadding;
-    border-radius: $borderRadiusCard;
-    overflow-y: auto;
-    max-height: 60vh;
-  }
-
-  &-UserStatus {
-    @include flex($align-items: center);
   }
 }

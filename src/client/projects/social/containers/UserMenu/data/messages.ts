@@ -1,5 +1,5 @@
-import { MassageSmileReaction } from '../components'
 import { AddedFile } from '@client/shared/hooks/useMaterialsAttach'
+import { MassageSmileReaction } from '@client/projects/social/containers/Messages/components'
 
 export type Message = {
   messageId: string

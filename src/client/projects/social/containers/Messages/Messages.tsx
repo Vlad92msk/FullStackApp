@@ -7,10 +7,8 @@ import { useBooleanState } from '@client_shared/hooks'
 import { AreaInput } from '@client_shared/components/AreaInput'
 
 import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
-import { useUserMenuState } from '../UserMenu/useUserMenuState'
 import { MESSAGES } from './data/messages'
 import { FOLDERS_CHATS } from './data/foldersChats'
-import { USER_ID } from '../NavBar'
 import { messageActions, useServiceMessageAction, useServiceMessageSelector } from './service'
 import { USER } from '@client/projects/social/containers/App/data/user'
 import styles from './Messages.module.scss'
@@ -23,7 +21,6 @@ export const Messages: React.FC = React.memo(() => {
   const searchInput = useServiceMessageSelector('search')
   const dispatch = useServiceMessageAction()
   const [isOpen, handleOpen, handleClose] = useBooleanState(false)
-  const { friends, currenUser } = useUserMenuState()
   /**
    * КОл-во новых сообщений
    */
