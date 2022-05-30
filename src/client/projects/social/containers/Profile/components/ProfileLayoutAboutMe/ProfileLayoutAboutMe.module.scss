@@ -5,12 +5,7 @@
 .ProfileLayoutAboutMe {
   @include flex($direction: column);
   @include wh(100%, 100%);
-
-  &-Information {
-    @include flex($direction: column);
-    overflow-y: auto;
-    height: 100%;
-  }
+  overflow-y: auto;
 
   &-Description {
     color: var(--SOCIAL--Color-Text-Main);

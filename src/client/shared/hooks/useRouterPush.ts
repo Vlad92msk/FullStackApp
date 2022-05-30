@@ -18,5 +18,5 @@ export const useReplaceRouterQuery = (newQuery: DefaultObject, remove?: string[]
   if (remove) {
     remove.forEach((item) => delete refQuery[item])
   }
-  return useCallback(() => replace({ query: { ...refQuery, ...newQuery } }), [query, newQuery, remove])
+  return useCallback(() => replace({ query: { ...refQuery, ...newQuery } }), [refQuery, newQuery, remove])
 }

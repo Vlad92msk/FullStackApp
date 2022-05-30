@@ -3,6 +3,8 @@
 @import "../../../App/App.module.scss";
 
 .ProfileLayoutDigital {
+  @include flex($direction: column);
+
   &-FiltersContainer {
     @include flex($justify: space-between, $align-items: center);
     margin: rem(15);

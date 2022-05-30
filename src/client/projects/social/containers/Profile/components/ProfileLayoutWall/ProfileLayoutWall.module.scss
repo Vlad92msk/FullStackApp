@@ -3,11 +3,9 @@
 @import "../../../App/App.module.scss";
 
 .ProfileLayoutWall {
-  @include flex($direction: column);
+  @include flex();
   @include wh(clamp(200px, 80%, rem(700)), 100%);
   padding-top: clamp(5px, 5vh, rem(25));
-  align-self: center;
-  justify-self: center;
 
   &-CreateRecord {
     @include flex($direction: column);
