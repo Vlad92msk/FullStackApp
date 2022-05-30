@@ -1,0 +1,15 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.InputComment {
+  @include flex($direction: column);
+
+  &-Send {
+    @extend %send_message;
+
+    &--disabled {
+      @extend %send_message--disable;
+    }
+  }
+}

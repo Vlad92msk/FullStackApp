@@ -1,3 +1,5 @@
 export * from './CommentsWrapper/CommentsWrapper'
 export * from './AnswerWrapper/AnswerWrapper'
 export * from './Actions/Actions'
+export * from './InputComment/InputComment'
+export * from './AuthorInfo/AuthorInfo'

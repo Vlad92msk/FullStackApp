@@ -5,7 +5,14 @@ import { Text } from '@client/shared/components/Text'
 import { Button } from '@client/shared/components/Button'
 import { AreaInput, UserSmall } from '@client/projects/social/components'
 import { COMMENTS, CommentType } from '../Comments/data/comments.data'
-import { Actions, AnswerWrapper, CommentsOpenType, CommentsWrapper } from '../Comments/components'
+import {
+  Actions,
+  AnswerWrapper,
+  AuthorInfo,
+  CommentsOpenType,
+  CommentsWrapper,
+  InputComment
+} from '../Comments/components'
 import styles from './Comments.module.scss'
 
 const cn = makeCn('Comments', styles)
@@ -51,12 +58,11 @@ export const Comments: React.FC<CommentsType> = React.memo(
       <CommentsWrapper width={width} isOpenComments={isOpenComments} openType={openType}>
         <div className={cn('Filter')}>filters</div>
         <div className={cn('Container')}>
-          <div className={cn('AuthorComment')}>
-            <AreaInput onChange={setComment} value={comment} />
-            <Text className={cn('Send', { disabled: !comment?.length })} children={'Отправить'} size={'1'} />
-          </div>
-          <div className={cn('CommentsArray')}
-               style={{ maxHeight: commentsHeight, overflowY: isOverflow ? 'auto' : null }}>
+          <InputComment />
+          <div
+            className={cn('CommentsArray')}
+            style={{ maxHeight: commentsHeight, overflowY: isOverflow ? 'auto' : null }}
+          >
             {comments.map(
               ({
                  commentAuthor,
@@ -69,10 +75,7 @@ export const Comments: React.FC<CommentsType> = React.memo(
                  commentId
                }) => (
                 <div key={commentId} className={cn('Comment')}>
-                  <div className={cn('AuthorRow')}>
-                    <UserSmall textClassName={cn('AuthorName')} userName={commentAuthor} img={'ava'} />
-                    <Text className={cn('Date')} children={commentDate} size={'1'} />
-                  </div>
+                  <AuthorInfo author={commentAuthor} date={commentDate} />
                   <Text className={cn('UserComment')} size={'2'} children={commentDescription} />
                   <Actions
                     id={commentId}
@@ -82,10 +85,7 @@ export const Comments: React.FC<CommentsType> = React.memo(
                     onOpenAnswer={setOpenCommentId}
                   />
                   <AnswerWrapper isOpenComments={openCommentId === commentId}>
-                    <div className={cn('AuthorComment')}>
-                      <AreaInput onChange={setComment} value={comment} />
-                      <Text className={cn('Send', { disabled: !comment?.length })} children={'Отправить'} size={'1'} />
-                    </div>
+                    <InputComment />
                     {answers.map(
                       ({
                          commentAuthor,
@@ -96,10 +96,7 @@ export const Comments: React.FC<CommentsType> = React.memo(
                          commentId
                        }) => (
                         <div key={commentId} className={cn('AnswerComment')}>
-                          <div className={cn('AnswerCommentAuthorRow')}>
-                            <UserSmall textClassName={cn('AuthorName')} userName={commentAuthor} img={'ava'} />
-                            <Text className={cn('Date')} children={commentDate} size={'1'} />
-                          </div>
+                          <AuthorInfo author={commentAuthor} date={commentDate} />
                           <Text className={cn('UserComment')} size={'1'} children={commentDescription} />
                           <Actions
                             id={commentId}

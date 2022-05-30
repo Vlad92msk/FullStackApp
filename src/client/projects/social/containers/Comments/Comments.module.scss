@@ -30,10 +30,6 @@
     }
   }
 
-  &-AuthorComment {
-    @include flex($direction: column);
-  }
-
   &-CommentsArray {
     padding-right: rem(10);
   }
@@ -41,18 +37,6 @@
   &-OpenComments {
     float: right;
     margin-top: rem(10);
-  }
-
-  &-Send {
-    @extend %send_message;
-
-    &--disabled {
-      @extend %send_message--disable;
-    }
-  }
-
-  &-Date {
-    color: var(--SOCIAL--Color-Text-System);
   }
 
   &-UserComment {
@@ -64,18 +48,6 @@
     background: var(--SOCIAL--Background-Chat-Message);
     padding: rem(10);
   }
-
-  &-AuthorRow {
-    @include flex($align-items: center, $justify: space-between);
-    margin: rem(10) 0;
-  }
-
-
-  &-AuthorName {
-    background: linear-gradient(to right, #ff3865, #ff7978);
-    text-shadow: 0 0 rem(4) #ffffffb8;
-  }
-
 
   &-AnswerComment {
     @include flex($direction: column);

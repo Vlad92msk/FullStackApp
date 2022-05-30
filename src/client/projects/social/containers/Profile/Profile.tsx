@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
+import { IconButton } from '@client_shared/components/IconButton'
 import { useReplaceRouterQuery } from '@client_shared/hooks'
 import {
   ProfileContainer,
@@ -16,13 +17,12 @@ import { PHOTO_ITEMS } from './data/photoItems.data'
 import { VIDEO_ITEMS } from './data/videoItems.data'
 import { VIDEO_ALBUMS } from './data/videoAlbums.data'
 import styles from './Profile.module.scss'
-import { IconButton } from '@client/shared/components/IconButton'
 
 
 const cn = makeCn('Profile', styles)
 
 
-export const Profile: React.FC = React.memo(() => {
+export const Profile: React.FC = () => {
   const { query } = useRouter()
 
   const openWallEdit = useReplaceRouterQuery({ isEditing: 'true' })
@@ -81,4 +81,4 @@ export const Profile: React.FC = React.memo(() => {
       }}
     />
   )
-})
+}
