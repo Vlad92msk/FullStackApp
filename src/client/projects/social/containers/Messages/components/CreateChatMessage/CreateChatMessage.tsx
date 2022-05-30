@@ -17,7 +17,7 @@ export type CreateChatMessageProps = {
   currentUserId: number
   targetUserId: number
 }
-export const CreateChatMessage: React.FC<CreateChatMessageProps> = React.memo((props) => {
+export const CreateChatMessage: React.FC<CreateChatMessageProps> = (props) => {
   const { onSendMessage, currentUserId, targetUserId } = props
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -80,4 +80,4 @@ export const CreateChatMessage: React.FC<CreateChatMessageProps> = React.memo((p
       </div>
     </div>
   )
-})
+}

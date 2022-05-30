@@ -7,16 +7,13 @@ import { useBooleanState } from '@client_shared/hooks'
 import { AreaInput } from '@client_shared/components/AreaInput'
 
 import { ChatFolders, ChatContainer, UsersChats, OpenChatButton } from './components'
-import { MESSAGES } from './data/messages'
-import { FOLDERS_CHATS } from './data/foldersChats'
 import { messageActions, useServiceMessageAction, useServiceMessageSelector } from './service'
-import { USER } from '@client/projects/social/containers/App/data/user'
 import styles from './Messages.module.scss'
 
 const cn = makeCn('Messages', styles)
 
 
-export const Messages: React.FC = React.memo(() => {
+export const Messages: React.FC = () => {
   const newMessages = useServiceMessageSelector('newMessages')
   const searchInput = useServiceMessageSelector('search')
   const dispatch = useServiceMessageAction()
@@ -28,20 +25,6 @@ export const Messages: React.FC = React.memo(() => {
     lodash(newMessages)
     .reduce((acc, item) => acc + lodash.size(item), 0)
   ), [newMessages])
-
-  useEffect(() => {
-    setTimeout(() => dispatch(messageActions.INJECT__MESSAGE_API({
-      allMessages: MESSAGES,
-    })), 200)
-  }, [MESSAGES])
-
-  useEffect(() => {
-    if (USER?.friends.length) {
-      setTimeout(() => dispatch(messageActions.INJECT__FOLDERS_API({
-        folders: FOLDERS_CHATS,
-      })), 200)
-    }
-  }, [FOLDERS_CHATS])
 
   return (
     <>
@@ -76,4 +59,4 @@ export const Messages: React.FC = React.memo(() => {
       </Modal>
     </>
   )
-})
+}

@@ -14,11 +14,11 @@ export const ContextServiceMessage = createContext<MessageServiceContext>({
 
 
 export const useServiceMessageSelector = <T extends keyof MessageServiceState>(where: T): MessageServiceState[T] => (
-  useContextSelector<MessageServiceContext, MessageServiceState[T]>(ContextServiceMessage, ({ store }) => store[where])
+  useContextSelector<MessageServiceContext, MessageServiceState[T]>(ContextServiceMessage, (store) => store.store[where])
 )
 /**
  * TODO: типизировать
  */
 export const useServiceMessageAction = () => (
-  useContextSelector(ContextServiceMessage, ({ dispatch }) => dispatch)
+  useContextSelector(ContextServiceMessage, (store) => store.dispatch)
 )

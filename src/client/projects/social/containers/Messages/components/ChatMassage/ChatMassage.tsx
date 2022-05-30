@@ -42,7 +42,7 @@ export type ChatMassageType = {
 
 }
 
-export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
+export const ChatMassage: React.FC<ChatMassageType> = (props) => {
   const { from, isWasSeen, message: { massage, smile, dateCreate, attachments } } = props
   const messageWasCreated = format(dateCreate, 'dd.MM.yyyy в HH:mm')
 
@@ -92,4 +92,4 @@ export const ChatMassage: React.FC<ChatMassageType> = React.memo((props) => {
       </div>
     </div>
   )
-})
+}

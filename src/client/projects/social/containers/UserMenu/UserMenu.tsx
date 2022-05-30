@@ -19,7 +19,7 @@ import styles from './UserMenu.module.scss'
 const cn = makeCn('UserMenu', styles)
 
 
-export const UserMenu: React.FC = React.memo(() => {
+export const UserMenu: React.FC = () => {
   const dispatch = useServiceUserMenuAction()
 
   const {
@@ -70,4 +70,4 @@ export const UserMenu: React.FC = React.memo(() => {
       </div>
     </section>
   )
-})
+}

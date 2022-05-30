@@ -18,7 +18,7 @@ import { UseUserMenuState } from '@client/projects/social/containers/UserMenu/se
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
-export const ChatContainer: React.FC<ChatType> = React.memo(() => {
+export const ChatContainer: React.FC<ChatType> = () => {
   const { currenUser } = storageGet(LocalStorageEnum.USER_INFO) as UseUserMenuState
 
   const openUserIdChat = useServiceMessageSelector('openUserIdChat')
@@ -76,4 +76,4 @@ export const ChatContainer: React.FC<ChatType> = React.memo(() => {
       <CreateChatMessage onSendMessage={onCreateMessage} currentUserId={1} targetUserId={targetUser?.id} />
     </div>
   )
-})
+}
