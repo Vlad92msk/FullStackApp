@@ -1,6 +1,6 @@
 import { CreateHandlers } from '@client/public/models/serviceHandler.model'
 import { UserType } from '@client/projects/social/containers/App/data/user'
-import { UseUserMenuState } from './'
+import { ServiceState } from './'
 
 
 export const userMenuActions = {
@@ -14,8 +14,8 @@ export type UserMenuActions = typeof userMenuActions
 export type UserMEnuActionsKeys = keyof UserMenuActions
 
 
-export type HandlersType = CreateHandlers<UserMEnuActionsKeys, UseUserMenuState, UserMenuActions>
-export const handlers = (): HandlersType => {
+export type HandlersType = CreateHandlers<UserMEnuActionsKeys, ServiceState, UserMenuActions>
+export const handlersCreator = (): HandlersType => {
   return ({
     INJECT__USER_INFO: (state, { currentUser, allUsers }) => ({
       ...state,
@@ -28,5 +28,3 @@ export const handlers = (): HandlersType => {
     DEFAULT: s => s
   })
 }
-
-export type HandlersTypeFunc = typeof handlers

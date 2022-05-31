@@ -1,6 +1,6 @@
 import { createContext, useContextSelector } from 'use-context-selector'
-import { Action } from '@client/shared/utils/reducer'
-import { messageActions } from './handlers'
+import { Action } from '@client_shared/utils/reducer'
+import { commentsActions } from './handlers'
 import { initial, ServiceState } from './'
 
 type ContextService = {
@@ -9,16 +9,16 @@ type ContextService = {
 }
 export const ContextService = createContext<ContextService>({
   store: initial,
-  dispatch: messageActions.DEFAULT
+  dispatch: commentsActions.DEFAULT
 })
 
 
-export const useServiceMessageSelector = <T extends keyof ServiceState>(where: T): ServiceState[T] => (
+export const useServiceCommentsSelector = <T extends keyof ServiceState>(where: T): ServiceState[T] => (
   useContextSelector<ContextService, ServiceState[T]>(ContextService, (store) => store.store[where])
 )
 /**
  * TODO: типизировать
  */
-export const useServiceMessageAction = () => (
+export const useServiceCommentsAction = () => (
   useContextSelector(ContextService, (store) => store.dispatch)
 )

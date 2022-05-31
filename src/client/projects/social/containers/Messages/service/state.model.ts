@@ -8,7 +8,7 @@ export interface FoldersUI extends FoldersChat {
 }
 
 export type FoldersUIObject = DefaultObject<FoldersUI>
-export type MessageServiceState = {
+export type ServiceState = {
   folders?: FoldersUIObject
   allMessages?: DefaultObject<Message[]>
   newMessages?: DefaultObject<Message[]>
@@ -19,7 +19,7 @@ export type MessageServiceState = {
 }
 
 
-export const initial: MessageServiceState = {
+export const initial: ServiceState = {
   folders: {},
   allMessages: {},
   newMessages: {},

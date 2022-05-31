@@ -12,14 +12,14 @@ import { Message } from '../../data/messages'
 import { messageActions, useServiceMessageAction, useServiceMessageSelector } from '../../service'
 import styles from './ChatContainer.module.scss'
 import { LocalStorageEnum } from '@client/public/models/localStorage'
-import { UseUserMenuState } from '@client/projects/social/containers/UserMenu/service'
+import { ServiceState } from '@client/projects/social/containers/UserMenu/service'
 
 
 const cn = makeCn('ChatContainer', styles)
 
 export type ChatType = {}
 export const ChatContainer: React.FC<ChatType> = () => {
-  const { currenUser } = storageGet(LocalStorageEnum.USER_INFO) as UseUserMenuState
+  const { currenUser } = storageGet(LocalStorageEnum.USER_INFO) as ServiceState
 
   const openUserIdChat = useServiceMessageSelector('openUserIdChat')
   const allMessages = useServiceMessageSelector('allMessages')

@@ -8,12 +8,12 @@ import { LogColors, log } from '../utils/logColors'
  */
 type CreateService<S, A, R> = {
   initial: S
-  handlers: A
+  handlersCreator: () => A
   reactions: R
   serviceName: string
 }
-export const useCreateService = <S, A extends () => any, R>(props: CreateService<S, A, R>) => {
-  const { initial, reactions, handlers, serviceName } = props
+export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
+  const { initial, reactions, handlersCreator, serviceName } = props
 
   return useEventCallback<any, S>(
     (event$, state$) =>
@@ -21,7 +21,7 @@ export const useCreateService = <S, A extends () => any, R>(props: CreateService
         withLatestFrom(state$),
         distinctUntilPropertyChanged(),
         switchMap(([action, state]) => of(action).pipe(
-          applyReducer(reducer(handlers), state, serviceName),
+          applyReducer(reducer(handlersCreator), state, serviceName),
           // applyEffects(action),
           applyReactions(action, reactions)
         ))

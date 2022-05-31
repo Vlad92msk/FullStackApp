@@ -21,7 +21,7 @@ const cn = makeCn('Comments', styles)
 export const COUNT_VISIBLE_COMMENTS = 1
 
 
-export type CommentsType = {
+export type CommentsProps = {
   isOpenComments: boolean
   width?: string
   commentsHeight?: string
@@ -29,7 +29,7 @@ export type CommentsType = {
   isOverflow?: boolean
 }
 
-export const Comments: React.FC<CommentsType> = React.memo(
+export const Comments: React.FC<CommentsProps> = React.memo(
   ({
      isOpenComments,
      width,

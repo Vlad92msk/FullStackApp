@@ -3,10 +3,10 @@ import { DefaultObject } from '@client/public/models/defaultObject.model'
 import { CreateHandlers } from '@client/public/models/serviceHandler.model'
 import { FoldersChat } from '../data/foldersChats'
 import { Message } from '../data/messages'
-import { MessageServiceState } from './'
+import { ServiceState } from './'
 import { storageGet } from '@client/shared/utils'
 import { LocalStorageEnum } from '@client/public/models/localStorage'
-import { UseUserMenuState } from '@client/projects/social/containers/UserMenu/service'
+import { ServiceState as UserMenuState } from '@client/projects/social/containers/UserMenu/service'
 
 /**
  * Экшены
@@ -64,9 +64,9 @@ export type MessageActionsKeys = keyof MessageActions
 /**
  * Хендлеры
  */
-export type HandlersType = CreateHandlers<MessageActionsKeys, MessageServiceState, MessageActions>
-export const handlers = (): HandlersType => {
-  const userInfo = storageGet(LocalStorageEnum.USER_INFO) as UseUserMenuState
+export type HandlersType = CreateHandlers<MessageActionsKeys, ServiceState, MessageActions>
+export const handlersCreator = (): HandlersType => {
+  const userInfo = storageGet(LocalStorageEnum.USER_INFO) as UserMenuState
   const { currenUser } = userInfo
 
   return ({
@@ -121,5 +121,3 @@ export const handlers = (): HandlersType => {
     DEFAULT: s => s
   })
 }
-
-export type HandlersTypeFunc = typeof handlers

@@ -1,6 +1,6 @@
 import { UserType } from '@client/projects/social/containers/App/data/user'
 
-export type UseUserMenuState = {
+export type ServiceState = {
   friends?: UserType[]
   possibleFriends?: UserType[]
   currenUser?: UserType
@@ -8,7 +8,7 @@ export type UseUserMenuState = {
   hashes?: any
 }
 
-export const initial: UseUserMenuState = {
+export const initial: ServiceState = {
   friends: [],
   possibleFriends: [],
   currenUser: {},
