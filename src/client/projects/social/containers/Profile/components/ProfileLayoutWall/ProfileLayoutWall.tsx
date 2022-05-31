@@ -1,7 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react'
 import lodash from 'lodash'
+import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
+import { Modal } from '@client_shared/components/Modal'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { AreaInput } from '@client_shared/components/AreaInput'
 import { FileUpLoad } from '@client_shared/components/FileUpLoad'
@@ -11,14 +13,12 @@ import { USER } from '../../../App/data/user'
 import { WallRecord } from '../../components'
 import { WALL_RECORDS } from '../../data/walls.data'
 import styles from './ProfileLayoutWall.module.scss'
-import { Modal } from '@client/shared/components/Modal'
 
 
 const cn = makeCn('ProfileLayoutWall', styles)
 
 type ProfileLayoutWallType = {
   userId: number
-  isWallEdit: unknown
   onCloseWallEditing: () => Promise<boolean>
 }
 
@@ -38,7 +38,10 @@ const NEW_RECORD_BASE = {
  * Раздел Профиля - Контент-компонет для Видео или Фото
  */
 export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = React.memo((props) => {
-  const { userId, isWallEdit, onCloseWallEditing } = props
+  const { userId, onCloseWallEditing } = props
+
+  const { query } = useRouter()
+
   const user = USER
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -76,7 +79,7 @@ export const ProfileLayoutWall: React.FC<ProfileLayoutWallType> = React.memo((pr
           }
         </div>
       </div>
-      <Modal className={cn('Modal')} open={Boolean(isWallEdit)} isBckOnClose onClose={onCloseWallEditing}>
+      <Modal className={cn('Modal')} open={Boolean(query.isEditing)} isBckOnClose onClose={onCloseWallEditing}>
         <div className={cn('CreateRecord')}>
           <div className={cn('RecordAdd')}>
             <FileUpLoad onApply={setNewRecordFiles} isConfirm />

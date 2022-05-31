@@ -8,7 +8,7 @@ import {
   CommentsOpenType,
   CommentsWrapper,
   InputComment,
-  ShowMore
+  ShowMore, Filters
 } from '../Comments/components'
 import styles from './Comments.module.scss'
 
@@ -52,7 +52,7 @@ export const Comments: React.FC<CommentsType> = React.memo(
 
     return (
       <CommentsWrapper width={width} isOpenComments={isOpenComments} openType={openType}>
-        <div className={cn('Filter')}>filters</div>
+        <Filters />
         <div className={cn('Container')}>
           <InputComment />
           <div
@@ -92,18 +92,17 @@ export const Comments: React.FC<CommentsType> = React.memo(
                          disLikeCounts,
                          commentId
                        }) => (
-                        <div key={commentId} className={cn('AnswerComment')}>
-                          <MainInfo
-                            author={commentAuthor}
-                            date={commentDate}
-                            disLikeCounts={disLikeCounts}
-                            answersCount={answersCount}
-                            description={commentDescription}
-                            likeCount={likeCount}
-                            commentId={commentId}
-                            onOpenAnswer={setOpenCommentId}
-                          />
-                        </div>
+                        <MainInfo
+                          key={commentId}
+                          author={commentAuthor}
+                          date={commentDate}
+                          disLikeCounts={disLikeCounts}
+                          answersCount={answersCount}
+                          description={commentDescription}
+                          likeCount={likeCount}
+                          commentId={commentId}
+                          onOpenAnswer={setOpenCommentId}
+                        />
                       ))}
                   </AnswerWrapper>
                 </div>

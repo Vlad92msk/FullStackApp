@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
@@ -23,8 +22,6 @@ const cn = makeCn('Profile', styles)
 
 
 export const Profile: React.FC = () => {
-  const { query } = useRouter()
-
   const openWallEdit = useReplaceRouterQuery({ isEditing: 'true' })
   const closeWallEdit = useReplaceRouterQuery({}, ['isEditing'])
 
@@ -32,7 +29,7 @@ export const Profile: React.FC = () => {
     <ProfileContainer
       tabs={{
         wall: (
-          <ProfileLayoutWall userId={USER_ID} isWallEdit={query.isEditing} onCloseWallEditing={closeWallEdit} />
+          <ProfileLayoutWall userId={USER_ID} onCloseWallEditing={closeWallEdit} />
         ),
         video: (
           <ProfileLayoutDigital

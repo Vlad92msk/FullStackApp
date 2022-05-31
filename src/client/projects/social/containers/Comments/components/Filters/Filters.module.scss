@@ -1,0 +1,9 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+
+.Filters {
+  width: 100%;
+  margin: 0 rem(20);
+}
