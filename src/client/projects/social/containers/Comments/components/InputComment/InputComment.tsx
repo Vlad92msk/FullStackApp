@@ -7,7 +7,7 @@ import styles from './InputComment.module.scss'
 const cn = makeCn('InputComment', styles)
 type InputCommentProps = {}
 export const InputComment: React.FC<InputCommentProps> = () => {
-  const [comment, setComment] = useState<string>(null)
+  const [comment, setComment] = useState('')
 
   return (
     <div className={cn()}>

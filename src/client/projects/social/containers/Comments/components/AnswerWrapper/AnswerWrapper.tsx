@@ -14,7 +14,8 @@ export type AnswerWrapperType = {
   isOpenComments: boolean
 }
 
-export const AnswerWrapper: React.FC<AnswerWrapperType> = React.memo(({ isOpenComments, children }) => {
+export const AnswerWrapper: React.FC<AnswerWrapperType> = (props) => {
+  const { isOpenComments, children } = props
 
   return (
     <AnimatePresence initial={false} exitBeforeEnter>
@@ -31,4 +32,4 @@ export const AnswerWrapper: React.FC<AnswerWrapperType> = React.memo(({ isOpenCo
       )}
     </AnimatePresence>
   )
-})
+}
