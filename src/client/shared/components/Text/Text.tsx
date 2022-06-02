@@ -8,7 +8,7 @@ import { ReferenceObject } from 'popper.js'
 const cn = makeCn('Text', styles)
 
 
-export type TextSize = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
+export type TextSize = '05' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
 
 export interface TextOwnProps {
   size?: TextSize

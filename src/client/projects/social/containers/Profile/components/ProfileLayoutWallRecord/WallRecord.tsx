@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
-import { ServiceComments } from '../../../../containers/Comments/service'
+import { ServiceComments, ServiceCommentsType } from '../../../../containers/Comments/service'
 import { Attachment, ATTACHMENT_ACTION, SliderMedia, UserSmall } from '../../../../components'
 import { useAttachmentsPurpose } from '../../../../components/Attachment/hooks'
 import { WallRecordItemType } from '../../../Profile/data/walls.data'
@@ -105,11 +105,14 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
           </div>
         </div>
         <ServiceComments
-          width={'100%'}
-          commentsHeight={'40vh'}
-          isOpenComments={isOpenComments}
-          openType={'vertical'}
-          isOverflow={false}
+          serviceName={'Wall Record'}
+          provideProps={{
+            commentsHeight: '40vh',
+            width: '100%',
+            isOverflow: false,
+            openType: 'vertical',
+            isOpenComments
+          }}
         />
       </div>
     </div>

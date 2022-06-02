@@ -6,6 +6,10 @@
 
   &--size {
     //мин 10rem, максимум 14rem, среднее 4vmax
+    &_05 {
+      font-size: rem(5);
+      line-height: rem(8);
+    }
     &_1 {
       font-size: wSize(8, 4, 12);
       line-height: wSize(12, 7, 16);

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import { makeCn } from '@client_shared/utils'
+import { length, makeCn } from '@client_shared/utils'
 import { COMMENTS, CommentType } from '../Comments/data/comments.data'
 import {
   AnswerWrapper,
@@ -11,6 +11,7 @@ import {
   ShowMore, Filters
 } from '../Comments/components'
 import styles from './Comments.module.scss'
+import { useServiceCommentsSelector } from '@client/projects/social/containers/Comments/service'
 
 const cn = makeCn('Comments', styles)
 
@@ -37,7 +38,9 @@ export const Comments: React.FC<CommentsProps> = React.memo(
      openType,
      isOverflow
    }) => {
-    const [openCommentId, setOpenCommentId] = useState<number>(null)
+    const d = useServiceCommentsSelector('comments')
+console.log('d', d)
+    const [openCommentId, setOpenCommentId] = useState<string>(null)
 
     const [commentsStart, setCommentsStart] = useState(0)
     const [comments, setComments] = useState<CommentType[]>([])
@@ -59,48 +62,25 @@ export const Comments: React.FC<CommentsProps> = React.memo(
             className={cn('CommentsArray')}
             style={{ maxHeight: commentsHeight, overflowY: isOverflow ? 'auto' : null }}
           >
-            {comments.map(
-              ({
-                 commentAuthor,
-                 commentDate,
-                 commentDescription,
-                 likeCount,
-                 disLikeCounts,
-                 answersCount,
-                 answers,
-                 commentId
-               }) => (
-                <div key={commentId} className={cn('Comment')}>
+            {Object.values(d).map(
+              (comment) => (
+                <div key={comment.commentId} className={cn('Comment')}>
                   <MainInfo
-                    author={commentAuthor}
-                    date={commentDate}
-                    disLikeCounts={disLikeCounts}
-                    answersCount={answersCount}
-                    description={commentDescription}
-                    likeCount={likeCount}
-                    commentId={commentId}
+                    type={'main'}
+                    comment={comment}
+                    answersLength={length(comment.answers)}
                     onOpenAnswer={setOpenCommentId}
                   />
-                  <AnswerWrapper isOpenComments={openCommentId === commentId}>
+                  <AnswerWrapper isOpenComments={openCommentId === comment.commentId}>
                     <InputComment />
-                    {answers.map(
-                      ({
-                         commentAuthor,
-                         commentDate,
-                         commentDescription,
-                         likeCount,
-                         disLikeCounts,
-                         commentId
-                       }) => (
+                    {comment.answers.map(
+                      (answer) => (
                         <MainInfo
-                          key={commentId}
-                          author={commentAuthor}
-                          date={commentDate}
-                          disLikeCounts={disLikeCounts}
-                          answersCount={answersCount}
-                          description={commentDescription}
-                          likeCount={likeCount}
-                          commentId={commentId}
+                          key={answer.commentId}
+                          type={'sub'}
+                          comment={answer}
+                          // @ts-ignore
+                          answersLength={length(answer.answers)}
                           onOpenAnswer={setOpenCommentId}
                         />
                       ))}

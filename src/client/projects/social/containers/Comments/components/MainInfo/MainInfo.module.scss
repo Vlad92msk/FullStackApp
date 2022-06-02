@@ -23,5 +23,11 @@
     color: var(--SOCIAL--Color-Text-Main);
     background: var(--SOCIAL--Background-Chat-Message);
     padding: rem(10);
+
+    &--type {
+      &_answer {
+        font-style: italic;
+      }
+    }
   }
 }

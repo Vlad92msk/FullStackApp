@@ -54,7 +54,7 @@ const data = [
   {
     id: 2,
     key: 'Тема 2',
-    data: [
+    date: [
       {
         id: 1,
         date: '2019-06-28',

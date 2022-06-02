@@ -4,20 +4,23 @@ import { makeCn } from '@client_shared/utils'
 import { Icon } from '@client_shared/components/Icon'
 import { Text } from '@client_shared/components/Text'
 import styles from './Actions.module.scss'
+import { IconName } from '@client/public/models/icon.model'
+import { MainInfoType } from '@client/projects/social/containers/Comments/components'
 
 const cn = makeCn('Actions', styles)
 
 
 export type ActionsType = {
-  onOpenAnswer?: React.Dispatch<React.SetStateAction<number>>
+  type: MainInfoType
+  onOpenAnswer?: React.Dispatch<React.SetStateAction<string>>
   likeCount: number
   disLikeCounts: number
   answersCount: number
-  id: number
+  id: string
 }
 
-export const Actions: React.FC<ActionsType> = React.memo(
-  ({ onOpenAnswer, id, disLikeCounts, likeCount, answersCount }) => {
+export const Actions: React.FC<ActionsType> = (props) => {
+    const { onOpenAnswer, id, disLikeCounts, likeCount, answersCount, type } = props
     const [toggle, setToggle] = useState(true)
 
     const handleOpenAnswer = useCallback(() => {
@@ -36,10 +39,14 @@ export const Actions: React.FC<ActionsType> = React.memo(
           <Icon
             className={cn('ButtonIcon')}
             size={'small'}
-            icon={'message-square'}
+            icon={type === 'main' ? 'message-square' : 'undo'}
             fill={'bluePrimrose50'}
           />
-          <Text className={cn('ButtonText')} size={'1'} children={answersCount || 0} />
+          <Text
+            className={cn('ButtonText')}
+            size={'1'}
+            children={answersCount || 0}
+          />
         </div>
         <div style={{ display: 'flex' }}>
           <div className={cn('Button')}>
@@ -63,4 +70,4 @@ export const Actions: React.FC<ActionsType> = React.memo(
         </div>
       </div>
     )
-  })
+  }
