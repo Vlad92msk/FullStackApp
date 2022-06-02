@@ -15,12 +15,31 @@
     }
   }
 
-  &-ButtonIcon {
-  }
-
   &-ButtonText {
     color: var(--SOCIAL--Color-Text-System);
     margin-left: rem(5);
+  }
+
+  &-Modal {
+    @include flex($align-items: center);
+    @include wh(50%, 70%);
+    background: rgb(50 56 78);
+    padding: rem(20);
+  }
+
+  &-ModalContainer {
+    width: rem(600);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &-SeeComment {
+    @include flex($direction: column);
+    width: rem(600);
+    padding-bottom: rem(15);
+    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
+    margin-bottom: rem(15);
   }
 }
 

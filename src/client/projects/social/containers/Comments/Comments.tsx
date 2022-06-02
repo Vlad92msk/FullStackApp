@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import { length, makeCn } from '@client_shared/utils'
+import {  makeCn } from '@client_shared/utils'
 import { COMMENTS, CommentType } from '../Comments/data/comments.data'
 import {
   AnswerWrapper,
@@ -10,8 +10,8 @@ import {
   InputComment,
   ShowMore, Filters
 } from '../Comments/components'
+import { ServiceCommentsType, useServiceCommentsSelector } from './service'
 import styles from './Comments.module.scss'
-import { useServiceCommentsSelector } from '@client/projects/social/containers/Comments/service'
 
 const cn = makeCn('Comments', styles)
 
@@ -68,19 +68,16 @@ console.log('d', d)
                   <MainInfo
                     type={'main'}
                     comment={comment}
-                    answersLength={length(comment.answers)}
                     onOpenAnswer={setOpenCommentId}
                   />
                   <AnswerWrapper isOpenComments={openCommentId === comment.commentId}>
                     <InputComment />
                     {comment.answers.map(
-                      (answer) => (
+                      (answer: ServiceCommentsType) => (
                         <MainInfo
                           key={answer.commentId}
                           type={'sub'}
                           comment={answer}
-                          // @ts-ignore
-                          answersLength={length(answer.answers)}
                           onOpenAnswer={setOpenCommentId}
                         />
                       ))}

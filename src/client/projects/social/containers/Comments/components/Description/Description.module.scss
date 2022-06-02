@@ -1,0 +1,20 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.Description {
+  @include flex();
+  flex: 1 1 auto;
+  margin: rem(0) rem(0) rem(0) rem(20);
+  position: relative;
+  width: 97%;
+  color: var(--SOCIAL--Color-Text-Main);
+  background: var(--SOCIAL--Background-Chat-Message);
+  padding: rem(10);
+
+  &--type {
+    &_answer {
+      font-style: italic;
+    }
+  }
+}
