@@ -18,15 +18,32 @@ type MainInfoProps = {
 export const MainInfo: React.FC<MainInfoProps> = (props) => {
   const {
     type,
-    comment: { userName, date, description, commentId, userIdsLikes, userIdsDislikes, appealToAnswerId },
+    comment: {
+      userName,
+      date,
+      description,
+      commentId,
+      userIdsLikes,
+      userIdsDislikes,
+      appealToAnswerId,
+      appealToUserName
+    },
     answersLength,
     onOpenAnswer
   } = props
 
   return (
-    <>
-      <div className={cn()}>
-        <UserSmall textClassName={cn('AuthorName')} userName={userName} img={'ava'} />
+    <div className={cn()}>
+      <div className={cn('Header')}>
+        <div className={cn('UsersInf')}>
+          <UserSmall textClassName={cn('AuthorName')} userName={userName} img={'ava'} />
+          {appealToAnswerId && (
+            <>
+              <Text className={cn('For')} children={'для'} size={'1'} />
+              <Text className={cn('ForUser')} children={appealToUserName} size={'1'} />
+            </>
+          )}
+        </div>
         <Text className={cn('Date')} children={date} size={'1'} />
       </div>
       <Text
@@ -42,6 +59,6 @@ export const MainInfo: React.FC<MainInfoProps> = (props) => {
         disLikeCounts={length(userIdsDislikes)}
         onOpenAnswer={onOpenAnswer}
       />
-    </>
+    </div>
   )
 }

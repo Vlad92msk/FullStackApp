@@ -7,9 +7,8 @@
   margin-left: rem(20);
 
   &-Button {
-    @include flex();
     margin: rem(5);
-    cursor: pointer;
+    align-items: center;
 
     &:last-child {
       justify-self: end;

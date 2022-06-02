@@ -6,6 +6,8 @@ import { Text } from '@client_shared/components/Text'
 import styles from './Actions.module.scss'
 import { IconName } from '@client/public/models/icon.model'
 import { MainInfoType } from '@client/projects/social/containers/Comments/components'
+import { ButtonBox } from '@client/shared/components/ButtonBox'
+import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('Actions', styles)
 
@@ -20,26 +22,44 @@ export type ActionsType = {
 }
 
 export const Actions: React.FC<ActionsType> = (props) => {
-    const { onOpenAnswer, id, disLikeCounts, likeCount, answersCount, type } = props
-    const [toggle, setToggle] = useState(true)
+  const { onOpenAnswer, id, disLikeCounts, likeCount, answersCount, type } = props
+  const [toggle, setToggle] = useState(true)
 
-    const handleOpenAnswer = useCallback(() => {
-      if (toggle) {
-        onOpenAnswer?.(id)
-        setToggle(false)
-      } else {
-        onOpenAnswer?.(null)
-        setToggle(true)
-      }
-    }, [id, toggle])
+  const handleOpenAnswer = useCallback(() => {
+    if (toggle) {
+      onOpenAnswer?.(id)
+      setToggle(false)
+    } else {
+      onOpenAnswer?.(null)
+      setToggle(true)
+    }
+  }, [id, toggle])
 
-    return (
-      <div className={cn()}>
-        <div className={cn('Button')} onClick={onOpenAnswer && handleOpenAnswer}>
+  const handleAddAnswer = useCallback(() => {
+    console.log('Ответить')
+  }, [])
+
+  const handleOpenAnswers = useCallback(() => {
+    console.log('Открыть модалку с ответами')
+  }, [])
+
+  return (
+    <div className={cn()}>
+      {type === 'sub' ? (
+        <IconButton
+          className={cn('Button')}
+          size={'small'}
+          icon={'message-square'}
+          fill={'bluePrimrose50'}
+          onClick={handleAddAnswer}
+        />
+      ) : (<div />)}
+      <div style={{ display: 'flex' }}>
+        <ButtonBox className={cn('Button')} onClick={type === 'main' ? handleOpenAnswer : handleOpenAnswers}>
           <Icon
             className={cn('ButtonIcon')}
             size={'small'}
-            icon={type === 'main' ? 'message-square' : 'undo'}
+            icon={'undo'}
             fill={'bluePrimrose50'}
           />
           <Text
@@ -47,27 +67,26 @@ export const Actions: React.FC<ActionsType> = (props) => {
             size={'1'}
             children={answersCount || 0}
           />
-        </div>
-        <div style={{ display: 'flex' }}>
-          <div className={cn('Button')}>
-            <Icon
-              className={cn('ButtonIcon')}
-              size={'small'}
-              icon={'heart'}
-              fill={'redRose40'}
-            />
-            <Text className={cn('ButtonText')} size={'1'} children={likeCount || 0} />
-          </div>
-          <div className={cn('Button')}>
-            <Icon
-              className={cn('ButtonIcon')}
-              size={'small'}
-              icon={'dislike'}
-              fill={'bluePrimrose50'}
-            />
-            <Text className={cn('ButtonText')} size={'1'} children={disLikeCounts || 0} />
-          </div>
-        </div>
+        </ButtonBox>
+        <ButtonBox className={cn('Button')}>
+          <Icon
+            className={cn('ButtonIcon')}
+            size={'small'}
+            icon={'heart'}
+            fill={'redRose40'}
+          />
+          <Text className={cn('ButtonText')} size={'1'} children={likeCount || 0} />
+        </ButtonBox>
+        <ButtonBox className={cn('Button')}>
+          <Icon
+            className={cn('ButtonIcon')}
+            size={'small'}
+            icon={'dislike'}
+            fill={'bluePrimrose50'}
+          />
+          <Text className={cn('ButtonText')} size={'1'} children={disLikeCounts || 0} />
+        </ButtonBox>
       </div>
-    )
-  }
+    </div>
+  )
+}

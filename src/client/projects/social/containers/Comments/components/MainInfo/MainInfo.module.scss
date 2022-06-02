@@ -3,15 +3,35 @@
 @import "../../../App/App.module.scss";
 
 .MainInfo {
-  @include flex($align-items: center, $justify: space-between);
-  margin: rem(10) 0;
+  @include flex($direction: column);
+
+  &-Header {
+    @include flex($align-items: center, $justify: space-between);
+    margin: rem(10) 0;
+  }
+
+  &-UsersInf {
+    @include flex($align-items: center)
+  }
 
   &-AuthorName {
+    color: var(--SOCIAL--Color-Text-Main);
     background: linear-gradient(to right, #ff3865, #ff7978);
     text-shadow: 0 0 rem(4) #ffffffb8;
+    padding: rem(2) rem(5);
   }
 
   &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+  }
+
+  &-For {
+    color: var(--SOCIAL--Color-Text-System);
+    margin: 0 rem(5);
+    font-style: italic;
+  }
+
+  &-ForUser {
     color: var(--SOCIAL--Color-Text-System);
   }
 
