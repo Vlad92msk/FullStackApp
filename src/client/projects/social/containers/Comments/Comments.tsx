@@ -14,12 +14,6 @@ import styles from './Comments.module.scss'
 const cn = makeCn('Comments', styles)
 
 
-/**
- * По сколько комментариев отображать
- */
-export const COUNT_VISIBLE_COMMENTS = 1
-
-
 export type CommentsProps = {
   isOpenComments: boolean
   width?: string

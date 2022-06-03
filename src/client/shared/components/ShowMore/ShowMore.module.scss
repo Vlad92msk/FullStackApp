@@ -1,0 +1,7 @@
+@use 'src/client/public/styles/lib/functions' as *;
+@use 'src/client/public/styles/lib/mixins';
+
+.ShowMore {
+  float: right;
+  margin-top: rem(10);
+}

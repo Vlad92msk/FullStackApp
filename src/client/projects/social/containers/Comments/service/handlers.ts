@@ -1,4 +1,4 @@
-import { reduce, groupBy } from 'lodash'
+import { reduce } from 'lodash'
 import { CreateHandlers } from '@client/public/models/serviceHandler.model'
 import { ServiceCommentsType, ServiceState } from './'
 import { CommentType } from '@client/projects/social/containers/Comments/data/comments.data'
