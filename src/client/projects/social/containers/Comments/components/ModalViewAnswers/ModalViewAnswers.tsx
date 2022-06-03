@@ -17,7 +17,7 @@ export type ModalViewAnswersProps = {
   dispatch: (action: Action) => void
 }
 
-const ModalViewAnswers: React.FC<ModalViewAnswersProps> = (props) => {
+const ModalViewAnswers: React.FC<ModalViewAnswersProps> = React.memo((props) => {
   const { modalComment, dispatch } = props
   const { appealToAnswerId, appealToUserName, userName, date, description, answers } = modalComment
 
@@ -56,7 +56,7 @@ const ModalViewAnswers: React.FC<ModalViewAnswersProps> = (props) => {
       </div>
     </Modal>
   )
-}
+})
 
 
 export const ModalViewAnswersHOC: React.FC = () => {

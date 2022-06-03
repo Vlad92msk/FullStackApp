@@ -28,7 +28,7 @@ export type CommentsProps = {
   isOverflow?: boolean
 }
 
-export const Comments: React.FC<CommentsProps> = (props) => {
+export const Comments: React.FC<CommentsProps> = React.memo((props) => {
   const { isOpenComments, width, commentsHeight, openType, isOverflow } = props
 
   return (
@@ -41,7 +41,7 @@ export const Comments: React.FC<CommentsProps> = (props) => {
       <ModalViewAnswersHOC />
     </AnimateOpenComments>
   )
-}
+})
 
 Comments.defaultProps = {
   openType: 'horizontal',
