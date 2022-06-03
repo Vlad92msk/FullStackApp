@@ -69,6 +69,7 @@ export const Actions: React.FC<ActionsType> = React.memo((props) => {
         <div style={{ display: 'flex' }}>
           <ButtonBox
             className={cn('Button')}
+            disabled={type === 'sub' && !length(answers)}
             onClick={type === 'main' ? handleOpenAnswer : handleOpenAnswers}
           >
             <Icon
