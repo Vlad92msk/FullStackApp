@@ -11,10 +11,9 @@ type MainInfoProps = {
   type: MainInfoType
   comment: CommentType
   isOpenSeeAnswers?: boolean
-  onOpenAnswer: React.Dispatch<React.SetStateAction<string>>
 }
-export const MainInfo: React.FC<MainInfoProps> = (props) => {
-  const { type, comment, onOpenAnswer, isOpenSeeAnswers } = props
+export const MainInfo: React.FC<MainInfoProps> = React.memo((props) => {
+  const { type, comment, isOpenSeeAnswers } = props
   const { userName, date, description, appealToAnswerId, appealToUserName } = comment
 
   return (
@@ -31,8 +30,7 @@ export const MainInfo: React.FC<MainInfoProps> = (props) => {
         type={type}
         // @ts-ignore
         comment={comment}
-        onOpenAnswer={onOpenAnswer}
       />
     </div>
   )
-}
+})

@@ -3,19 +3,19 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { makeCn } from '@client_shared/utils'
 import { useScreenWidth } from '@client/shared/hooks'
-import styles from './CommentsWrapper.module.scss'
+import styles from './AnimateOpenComments.module.scss'
 
-const cn = makeCn('CommentsWrapper', styles)
+const cn = makeCn('AnimateOpenComments', styles)
 
 export type CommentsOpenType = 'horizontal' | 'vertical'
 
-export type CommentsWrapperType = {
+export type AnimateOpenCommentsType = {
   isOpenComments: boolean
   width?: string
   openType: CommentsOpenType
 }
 
-export const CommentsWrapper: React.FC<CommentsWrapperType> = React.memo((props) => {
+export const AnimateOpenComments: React.FC<AnimateOpenCommentsType> = (props) => {
   const { isOpenComments, width, openType, children } = props
   const screenWidth = useScreenWidth()
   const componentWidth = width ? width : screenWidth <= 768 ? '100%' : '50%'
@@ -52,4 +52,4 @@ export const CommentsWrapper: React.FC<CommentsWrapperType> = React.memo((props)
       )}
     </AnimatePresence>
   )
-})
+}

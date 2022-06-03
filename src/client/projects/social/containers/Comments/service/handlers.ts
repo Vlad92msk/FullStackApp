@@ -11,6 +11,26 @@ export const commentsActions = {
   INJECT__COMMENTS: (payload: { comments: CommentType[] }) => ({
     type: 'INJECT__COMMENTS',
     payload
+  }),
+  SET__COMMENT_FOR_ENTITY: (payload: { inputValue: string }) => ({
+    type: 'SET__COMMENT_FOR_ENTITY',
+    payload
+  }),
+  SET__COMMENT_FOR_COMMENT: (payload: { inputValue: string }) => ({
+    type: 'SET__COMMENT_FOR_COMMENT',
+    payload
+  }),
+  SET__COMMENT_FOR_ANSWER: (payload: { inputValue: string }) => ({
+    type: 'SET__COMMENT_FOR_ANSWER',
+    payload
+  }),
+  SET__OPEN_COMMENT_ID: (payload: { commentId: string }) => ({
+    type: 'SET__OPEN_COMMENT_ID',
+    payload
+  }),
+  SET__OPEN_MODAL_FOR_VIEW_ANSWERS: (payload: { comment: ServiceCommentsType }) => ({
+    type: 'SET__OPEN_MODAL_FOR_VIEW_ANSWERS',
+    payload
   })
 }
 export type CommentsActions = typeof commentsActions
@@ -42,6 +62,26 @@ export const handlersCreator = (): HandlersType => {
           }
         }) : acc)
         , {} as ServiceCommentsType)
+    }),
+    SET__COMMENT_FOR_ENTITY: (state, { inputValue }) => ({
+      ...state,
+      commentForEntityInput: inputValue
+    }),
+    SET__COMMENT_FOR_COMMENT: (state, { inputValue }) => ({
+      ...state,
+      commentForCommentInput: inputValue
+    }),
+    SET__COMMENT_FOR_ANSWER: (state, { inputValue }) => ({
+      ...state,
+      answerForCommentInput: inputValue
+    }),
+    SET__OPEN_COMMENT_ID: (state, { commentId }) => ({
+      ...state,
+      openCommentId: commentId
+    }),
+    SET__OPEN_MODAL_FOR_VIEW_ANSWERS: (state, { comment }) => ({
+      ...state,
+      modalComment: comment
     })
   })
 }

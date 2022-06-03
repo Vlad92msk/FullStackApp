@@ -3,15 +3,6 @@
 @import "../App/App.module.scss";
 
 .Comments {
-  &-Comment {
-    @include flex($direction: column);
-    margin-bottom: rem(20);
-    position: relative;
-    overflow: hidden;
-    padding-bottom: rem(20);
-    border-bottom: rem(1) solid var(--SOCIAL--Color-Text-System);
-  }
-
   &-Container {
     @include wh(100%, 100%);
     overflow-y: auto;
@@ -22,10 +13,6 @@
       overflow: auto;
       padding: rem(8) 0;
     }
-  }
-
-  &-CommentsArray {
-    padding-right: rem(10);
   }
 }
 

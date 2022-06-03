@@ -8,9 +8,19 @@ export type ServiceState = {
   comments: {
     [key: string]: ServiceCommentsType
   }
+  commentForEntityInput: string
+  commentForCommentInput: string
+  answerForCommentInput: string
+  openCommentId: string
+  modalComment: ServiceCommentsType
 }
 
 
 export const initial: ServiceState = {
-  comments: {}
+  comments: {},
+  commentForEntityInput: '',
+  commentForCommentInput: '',
+  answerForCommentInput: '',
+  openCommentId: '',
+  modalComment: null
 }

@@ -6,9 +6,8 @@ import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { IconButton } from '@client_shared/components/IconButton'
 import { useToggle } from '@client_shared/hooks'
-import { Modal } from '@client_shared/components/Modal'
-import { Description, Header, InputComment, MainInfo, MainInfoType } from '../../components'
-import { ServiceCommentsType } from '../../service'
+import { COMMENT_FOR, InputComment, MainInfoType } from '../../components'
+import { commentsActions, ServiceCommentsType, useServiceCommentsAction } from '../../service'
 import styles from './Actions.module.scss'
 
 const cn = makeCn('Actions', styles)
@@ -18,43 +17,42 @@ export type ActionsType = {
   type: MainInfoType
   disableOpenSeeAnswers: boolean
   comment: ServiceCommentsType
-  onOpenAnswer?: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const Actions: React.FC<ActionsType> = (props) => {
-  const { onOpenAnswer, type, comment, disableOpenSeeAnswers } = props
+export const Actions: React.FC<ActionsType> = React.memo((props) => {
+  const { type, comment, disableOpenSeeAnswers } = props
   const {
     userIdsLikes,
     userIdsDislikes,
     commentId,
-    answers,
-    userName,
-    date,
-    appealToAnswerId,
-    appealToUserName,
-    description
+    answers
   } = comment
-
+  const dispatch = useServiceCommentsAction()
   const [isOpenAddAnswer, setOpenAddAnswer] = useToggle(false)
-  const [isOpenSeeAnswers, setOpenSeeAnswers] = useToggle(false)
 
   const [toggle, setToggle] = useState(true)
 
   const handleOpenAnswer = useCallback(() => {
     if (toggle) {
-      onOpenAnswer?.(commentId)
+      dispatch(commentsActions.SET__OPEN_COMMENT_ID({
+        commentId
+      }))
       setToggle(false)
     } else {
-      onOpenAnswer?.(null)
+      dispatch(commentsActions.SET__OPEN_COMMENT_ID({
+        commentId: null
+      }))
       setToggle(true)
     }
-  }, [commentId, toggle])
+  }, [commentId, toggle, dispatch])
 
   const handleOpenAnswers = useCallback(() => {
     if (!disableOpenSeeAnswers) {
-      setOpenSeeAnswers()
+      dispatch(commentsActions.SET__OPEN_MODAL_FOR_VIEW_ANSWERS({
+        comment
+      }))
     }
-  }, [disableOpenSeeAnswers, setOpenSeeAnswers])
+  }, [disableOpenSeeAnswers, commentsActions, dispatch])
 
   return (
     <>
@@ -105,33 +103,7 @@ export const Actions: React.FC<ActionsType> = (props) => {
           </ButtonBox>
         </div>
       </div>
-      {isOpenAddAnswer && (<InputComment />)}
-      <Modal
-        className={cn('Modal')}
-        open={isOpenSeeAnswers}
-        onClose={setOpenSeeAnswers}
-      >
-        <div className={cn('SeeComment')}>
-          <Header
-            appealToAnswerId={appealToAnswerId}
-            appealToUserName={appealToUserName}
-            userName={userName}
-            date={date}
-          />
-          <Description description={description} appealToAnswerId={appealToAnswerId} type={type} />
-        </div>
-        <div className={cn('ModalContainer')}>
-          {answers?.map((item) => (
-            <MainInfo
-              key={item.commentId}
-              isOpenSeeAnswers={isOpenSeeAnswers}
-              type={'sub'}
-              comment={item}
-              onOpenAnswer={() => 1}
-            />
-          ))}
-        </div>
-      </Modal>
+      {isOpenAddAnswer && (<InputComment inputFor={COMMENT_FOR.ANSWER} />)}
     </>
   )
-}
+})
