@@ -12,10 +12,9 @@ type MainInfoProps = {
   comment: CommentType
   isOpenSeeAnswers?: boolean
 }
-export const MainInfo: React.FC<MainInfoProps> = React.memo((props) => {
+export const MainInfo: React.FC<MainInfoProps> = (props) => {
     const { type, comment, isOpenSeeAnswers } = props
     const { userName, date, description, appealToAnswerId, appealToUserName } = comment
-    console.log('MainInfo', comment)
     return (
       <div className={cn()}>
         <Header
@@ -34,4 +33,4 @@ export const MainInfo: React.FC<MainInfoProps> = React.memo((props) => {
       </div>
     )
   }
-)
+

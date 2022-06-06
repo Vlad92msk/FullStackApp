@@ -31,7 +31,7 @@ export const CommentsMap: React.FC<CommentsMapProps> = (props) => {
         data={commentsService}
       >
         {([appealToCommentId, comment]: [string, ServiceCommentsType]) => (
-          <div className={cn('Comment')}>
+          <div key={appealToCommentId} className={cn('Comment')}>
             <MainInfo type={'main'} comment={comment} />
             <AnswerWrapper commentId={comment.commentId}>
               <InputComment
@@ -44,7 +44,7 @@ export const CommentsMap: React.FC<CommentsMapProps> = (props) => {
                 data={comment.answers}
               >
                 {(answer: CommentType) => (
-                  <MainInfo type={'sub'} comment={answer} />
+                  <MainInfo key={answer.commentId} type={'sub'} comment={answer} />
                 )}
               </ArrayMap>
             </AnswerWrapper>
