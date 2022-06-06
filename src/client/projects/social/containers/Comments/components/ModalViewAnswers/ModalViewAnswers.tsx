@@ -19,7 +19,7 @@ export type ModalViewAnswersProps = {
 
 const ModalViewAnswers: React.FC<ModalViewAnswersProps> = React.memo((props) => {
   const { modalComment, dispatch } = props
-  const { appealToAnswerId, appealToUserName, userName, date, description, answers } = modalComment
+  const { appealToAnswerId, appealToUserName, userName, date, description, answers, appealToCommentId } = modalComment
 
   const handleCloseModal = useCallback(() => {
     if (modalComment) {

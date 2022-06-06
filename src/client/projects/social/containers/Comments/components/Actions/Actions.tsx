@@ -6,7 +6,7 @@ import { Text } from '@client_shared/components/Text'
 import { ButtonBox } from '@client_shared/components/ButtonBox'
 import { IconButton } from '@client_shared/components/IconButton'
 import { useToggle } from '@client_shared/hooks'
-import { COMMENT_FOR, InputComment, MainInfoType } from '../../components'
+import { InputComment, MainInfoType } from '../../components'
 import { commentsActions, ServiceCommentsType, useServiceCommentsAction } from '../../service'
 import styles from './Actions.module.scss'
 
@@ -25,7 +25,8 @@ export const Actions: React.FC<ActionsType> = React.memo((props) => {
     userIdsLikes,
     userIdsDislikes,
     commentId,
-    answers
+    answers,
+    appealToCommentId
   } = comment
   const dispatch = useServiceCommentsAction()
   const [isOpenAddAnswer, setOpenAddAnswer] = useToggle(false)
@@ -104,7 +105,13 @@ export const Actions: React.FC<ActionsType> = React.memo((props) => {
           </ButtonBox>
         </div>
       </div>
-      {isOpenAddAnswer && (<InputComment inputFor={COMMENT_FOR.ANSWER} />)}
+      {isOpenAddAnswer && (
+        <InputComment
+          targetCommentId={comment.commentId}
+          appealToAnswerId={comment.commentId}
+          appealToCommentId={appealToCommentId}
+        />
+      )}
     </>
   )
 })

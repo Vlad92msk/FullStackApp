@@ -13,24 +13,25 @@ type MainInfoProps = {
   isOpenSeeAnswers?: boolean
 }
 export const MainInfo: React.FC<MainInfoProps> = React.memo((props) => {
-  const { type, comment, isOpenSeeAnswers } = props
-  const { userName, date, description, appealToAnswerId, appealToUserName } = comment
-
-  return (
-    <div className={cn()}>
-      <Header
-        date={date}
-        userName={userName}
-        appealToUserName={appealToUserName}
-        appealToAnswerId={appealToAnswerId}
-      />
-      <Description description={description} appealToAnswerId={appealToAnswerId} type={type} />
-      <Actions
-        disableOpenSeeAnswers={isOpenSeeAnswers}
-        type={type}
-        // @ts-ignore
-        comment={comment}
-      />
-    </div>
-  )
-})
+    const { type, comment, isOpenSeeAnswers } = props
+    const { userName, date, description, appealToAnswerId, appealToUserName } = comment
+    console.log('MainInfo', comment)
+    return (
+      <div className={cn()}>
+        <Header
+          date={date}
+          userName={userName}
+          appealToUserName={appealToUserName}
+          appealToAnswerId={appealToAnswerId}
+        />
+        <Description description={description} appealToAnswerId={appealToAnswerId} type={type} />
+        <Actions
+          disableOpenSeeAnswers={isOpenSeeAnswers}
+          type={type}
+          // @ts-ignore
+          comment={comment}
+        />
+      </div>
+    )
+  }
+)

@@ -22,6 +22,11 @@ export const ServiceComments: React.FC<ServiceCommentsProps> = (props) => {
     serviceName
   })
 
+  useEffect(() => {
+    dispatch(commentsActions.INJECT__ENTITY_ID({
+      entityId: provideProps.id
+    }))
+  }, [provideProps])
 
   useEffect(() => {
     dispatch(commentsActions.INJECT__COMMENTS({

@@ -8,7 +8,7 @@ export const WALLS_DATA = [
 
 export const WALL_RECORDS:WallRecordItemType[] = [
   {
-    id: 1,
+    id: 6465,
     userId: 1,
     userName: 'dwede',
     userAva: 'ava',

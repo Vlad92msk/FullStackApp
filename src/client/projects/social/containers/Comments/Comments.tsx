@@ -6,7 +6,6 @@ import {
   AnimateOpenComments,
   InputComment,
   Filters,
-  COMMENT_FOR,
   CommentsMap, ModalViewAnswersHOC
 } from '../Comments/components'
 import styles from './Comments.module.scss'
@@ -20,6 +19,7 @@ export type CommentsProps = {
   commentsHeight?: string
   openType?: CommentsOpenType
   isOverflow?: boolean
+  id: number
 }
 
 export const Comments: React.FC<CommentsProps> = React.memo((props) => {
@@ -29,7 +29,10 @@ export const Comments: React.FC<CommentsProps> = React.memo((props) => {
     <AnimateOpenComments width={width} isOpenComments={isOpenComments} openType={openType}>
       <Filters />
       <div className={cn('Container')}>
-        <InputComment inputFor={COMMENT_FOR.ENTITY} />
+        <InputComment
+          appealToCommentId={null}
+          appealToAnswerId={null}
+        />
         <CommentsMap commentsHeight={commentsHeight} isOverflow={isOverflow} />
       </div>
       <ModalViewAnswersHOC />

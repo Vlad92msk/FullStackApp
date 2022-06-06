@@ -5,22 +5,20 @@ export interface ServiceCommentsType extends CommentType {
 }
 
 export type ServiceState = {
+  appealToEntityId: number
+  commentsApi: CommentType[]
   comments: {
     [key: string]: ServiceCommentsType
   }
-  commentForEntityInput: string
-  commentForCommentInput: string
-  answerForCommentInput: string
   openCommentId: string
   modalComment: ServiceCommentsType
 }
 
 
 export const initial: ServiceState = {
+  appealToEntityId: null,
+  commentsApi: [],
   comments: {},
-  commentForEntityInput: '',
-  commentForCommentInput: '',
-  answerForCommentInput: '',
   openCommentId: '',
   modalComment: null
 }

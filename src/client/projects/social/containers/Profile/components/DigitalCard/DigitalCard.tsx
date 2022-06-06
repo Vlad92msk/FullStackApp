@@ -175,7 +175,7 @@ export const DigitalCard: React.FC<PhotoCardType> = React.memo((props) => {
                 </>
               )}
             </div>
-            <Comments isOpenComments={isOpenComments} />
+            <Comments isOpenComments={isOpenComments} id={id} />
           </motion.div>
         </div>
       )}

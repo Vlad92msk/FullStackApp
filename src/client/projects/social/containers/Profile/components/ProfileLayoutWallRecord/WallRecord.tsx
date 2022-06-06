@@ -111,7 +111,8 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
             width: '100%',
             isOverflow: false,
             openType: 'vertical',
-            isOpenComments
+            isOpenComments,
+            id
           }}
         />
       </div>

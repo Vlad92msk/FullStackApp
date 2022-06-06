@@ -1,4 +1,18 @@
-export const COMMENTS = [
+export const COMMENTS:CommentType[] = [
+  {
+    commentId: '11цув', // Id комментария
+    appealToEntityId: 777, //к чему отноосится (ID фото например или UD видео)
+    appealToCommentId: null, // к какому комментарию этот ответ (когда отвечаем на комментарии)
+    appealToAnswerId: null, // к какому ответу этот ответ (когда отвечаем на ответы)
+    userId: 2, // Потзователь который коммент оставил
+    userName: 'Пользователь 2',
+    appealToUserId: null, // Какому пользователю адресован комментарий
+    appealToUserName: null, // Какому пользователю адресован комментарий
+    date: 'июль 02, 2022', // Когда создан комментарий
+    userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
+    userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
+    description: 'Комментарий',
+  },
   {
     commentId: '1', // Id комментария
     appealToEntityId: 6465, //к чему отноосится (ID фото например или UD видео)
@@ -309,4 +323,17 @@ export const COMMENTS = [
   },
 ]
 
-export type CommentType = typeof COMMENTS[0]
+export type CommentType = {
+  commentId: string
+  appealToEntityId: number
+  appealToCommentId: string
+  appealToAnswerId: string
+  userId: number
+  userName: string
+  appealToUserId: number
+  appealToUserName: string
+  date: string
+  userIdsLikes: number[]
+  userIdsDislikes: number[]
+  description: string
+}
