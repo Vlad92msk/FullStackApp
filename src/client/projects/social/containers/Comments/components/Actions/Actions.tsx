@@ -19,7 +19,7 @@ export type ActionsType = {
   comment: ServiceCommentsType
 }
 
-export const Actions: React.FC<ActionsType> = (props) => {
+export const Actions: React.FC<ActionsType> = React.memo((props) => {
   const { type, comment, disableOpenSeeAnswers } = props
   const {
     userIdsLikes,
@@ -53,7 +53,7 @@ export const Actions: React.FC<ActionsType> = (props) => {
         comment
       }))
     }
-  }, [disableOpenSeeAnswers, commentsActions, dispatch])
+  }, [disableOpenSeeAnswers, commentsActions, dispatch, comment])
 
   return (
     <>
@@ -114,4 +114,4 @@ export const Actions: React.FC<ActionsType> = (props) => {
       )}
     </>
   )
-}
+})

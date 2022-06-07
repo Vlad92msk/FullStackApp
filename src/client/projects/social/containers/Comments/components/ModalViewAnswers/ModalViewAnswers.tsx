@@ -2,12 +2,13 @@ import React, { useCallback } from 'react'
 
 import { Action, makeCn } from '@client_shared/utils'
 import { Modal } from '@client_shared/components/Modal'
-import { Description, Header, MainInfo } from '../../components'
+import { Actions, Description, Header, MainInfo } from '../../components'
 import {
   commentsActions, ServiceCommentsType,
   useServiceCommentsAction, useServiceCommentsSelector
 } from '../../service'
 import styles from './ModalViewAnswers.module.scss'
+import { values } from 'lodash'
 
 const cn = makeCn('ModalViewAnswers', styles)
 
@@ -19,15 +20,17 @@ export type ModalViewAnswersProps = {
 
 const ModalViewAnswers: React.FC<ModalViewAnswersProps> = React.memo((props) => {
   const { modalComment, dispatch } = props
-  const { appealToAnswerId, appealToUserName, userName, date, description, answers, appealToCommentId } = modalComment
-
+  const { appealToAnswerId, appealToUserName, userName, date, description, answers, appealToCommentId, commentId } = modalComment
+  const commentsService = useServiceCommentsSelector('comments')
+  // @ts-ignore
+  const find = commentsService[appealToCommentId].answers.find(({commentId: id}) => id === commentId)?.answers
   const handleCloseModal = useCallback(() => {
     if (modalComment) {
       dispatch(commentsActions.SET__OPEN_MODAL_FOR_VIEW_ANSWERS({
         comment: null
       }))
     }
-  }, [commentsActions, dispatch])
+  }, [commentsActions, dispatch, modalComment])
 
   return (
     <Modal
@@ -43,9 +46,10 @@ const ModalViewAnswers: React.FC<ModalViewAnswersProps> = React.memo((props) => 
           date={date}
         />
         <Description description={description} appealToAnswerId={appealToAnswerId} type={'main'} />
+        <Actions disableOpenSeeAnswers={true} type={'sub'} comment={modalComment} />
       </div>
       <div className={cn('ModalContainer')}>
-        {answers?.map((item) => (
+        {find?.map((item) => (
           <MainInfo
             key={item.commentId}
             isOpenSeeAnswers={true}

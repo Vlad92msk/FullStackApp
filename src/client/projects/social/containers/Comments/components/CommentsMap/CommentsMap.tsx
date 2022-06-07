@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { toPairs, values } from 'lodash'
+import React from 'react'
+import { values } from 'lodash'
 
 import { makeCn } from '@client_shared/utils'
 import { ServiceCommentsType, useServiceCommentsSelector } from '../../service'
