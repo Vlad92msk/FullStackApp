@@ -1,5 +1,5 @@
-import React from 'react'
-import { toPairs } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { toPairs, values } from 'lodash'
 
 import { makeCn } from '@client_shared/utils'
 import { ServiceCommentsType, useServiceCommentsSelector } from '../../service'
@@ -19,7 +19,7 @@ export type CommentsMapProps = {
 
 export const CommentsMap: React.FC<CommentsMapProps> = (props) => {
   const { commentsHeight, isOverflow } = props
-  const commentsService = toPairs(useServiceCommentsSelector('comments'))
+  const commentsService = values(useServiceCommentsSelector('comments'))
 
   return (
     <div
@@ -30,25 +30,26 @@ export const CommentsMap: React.FC<CommentsMapProps> = (props) => {
         key={'commentId'}
         data={commentsService}
       >
-        {([appealToCommentId, comment]: [string, ServiceCommentsType]) => (
-          <div key={appealToCommentId} className={cn('Comment')}>
-            <MainInfo type={'main'} comment={comment} />
-            <AnswerWrapper commentId={comment.commentId}>
-              <InputComment
-                targetCommentId={comment.commentId}
-                appealToCommentId={appealToCommentId}
-                appealToAnswerId={null}
-              />
-              <ArrayMap
-                key={'commentId'}
-                data={comment.answers}
-              >
-                {(answer: CommentType) => (
-                  <MainInfo key={answer.commentId} type={'sub'} comment={answer} />
-                )}
-              </ArrayMap>
-            </AnswerWrapper>
-          </div>
+        {((comment: ServiceCommentsType) => (
+            <div className={cn('Comment')}>
+              <MainInfo type={'main'} comment={comment} />
+              <AnswerWrapper commentId={comment.commentId}>
+                <InputComment
+                  targetCommentId={comment.commentId}
+                  appealToCommentId={comment.commentId}
+                  appealToAnswerId={null}
+                />
+                <ArrayMap
+                  key={'commentId'}
+                  data={comment.answers}
+                >
+                  {(answer: CommentType) => (
+                    <MainInfo type={'sub'} comment={answer} />
+                  )}
+                </ArrayMap>
+              </AnswerWrapper>
+            </div>
+          )
         )}
       </ArrayMap>
     </div>

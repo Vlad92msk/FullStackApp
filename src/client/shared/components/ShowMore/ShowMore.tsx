@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { Button } from '../../components/Button'
 import { Text } from '../../components/Text'
 import { length, makeCn } from '../../utils'
-import { COUNT_VISIBLE, useShowMore } from '../../hooks'
+import { COUNT_VISIBLE } from '../../hooks'
 import styles from './ShowMore.module.scss'
 
 const cn = makeCn('ShowMore', styles)
@@ -14,16 +14,15 @@ type ShowMoreProps = {
   addCount: number
   onShowMore: (count?: number) => void
 }
-export const ShowMore: React.FC<ShowMoreProps> = React.memo((props) => {
+export const ShowMore: React.FC<ShowMoreProps> = (props) => {
   const { set, showArr, totalArr, onShowMore, addCount } = props
-  const showMore = useShowMore(totalArr, set, addCount)
   const totalArrLength = useMemo(() => length(totalArr), [totalArr])
   const showArrLength = useMemo(() => length(showArr), [showArr])
 
   const handleClick = useCallback(() => {
-    showMore()
+    set(prev => prev + addCount)
     onShowMore?.(addCount)
-  }, [addCount, onShowMore]);
+  }, [addCount, onShowMore, set]);
 
   return (
     <Button
@@ -40,4 +39,4 @@ export const ShowMore: React.FC<ShowMoreProps> = React.memo((props) => {
       />
     </Button>
   )
-})
+}

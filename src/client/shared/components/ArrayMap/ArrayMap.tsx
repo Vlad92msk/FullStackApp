@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { ShowMore } from '../ShowMore'
 
 type ArrayMapProps = {
@@ -11,16 +11,13 @@ type ArrayMapProps = {
 }
 export const ArrayMap: React.FC<ArrayMapProps> = React.memo((props) => {
   const { data, initViewCount, key, onShowMore, addCount, children } = props
-  const [total, setTotal] = useState(data)
-  const [arr, setArr] = useState(() => total.slice(0, initViewCount))
+  const [startWith, setStartWith] = useState(initViewCount)
 
-  useEffect(() => {
-    setTotal(data)
-  }, [data])
+  const arr = useMemo(() => data.slice(0, startWith), [data, startWith])
 
   return (
     <>
-      {total?.map((data, index) => (
+      {arr.map((data, index) => (
           <React.Fragment key={data[key] || index}>
             {children(data, index)}
           </React.Fragment>
@@ -30,13 +27,14 @@ export const ArrayMap: React.FC<ArrayMapProps> = React.memo((props) => {
         onShowMore={onShowMore}
         addCount={addCount}
         showArr={arr}
-        totalArr={total}
-        set={setArr}
+        totalArr={data}
+        set={setStartWith}
       />
     </>
   )
-}, (a, b) => JSON.stringify(a) === JSON.stringify(b))
+})
 
 ArrayMap.defaultProps = {
-  initViewCount: 3
+  initViewCount: 3,
+  addCount: 1
 }
