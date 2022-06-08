@@ -52,8 +52,7 @@
   }
 
   &-Modal {
-    background: var(--SOCIAL--Background-Card-Opacity-02);
-    box-shadow: 0 0 rem(22) var(--SOCIAL--Background-Chat-Message);
+    background: var(--SOCIAL--Background--Modal);
     border: rem(1) solid var(--SOCIAL--Background-Chat-Message);
     width: 50vw;
     padding: rem(50);
