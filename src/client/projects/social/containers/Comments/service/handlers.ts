@@ -78,6 +78,9 @@ export const handlersCreator = (): HandlersType => {
         ...createComment(value, appealToCommentId, appealToAnswerId, find)
       }
 
+      /**
+       * TODO: ну вот это по идее не правильно т.к. 1 действие =  событие, а тут мы на 1 действие меняем сразу несколько параметров.. в Реакции по идее это надо вынести
+       */
       return ({
         ...state,
         newComment,
