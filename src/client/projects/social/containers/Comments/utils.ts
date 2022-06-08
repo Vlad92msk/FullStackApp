@@ -24,7 +24,7 @@ export const createComment = (value, appealToCommentId: string, appealToAnswerId
     userName: `${currenUser.family} ${currenUser.name}`,
     userIdsDislikes: [],
     userIdsLikes: [],
-    date: 'dwed'
+    date: new Date()
   })
 }
 

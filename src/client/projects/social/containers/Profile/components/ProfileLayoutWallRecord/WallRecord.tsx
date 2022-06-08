@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { format } from 'date-fns'
 
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
@@ -9,6 +8,7 @@ import { Attachment, ATTACHMENT_ACTION, SliderMedia, UserSmall } from '../../../
 import { useAttachmentsPurpose } from '../../../../components/Attachment/hooks'
 import { WallRecordItemType } from '../../../Profile/data/walls.data'
 import styles from './WallRecord.module.scss'
+import { dateType1 } from '@client/shared/utils/date'
 
 
 const cn = makeCn('WallRecord', styles)
@@ -48,7 +48,7 @@ export const WallRecord: React.FC<WallRecordType> = React.memo((props) => {
           userName={userName}
           img={userAva}
         />
-        <Text className={cn('Date')} size={'2'} children={format(dateCreated, 'dd.MM.yyyy в HH:mm')} />
+        <Text className={cn('Date')} size={'2'} children={dateType1(dateCreated)} />
       </div>
       <div className={cn('Body')}>
         <div className={cn('Content')}>

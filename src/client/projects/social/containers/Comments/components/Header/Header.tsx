@@ -2,6 +2,7 @@ import React from 'react'
 import { UserSmall } from '@client/projects/social/components'
 import { Text } from '@client_shared/components/Text'
 import { makeCn } from '@client_shared/utils'
+import { dateType2 } from '@client/shared/utils/date'
 import styles from './Header.module.scss'
 
 const cn = makeCn('Header', styles)
@@ -10,7 +11,7 @@ type HeaderProps = {
   appealToAnswerId: string
   appealToUserName: string
   userName: string
-  date: string
+  date: Date
 }
 export const Header: React.FC<HeaderProps> = (props) => {
   const { appealToUserName, userName, appealToAnswerId, date } = props
@@ -26,7 +27,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
           </>
         )}
       </div>
-      <Text className={cn('Date')} size={'1'} children={date} />
+      <Text className={cn('Date')} size={'1'} children={dateType2(date)} />
     </div>
   )
 }

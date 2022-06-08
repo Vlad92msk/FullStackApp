@@ -9,6 +9,7 @@ import { Attachment, ATTACHMENT_ACTION, SliderMedia } from '@client/projects/soc
 import { useAttachmentsPurpose } from '@client/projects/social/components/Attachment/hooks'
 import { Message } from '../../data/messages'
 import styles from './ChatMassage.module.scss'
+import { dateType1 } from '@client/shared/utils/date'
 
 const cn = makeCn('ChatMassage', styles)
 
@@ -44,7 +45,7 @@ export type ChatMassageType = {
 
 export const ChatMassage: React.FC<ChatMassageType> = (props) => {
   const { from, isWasSeen, message: { massage, smile, dateCreate, attachments } } = props
-  const messageWasCreated = format(dateCreate, 'dd.MM.yyyy в HH:mm')
+  const messageWasCreated = dateType1(dateCreate)
 
   const { toSave, toPlay, toSlider } = useAttachmentsPurpose(attachments)
 

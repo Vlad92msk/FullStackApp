@@ -8,7 +8,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 2',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Комментарий',
@@ -22,7 +22,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 3',
     appealToUserId: 2, // Какому пользователю адресован комментарий
     appealToUserName: 'Пользователь 2', // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Ты не прав!',
@@ -36,7 +36,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 4',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Какое небо голубое',
@@ -50,7 +50,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 4',
     appealToUserId: 3, // Какому пользователю адресован комментарий
     appealToUserName: 'Пользователь 3', // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Он прав!',
@@ -64,7 +64,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 2',
     appealToUserId: 4, // Какому пользователю адресован комментарий
     appealToUserName: 'Пользователь 4', // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Да и вообще я отписываюсь!',
@@ -78,7 +78,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 4',
     appealToUserId: 2, // Какому пользователю адресован комментарий
     appealToUserName: 'Пользователь 2', // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Хватит истерить',
@@ -92,7 +92,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 6',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Еще какой то комментарий 22222',
@@ -106,7 +106,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 6',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Еще какой то комментарий',
@@ -120,7 +120,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 6',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Еще какой то комментарий',
@@ -134,7 +134,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 6',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Еще какой то комментарий',
@@ -148,7 +148,7 @@ export const COMMENTS:CommentType[] = [
     userName: 'Пользователь 6',
     appealToUserId: null, // Какому пользователю адресован комментарий
     appealToUserName: null, // Какому пользователю адресован комментарий
-    date: 'июль 02, 2022', // Когда создан комментарий
+    date: new Date(), // Когда создан комментарий
     userIdsLikes: [1, 3123, 543], // Пользователи которые лайкнули
     userIdsDislikes: [1, 3123, 543], // Пользователи которые диз-лайкнули
     description: 'Еще какой то комментарий',
@@ -164,7 +164,7 @@ export type CommentType = {
   userName: string
   appealToUserId: number
   appealToUserName: string
-  date: string
+  date: Date
   userIdsLikes: number[]
   userIdsDislikes: number[]
   description: string
