@@ -11,9 +11,10 @@ type MainInfoProps = {
   type: MainInfoType
   comment: CommentType
   isOpenSeeAnswers?: boolean
+  isFromModal?: boolean
 }
 export const MainInfo: React.FC<MainInfoProps> = (props) => {
-    const { type, comment, isOpenSeeAnswers } = props
+    const { type, comment, isOpenSeeAnswers, isFromModal } = props
     const { userName, date, description, appealToAnswerId, appealToUserName } = comment
     return (
       <div className={cn()}>
@@ -29,6 +30,7 @@ export const MainInfo: React.FC<MainInfoProps> = (props) => {
           type={type}
           // @ts-ignore
           comment={comment}
+          isFromModal={isFromModal}
         />
       </div>
     )

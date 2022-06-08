@@ -17,10 +17,11 @@ export type ActionsType = {
   type: MainInfoType
   disableOpenSeeAnswers: boolean
   comment: ServiceCommentsType
+  isFromModal?: boolean
 }
 
 export const Actions: React.FC<ActionsType> = React.memo((props) => {
-  const { type, comment, disableOpenSeeAnswers } = props
+  const { type, comment, disableOpenSeeAnswers, isFromModal } = props
   const {
     userIdsLikes,
     userIdsDislikes,
@@ -68,23 +69,25 @@ export const Actions: React.FC<ActionsType> = React.memo((props) => {
           />
         ) : (<div />)}
         <div style={{ display: 'flex' }}>
-          <ButtonBox
-            className={cn('Button')}
-            disabled={type === 'sub' && !length(answers)}
-            onClick={type === 'main' ? handleOpenAnswer : handleOpenAnswers}
-          >
-            <Icon
-              className={cn('ButtonIcon')}
-              size={'small'}
-              icon={'undo'}
-              fill={'light100'}
-            />
-            <Text
-              className={cn('ButtonText')}
-              size={'1'}
-              children={length(answers)}
-            />
-          </ButtonBox>
+          {!isFromModal && (
+            <ButtonBox
+              className={cn('Button')}
+              disabled={type === 'sub' && !length(answers) || disableOpenSeeAnswers}
+              onClick={type === 'main' ? handleOpenAnswer : handleOpenAnswers}
+            >
+              <Icon
+                className={cn('ButtonIcon')}
+                size={'small'}
+                icon={'undo'}
+                fill={'light100'}
+              />
+              <Text
+                className={cn('ButtonText')}
+                size={'1'}
+                children={length(answers)}
+              />
+            </ButtonBox>
+          )}
           <ButtonBox className={cn('Button')}>
             <Icon
               className={cn('ButtonIcon')}
