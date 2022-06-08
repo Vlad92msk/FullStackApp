@@ -10,7 +10,7 @@ import { Icon } from '@client_shared/components/Icon'
 import { MImage } from '@client_shared/components/Image'
 import { useToggle } from '@client_shared/hooks'
 import { UserSmall } from '@client/projects/social/components'
-import { Comments } from '../../../Comments'
+import { ServiceComments } from '@client/projects/social/containers/Comments/service'
 import { PhotoType } from '../../data/photoItems.data'
 import { initialEl, useMainAnim } from './functions/main.animate'
 import styles from './DigitalCard.module.scss'
@@ -175,7 +175,13 @@ export const DigitalCard: React.FC<PhotoCardType> = React.memo((props) => {
                 </>
               )}
             </div>
-            <Comments isOpenComments={isOpenComments} id={id} />
+            <ServiceComments
+              serviceName={'DigitalCard'}
+              provideProps={{
+                isOpenComments,
+                id
+              }}
+            />
           </motion.div>
         </div>
       )}
