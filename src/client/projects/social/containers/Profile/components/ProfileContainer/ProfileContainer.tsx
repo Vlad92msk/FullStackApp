@@ -52,23 +52,19 @@ const TABS = [
 const variants = {
   enter: (direction: 'left' | 'right') => {
     return {
-      x: direction === 'right' ? 1000 : -1000,
-      opacity: 0
+      transform: direction === 'right' ? 'translateX(1000px)' : 'translateX(-1000px)'
     }
   },
   center: {
     zIndex: 1,
-    x: 0,
-    opacity: 1,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    transform: 'translateX(0px)',
+    filter: 'blur(0px)'
   },
-  exit: (direction: 'left' | 'right') => {
-    return {
-      zIndex: 0,
-      x: direction === 'left' ? 1000 : -1000,
-      opacity: 0
-    }
+  exit: {
+    filter: 'blur(4px)',
+    transform: 'translateX(0px)'
   }
 }
 
@@ -97,8 +93,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = React.memo((pro
     animate: 'center',
     exit: 'exit',
     transition: {
-      x: { type: 'spring', stiffness: 300, damping: 30 },
-      opacity: { duration: 0.5 }
+      duration: .5
     }
   }), [variants, query, direction])
 
@@ -170,7 +165,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = React.memo((pro
           />
         </div>
         <AnimatePresence initial={false}>
-          <motion.div {...animation}>
+          <motion.div {...animation} style={{ width: '100%', position: 'absolute' }}>
             {tabs[query.layout as PROFILE_LAYOUTS]}
           </motion.div>
         </AnimatePresence>
