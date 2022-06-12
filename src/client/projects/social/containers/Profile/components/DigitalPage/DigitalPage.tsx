@@ -49,9 +49,8 @@ export const DigitalPage: React.FC<DigitalPageType> = React.memo((props) => {
         color={'blue'}
         icon={'arrow-left-sharp'}
         onClick={back}
-      >
-        Вернуться
-      </Button>
+        children={'Вернуться'}
+      />
 
       <div className={cn('Main')}>
         <div className={cn('Box')}>
@@ -89,13 +88,11 @@ export const DigitalPage: React.FC<DigitalPageType> = React.memo((props) => {
         {((userId !== authorId) && authorName) && (
           <div className={cn('AuthorBox')}>
             <UserSmall userName={authorName} img={'ava'} />
-
             <Text
               className={cn('Subscribe')}
               size={'1'}
               onClick={() => console.log('subscribe')}
               children={'Подписаться'} />
-
           </div>
         )}
         <Text className={cn('Title')} children={title} />

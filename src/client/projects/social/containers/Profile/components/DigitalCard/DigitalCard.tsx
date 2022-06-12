@@ -43,8 +43,8 @@ export const DigitalCard: React.FC<DigitalCardProps> = React.memo((props) => {
 
   const [isHover, setVisible, setHide] = useBooleanState(false)
   const { push, pathname, query } = useRouter()
+
   const handleOpenPage = useCallback(() => {
-    console.log('pathname', pathname)
     push({
       pathname: pathname + '/[digital_type]/[digital_id]',
       query: { ...pick(query, ['lang', 'user_id']), digital_type: type, digital_id: id }
