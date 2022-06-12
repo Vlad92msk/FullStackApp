@@ -1,0 +1,120 @@
+@use "../../../../../../public/styles/lib/functions" as *;
+@use "../../../../../../public/styles/lib/mixins" as *;
+@import "../../../App/App.module.scss";
+
+.DigitalPage {
+  @include flex();
+  @include wh(100vw, 100vh);
+  position: relative;
+  background: var(--SOCIAL--Background--Modal);
+
+  &-Back {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &-Main {
+    @include flex($direction: column);
+    width: 100%;
+    padding: rem(100);
+    border-right: rem(1) solid var(--SOCIAL--Color-Text-System);
+
+  }
+
+  &-Row {
+    @include flex();
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &-Box {
+    @include flex($justify: center, $align-items: center, $direction: column);
+    @include wh(100%, 100%);
+    position: relative;
+    z-index: 1;
+
+    @include media-768 {
+      min-height: 30vh;
+    }
+  }
+
+  &-Photo {
+    @include wh(100%, 100%);
+    position: relative;
+  }
+
+  &-ButtonsGroup {
+    @include flex();
+    background: var(--SOCIAL--Background-Light-Grey);
+    margin-left: rem(5);
+    position: relative;
+    width: 100%;
+
+  }
+
+  &-Button {
+    @include flex();
+    margin: rem(5);
+    cursor: pointer;
+  }
+
+  &-ButtonIcon {
+  }
+
+  &-ButtonText {
+    color: var(--SOCIAL--Color-Text-System);
+    margin-left: rem(5);
+  }
+
+
+  &-TitleRow {
+    width: 100%;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    margin: rem(5);
+  }
+
+  &-Date {
+    color: var(--SOCIAL--Color-Text-System);
+    padding: rem(5);
+    text-align: right;
+  }
+
+  &-AuthorBox {
+    @include flex($justify: space-between, $align-items: center);
+    z-index: 2;
+    padding: 0 rem(10);
+  }
+
+  &-Subscribe {
+    display: inline-flex;
+    flex: 0 1 auto;
+    background: linear-gradient(to right, #ff3865, #ff7978);
+    color: var(--SOCIAL--Color-Text-Main);
+    text-shadow: 0 0 rem(4) #ffffffb8;
+    padding: rem(5) rem(15);
+    width: fit-content;
+  }
+
+  &-Title {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+  }
+
+  &-Description {
+    color: var(--SOCIAL--Color-Text-Main);
+    padding: rem(10) 0;
+    max-height: 20%;
+    overflow-y: auto;
+
+    @include media-768 {
+      padding: rem(10) 0;
+      max-height: initial;
+      overflow-y: initial;
+    }
+  }
+}

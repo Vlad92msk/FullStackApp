@@ -9,7 +9,7 @@ export const VIDEO_ITEMS = [
     likeCount: 13,
     disLikeCounts: 54,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: 'description description description description description description description description description descriptio description description description description description description description description descriptio description description description description description description description description descriptio description description description description description description description description descriptio description description description description description description description description',
     hash: null,
     commentUsersIds: [],
@@ -25,7 +25,7 @@ export const VIDEO_ITEMS = [
     likeCount: 13,
     disLikeCounts: 54,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
     hash: null,
     commentUsersIds: [],
@@ -41,7 +41,7 @@ export const VIDEO_ITEMS = [
     likeCount: 13,
     disLikeCounts: 54,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
     hash: null,
     commentUsersIds: [],
@@ -57,7 +57,7 @@ export const VIDEO_ITEMS = [
     likeCount: 13,
     disLikeCounts: 54,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
     hash: null,
     commentUsersIds: [],
@@ -73,7 +73,7 @@ export const VIDEO_ITEMS = [
     likeCount: 13,
     disLikeCounts: 54,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
     hash: null,
     commentUsersIds: [],
@@ -81,4 +81,4 @@ export const VIDEO_ITEMS = [
   },
 ]
 
-export type VideoType = typeof VIDEO_ITEMS[0]
+export type PhotoAlbumType = typeof VIDEO_ITEMS[0]

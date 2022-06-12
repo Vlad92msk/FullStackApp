@@ -4,6 +4,7 @@ import { makeCn } from '@client_shared/utils'
 import { IconButton } from '@client_shared/components/IconButton'
 import { useReplaceRouterQuery } from '@client_shared/hooks'
 import {
+  DigitalCardType,
   ProfileContainer,
   ProfileLayoutAboutMe,
   ProfileLayoutDigital,
@@ -33,6 +34,7 @@ export const Profile: React.FC = () => {
         ),
         video: (
           <ProfileLayoutDigital
+            type={DigitalCardType.VIDEO}
             allItems={VIDEO_ITEMS}
             userId={USER_ID}
             albums={VIDEO_ALBUMS}
@@ -40,6 +42,7 @@ export const Profile: React.FC = () => {
         ),
         photo: (
           <ProfileLayoutDigital
+            type={DigitalCardType.PHOTO}
             allItems={PHOTO_ITEMS}
             userId={USER_ID}
             albums={PHOTO_ALBUMS}

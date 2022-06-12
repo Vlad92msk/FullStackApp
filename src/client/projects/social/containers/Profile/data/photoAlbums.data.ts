@@ -4,7 +4,7 @@ export const PHOTO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     authorName: '',
     description: null,
   },
@@ -13,7 +13,7 @@ export const PHOTO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -21,7 +21,7 @@ export const PHOTO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -29,7 +29,7 @@ export const PHOTO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -37,7 +37,7 @@ export const PHOTO_ALBUMS = [
     title: 'titleй',
     likeCount: 5,
     commentsCount: 4,
-    date: 'май 02, 2022',
+    date: new Date(),
     description: 'wd',
   },
 ]

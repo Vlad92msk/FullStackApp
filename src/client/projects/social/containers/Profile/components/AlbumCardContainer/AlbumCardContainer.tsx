@@ -3,7 +3,7 @@ import { Droppable } from 'react-beautiful-dnd'
 
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
-import { AlbumCard, DigitalCard } from '../../../Profile/components'
+import { AlbumCard, DigitalCard, DigitalCardType } from '../../../Profile/components'
 import { PhotoType } from '../../data/photoItems.data'
 import { PhotoAlbumType } from '../../data/photoAlbums.data'
 import styles from './AlbumCardContainer.module.scss'
@@ -15,10 +15,11 @@ export type AlbumCardContainerType = {
   albums: PhotoAlbumType[]
   photos: PhotoType[]
   userId: number
+  type: DigitalCardType
 }
 
 export const AlbumCardContainer: React.FC<AlbumCardContainerType> = React.memo((props) => {
-  const { albums, photos, userId } = props
+  const { albums, photos, userId, type } = props
 
   return (
     <div className={cn()}>
@@ -49,7 +50,7 @@ export const AlbumCardContainer: React.FC<AlbumCardContainerType> = React.memo((
                 <DigitalCard
                   key={photo.id}
                   index={i}
-                  userId={userId}
+                  type={type}
                   item={photo}
                 />
               ))}

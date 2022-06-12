@@ -4,7 +4,7 @@ export const VIDEO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     authorName: '',
     description: null,
   },
@@ -13,7 +13,7 @@ export const VIDEO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -21,7 +21,7 @@ export const VIDEO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -29,7 +29,7 @@ export const VIDEO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
   {
@@ -37,9 +37,9 @@ export const VIDEO_ALBUMS = [
     title: 'title',
     likeCount: 13,
     commentsCount: 423,
-    date: 'июль 02, 2022',
+    date: new Date(),
     description: null,
   },
 ]
 
-export type VideoAlbumType = typeof VIDEO_ALBUMS[0]
+export type VideoAlbum = typeof VIDEO_ALBUMS[0]

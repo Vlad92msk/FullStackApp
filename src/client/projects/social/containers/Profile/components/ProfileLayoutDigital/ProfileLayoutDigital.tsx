@@ -5,7 +5,7 @@ import { Switcher } from '@client/projects/social/components'
 import { makeCn } from '@client_shared/utils'
 import { PhotoAlbumType } from '../../../Profile/data/photoAlbums.data'
 import { PhotoType } from '../../../Profile/data/photoItems.data'
-import { DigitalCard, AlbumCardContainer } from '../../../Profile/components'
+import { DigitalCard, AlbumCardContainer, DigitalCardType } from '../../../Profile/components'
 import { useChangeAlbumIdPhoto, useDragEnd } from './hooks'
 import styles from './ProfileLayoutDigital.module.scss'
 
@@ -35,16 +35,17 @@ type ProfileLayoutsPhotoType = {
   userId: number
   allItems: PhotoType[]
   albums: PhotoAlbumType[]
+  type: DigitalCardType
 }
 
 /**
  * Раздел Профиля - Контент-компонет для Видео или Фото
  */
 export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.memo((props) => {
-  const { allItems, albums, userId } = props
+  const { allItems, albums, userId, type } = props
 
   const [photos, setPhotos] = useState<PhotoType[]>(allItems)
-  const [photoAlbums, setPhotoAlbums] = useState(albums)
+  const [photoAlbums, setPhotoAlbums] = useState<PhotoAlbumType[]>(albums)
 
   /**
    * TODO: Эксперимент
@@ -80,6 +81,7 @@ export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.mem
                   albums={photoAlbums}
                   photos={photos}
                   userId={userId}
+                  type={type}
                 />
               )
             case GROUPS_SWITCH_VALUES.ALL:
@@ -95,7 +97,7 @@ export const ProfileLayoutDigital: React.FC<ProfileLayoutsPhotoType> = React.mem
                         <DigitalCard
                           key={photo.id}
                           index={i}
-                          userId={userId}
+                          type={type}
                           item={photo}
                         />
                       ))}

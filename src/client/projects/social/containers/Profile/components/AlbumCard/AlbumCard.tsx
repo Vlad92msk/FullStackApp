@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 
-import { DigitalCard } from '../../../Profile/components'
+import { DigitalCard, DigitalCardType } from '../../../Profile/components'
 import { makeCn } from '@client_shared/utils'
 import { Text } from '@client_shared/components/Text'
 import { Button } from '@client_shared/components/Button'
@@ -11,6 +11,7 @@ import { Image } from '@client_shared/components/Image'
 import { IconButton } from '@client_shared/components/IconButton'
 import { PhotoType } from '../../data/photoItems.data'
 import styles from './AlbumCard.module.scss'
+import { dateType2 } from '@client/shared/utils/date'
 
 const cn = makeCn('AlbumCard', styles)
 
@@ -21,7 +22,7 @@ export type MainCardType = {
   title: string
   description?: string
   authorName?: string
-  date: string
+  date: Date
   likeCount?: number
   commentsCount?: number
   photo: PhotoType[]
@@ -56,7 +57,7 @@ export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
         >
           {!open ? (
               <>
-                <Text className={cn('Date')} size={'2'} children={date} />
+                <Text className={cn('Date')} size={'2'} children={dateType2(date)} />
                 <Text className={cn('Title')} children={title} />
                 {description && (
                   <Text className={cn('Description')} size={'1'} children={description} />
@@ -96,7 +97,12 @@ export const AlbumCard: React.FC<MainCardType> = React.memo((props) => {
               </div>
               <div className={cn('Photos')}>
                 {photo.map((photo, i) => (
-                  <DigitalCard key={photo.id} index={i} userId={userId} item={photo} />
+                  <DigitalCard
+                    key={photo.id}
+                    index={i}
+                    type={DigitalCardType.PHOTO}
+                    item={photo}
+                  />
                 ))}
               </div>
             </>)

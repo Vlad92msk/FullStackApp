@@ -105,7 +105,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = React.memo((pro
   useEffect(() => {
     if (!query.layout) return
 
-    const activeTabId = TABS.find(({ activeLayout }) => activeLayout === query.layout).id
+    const activeTabId = TABS.find(({ activeLayout }) => activeLayout === query.layout)?.id
 
     if (activeTabId > currentI) {
       setDirection('right')
