@@ -165,7 +165,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = React.memo((pro
           />
         </div>
         <AnimatePresence initial={false}>
-          <motion.div {...animation} style={{ width: '100%', position: 'absolute' }}>
+          <motion.div {...animation} style={{ width: '100%', height: '100%', position: 'absolute' }}>
             {tabs[query.layout as PROFILE_LAYOUTS]}
           </motion.div>
         </AnimatePresence>

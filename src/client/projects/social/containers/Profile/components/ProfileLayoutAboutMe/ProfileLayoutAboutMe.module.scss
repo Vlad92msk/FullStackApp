@@ -6,6 +6,7 @@
   @include flex($direction: column);
   @include wh(100%, 100%);
   overflow-y: auto;
+  width: clamp(200px, 80%, 43.75rem);
 
   &-Description {
     color: var(--SOCIAL--Color-Text-Main);

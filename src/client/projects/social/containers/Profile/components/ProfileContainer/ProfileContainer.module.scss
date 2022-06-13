@@ -49,6 +49,7 @@
     align-items: center;
     justify-content: center;
     fill: var(--SOCIAL--Color-Text-System);
+    z-index: 2;
   }
 
   &-ChangeLayoutButtonsRight {
@@ -58,6 +59,7 @@
     justify-content: center;
     fill: var(--SOCIAL--Color-Text-System);
     position: relative;
+    z-index: 2;
   }
 
   &-Actions {
