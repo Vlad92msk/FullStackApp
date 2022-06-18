@@ -19,7 +19,8 @@ const ProfilePage: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = (ctx) => getSSR(ctx, async (apolloClient) => {
-  // const article = await apolloClient.query<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>({
+
+  console.log('2', 2)// const article = await apolloClient.query<ArticlesFindOneQuery, ArticlesFindOneQueryVariables>({
   //   query: ArticlesFindOneDocument,
   //   variables: {
   //     searchParam: { id: Number(ctx.query.id) }

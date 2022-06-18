@@ -9,6 +9,7 @@ export enum RoleEnum {
 
 export enum SocialPages {
   SOCIAL = 'social',
+  LOGIN = 'login',
   SOCIAL_PHOTO = 'photo',
   SOCIAL_VIDEO = 'video',
   SOCIAL_PROFILE = 'profile',
@@ -65,6 +66,14 @@ export const PROJECT_ROUTES: ProjectStructureRoutes = {
   [SocialPages.SOCIAL_MUSIC]: {
     page: 'music',
     title: 'Музыка',
+    allowRoles: [RoleEnum.visitor],
+    subRoutes: {
+
+    }
+  },
+  [SocialPages.LOGIN]: {
+    page: 'login',
+    title: 'Войти/Зарегистрироваться',
     allowRoles: [RoleEnum.visitor],
     subRoutes: {
 

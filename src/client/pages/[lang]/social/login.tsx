@@ -1,10 +1,22 @@
+import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import { ROUTES_ALL } from '@client/projects/routesAll'
+import { Page } from '@client/shared/components/page'
+import { Login } from '@client/projects/social/containers/Login'
 
-const Index: NextPage = () => <></>
+const Index: NextPage = () => {
+  return (
+    <Page
+      page={'LOGIN'}
+      title={'VladSocial'}
+      subTitle={'Login'}
+    >
+      <Login />
+    </Page>
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-console.log('1111111111111111111111', ctx.resolvedUrl)
+  console.log('login', ctx.resolvedUrl)
   /**
    * ctx.resolvedUrl - текущий путь
    */

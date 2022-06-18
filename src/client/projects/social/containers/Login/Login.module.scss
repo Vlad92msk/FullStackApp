@@ -1,0 +1,43 @@
+@use "../../../../public/styles/lib/functions" as *;
+@use "../../../../public/styles/lib/mixins" as *;
+@import "../App/App.module.scss";
+
+.Login {
+  @include wh(100vw, 100vh);
+  &-Section{
+    height: 100%;
+    width: 100%;
+    @include flex($justify: center, $align-items: center, $direction: column);
+
+  }
+
+  &-ThumbRow {
+    @include flex($justify: center);
+    margin: rem(40) 0;
+  }
+
+  &-SwiperContainer {
+    @include flex($justify: center, $align-items: center);
+    padding: rem(30) rem(30) rem(10) rem(30);
+    width: rem(500);
+
+    & > * {
+      width: 80%;
+      height: auto;
+    }
+  }
+
+  &-Thumb {
+    padding: rem(5) rem(50);
+    transition: .5s;
+
+    &--activeSlide {
+      text-shadow: 0 0 rem(5) var(--Color-Light--90);
+      transition: .5s;
+    }
+  }
+
+  &-Item {
+    width: 100%;
+  }
+}
