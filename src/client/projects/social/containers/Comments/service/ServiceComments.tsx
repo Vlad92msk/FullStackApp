@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { storageGet } from '@client_shared/utils'
+import { LocalStorageEnum } from '@client/public/models/localStorage'
 import { useCreateService } from '@client_shared/hooks/useCreateService'
 import { commentsActions, handlersCreator, HandlersType } from './handlers'
 import { ContextService } from './context'
@@ -15,11 +17,13 @@ interface ServiceCommentsProps {
 
 export const ServiceComments: React.FC<ServiceCommentsProps> = (props) => {
   const { serviceName, provideProps } = props
+  const userInfo = storageGet(LocalStorageEnum.USER_INFO)
   const [dispatch, store] = useCreateService<ServiceState, HandlersType, Reactions>({
     handlersCreator,
     reactions,
     initial,
-    serviceName
+    serviceName,
+    deps: [Boolean(userInfo)]
   })
 
   useEffect(() => {
@@ -37,7 +41,7 @@ export const ServiceComments: React.FC<ServiceCommentsProps> = (props) => {
 
   return (
     <ContextService.Provider value={{ store, dispatch }}>
-      <Comments {...provideProps} />
+      {store.isServiceRunning && (<Comments {...provideProps} />)}
     </ContextService.Provider>
   )
 }

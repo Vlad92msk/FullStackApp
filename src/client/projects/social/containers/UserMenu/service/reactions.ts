@@ -14,7 +14,7 @@ export const reactions = new Map([
     {
       description: 'После получения инф о пользователе - записывает ее в Локал Стор',
       fn: (result: ServiceState): ServiceState => {
-        storageSet(LocalStorageEnum.USER_INFO, result)
+        // storageSet(LocalStorageEnum.USER_INFO, result)
         return result
       }
     }

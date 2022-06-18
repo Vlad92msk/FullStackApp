@@ -1,4 +1,5 @@
 import { useEventCallback } from 'rxjs-hooks'
+import { every } from 'lodash'
 import { distinctUntilChanged, map, of, pipe, scan, switchMap, tap, withLatestFrom } from 'rxjs'
 import { reducer } from '../utils/reducer'
 import { LogColors, log } from '../utils/logColors'
@@ -11,22 +12,27 @@ type CreateService<S, A, R> = {
   handlersCreator: () => A
   reactions: R
   serviceName: string
+  deps?: boolean[]
 }
 export const useCreateService = <S, A, R>(props: CreateService<S, A, R>) => {
-  const { initial, reactions, handlersCreator, serviceName } = props
+  const { initial, reactions, handlersCreator, serviceName, deps } = props
 
   return useEventCallback<any, S>(
     (event$, state$) =>
       event$.pipe(
         withLatestFrom(state$),
         distinctUntilPropertyChanged(),
-        switchMap(([action, state]) => of(action).pipe(
-          applyReducer(reducer(handlersCreator), state, serviceName),
-          // applyEffects(action),
-          applyReactions(action, reactions)
-        ))
+        switchMap(([action, state]) => {
+          if (deps && !every(deps)) return of(state)
+
+          return of(action).pipe(
+            applyReducer(reducer(handlersCreator), {...state, isServiceRunning: true}, serviceName),
+            // applyEffects(action),
+            applyReactions(action, reactions)
+          )
+        })
       ),
-    initial
+    {...initial, isServiceRunning: false}
   )
 }
 
