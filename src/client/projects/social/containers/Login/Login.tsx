@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { EffectCube } from 'swiper/core'
+import SwiperCore, { EffectCube, Navigation } from 'swiper/core'
 
-import { Modal } from '@client/shared/components/Modal'
 import { Text } from '@client/shared/components/Text'
 import { makeCn } from '@client_shared/utils'
 import { Section } from '@client/shared/components/Section'
-import { SignInForm } from '@client/projects/social/containers/Login/components'
-import { SignUpForm } from '@client/projects/social/containers/Login/components'
+import { SignInForm } from './components'
+import { SignUpForm } from './components'
 import styles from './Login.module.scss'
+import { Icon } from '@client/shared/components/Icon'
+import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('Login', styles)
-SwiperCore.use([EffectCube])
+SwiperCore.use([EffectCube, Navigation])
 
 export const Login: React.FC = (props) => {
   const { children } = props
   const [activeSlide, setActiveSlide] = useState(0)
   const [signIn, setSignIn] = useState(false)
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
   return (
     <div className={cn()}>
       <Section
@@ -43,8 +46,17 @@ export const Login: React.FC = (props) => {
           />
         </div>
         <div className={cn('SwiperContainer')}>
+          <div className={cn('ButtonsRow')}>
+            <span className={cn('Buttons')} ref={(node) => setPrevEl(node)}>
+             <Icon icon={'arrow-left-sharp'} size={'large'} fill={'bluePrimrose50'} />
+            </span>
+            <span className={cn('Buttons')} ref={(node) => setNextEl(node)}>
+              <Icon icon={'arrow-right-sharp'} size={'large'} fill={'bluePrimrose50'} />
+            </span>
+          </div>
           <Swiper
             effect={'cube'}
+            navigation={{ prevEl, nextEl }}
             cubeEffect={{
               'shadow': true,
               'slideShadows': true,

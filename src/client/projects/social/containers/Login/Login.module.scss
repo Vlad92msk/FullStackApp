@@ -4,7 +4,8 @@
 
 .Login {
   @include wh(100vw, 100vh);
-  &-Section{
+
+  &-Section {
     height: 100%;
     width: 100%;
     @include flex($justify: center, $align-items: center, $direction: column);
@@ -17,9 +18,9 @@
   }
 
   &-SwiperContainer {
-    @include flex($justify: center, $align-items: center);
     padding: rem(30) rem(30) rem(10) rem(30);
     width: rem(500);
+    position: relative;
 
     & > * {
       width: 80%;
@@ -39,5 +40,22 @@
 
   &-Item {
     width: 100%;
+  }
+
+  &-ButtonsRow {
+    left: -25%;
+    width: 150%;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-Buttons {
+    cursor: pointer;
+    user-select: none;
+    color: #00bff3;
+    z-index: 30;
   }
 }
