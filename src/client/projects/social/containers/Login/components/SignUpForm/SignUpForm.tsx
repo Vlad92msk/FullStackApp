@@ -32,10 +32,9 @@ const schema = yup.object().shape({
 
 
 type SignUpFormType = {
-  setSignIn: React.Dispatch<boolean>
 }
 
-export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
+export const SignUpForm: React.FC<SignUpFormType> = () => {
   const classes = useStyles()
   /**
    * Форма
@@ -55,7 +54,9 @@ export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
    */
   const [authSignUp, { loading, error }] = useAuthSignUpMutation({
     onCompleted({ authSignUp }) {
-      if (authSignUp) setSignIn(false)
+      if (authSignUp) {
+        // ........
+      }
     }
   })
 
@@ -74,19 +75,19 @@ export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn()}>
       <TextField
-        fullWidth {...register('name')} label={`${'userInterface.enterLogin'}...`} error={!!errors.name}
+        fullWidth {...register('name')} label={`${'Введите логин'}...`} error={!!errors.name}
         helperText={errors.name?.message}
         inputProps={{ className: classes.input }}
         InputLabelProps={{ className: classes.label }}
       />
       <TextField
-        fullWidth {...register('email')} label={`${'userInterface.enterEmail'}`} error={!!errors.email}
+        fullWidth {...register('email')} label={`${'Введите Email'}`} error={!!errors.email}
         helperText={errors.email?.message}
         inputProps={{ className: classes.input }}
         InputLabelProps={{ className: classes.label }}
       />
       <TextField
-        type={'text'} fullWidth {...register('password')} label={`${'userInterface.enterPassword'}...`}
+        type={'text'} fullWidth {...register('password')} label={`${'Введите пароль'}...`}
         error={!!errors.password}
         helperText={errors.password?.message}
         inputProps={{ className: classes.input }}
@@ -101,7 +102,7 @@ export const SignUpForm: React.FC<SignUpFormType> = ({ setSignIn }) => {
         color={'blue'}
         disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!!nameWatch?.length || !!errors.email || !!errors.password || !!errors.name}
       >
-        {'userInterface.register'}
+        {'Зарегистрироваться'}
       </Button>
     </form>
   )

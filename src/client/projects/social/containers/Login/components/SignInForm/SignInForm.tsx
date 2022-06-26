@@ -30,10 +30,9 @@ const schema = yup.object().shape({
 
 
 type SignInFormType = {
-  setSignIn: React.Dispatch<boolean>
 }
 
-export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
+export const SignInForm: React.FC<SignInFormType> = () => {
   const classes = useStyles()
 
   /**
@@ -56,7 +55,6 @@ export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
     onCompleted({ authSignIn }) {
       if (authSignIn)
         storageSet(LocalStorageEnum.USER, authSignIn)
-      setSignIn(false)
     }
   })
 
@@ -73,13 +71,13 @@ export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn()}>
       <TextField
-        fullWidth {...register('email')} label={`${'userInterface.enterEmail'}...`} error={!!errors.email}
+        fullWidth {...register('email')} label={`${'Введите email'}...`} error={!!errors.email}
         helperText={errors.email?.message}
         inputProps={{ className: classes.input }}
         InputLabelProps={{ className: classes.label }}
       />
       <TextField
-        fullWidth {...register('password')} label={`${'userInterface.enterPassword'}...`} error={!!errors.password}
+        fullWidth {...register('password')} label={`${'Введите пароль'}...`} error={!!errors.password}
         helperText={errors.password?.message}
         inputProps={{ className: classes.input }}
         InputLabelProps={{ className: classes.label }}
@@ -93,7 +91,7 @@ export const SignInForm: React.FC<SignInFormType> = ({ setSignIn }) => {
         color={'blue'}
         disabled={!!!emailWatch?.length || !!!passwordWatch?.length || !!errors.email || !!errors.password}
       >
-        {'userInterface.toComeIn'}
+        {'Войти'}
       </Button>
     </form>
   )

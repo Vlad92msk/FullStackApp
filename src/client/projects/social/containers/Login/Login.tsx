@@ -4,12 +4,11 @@ import SwiperCore, { EffectCube, Navigation } from 'swiper/core'
 
 import { Text } from '@client/shared/components/Text'
 import { makeCn } from '@client_shared/utils'
-import { Section } from '@client/shared/components/Section'
+import { Section } from '@client_shared/components/Section'
+import { Icon } from '@client_shared/components/Icon'
 import { SignInForm } from './components'
 import { SignUpForm } from './components'
 import styles from './Login.module.scss'
-import { Icon } from '@client/shared/components/Icon'
-import { IconButton } from '@client/shared/components/IconButton'
 
 const cn = makeCn('Login', styles)
 SwiperCore.use([EffectCube, Navigation])
@@ -17,7 +16,6 @@ SwiperCore.use([EffectCube, Navigation])
 export const Login: React.FC = (props) => {
   const { children } = props
   const [activeSlide, setActiveSlide] = useState(0)
-  const [signIn, setSignIn] = useState(false)
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
   return (
@@ -36,38 +34,42 @@ export const Login: React.FC = (props) => {
             className={cn('Thumb')}
             size={'7'}
             color={!Boolean(activeSlide) ? 'title' : 'note'}
-            children={'Войти'}
+            textTransform={'uppercase'}
+            ref={(node) => setPrevEl(node)}
+            children={'Вход'}
           />
           <Text
             className={cn('Thumb')}
             size={'7'}
             color={Boolean(activeSlide) ? 'title' : 'note'}
-            children={'Зарегистрироваться'}
+            textTransform={'uppercase'}
+            ref={(node) => setNextEl(node)}
+            children={'Регистрация'}
           />
         </div>
         <div className={cn('SwiperContainer')}>
           <div className={cn('ButtonsRow')}>
-            <span className={cn('Buttons')} ref={(node) => setPrevEl(node)}>
+            <span className={cn('Button', { disabled: !Boolean(activeSlide) })} ref={(node) => setPrevEl(node)}>
              <Icon icon={'arrow-left-sharp'} size={'large'} fill={'bluePrimrose50'} />
             </span>
-            <span className={cn('Buttons')} ref={(node) => setNextEl(node)}>
+            <span className={cn('Button', { disabled: Boolean(activeSlide) })} ref={(node) => setNextEl(node)}>
               <Icon icon={'arrow-right-sharp'} size={'large'} fill={'bluePrimrose50'} />
             </span>
           </div>
           <Swiper
             effect={'cube'}
             navigation={{ prevEl, nextEl }}
+            onActiveIndexChange={({ realIndex }) => setActiveSlide(realIndex)}
+            grabCursor
             cubeEffect={{
               'shadow': true,
               'slideShadows': true,
               'shadowOffset': 20,
               'shadowScale': 0.94
             }}
-            onActiveIndexChange={({ realIndex }) => setActiveSlide(realIndex)}
-            grabCursor
           >
-            <SwiperSlide><SignInForm setSignIn={setSignIn} /></SwiperSlide>
-            <SwiperSlide><SignUpForm setSignIn={setSignIn} /></SwiperSlide>
+            <SwiperSlide><SignInForm /></SwiperSlide>
+            <SwiperSlide><SignUpForm /></SwiperSlide>
           </Swiper>
         </div>
       </Section>
