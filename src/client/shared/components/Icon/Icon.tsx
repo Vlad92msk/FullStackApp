@@ -20,16 +20,20 @@ export interface IconProps {
 }
 
 export const Icon: React.FunctionComponent<IconProps> = ({ className, icon, fill, size, onClick, onMouseEnter, onMouseLeave }) => {
-  const DynamicComponent = dynamic(() => import(`../../../public/resources/icons/${icon}.svg`), {
-    ssr: false,
-  })
+  if (typeof window !== 'undefined')  {
+    const DynamicComponent = dynamic(() => import(`../../../public/resources/icons/${icon}.svg`), {
+      ssr: false,
+    })
 
-  DynamicComponent.defaultProps = {
-    className: classnames(cn({ fill, size }), className),
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
+    DynamicComponent.defaultProps = {
+      className: classnames(cn({ fill, size }), className),
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+    }
+
+    return <DynamicComponent />
   }
 
-  return <DynamicComponent />
+  return <></>
 }

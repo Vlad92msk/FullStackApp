@@ -16,15 +16,10 @@ const Index: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  console.log('login', ctx.resolvedUrl)
   /**
    * ctx.resolvedUrl - текущий путь
    */
   return ({
-    // redirect: {
-    //   destination: `${ctx.resolvedUrl}/${ROUTES_ALL.SOCIAL_PROFILE}`,
-    //   permanent: true
-    // },
     props: {}
   })
 }
