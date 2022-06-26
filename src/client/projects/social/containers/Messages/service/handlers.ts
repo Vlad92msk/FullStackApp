@@ -7,6 +7,7 @@ import { ServiceState } from './'
 import { storageGet } from '@client/shared/utils'
 import { LocalStorageEnum } from '@client/public/models/localStorage'
 import { ServiceState as UserMenuState } from '@client/projects/social/containers/UserMenu/service'
+import { UserType } from '@client/projects/social/containers/App/data/user'
 
 /**
  * Экшены
@@ -66,8 +67,7 @@ export type MessageActionsKeys = keyof MessageActions
  */
 export type HandlersType = CreateHandlers<MessageActionsKeys, ServiceState, MessageActions>
 export const handlersCreator = (): HandlersType => {
-  const userInfo = storageGet(LocalStorageEnum.USER_INFO) as UserMenuState
-  const { currenUser } = userInfo
+  const userInfo = storageGet(LocalStorageEnum.USER_INFO) as UserType
 
   return ({
     SEARCH__CHAT: (state, { value }) => ({
@@ -76,18 +76,18 @@ export const handlersCreator = (): HandlersType => {
     }),
     INJECT__FOLDERS_API: (state, { folders }) => ({
       ...state,
-      folders: lodash(folders.filter(({ ownerId }) => ownerId === currenUser.id))
+      folders: lodash(folders.filter(({ ownerId }) => ownerId === userInfo.id))
       .map((folder) => ({
         ...folder,
-        friends: lodash.intersection(currenUser.friends, folder.users), // оставлет повторяющиеся значени
-        noFriends: lodash.reject(folder.users, (id) => currenUser.friends.includes(id)) // возвращает массив не удовлетворяющий условию
+        friends: lodash.intersection(userInfo.friends, folder.users), // оставлет повторяющиеся значени
+        noFriends: lodash.reject(folder.users, (id) => userInfo.friends.includes(id)) // возвращает массив не удовлетворяющий условию
       }))
       .keyBy('id')
       .value()
     }),
     INJECT__MESSAGE_API: (state, { allMessages }) => {
 
-      const res = ({ allMessages: allMessages.filter(({ toUserId }) => toUserId === currenUser.id) })
+      const res = ({ allMessages: allMessages.filter(({ toUserId }) => toUserId === userInfo.id) })
       return ({
         ...state,
         allMessages: lodash(res.allMessages)

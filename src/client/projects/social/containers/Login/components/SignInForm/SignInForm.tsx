@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { TextField } from '@material-ui/core'
@@ -13,6 +14,8 @@ import { formStyles } from '@client_public/styles/materialUI'
 import { Button } from '@client_shared/components/Button'
 import { ResponseApi } from '@client_shared/components/ResponseApi'
 import styles from './SignInForm.module.scss'
+import { USER } from '@client/projects/social/containers/App/data/user'
+import { ROUTES_ALL } from '@client/projects/routesAll'
 
 /**
  * Стили
@@ -29,10 +32,10 @@ const schema = yup.object().shape({
 })
 
 
-type SignInFormType = {
-}
+type SignInFormType = {}
 
 export const SignInForm: React.FC<SignInFormType> = () => {
+  const router = useRouter()
   const classes = useStyles()
 
   /**
@@ -54,19 +57,27 @@ export const SignInForm: React.FC<SignInFormType> = () => {
     fetchPolicy: 'network-only',
     onCompleted({ authSignIn }) {
       if (authSignIn)
-        storageSet(LocalStorageEnum.USER, authSignIn)
+        // storageSet(LocalStorageEnum.USER_INFO, USER)
+        storageSet(LocalStorageEnum.USER_INFO, authSignIn)
     }
   })
 
-  const onSubmit = ({ password, email }: SignInInput) => authSignIn({
-    variables: {
-      authSignInUser: {
-        'email': 'vlad11@mail.ru',
-        'password': '123456789Qq'
-        // email, password
+  const onSubmit = ({ password, email }: SignInInput) => {
+    storageSet(LocalStorageEnum.USER_INFO, USER)
+    router.push({
+      pathname: `/[lang]/${ROUTES_ALL.SOCIAL}/[user_id]/${ROUTES_ALL.SOCIAL_PROFILE}`,
+      query: { lang: router.query.lang, user_id: USER.id },
+    })
+    return authSignIn({
+      variables: {
+        authSignInUser: {
+          'email': 'vlad11@mail.ru',
+          'password': '123456789Qq'
+          // email, password
+        }
       }
-    }
-  })
+    })
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn()}>
