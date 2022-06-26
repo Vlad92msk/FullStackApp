@@ -3,9 +3,9 @@ import dynamic from 'next/dynamic'
 import { classnames } from '@bem-react/classnames'
 import { IconName } from '@client_public/models/icon.model'
 import { makeCn } from '@client_shared/utils'
-
-import styles from './Icon.module.scss'
+import { BlockContentLoader } from '../BlockContentLoader'
 const cn = makeCn('Icon', styles)
+import styles from './Icon.module.scss'
 
 export type IconFill = 'oldAsphalt50' | 'oldAsphalt40' | 'bluePrimrose50' | 'light100' | 'redRose40'
 
@@ -35,5 +35,5 @@ export const Icon: React.FunctionComponent<IconProps> = ({ className, icon, fill
     return <DynamicComponent />
   }
 
-  return <></>
+  return <BlockContentLoader />
 }
