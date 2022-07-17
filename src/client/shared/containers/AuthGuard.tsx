@@ -5,6 +5,7 @@ import { LocalStorageEnum } from '@client_public/models/localStorage'
 import { RoleEnum } from '@client_projects/portfolio/router'
 import { ROUTES_ALL, routesAll } from '@client_projects/routesAll'
 import { User } from '@client/projects/gql-generated-hooks'
+import { useAuthGuard } from '@client/shared/hooks/useAuthGuard'
 
 
 export type AuthGuardType = {
@@ -16,8 +17,8 @@ export const AuthGuard: React.FC<AuthGuardType> = ({ roles, page, children }) =>
    * Если пользователь попал на 404 страницу - пропустить
    * Если не указано имя страницы и роли доступа к ней - пропустить
    */
-  if (page === 'ERROR_404' || !Boolean(roles && page)) return <>{children}</>
-
+  if (page === 'ERROR_404' || page === 'LOGIN' || !Boolean(roles && page)) return <>{children}</>
+  useAuthGuard()
 
   const pageName = ROUTES_ALL[page]
   const allowPageRoles = routesAll[pageName].allowRoles

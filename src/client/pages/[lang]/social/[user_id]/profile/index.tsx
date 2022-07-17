@@ -4,13 +4,14 @@ import { App } from '@client_projects/social/containers/App'
 import { Page } from '@client_shared/components/page'
 import { getSSR, ssrResult } from '@client_shared/utils/getSsrFuncs'
 import { Profile } from '@client/projects/social/containers/Profile'
+import { RoleEnum } from '@client/projects/portfolio/router'
 
 
 const ProfilePage: NextPage = () => {
   const { pathname } = useRouter()
 
   return (
-    <Page page={'SOCIAL_PROFILE'} subTitle={'Social'}>
+    <Page page={'SOCIAL_PROFILE'} subTitle={'Social'} roles={[RoleEnum.participant]}>
       <App pathname={pathname}>
         <Profile />
       </App>

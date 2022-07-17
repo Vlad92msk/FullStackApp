@@ -23,7 +23,7 @@ const ErrorPage: NextPage = () => {
     setLanguage(DEFAULT_LANGUAGE)
   }, [])
 
-  const user: User = storageGet(LocalStorageEnum.USER)
+  const user: User = storageGet(LocalStorageEnum.USER_INFO)
 
   const allowRoutes = Object.values(routesAll)
   .filter(
@@ -45,7 +45,8 @@ const ErrorPage: NextPage = () => {
       <ul>
         {allowRoutes.map(({ page, title }) => (
           <li key={page} style={{ listStyle: 'none' }}>
-            <Link href={String(`/${language}/${page}`)}>
+            {/*TODO: Обязательно исправить ROUTES_ALL.SOCIAL не надо подставлять тут*/}
+            <Link href={String(`/${language}/${ROUTES_ALL.SOCIAL}/${page}`)}>
               {title}
             </Link>
           </li>

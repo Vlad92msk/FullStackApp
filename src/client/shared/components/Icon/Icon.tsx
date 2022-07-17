@@ -1,9 +1,10 @@
-import React from 'react'
 import dynamic from 'next/dynamic'
+import React from 'react'
 import { classnames } from '@bem-react/classnames'
 import { IconName } from '@client_public/models/icon.model'
 import { makeCn } from '@client_shared/utils'
 import { BlockContentLoader } from '../BlockContentLoader'
+
 const cn = makeCn('Icon', styles)
 import styles from './Icon.module.scss'
 
@@ -21,7 +22,7 @@ export interface IconProps {
 
 export const Icon: React.FunctionComponent<IconProps> = ({ className, icon, fill, size, onClick, onMouseEnter, onMouseLeave }) => {
   if (typeof window !== 'undefined')  {
-    const DynamicComponent = dynamic(() => import(`../../../public/resources/icons/${icon}.svg`), {
+    const DynamicComponent = dynamic(async () => import(`../../../public/resources/icons/${icon}.svg`).then((mod) => mod.default), {
       ssr: false,
     })
 

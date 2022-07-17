@@ -5,6 +5,7 @@ import { Section } from '@client/shared/components/Section'
 import { PHOTO_ITEMS } from '@client/projects/social/containers/Profile/data/photoItems.data'
 import { VIDEO_ITEMS } from '@client/projects/social/containers/Profile/data/videoItems.data'
 import { DigitalCardType, DigitalPage } from '@client/projects/social/containers/Profile/components'
+import { RoleEnum } from '@client/projects/portfolio/router'
 
 
 interface DigitalCardProps {
@@ -14,7 +15,7 @@ interface DigitalCardProps {
 const DigitalCard: NextPage<DigitalCardProps> = (props) => {
   const { data } = props
   return (
-    <Page subTitle={'Ssss'}>
+    <Page subTitle={'Ssss'} roles={[RoleEnum.participant]}>
       <Section>
         <DigitalPage data={data} userId={1} />
       </Section>
